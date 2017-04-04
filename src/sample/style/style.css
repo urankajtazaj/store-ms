@@ -1,0 +1,335 @@
+@font-face {
+    src: url("../font/Nunito-Regular.ttf");
+    font-family: "Nunito";
+}
+
+* {
+    -fx-element: #2196F3;
+    -fx-clr: #444;
+    -fx-green: #34DF89;
+    -fx-red: #E22626;
+}
+
+.root {
+    -fx-font-family: "Nunito";
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.gp .button {
+    -fx-cursor: hand;
+    -fx-background-color: -fx-element;
+    -fx-text-fill: #fff;
+    -fx-border-radius: 2;
+    -fx-min-height: 36;
+    -fx-max-height: 36;
+    -fx-min-width: 64;
+    -fx-padding: 0 20 0 20;
+    -fx-background-radius: 2;
+}
+
+.sideBar .button, .side-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #000;
+    -fx-background-radius: 50;
+    -fx-padding: 8 15 8 15;
+    -fx-font-size: 13;
+    -fx-alignment: bottom_left;
+    -fx-opacity: .7;
+    -fx-cursor: hand;
+}
+
+.side-btn {
+    -fx-text-fill: #000;
+}
+
+.sideBar {
+    -fx-background-color: #f5f5f5;
+    -fx-min-width: 210;
+    -fx-max-width: 210;
+    -fx-padding: 0 0 0 10;
+}
+
+.hbBtn {
+    -fx-padding: 10;
+}
+
+.bigText {
+    -fx-font-size: 12;
+    -fx-opacity: .7;
+}
+
+.hbBtn .button {
+    -fx-background-color: #eaeaea;
+    -fx-background-radius: 0;
+    -fx-padding: 10;
+    -fx-min-width: 110;
+    -fx-opacity: .7;
+}
+
+.top {
+    -fx-background-color: #2987C5;
+    -fx-background-color: #f7f7f7;
+    -fx-min-height: 50;
+    -fx-padding: 0 20 0 20;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #eaeaea;
+}
+
+.chart-line-symbol {
+    -fx-background-color: transparent;
+}
+
+.chart-series-line {
+    -fx-stroke-width: 2;
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke: -fx-element;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: rgb(123, 204, 196);
+}
+
+.default-color2.chart-series-line {
+    -fx-stroke: rgb(186, 228, 188);
+}
+
+.default-color3.chart-series-area-line {
+    -fx-stroke: rgb(253, 141, 60);
+}
+.default-color3.chart-series-area-fill {
+    -fx-fill: rgba(253, 141, 60, .05);
+}
+
+.default-color1.chart-pie {
+    -fx-background-color: #fafafa;
+}
+
+.default-color0.chart-pie {
+    -fx-background-color: -fx-element;
+}
+
+/*
+.chart-series-area-fill {
+    -fx-fill: transparent;
+}*/
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart {
+    -fx-background-color: #fff;
+    -fx-padding: 10;
+}
+
+.hover {
+    -fx-background-color: #ddd;
+    -fx-opacity: .9;
+}
+
+.combo-box {
+    -fx-padding: 0 5 0 5;
+    -fx-background-radius: 2;
+    -fx-border-width: 1;
+    -fx-min-height: 36;
+    -fx-background-color: #fff;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+ }
+
+ .combo-box:disabled {
+    -fx-opacity: .3;
+ }
+
+ .combo-box-popup .list-view {
+    -fx-border-color: #fff;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 0);
+    -fx-padding: 0;
+ }
+
+  .combo-box-popup {
+    -fx-background-color: #ccc;
+  }
+
+ .combo-box-popup .list-view .list-cell {
+    -fx-text-fill: rgba(0,0,0,0.7);
+    -fx-padding: 5;
+ }
+
+ .combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -fx-element;
+    -fx-text-fill: #fff;
+ }
+
+ .combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: -fx-element;
+    -fx-text-fill: #fff;
+ }
+
+ .chartVb {
+    -fx-padding: 0 0 0 0;
+ }
+
+ .shadow {
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+    -fx-background-color: #fff;
+    -fx-background-radius: 2;
+    -fx-border-radius: 2;
+ }
+
+ .chart-tooltip {
+    -fx-background-color: #fff;
+    -fx-effect: none;
+    -fx-background-radius: 2;
+    -fx-padding: 5 15 5 15;
+    -fx-text-fill: rgba(0,0,0,0.8);
+    -fx-font-size: 14;
+    -fx-text-alignment: CENTER;
+ }
+
+ .toggle-button {
+    -fx-background-radius: 0;
+    -fx-background-color: #f1f1f1;
+    -fx-padding: 6 20 6 20;
+    -fx-border-color: #f1f1f1;
+    -fx-opacity: .3;
+ }
+
+ .toggle-button:selected {
+    -fx-opacity: 1;
+    -fx-background-color: #fff;
+    -fx-border-color: #e6e6e6;
+ }
+
+ .vbTbl {
+    -fx-padding: 10 5;
+    -fx-min-height: 400;
+ }
+
+ .vbTbl .label {
+    -fx-opacity: .5;
+    -fx-padding: 0 0 5 0;
+ }
+
+ .table-view .column-header,
+ .table-view .column-header .filler,
+ .table-view .column-header-background .filler {
+     -fx-background-color: #fff;
+ }
+
+  .table-view .column-header .label {
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-size: 12;
+    -fx-opacity: .5;
+  }
+
+.table-row-cell {
+    -fx-cell-size: 35;
+    -fx-opacity: .9;
+}
+
+.table-view .table-row-cell:filled:focused:selected {
+    -fx-background-color: rgba(0,0,0,0.8);
+    -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: rgba(0,0,0,0.05);
+}
+
+
+.table-view {
+    -fx-border-color: #fff;
+    -fx-control-inner-background-alt: -fx-control-inner-background ;
+}
+
+.table-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+.table-view .hyperlink {
+    -fx-text-fill: rgba(0,0,0,0.85);
+    -fx-underline: true;
+}
+
+.infoTtl {
+    -fx-text-fill: rgba(0,0,0,0.5);
+}
+
+.lVlera {
+    -fx-font-size: 40;
+    -fx-text-fill: -fx-clr;
+}
+
+.color {
+    -fx-text-fill: -fx-clr;
+    -fx-font-size: 15;
+}
+
+.chart-nr {
+    -fx-font-size: 20;
+}
+
+.scroll-bar {
+    -fx-max-width: 5;
+}
+
+.scroll-bar .track {
+    -fx-background-fill: red;
+    -fx-background-color: red;
+    -fx-border-color: transparent;
+    visibility: hidden;
+    -fx-opacity: 0;
+}
+
+.track-background {
+    visibility: hidden;
+}
+
+.thumb {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-max-width: 5;
+}
+
+.check-box .box {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: #fff;
+    -fx-border-color: -fx-element;
+    -fx-scale-x: .8;
+    -fx-scale-y: .8;
+}
+
+.check-box:selected .box {
+    -fx-background-color: -fx-element;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #fff;
+}
+
+.check-box .mark {
+    -fx-shape: "M14.596,2.055L12.455,0C9.687,2.884,6.011,6.714,5.158,7.602L2.055,4.624L0,6.765l5.242,5.037l0.003-0.004l0.003,0.004L14.596,2.055z";
+    /*-fx-alignment: CENTER;
+    -fx-shape: "M-5,0a5,5 0 1,0 10,0a5,5 0 1,0 -10,0";*/
+}
+
+.barBtn {
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-background-color: rgba(255,255,255,.05);
+    -fx-effect: none;
+    -fx-padding: 3 7 3 7;
+}
+
+.close {
+    -fx-background-color: rgba(255,255,255,0.2);
+}
+
+.bar {
+    -fx-background-color: #444;
+}

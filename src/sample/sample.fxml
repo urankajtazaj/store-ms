@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.geometry.Insets?>
+<BorderPane style="-fx-background-color: #fafafa" fx:id="root" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+
+    <top>
+        <HBox styleClass="bar" spacing="7" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets right="10" top="5" bottom="5"/>
+            </padding>
+            <Button fx:id="minimizeBtn" styleClass="barBtn">
+                <graphic>
+                    <ImageView fitWidth="12" preserveRatio="true">
+                        <Image url="/sample/photo/minimize.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="closeBtn" styleClass="barBtn, close">
+                <graphic>
+                    <ImageView preserveRatio="true" fitWidth="12">
+                        <Image url="/sample/photo/close.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox fx:id="btnVb" styleClass="sideBar">
+            <Label style="-fx-font-size: 30; -fx-text-fill: -fx-element; -fx-padding: 20 0 20 0"  alignment="CENTER" text="LOGO" />
+            <Button  fx:id="btnHome" graphicTextGap="15" text="PANELI KRYESOR" onAction="#changeScene">
+                <graphic>
+                    <ImageView fitHeight="22" fitWidth="22">
+                        <Image url="/sample/photo/home.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button  fx:id="btnPunetoret" graphicTextGap="15" text="PUNETORET" onAction="#changeScene">
+                <graphic>
+                    <ImageView fitHeight="22" fitWidth="22">
+                        <Image url="/sample/photo/user.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button  fx:id="btnKons" graphicTextGap="15" text="KONSUMATORET">
+                <graphic>
+                    <ImageView fitHeight="22" fitWidth="22">
+                        <Image url="/sample/photo/user.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button  fx:id="btnPaisjet" graphicTextGap="15" text="PAISJET">
+                <graphic>
+                    <ImageView fitHeight="22" fitWidth="22">
+                        <Image url="/sample/photo/tool.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button  fx:id="btnStat" graphicTextGap="15" text="STATISTIKAT">
+                <graphic>
+                    <ImageView fitHeight="22" fitWidth="22">
+                        <Image url="/sample/photo/graph.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button  fx:id="btnProfile" graphicTextGap="15" text="PROFILI">
+                <graphic>
+                    <ImageView fitHeight="22" fitWidth="22">
+                        <Image url="/sample/photo/user.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button  fx:id="btnLogout" graphicTextGap="15" text="DIL">
+                <graphic>
+                    <ImageView fitHeight="22" fitWidth="22">
+                        <Image url="/sample/photo/logout.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+
+</BorderPane>

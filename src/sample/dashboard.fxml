@@ -1,0 +1,212 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Hyperlink?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.collections.FXCollections?>
+<?import sample.Punetori?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import sample.Punet?>
+<?import java.lang.String?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.control.CheckBox?>
+<GridPane fx:id="grid" style="-fx-padding: 15; -fx-background-color: #fafafa" styleClass="gp" vgap="10" hgap="10" fx:controller="sample.Dashboard" xmlns:fx="http://javafx.com/fxml">
+
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="${grid.width}"
+          GridPane.columnSpan="3" alignment="CENTER_LEFT" spacing="5">
+        <ComboBox value="Pamje vjetore" fx:id="cbPamja">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Pamje vjetore"/>
+                    <String fx:value="Pamje mujore"/>
+                    <String fx:value="Pamje javore"/>
+                    <String fx:value="Pamje ditore"/>
+                    <String fx:value="Kohe e caktuar"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <ComboBox value="2017" fx:id="cbViti">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="2017"/>
+                    <String fx:value="2016"/>
+                    <String fx:value="2015"/>
+                    <String fx:value="2014"/>
+                    <String fx:value="2013"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <ComboBox value="Muaji aktual" fx:id="cbMuaji">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Muaji aktual"/>
+                    <String fx:value="Janar"/>
+                    <String fx:value="Shkurt"/>
+                    <String fx:value="Mars"/>
+                    <String fx:value="Prill"/>
+                    <String fx:value="Maj"/>
+                    <String fx:value="Qershor"/>
+                    <String fx:value="Korrik"/>
+                    <String fx:value="Gusht"/>
+                    <String fx:value="Shtator"/>
+                    <String fx:value="Tetor"/>
+                    <String fx:value="Nentor"/>
+                    <String fx:value="Dhjetor"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <ComboBox fx:id="cbDita"></ComboBox>
+        <ComboBox fx:id="cbDitaDeri"></ComboBox>
+        <Button text="FILTRO" fx:id="btFiltro"/>
+    </HBox>
+
+    <HBox alignment="CENTER_LEFT" maxHeight="100" prefWidth="500" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="shadow">
+        <padding>
+            <Insets left="10" top="5" right="10" bottom="10"/>
+        </padding>
+        <BorderPane minWidth="450" maxWidth="450">
+            <top><Label text="LOREM IPSUM DOLOR" styleClass="infoTtl"/> </top>
+            <center>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Label styleClass="lVlera" text="1,295€"/>
+                </HBox>
+            </center>
+            <right>
+                <StackPane scaleX=".8" scaleY=".8" style="-fx-padding: 0 0 -20 0">
+                    <PieChart fx:id="pieChart1" labelsVisible="false" minWidth="120" maxWidth="120" animated="false"/>
+                    <Circle radius="35" fill="#ffffff"/>
+                    <Label styleClass="color, chart-nr" fx:id="lbPerc1"/>
+                </StackPane>
+            </right>
+        </BorderPane>
+    </HBox>
+
+    <HBox prefWidth="500" prefHeight="150" maxHeight="150" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="shadow">
+        <padding>
+            <Insets left="10" top="5" right="10" bottom="10"/>
+        </padding>
+        <BorderPane minWidth="450" maxWidth="450" maxHeight="100">
+            <top><Label text="LOREM IPSUM" styleClass="infoTtl"/> </top>
+            <center>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Label styleClass="lVlera" text="295€"/>
+                </HBox>
+            </center>
+            <right>
+                <StackPane scaleX=".8" scaleY=".8" style="-fx-padding: 0 0 -20 0">
+                    <PieChart fx:id="pieChart2" labelsVisible="false" minWidth="120" maxWidth="120" animated="false"/>
+                    <Circle radius="35" fill="#ffffff"/>
+                    <Label styleClass="color, chart-nr" fx:id="lbPerc2"/>
+                </StackPane>
+            </right>
+        </BorderPane>
+    </HBox>
+
+    <HBox prefWidth="500" prefHeight="150" maxHeight="150" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="shadow">
+        <padding>
+            <Insets left="10" top="5" right="10" bottom="10"/>
+        </padding>
+        <BorderPane minWidth="450" maxWidth="450">
+            <top><Label text="LOREM IPSUM" styleClass="infoTtl"/> </top>
+            <center>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Label styleClass="lVlera" text="102€"/>
+                </HBox>
+            </center>
+            <right>
+                <StackPane scaleX=".8" scaleY=".8" style="-fx-padding: 0 0 -20 0">
+                    <PieChart fx:id="pieChart3" labelsVisible="false" minWidth="120" maxWidth="120" animated="false"/>
+                    <Circle radius="35" fill="#ffffff"/>
+                    <Label styleClass="color, chart-nr" fx:id="lbPerc3"/>
+                </StackPane>
+            </right>
+        </BorderPane>
+    </HBox>
+    <HBox prefWidth="500" prefHeight="150" maxHeight="150" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="shadow">
+        <padding>
+            <Insets left="10" top="5" right="10" bottom="10"/>
+        </padding>
+        <BorderPane minWidth="450" maxWidth="450">
+            <top><Label text="LOREM IPSUM" styleClass="infoTtl"/> </top>
+            <center>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Label styleClass="lVlera" text="45€"/>
+                </HBox>
+            </center>
+            <right>
+                <StackPane scaleX=".8" scaleY=".8" style="-fx-padding: 0 0 -20 0">
+                    <PieChart fx:id="pieChart4" labelsVisible="false" minWidth="120" maxWidth="120" animated="false"/>
+                    <Circle radius="35" fill="#ffffff"/>
+                    <Label styleClass="color, chart-nr" fx:id="lbPerc4"/>
+                </StackPane>
+            </right>
+        </BorderPane>
+    </HBox>
+
+    <VBox fx:id="chartVb" minHeight="310" maxHeight="310" minWidth="1000" maxWidth="1000" styleClass="chartVb, shadow"
+          GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.rowSpan="1" GridPane.columnSpan="2" spacing="5">
+        <HBox spacing="10" alignment="TOP_CENTER">
+            <padding>
+                <Insets bottom="15"/>
+            </padding>
+            <CheckBox text="Seria" selected="true" />
+            <CheckBox text="Seria"/>
+            <CheckBox text="Seria"/>
+            <CheckBox text="Seria"/>
+        </HBox>
+    </VBox>
+
+    <!--FILLIMI - TABELA-->
+    <VBox styleClass="shadow, vbTbl" maxWidth="${chartVb.width}" maxHeight="300" spacing="5"
+          GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2">
+        <HBox spacing="10">
+            <BorderPane>
+                <left><Label text="PUNET"/></left>
+                <right>
+                    <ComboBox fx:id="cb" value="Te gjitha">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Te gjitha"/>
+                                <String fx:value="Perfunduar"/>
+                                <String fx:value="Aktiv"/>
+                                <String fx:value="Pritje"/>
+                                <String fx:value="Ndaluar"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </right>
+            </BorderPane>
+        </HBox>
+        <TableView fx:id="tbl">
+            <columns>
+                <TableColumn text="#"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+                <TableColumn fx:id="colPuna" text="AKTIVITETI"><cellValueFactory><PropertyValueFactory property="puna"/></cellValueFactory></TableColumn>
+                <TableColumn fx:id="colMng" text="PERGJEGJESI"><cellValueFactory><PropertyValueFactory property="menaxheri"/></cellValueFactory></TableColumn>
+                <TableColumn text="FILLIMI"><cellValueFactory><PropertyValueFactory property="fillimi"/></cellValueFactory></TableColumn>
+                <TableColumn text="MBARIMI"><cellValueFactory><PropertyValueFactory property="mbarimi"/></cellValueFactory></TableColumn>
+                <TableColumn fx:id="sts" text="STATUSI"><cellValueFactory><PropertyValueFactory property="statusi"/></cellValueFactory></TableColumn>
+            </columns>
+        </TableView>
+    </VBox>
+    <!--PERFUNDIMI - TABELA-->
+</GridPane>
