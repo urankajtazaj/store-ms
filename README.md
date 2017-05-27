@@ -1,4 +1,4 @@
 # Information System
 A desktop application
 
-![Image](http://imgur.com/K6sktJ4)
+![Image](http://i.imgur.com/K6sktJ4.png)
