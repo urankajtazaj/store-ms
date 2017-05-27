@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.shape.Rectangle?>
+<GridPane vgap="5" hgap="5" styleClass="gp" xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml">         <!--fx:controller="sample.controller.PunetoretView"> -->
+
+    <padding>
+        <Insets left="30" top="20"/>
+    </padding>
+
+    <children>
+
+        <HBox styleClass="shadow" alignment="CENTER_LEFT" spacing="10"
+              GridPane.rowIndex="0" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="7" right="7" left="7" bottom="7"/>
+            </padding>
+            <StackPane fx:id="sp" alignment="CENTER">
+                <ImageView fx:id="iv" fitHeight="125" preserveRatio="true"></ImageView>
+            </StackPane>
+            <VBox HBox.hgrow="ALWAYS" spacing="2" alignment="CENTER_LEFT">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label fx:id="emri" styleClass="infoTtl, intoTtlNb" style="-fx-font-size: 25;"/>
+                    <Circle radius="10" fx:id="crcStatusi"/>
+                </HBox>
+                <HBox style="-fx-opacity: .7" alignment="TOP_LEFT">
+                    <Label minWidth="0" fx:id="titulli" styleClass="infoTtl, intoTtlNb"/>
+                    <Label wrapText="true" minWidth="0" fx:id="dep" styleClass="infoTtl, intoTtlNb"/>
+                </HBox>
+            </VBox>
+            <VBox alignment="CENTER">
+                <padding>
+                    <Insets right="15"/>
+                </padding>
+                <Label text="Te hyrat" styleClass="infoTtl, intoTtlNb"/>
+                <Label text="1,243" styleClass="infoTtl, intoTtlNb" style="-fx-font-size: 33; -fx-text-fill: -fx-primary"/>
+            </VBox>
+        </HBox>
+
+        <VBox GridPane.rowIndex="1" styleClass="shadow" style="-fx-padding: 10;"
+              GridPane.columnIndex="0" spacing="5">
+            <Label text="Detajet personale" styleClass="infoTtl, intoTtlNb"/>
+            <HBox spacing="50">
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label text="Ditelindja" styleClass="infoTtl, infoTtl1"/>
+                    <Label fx:id="dtl" styleClass="infoTtl, intoTtlNb"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label text="Adresa" styleClass="infoTtl, infoTtl1"/>
+                    <Label maxWidth="130" fx:id="adresa" styleClass="infoTtl, intoTtlNb"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label text="Qyteti" styleClass="infoTtl, infoTtl1"/>
+                    <Label maxWidth="130" fx:id="qyteti" styleClass="infoTtl, intoTtlNb"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label text="Shteti" styleClass="infoTtl, infoTtl1"/>
+                    <Label maxWidth="130" fx:id="shteti" styleClass="infoTtl, intoTtlNb"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label text="Gjinia" styleClass="infoTtl, infoTtl1"/>
+                    <Label maxWidth="130" fx:id="gjinia" styleClass="infoTtl, intoTtlNb"/>
+                </VBox>
+            </HBox>
+        </VBox>
+        <VBox spacing="5" styleClass="shadow" style="-fx-padding: 10;"
+            GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label text="Tjera" styleClass="infoTtl, intoTtlNb"/>
+            <HBox spacing="50">
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label text="Pagesa" styleClass="infoTtl, infoTtl1"/>
+                    <Label maxWidth="130" fx:id="pagesa" styleClass="infoTtl, intoTtlNb"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label text="Email" styleClass="infoTtl, infoTtl1"/>
+                    <Label maxWidth="200" fx:id="email" styleClass="infoTtl, intoTtlNb"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label text="Telefoni" styleClass="infoTtl, infoTtl1"/>
+                    <Label maxWidth="130" fx:id="telefoni" styleClass="infoTtl, intoTtlNb"/>
+                </VBox>
+            </HBox>
+        </VBox>
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" spacing="4" alignment="BOTTOM_RIGHT">
+            <Button styleClass="btn" fx:id="btnExport" text="Eksporto"/>
+            <Button styleClass="btn" fx:id="btnRregullo" text="Rregullo"/>
+        </HBox>
+        <VBox fx:id="hbGrid" GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER_LEFT" spacing="5">
+            <padding>
+                <Insets top="50"/>
+            </padding>
+            <HBox spacing="5" alignment="BOTTOM_LEFT">
+                <Label text="Kalendari i pushimeve" styleClass="infoTtl, intoTtlNb"/>
+                <HBox HBox.hgrow="ALWAYS" spacing="20" alignment="BOTTOM_CENTER">
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Rectangle width="10" height="10" styleClass="vjetor"/>
+                        <Label text="Vjetor" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Rectangle width="10" height="10" styleClass="veqant"/>
+                        <Label text="Veqante" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Rectangle width="10" height="10" styleClass="semure"/>
+                        <Label text="Semure" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Rectangle width="10" height="10" styleClass="ppages"/>
+                        <Label text="Pa pagese" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Rectangle width="10" height="10" styleClass="parsye"/>
+                        <Label text="Pa arsye" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                    </HBox>
+                </HBox>
+                <ComboBox fx:id="cbViti"/>
+            </HBox>
+        </VBox>
+        <HBox GridPane.rowIndex="5" GridPane.columnIndex="0" alignment="BOTTOM_LEFT"
+              spacing="5">
+            <DatePicker maxWidth="110" fx:id="dpPrejPushim"/>
+            <DatePicker maxWidth="110" fx:id="dpDeriPushim"/>
+            <ComboBox fx:id="cbArsyeja" value="Vjetor">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Vjetor"/>
+                        <String fx:value="Veqant"/>
+                        <String fx:value="Semure"/>
+                        <String fx:value="Pa pagese"/>
+                        <String fx:value="Pa arsye"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Button text="Shto" styleClass="btn" onAction="#shtoPushim"/>
+        </HBox>
+    </children>
+
+</GridPane>

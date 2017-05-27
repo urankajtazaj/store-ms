@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.controller.LajmeroRed">
+
+    <padding>
+        <Insets top="20" left="20" right="20" bottom="20"/>
+    </padding>
+
+    <center>
+        <BorderPane fx:id="bp" styleClass="newWindow">
+            <center>
+                <Label graphicTextGap="20" BorderPane.alignment="CENTER_LEFT" wrapText="true" maxWidth="${bp.width}"
+                       fx:id="mesazhi" style="-fx-text-fill: #fff; -fx-padding: 0 10 0 20; -fx-font-weight: bold" styleClass="mesazhiDialog">
+                    <graphic>
+                        <ImageView preserveRatio="true" fitWidth="64">
+                            <Image url="/sample/photo/errormark.png"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+            </center>
+
+            <bottom>
+                <Button HBox.hgrow="ALWAYS" styleClass="btnT, darkerR" style="-fx-text-fill: #fff"
+                        minWidth="400" maxWidth="400" text="Ne rregull" fx:id="btnOk"/>
+            </bottom>
+        </BorderPane>
+    </center>
+
+</BorderPane>

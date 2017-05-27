@@ -4,51 +4,52 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.controller.Controller;
+import sample.controller.DB;
+import sample.controller.Login;
+import sample.controller.VariablatPublike;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
-        Parent root = loader.load();
-        Controller controller = loader.getController();
+        FXMLLoader login = new FXMLLoader(getClass().getResource("/sample/gui/Login.fxml"));
+        Parent root = login.load();
 
-        controller.closeBtn.setOnAction(e -> {
-            primaryStage.close();
-        });
+        System.err.println(VariablatPublike.javetNeMuaj(28));
 
-        controller.minimizeBtn.setOnAction(e -> {
-            primaryStage.setIconified(true);
-        });
+        Scene scene = new Scene(root, 700, 450);
 
-        controller.minimizeBtn.setOnMouseEntered(e -> {
-            controller.minimizeBtn.setStyle("-fx-background-color: rgba(255,255,255,0.2);");
-        });
-        controller.minimizeBtn.setOnMouseExited(e -> {
-            controller.minimizeBtn.setStyle("-fx-background-color: rgba(255,255,255,.05);");
-        });
+        Login loginController = login.getController();
+        loginController.setStage(primaryStage);
 
-        controller.closeBtn.setOnMouseEntered(e -> {
-            controller.closeBtn.setStyle("-fx-background-color: -fx-red;");
-        });
-        controller.closeBtn.setOnMouseExited(e -> {
-            controller.closeBtn.setStyle("-fx-background-color: rgba(255,255,255,0.2);");
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                loginController.checkUser(primaryStage);
+            }
         });
 
         primaryStage.setTitle("Information System");
-        Scene scene = new Scene(root, 800, 500);
         scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
-        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
+        primaryStage.setResizable(false);
         primaryStage.show();
-    }
 
+    }
 
     public static void main(String[] args) {
         launch(args);
     }
 }
+
+//1100 x 600

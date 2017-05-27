@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<BorderPane style="-fx-background-color: transparent" fx:id="konBp" fx:controller="sample.controller.Konfirmo"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+
+    <padding>
+        <Insets bottom="20" right="20" left="20" top="20"/>
+    </padding>
+
+    <center>
+        <BorderPane styleClass="newWindow" style="-fx-background-color: -fx-sidebar">
+            <center>
+                <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 10 10 0 15">
+                    <ImageView style="-fx-opacity: .95" preserveRatio="true" fitWidth="64">
+                        <Image url="/sample/photo/question.png"/>
+                    </ImageView>
+                    <VBox>
+                        <!--<Label fx:id="titulli" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #fff"/>-->
+                        <Label wrapText="true" style="-fx-font-weight: bold;-fx-padding: 5 0 7 0; -fx-font-size: 15; -fx-opacity: .95; -fx-text-fill: #fff"
+                               fx:id="mesazhi" styleClass="mesazhiDialog" prefWidth="${konBp.width}"/>
+                        <Label text="Ky aksion nuk mund te kthehet!"
+                               style="-fx-padding: 3;-fx-background-color: #fff;-fx-text-fill: -fx-orange;-fx-font-weight: bold; -fx-opacity: .9;"/>
+                    </VBox>
+                </HBox>
+            </center>
+
+            <bottom>
+                <HBox>
+                    <Button HBox.hgrow="ALWAYS" styleClass="btnT, btnOrng" onAction="#egzekuto"
+                            minWidth="210" maxWidth="210" text="Konfirmo" fx:id="btnOk" style="-fx-text-fill: #fff"/>
+                    <Button HBox.hgrow="ALWAYS" styleClass="btnT, btnOrng" onAction="#mbyllDritaren"
+                            minWidth="210" maxWidth="210" text="Anulo" fx:id="btnAnulo" style="-fx-text-fill: #fff"/>
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </center>
+
+</BorderPane>

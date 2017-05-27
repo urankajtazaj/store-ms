@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.sun.javafx.scene.control.skin.IntegerField?>
+<?import javafx.geometry.Insets?>
+<BorderPane styleClass="newWindow" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.controller.ShtoDepartamente">
+
+    <center>
+        <ScrollPane>
+            <VBox styleClass="wideVb" fx:id="vb" spacing="10" alignment="TOP_CENTER">
+                <padding>
+                    <Insets left="15" top="20" right="15"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <HBox spacing="5" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets bottom="10" right="10"/>
+            </padding>
+            <Button styleClass="btn" style="-fx-font-size: 16" fx:id="btnShto" text="+1" minWidth="340"/>
+            <Button styleClass="btn" fx:id="btnRuaj" text="Ruaj" minWidth="172"/>
+            <Button styleClass="btn" fx:id="btnKthehu" text="Kthehu" minWidth="172"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

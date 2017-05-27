@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<GridPane vgap="10" hgap="10" styleClass="gp" xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="sample.controller.Settings">
+
+    <children>
+        <BorderPane styleClass="shadow" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <padding>
+                <Insets top="5" left="10" right="10" bottom="10"/>
+            </padding>
+            <top>
+                <Label text="Targeti" styleClass="infoTtl"/>
+            </top>
+            <center>
+                <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-padding: 10 0 15 0">
+                    <TextField fx:id="tMujor" minWidth="100" maxWidth="150" />
+                    <ComboBox fx:id="cbTipi" value="Mujore">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Mujore"/>
+                                <String fx:value="Javore"/>
+                                <String fx:value="Ditore"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </HBox>
+            </center>
+            <bottom>
+                <Button BorderPane.alignment="CENTER_RIGHT" onAction="#ruajTarget" text="Ruaj" fx:id="btnRuajTargeti"/>
+            </bottom>
+        </BorderPane>
+
+        <BorderPane styleClass="shadow" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <padding>
+                <Insets top="5" left="10" right="10" bottom="10"/>
+            </padding>
+            <top>
+                <Label text="Punet" styleClass="infoTtl"/>
+            </top>
+            <center>
+                <VBox spacing="10" fx:id="vbPunet" alignment="CENTER_RIGHT">
+                    <Separator orientation="HORIZONTAL"/>
+                    <Button text="Shto" onAction="#shtoPune" fx:id="shtoPune"/>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <BorderPane styleClass="shadow" GridPane.rowSpan="2" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <padding>
+                <Insets top="5" left="10" right="10" bottom="10"/>
+            </padding>
+            <top>
+                <Label text="Produktet" styleClass="infoTtl"/>
+            </top>
+            <center>
+                <VBox spacing="15" alignment="TOP_RIGHT">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="TVSH (%)"/>
+                        <TextField minWidth="100" maxWidth="130"/>
+                        <Button text="Ruaj"/>
+                    </HBox>
+                    <Separator orientation="HORIZONTAL"/>
+                    <ScrollPane VBox.vgrow="ALWAYS" maxHeight="240" styleClass="edge-to-edge">
+                        <VBox alignment="CENTER_LEFT" fx:id="vbPnt" spacing="5">
+
+                        </VBox>
+                    </ScrollPane>
+                    <HBox spacing="5" alignment="CENTER_RIGHT">
+                        <Button text="Ruaj" onAction="#ruajProdKat"/>
+                        <Button text="+" onAction="#shtoProdKat"/>
+                    </HBox>
+                </VBox>
+            </center>
+        </BorderPane>
+
+    </children>
+
+</GridPane>

@@ -1,0 +1,102 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Hyperlink?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<GridPane styleClass="gp" fx:id="gp" hgap="5" vgap="5" fx:controller="sample.controller.Konsumatoret"
+          xmlns:fx="http://javafx.com/fxml">
+    <padding>
+        <Insets top="10" bottom="10" left="10" right="10"/>
+    </padding>
+    <children>
+        <HBox alignment="BOTTOM_LEFT" styleClass="filterHb" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3">
+            <VBox>
+                <Label text="ID" styleClass="filterLbl"/>
+                <TextField maxWidth="60" fx:id="txtId"/>
+            </VBox>
+            <VBox>
+                <Label text="Emri" styleClass="filterLbl"/>
+                <TextField fx:id="txtEmri" maxWidth="150"/>
+            </VBox>
+            <VBox>
+                <Label text="Qyteti" styleClass="filterLbl"/>
+                <TextField fx:id="txtQyteti" maxWidth="150"/>
+            </VBox>
+            <VBox>
+                <Label text="Adresa" styleClass="filterLbl"/>
+                <TextField fx:id="txtAdr" maxWidth="150"/>
+            </VBox>
+            <VBox>
+                <Label text="Email" styleClass="filterLbl"/>
+                <TextField fx:id="txtEmail" maxWidth="150"/>
+            </VBox>
+            <Button text="Filtro"/>
+            <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="5">
+                <Button text="Shto" onAction="#shtoKons"/>
+                <Button text="Eksporto" onAction="#eksporto"/>
+            </HBox>
+        </HBox>
+
+        <HBox styleClass="shadow" alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 20" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <!--<VBox alignment="CENTER_LEFT" styleClass="details">-->
+                <Label styleClass="detailInfoPnt" text="Numri i konsumatoreve: "/>
+                <Label fx:id="lblTotalKon" styleClass="detailInfoPnt-Qm"/>
+            <!--</VBox>-->
+            <!--<VBox alignment="CENTER_LEFT" styleClass="details">-->
+                <!--<Label styleClass="detailInfoPnt" text="Numri i Blerjeve"/>-->
+                <!--<Label fx:id="lblTotalP" styleClass="detailInfoPnt-Qm"/>-->
+            <!--</VBox>-->
+            <!--<VBox alignment="CENTER_LEFT" styleClass="details">-->
+                <!--<Label styleClass="detailInfoPnt" text="Porosi te sukseshme"/>-->
+                <!--<Label fx:id="lblPs" styleClass="detailInfoPnt-Qm"/>-->
+            <!--</VBox>-->
+            <!--<VBox alignment="CENTER_LEFT" styleClass="details">-->
+                <!--<Label styleClass="detailInfoPnt" text="Porosi te pasukseshme"/>-->
+                <!--<Label fx:id="lblPd" styleClass="detailInfoPnt-Qm"/>-->
+            <!--</VBox>-->
+        </HBox>
+
+        <TableView styleClass="shadow" minWidth="1100" GridPane.rowIndex="2"
+                   GridPane.columnSpan="1" GridPane.columnIndex="0" fx:id="tbl" GridPane.vgrow="ALWAYS">
+            <columns>
+                <TableColumn maxWidth="70" minWidth="70" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+                <TableColumn maxWidth="150" minWidth="150" text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                <TableColumn text="Adresa"><cellValueFactory><PropertyValueFactory property="adresa"/></cellValueFactory></TableColumn>
+                <TableColumn minWidth="90" maxWidth="90" text="Qyteti"><cellValueFactory><PropertyValueFactory property="qyteti"/></cellValueFactory></TableColumn>
+                <TableColumn maxWidth="90" minWidth="90" text="Shteti"><cellValueFactory><PropertyValueFactory property="shteti"/></cellValueFactory></TableColumn>
+                <TableColumn maxWidth="90" minWidth="90" text="Telefoni"><cellValueFactory><PropertyValueFactory property="tel"/></cellValueFactory></TableColumn>
+                <TableColumn text="Email"><cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory></TableColumn>
+                <TableColumn fx:id="colAction" maxWidth="50" minWidth="50"></TableColumn>
+            </columns>
+        </TableView>
+    </children>
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
+
+</GridPane>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane styleClass="gp" vgap="15" hgap="10" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <fx:define>
+        <ToggleGroup fx:id="tgBg"/>
+        <ToggleGroup fx:id="tgFg"/>
+    </fx:define>
+
+    <Label styleClass="infoTtl" text="Zgjedh ngjyren" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+
+    <Label text="Prapavija" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <HBox alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="10" styleClass="smallVb">
+        <ToggleButton selected="true" fx:id="tb1" toggleGroup="$tgBg" style="-fx-background-color: #1abc9c" text="#1abc9c" contentDisplay="GRAPHIC_ONLY"/>
+        <ToggleButton fx:id="tb2" toggleGroup="$tgBg" style="-fx-background-color: #2ecc71" text="#2ecc71" contentDisplay="GRAPHIC_ONLY"/>
+        <ToggleButton fx:id="tb3" toggleGroup="$tgBg" style="-fx-background-color: #3498db" text="#3498db" contentDisplay="GRAPHIC_ONLY"/>
+        <ToggleButton fx:id="tb4" toggleGroup="$tgBg" style="-fx-background-color: #9b59b6" text="#9b59b6" contentDisplay="GRAPHIC_ONLY"/>
+        <ToggleButton fx:id="tb5" toggleGroup="$tgBg" style="-fx-background-color: #e67e22" text="#e67e22" contentDisplay="GRAPHIC_ONLY"/>
+        <ToggleButton fx:id="tb6" toggleGroup="$tgBg" style="-fx-background-color: #e74c3c" text="#e74c3c" contentDisplay="GRAPHIC_ONLY"/>
+        <ToggleButton fx:id="tb7" toggleGroup="$tgBg" style="-fx-background-color: rgba(0,0,0, .085)" text="rgba(0,0,0, .085)" contentDisplay="GRAPHIC_ONLY"/>
+        <ToggleButton fx:id="tb8" toggleGroup="$tgBg" style="-fx-background-color: #444" text="#444" contentDisplay="GRAPHIC_ONLY"/>
+    </HBox>
+
+    <Label text="Teksti" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <HBox alignment="CENTER" GridPane.rowIndex="2" GridPane.columnIndex="1" spacing="10" styleClass="smallVb">
+        <ToggleButton selected="true" fx:id="ftb1" toggleGroup="$tgFg" style="-fx-background-color: rgba(255,255,255,0.9)" text="rgba(255,255,255,0.9)" contentDisplay="GRAPHIC_ONLY"/>
+        <ToggleButton fx:id="ftb2" toggleGroup="$tgFg" style="-fx-background-color: rgba(0,0,0,0.9)" text="rgba(0,0,0,0.9)" contentDisplay="GRAPHIC_ONLY"/>
+    </HBox>
+
+    <Button onAction="#ruajNgjyren" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.halignment="RIGHT" text="OK"/>
+
+</GridPane>

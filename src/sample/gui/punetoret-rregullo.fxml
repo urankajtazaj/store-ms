@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane style="-fx-background-color: -fx-sidebar" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.controller.PunetoretRregullo"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="5">
+        <HBox spacing="2">
+            <Label text="Emri"/>
+            <TextField fx:id="txtEmriR" />
+        </HBox>
+        <HBox spacing="2">
+            <Label text="Mbiemri"/>
+            <TextField fx:id="txtMbiemriR" />
+        </HBox>
+        <HBox spacing="2">
+            <Label text="Roli"/>
+            <TextField fx:id="txtRoliR" />
+        </HBox>.darkerRe
+        <HBox spacing="2">
+            <Label text="Departamenti"/>
+            <TextField fx:id="txtDepR" />
+        </HBox>
+        <HBox spacing="2">
+            <Label text="Qyteti"/>
+            <TextField fx:id="txtQytetiR" />
+        </HBox>
+    </VBox>
+
+</GridPane>

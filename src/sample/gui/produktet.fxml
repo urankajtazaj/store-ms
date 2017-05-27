@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<GridPane vgap="3" hgap="3" fx:id="root" styleClass="gp" xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="sample.controller.Produktet">
+
+    <HBox alignment="BOTTOM_LEFT" styleClass="filterHb" spacing="2" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="ID" styleClass="filterLbl"/>
+            <TextField maxWidth="50" minWidth="50" />
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Prodhuesi" styleClass="filterLbl"/>
+            <TextField maxWidth="120" minWidth="120"/>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Produkti" styleClass="filterLbl"/>
+            <TextField maxWidth="120" minWidth="120"/>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Frunizuesi" styleClass="filterLbl"/>
+            <TextField maxWidth="120" minWidth="120"/>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Kategoria" styleClass="filterLbl"/>
+            <ComboBox value="Kategoria"/>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Qmimi" styleClass="filterLbl"/>
+            <TextField maxWidth="100"/>
+        </VBox>
+        <ComboBox value="=">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="="/>
+                    <String fx:value="&gt;"/>
+                    <String fx:value="&lt;"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Button text="Filtro"/>
+        </Button>
+        <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="1">
+            <Button text="Shto" onAction="#shtoProdukt" style="-fx-background-color: -fx-secondary"/>
+            <Button text="Eksporto" style="-fx-background-color: -fx-secondary"/>
+        </HBox>
+    </HBox>
+
+    <TableView styleClass="shadow" minWidth="1000" fx:id="tblProduktet" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
+        <columns>
+            <TableColumn maxWidth="50" minWidth="50" text="id"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+            <TableColumn text="Prodhuesi"><cellValueFactory><PropertyValueFactory property="prodhuesi"/></cellValueFactory></TableColumn>
+            <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+            <TableColumn text="Kategoria"><cellValueFactory><PropertyValueFactory property="kategoria"/></cellValueFactory></TableColumn>
+            <TableColumn text="Furnizuesi"><cellValueFactory><PropertyValueFactory property="furnizuesi"/></cellValueFactory></TableColumn>
+            <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="colSasia" text="Sasia e mbetur"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="colAksion" minWidth="50" maxWidth="50"></TableColumn>
+        </columns>
+    </TableView>
+
+    <BorderPane maxHeight="300" styleClass="shadow" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="1">
+        <top>
+            <Label text="Kategorite me te shitura" styleClass="infoTtl"/>
+        </top>
+        <center>
+            <StackPane styleClass="stack" fx:id="stack">
+                <BarChart fx:id="barChart">
+                    <xAxis>
+                        <CategoryAxis/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis/>
+                    </yAxis>
+                </BarChart>
+            </StackPane>
+        </center>
+    </BorderPane>
+
+    <BorderPane maxHeight="300" styleClass="shadow" GridPane.rowIndex="2" GridPane.columnIndex="1">
+        <top>
+            <Label text="Produktet me te shitura" styleClass="infoTtl"/>
+        </top>
+        <center>
+            <StackPane styleClass="stack" fx:id="stack2">
+                <BarChart fx:id="barChart2">
+                    <xAxis>
+                        <CategoryAxis/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis/>
+                    </yAxis>
+                </BarChart>
+            </StackPane>
+        </center>
+    </BorderPane>
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
+
+</GridPane>

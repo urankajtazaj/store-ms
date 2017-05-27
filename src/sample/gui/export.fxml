@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<BorderPane style="-fx-background-color: transparent" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.controller.Export">
+    <padding>
+        <Insets right="20" bottom="20" left="20" top="20"/>
+    </padding>
+    <center>
+        <BorderPane fx:id="inBp" styleClass="newWindow">
+            <center>
+                <GridPane alignment="TOP_CENTER">
+                    <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="EXCEL" fx:id="btnExcel" styleClass="btnExportImg"/>
+                    <Button GridPane.rowIndex="0" GridPane.columnIndex="1" text="PDF" styleClass="btnExportImg"/>
+                    <Button GridPane.rowIndex="0" GridPane.columnIndex="2" text="CSV" fx:id="btnCsv" styleClass="btnExportImg"/>
+                    <Button GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="3"
+                            fx:id="btnAnulo" text="ANULO" styleClass="btnExportImg, btnC"/>
+                </GridPane>
+            </center>
+        </BorderPane>
+
+    </center>
+
+</BorderPane>

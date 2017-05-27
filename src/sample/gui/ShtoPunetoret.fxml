@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.shape.Rectangle?>
+<BorderPane styleClass="gp" style="-fx-padding: 50 10 10 10" fx:id="shtoBp" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+            <!---fx:controller="sample.controller.ShtoPunetoret">-->
+    <center>
+        <GridPane alignment="TOP_CENTER" vgap="5" hgap="10">
+            <VBox styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="10">
+                <Label text="Emri"/>
+                <Label text="Mbiemri"/>
+                <Label text="Gjinia"/>
+                <Label text="Ditelindja"/>
+                <Label text="Punesuar"/>
+                <Label text="Statusi"/>
+            </VBox>
+
+            <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="10">
+                <TextField fx:id="emri" minWidth="200" maxWidth="200"/>
+                <TextField fx:id="mbiemri" minWidth="200" maxWidth="200"/>
+                <ComboBox value="Mashkull" fx:id="gjinia" minWidth="200" maxWidth="200">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Mashkull"/>
+                            <String fx:value="Femer"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <DatePicker fx:id="ditelindja" minWidth="200" maxWidth="200"/>
+                <DatePicker fx:id="punesuar" minWidth="200" maxWidth="200"/>
+                <ComboBox fx:id="cbStatusi" minWidth="200" maxWidth="200">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Pasiv"/>
+                            <String fx:value="Aktiv"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <HBox spacing="5">
+                    <Button fx:id="btnFoto" text="Foto" onAction="#zgjedhFoto"/>
+                    <Button fx:id="btnFotoPastro" text="Pastro" onAction="#pastroFoto"/>
+                    <Button fx:id="btnFotoHape" text="Hape" onAction="#hapeFoto" disable="true"/>
+                </HBox>
+                <Label fx:id="lblFoto" style="-fx-text-fill: rgba(0,0,0,.7)" wrapText="true" maxWidth="200"/>
+            </VBox>
+
+            <VBox styleClass="vbSp" GridPane.columnIndex="2" GridPane.rowIndex="0" spacing="10">
+                <padding>
+                    <Insets left="70"/>
+                </padding>
+                <Label text="Puna"/>
+                <Label text="Departamenti"/>
+                <Label text="Paga"/>
+                <Label text="Telefoni"/>
+                <Label text="Email"/>
+                <Label text="Adresa"/>
+                <Label text="Qyteti"/>
+                <Label text="Shteti"/>
+            </VBox>
+
+            <VBox GridPane.columnIndex="3" GridPane.rowIndex="0" spacing="10">
+                <TextField fx:id="titulli" minWidth="200" maxWidth="200"/>
+                <HBox spacing="2">
+                    <ComboBox fx:id="departamenti" minWidth="200" maxWidth="200"/>
+                    <Button
+                    style="-fx-background-color: -fx-secondary; -fx-border-radius: 3;
+                    -fx-background-radius: 3; -fx-text-fill: #fff
+;-fx-font-weight: bold; -fx-max-height: 31;" onAction="#openAddDep">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="10">
+                                <Image url="/sample/photo/add1.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+                <TextField fx:id="paga" minWidth="200" maxWidth="200"/>
+                <TextField fx:id="telefoni" minWidth="200" maxWidth="200"/>
+                <TextField fx:id="email" minWidth="200" maxWidth="200"/>
+                <TextField fx:id="adresa" minWidth="200" maxWidth="200"/>
+                <TextField fx:id="qyteti" minWidth="200" maxWidth="200"/>
+                <TextField fx:id="shteti" minWidth="200" maxWidth="200"/>
+            </VBox>
+
+            <VBox spacing="10" styleClass="vbSp" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                <Label text="Emri"/>
+                <Label text="Fjalekalimi"/>
+            </VBox>
+
+            <VBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="txtUser" minWidth="200" maxWidth="200"/>
+                <PasswordField fx:id="txtPw" minWidth="200" maxWidth="200"/>
+            </VBox>
+
+            <HBox GridPane.rowIndex="1" GridPane.columnIndex="2" spacing="3" alignment="BOTTOM_RIGHT" GridPane.columnSpan="2">
+                <padding>
+                    <Insets top="10" right="35"/>
+                </padding>
+                    <Button text="Ruaj" fx:id="btnRuaj" styleClass="btn" minWidth="200"></Button>
+            </HBox>
+        </GridPane>
+    </center>
+</BorderPane>

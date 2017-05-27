@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.geometry.Insets?>
+<GridPane vgap="5" hgap="5" fx:id="gp" styleClass="gp" xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="sample.controller.Raportet">
+
+    <fx:define>
+        <ToggleGroup fx:id="tg"/>
+    </fx:define>
+
+    <children>
+
+        <HBox styleClass="filterHb" spacing="5" alignment="CENTER_RIGHT" GridPane.columnSpan="4" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <DatePicker fx:id="dpPrej" maxWidth="120" maxHeight="28"/>
+            <Label text="-"/>
+            <DatePicker fx:id="dpDeri" maxWidth="120" maxHeight="28"/>
+            <Button text="Filtro" />
+        </HBox>
+
+        <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="0">
+            <top><Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Fitimi NET"/> </top>
+            <center>
+                <VBox alignment="CENTER">
+                    <Label styleClass="lVlera"  text="150€"/>
+                    <HBox spacing="2" alignment="BOTTOM_CENTER">
+                        <Label text="+20%" styleClass="percGreen"/>
+                        <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
+                    </HBox>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="1">
+            <top><Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Pagesa mesatare"/> </top>
+            <center>
+                <VBox alignment="CENTER">
+                    <Label styleClass="lVlera"  text="20.56€"/>
+                    <HBox spacing="2" alignment="BOTTOM_CENTER">
+                        <Label text="-72%" styleClass="percRed"/>
+                        <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
+                    </HBox>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="2">
+            <top><Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Produkte te shitura"/> </top>
+            <center>
+                <VBox alignment="CENTER">
+                    <Label styleClass="lVlera"  text="436"/>
+                    <HBox spacing="2" alignment="BOTTOM_CENTER">
+                        <Label text="+63%" styleClass="percGreen"/>
+                        <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
+                    </HBox>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="3">
+            <top><Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Konsumatore te rinj"/> </top>
+            <center>
+                <VBox alignment="CENTER">
+                    <Label styleClass="lVlera"  text="12"/>
+                    <HBox spacing="2" alignment="BOTTOM_CENTER">
+                        <Label text="+15%" styleClass="percGreen"/>
+                        <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
+                    </HBox>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <BorderPane GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="shadow" GridPane.columnSpan="4">
+            <top>
+                <HBox styleClass="bbHb">
+                    <Label styleClass="infoTtl" style="-fx-border-width: 0;" text="Produktet e shitura"/>
+                    <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" spacing="5">
+                        <Button text="CSV" />
+                        <Button text="Excel"  />
+                        <Button text="PDF" />
+                    </HBox>
+                </HBox>
+            </top>
+            <center>
+                <TableView fx:id="tbl">
+                    <columns>
+                        <TableColumn text="ID"/>
+                        <TableColumn text="ID"/>
+                        <TableColumn text="ID"/>
+                        <TableColumn text="ID"/>
+                        <TableColumn text="ID"/>
+                        <TableColumn text="ID"/>
+                    </columns>
+                </TableView>
+            </center>
+        </BorderPane>
+
+        <BorderPane GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="shadow" GridPane.columnSpan="4">
+            <top>
+                <HBox styleClass="bbHb">
+                    <Label styleClass="infoTtl" style="-fx-border-width: 0;" text="Konsumatoret"/>
+                    <HBox HBox.hgrow="ALWAYS" spacing="5" alignment="CENTER_RIGHT">
+                        <Button text="CSV"  />
+                        <Button text="Excel"  />
+                        <Button text="PDF" />
+                    </HBox>
+                </HBox>
+            </top>
+            <center>
+                <TableView fx:id="tblKns">
+                    <columns>
+                        <TableColumn maxWidth="70" minWidth="70" text="id"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+                        <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                        <TableColumn minWidth="90" maxWidth="90" text="Qyteti"><cellValueFactory><PropertyValueFactory property="qyteti"/></cellValueFactory></TableColumn>
+                        <TableColumn maxWidth="90" minWidth="90" text="Shteti"><cellValueFactory><PropertyValueFactory property="shteti"/></cellValueFactory></TableColumn>
+                        <TableColumn text="Adresa"><cellValueFactory><PropertyValueFactory property="adresa"/></cellValueFactory></TableColumn>
+                        <TableColumn maxWidth="90" minWidth="90" text="Tel"><cellValueFactory><PropertyValueFactory property="tel"/></cellValueFactory></TableColumn>
+                        <TableColumn text="Email"><cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory></TableColumn>
+                        <TableColumn maxWidth="70" minWidth="70" text="Blerje"><cellValueFactory><PropertyValueFactory property="p"/></cellValueFactory></TableColumn>
+                    </columns>
+                </TableView>
+            </center>
+        </BorderPane>
+    </children>
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+
+</GridPane>

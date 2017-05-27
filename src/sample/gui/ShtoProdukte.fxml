@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane styleClass="gp" vgap="15" hgap="20" xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="sample.controller.ShtoProdukte">
+
+    <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <Label text="Produkti"/>
+        <Label text="Kategoria"/>
+        <Label text="Njesia"/>
+        <Label text="Qmimi standard"/>
+        <Label text="Qmimi shitjes"/>
+        <Label text="Zbritje (%)"/>
+    </VBox>
+
+    <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" spacing="10">
+        <TextField fx:id="emri" minWidth="200" maxWidth="200"/>
+        <ComboBox fx:id="cbKategoria" minWidth="200" maxWidth="200"/>
+        <ComboBox fx:id="cbNjesia" minWidth="200" maxWidth="200"/>
+        <TextField fx:id="qmimiStd" minWidth="200" maxWidth="200"/>
+        <TextField fx:id="qmimiShitjes" minWidth="200" maxWidth="200"/>
+        <TextField fx:id="zbritje" minWidth="200" maxWidth="200"/>
+    </VBox>
+
+    <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="0">
+        <padding>
+            <Insets left="50"/>
+        </padding>
+        <!--<Label-->
+    </VBox>
+
+</GridPane>

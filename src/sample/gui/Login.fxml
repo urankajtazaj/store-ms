@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane styleClass="bg" style="-fx-background-color: -fx-primary;" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.controller.Login">
+
+    <center>
+        <GridPane styleClass="gpBg" alignment="CENTER" vgap="15">
+            <Label text="Miresevini" styleClass="h1" GridPane.halignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField promptText="Emri" fx:id="txtUser" styleClass="logTxt" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <PasswordField promptText="Fjalekalimi" fx:id="txtPw" styleClass="logTxt" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                  GridPane.columnSpan="2">
+                <Button fx:id="btnLogin" styleClass="btn"
+                        style="-fx-min-width: 250; -fx-max-width: 250; -fx-border-width: 2; -fx-border-color: #fff; -fx-background-color: transparent" text="Kyqu"/>
+            </HBox>
+        </GridPane>
+    </center>
+    <bottom>
+        <HBox alignment="BOTTOM_RIGHT">
+            <padding>
+                <Insets right="5" left="5"/>
+            </padding>
+            <HBox alignment="BOTTOM_LEFT" HBox.hgrow="ALWAYS">
+                <Label style="-fx-text-fill: rgba(255,255,255,.35);" text="Copyrights © Uran Kajtazaj, 2017"/>
+            </HBox>
+            <Button fx:id="btnSetting" styleClass="littleIcon">
+                <graphic>
+                    <ImageView preserveRatio="true" fitWidth="13">
+                        <Image url="/sample/photo/setting.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnAbout" styleClass="littleIcon">
+                <graphic>
+                    <ImageView preserveRatio="true" fitWidth="13">
+                        <Image url="/sample/photo/qblack.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </bottom>
+
+</BorderPane>

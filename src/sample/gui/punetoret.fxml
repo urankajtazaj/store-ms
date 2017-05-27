@@ -1,0 +1,117 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Hyperlink?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<GridPane styleClass="gp" fx:id="gp" hgap="5" vgap="5" fx:controller="sample.controller.Punetoret" xmlns:fx="http://javafx.com/fxml">
+<children>
+    <HBox styleClass="filterHb" alignment="BOTTOM_LEFT" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="ID" styleClass="filterLbl"/>
+            <TextField fx:id="txtId" maxWidth="60"/>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Emri" styleClass="filterLbl"/>
+            <TextField fx:id="txtEmri"/>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Puna" styleClass="filterLbl"/>
+            <TextField fx:id="txtPuna"/>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Departamenti" styleClass="filterLbl"/>
+            <ComboBox value="Shitje">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Shitje"/>
+                        <String fx:value="Prodhim"/>
+                        <String fx:value="Depart"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT">
+            <Label text="Statusi" styleClass="filterLbl"/>
+            <ComboBox value="Te gjithe">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Te gjithe"/>
+                        <String fx:value="Aktiv"/>
+                        <String fx:value="Pushim"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </VBox>
+        <Button text="Filtro"/>
+        <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="4">
+            <Button fx:id="btnShtoPnt" text="Shto"/>
+            <Button text="Eksporto" onAction="#eksporto"/>
+        </HBox>
+    </HBox>
+
+    <HBox styleClass="shadow" alignment="CENTER" spacing="20" GridPane.columnSpan="1" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <VBox alignment="CENTER_LEFT" styleClass="details">
+            <Label styleClass="detailInfoPnt" text="Numri i punetoreve"/>
+            <Label fx:id="lblTotalPnt" text="0" styleClass="detailInfoPnt-Qm" />
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="details">
+            <Label styleClass="detailInfoPnt" text="Pagesa totale mujore"/>
+            <Label fx:id="lblTotalM" text="0" styleClass="detailInfoPnt-Qm"/>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="details">
+            <Label styleClass="detailInfoPnt" text="Paga mesatare"/>
+            <Label fx:id="lblMes" text="0" styleClass="detailInfoPnt-Qm"/>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="details">
+            <Label styleClass="detailInfoPnt" text="Punetore aktiv"/>
+            <Label fx:id="lblPntAktiv" text="0" styleClass="detailInfoPnt-Qm"/>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" styleClass="details">
+            <Label styleClass="detailInfoPnt" text="Punetore ne pushim"/>
+            <Label fx:id="lblPntPsh" text="0" styleClass="detailInfoPnt-Qm"/>
+        </VBox>
+    </HBox>
+
+    <TableView fx:id="tbl" GridPane.vgrow="ALWAYS" prefHeight="550"
+               GridPane.hgrow="ALWAYS" styleClass="shadow" GridPane.rowIndex="2" GridPane.columnSpan="1"
+               GridPane.columnIndex="0">
+        <columns>
+            <TableColumn maxWidth="60" minWidth="60" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+            <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+            <TableColumn text="Puna"><cellValueFactory><PropertyValueFactory property="puna"/></cellValueFactory></TableColumn>
+            <TableColumn text="Departamenti"><cellValueFactory><PropertyValueFactory property="departamenti"/></cellValueFactory></TableColumn>
+            <TableColumn text="Data e punesimit"><cellValueFactory><PropertyValueFactory property="punesimi"/></cellValueFactory></TableColumn>
+            <TableColumn text="Paga"><cellValueFactory><PropertyValueFactory property="paga"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="colMng" text="Telefoni"><cellValueFactory><PropertyValueFactory property="tel"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="sts" maxWidth="80" minWidth="80" text="Statusi"><cellValueFactory><PropertyValueFactory property="statusi"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="colAct" maxWidth="45" minWidth="45"></TableColumn>
+        </columns>
+    </TableView>
+</children>
+
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
+
+</GridPane>
