@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
 <GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.ShtoProdukte">
@@ -14,39 +15,54 @@
     <Label GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" styleClass="h0" text="Shto Produkte"/>
 
     <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="1">
-        <Label text="Produkti"/>
-        <Label text="Kategoria"/>
-        <Label text="Njesia"/>
-        <Label text="Qmimi standard"/>
-        <Label text="Qmimi shitjes"/>
-        <Label text="Zbritje (%)"/>
+        <Label text="Barkodi*"/>
+        <Label text="Emri*"/>
+        <Label text="Kategoria*"/>
+        <Label text="Njesia*"/>
     </VBox>
 
     <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="10">
+        <TextField fx:id="bc" minWidth="200" maxWidth="200"/>
         <TextField fx:id="emri" minWidth="200" maxWidth="200"/>
         <ComboBox fx:id="cbKategoria" minWidth="200" maxWidth="200"/>
-        <ComboBox fx:id="cbNjesia" minWidth="200" maxWidth="200"/>
-        <TextField fx:id="qmimiStd" minWidth="200" maxWidth="200"/>
-        <TextField fx:id="qmimiShitjes" minWidth="200" maxWidth="200"/>
-        <TextField fx:id="zbritje" minWidth="200" maxWidth="200"/>
+        <ComboBox fx:id="cbNjesia" value="Cope" minWidth="200" maxWidth="200">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Cope"/>
+                    <String fx:value="Paketim"/>
+                    <String fx:value="kg"/>
+                    <String fx:value="liter"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
     </VBox>
 
     <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <padding>
             <Insets left="50"/>
         </padding>
-        <Label text="Furnizuesi" />
-        <Label text="Stoku" />
+        <Label text="Qmimi standard*"/>
+        <Label text="Qmimi i shitjes*"/>
+        <Label text="Zbritje (%)"/>
+        <Label text="Sasia*" />
         <Label text="Niveli kritik" />
     </VBox>
 
     <VBox spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="1">
-        <ComboBox fx:id="cbFur" minWidth="200" maxWidth="200"/>
+        <TextField fx:id="qmimiStd" minWidth="200" maxWidth="200"/>
+        <TextField fx:id="qmimiShitjes" minWidth="200" maxWidth="200"/>
+        <TextField fx:id="zbritje" minWidth="200" maxWidth="200"/>
         <TextField fx:id="stok" minWidth="200" maxWidth="200"/>
         <TextField fx:id="stokCrit" minWidth="200" maxWidth="200"/>
-        <HBox spacing="5" alignment="CENTER_RIGHT" minWidth="200" maxWidth="200">
-            <Button text="+Furnizues"/>
-        </HBox>
     </VBox>
+
+    <Label text="Fushat me yll (*) jane te obligueshme" style="-fx-font-weight: bold; -fx-opacity: .6"
+           GridPane.halignment="RIGHT"
+           GridPane.columnSpan="2" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+    <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.rowIndex="3" GridPane.columnIndex="3">
+        <Button text="Pastro" onAction="#pastroProdukt"/>
+        <Button text="Shto" onAction="#shtoProdukt"/>
+    </HBox>
 
 </GridPane>
