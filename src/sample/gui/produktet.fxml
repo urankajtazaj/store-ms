@@ -49,7 +49,6 @@
             </items>
         </ComboBox>
         <Button text="Filtro"/>
-        </Button>
         <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="1">
             <Button text="Shto" onAction="#shtoProdukt" style="-fx-background-color: -fx-secondary"/>
             <Button text="Eksporto" style="-fx-background-color: -fx-secondary"/>

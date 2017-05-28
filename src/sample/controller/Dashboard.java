@@ -211,7 +211,7 @@ public class Dashboard implements Initializable{
                         "where koha_shitjes >= dateadd('month', -12, current_date()) " +
                         "group by data";
             }else if (p.equals("6m")) {
-                q = "select sum(totanetol) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +
+                q = "select sum(totalneto) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +
                         "where koha_shitjes >= dateadd('month', -6, current_date()) group by data";
             }else if (p.equals("3m")) {
                 q = "select sum(totalneto) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +

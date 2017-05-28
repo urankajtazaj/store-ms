@@ -3,13 +3,16 @@ package sample.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import sample.constructors.ProduktetClass;
 
@@ -31,6 +34,12 @@ public class Produktet implements Initializable {
     @FXML private TableView tblProduktet;
     @FXML private TableColumn colStatusi, colAksion, colSasia;
     @FXML private BarChart<String, Number> barChart, barChart2;
+
+    private BorderPane bp;
+
+    public void setBp (BorderPane bp) {
+        this.bp = bp;
+    }
 
     Random rand = new Random();
 
@@ -158,8 +167,12 @@ public class Produktet implements Initializable {
     }
 
     @FXML
-    private void shtoProdukt(){
-
+    private void shtoProdukt() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoProdukte.fxml"));
+            Parent parent = loader.load();
+            bp.setCenter(parent);
+        }catch (Exception e) { e.printStackTrace(); }
     }
 
 }

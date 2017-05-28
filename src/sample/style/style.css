@@ -1044,6 +1044,12 @@
     -fx-text-fill: -fx-label-color;
 }
 
+.h0 {
+    -fx-font-size: 30;
+    -fx-font-family: "Montserrat bold";
+    -fx-text-fill: -fx-primary;
+}
+
 .bg {
     -fx-background: linear-gradient(#542F64, #312540);
 /*
