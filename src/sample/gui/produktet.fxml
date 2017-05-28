@@ -57,13 +57,12 @@
 
     <TableView styleClass="shadow" minWidth="1000" fx:id="tblProduktet" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
         <columns>
-            <TableColumn maxWidth="50" minWidth="50" text="id"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
-            <TableColumn text="Prodhuesi"><cellValueFactory><PropertyValueFactory property="prodhuesi"/></cellValueFactory></TableColumn>
+            <TableColumn maxWidth="50" minWidth="50" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
             <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
             <TableColumn text="Kategoria"><cellValueFactory><PropertyValueFactory property="kategoria"/></cellValueFactory></TableColumn>
-            <TableColumn text="Furnizuesi"><cellValueFactory><PropertyValueFactory property="furnizuesi"/></cellValueFactory></TableColumn>
             <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
-            <TableColumn fx:id="colSasia" text="Sasia e mbetur"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+            <TableColumn text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
             <TableColumn fx:id="colAksion" minWidth="50" maxWidth="50"></TableColumn>
         </columns>
     </TableView>

@@ -61,7 +61,7 @@ public class Konsumatoret implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 520, 205);
+        Scene scene = new Scene(bpExport, 400, 165);
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);

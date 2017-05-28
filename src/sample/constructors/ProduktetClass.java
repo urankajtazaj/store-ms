@@ -6,16 +6,17 @@ import javafx.scene.control.Label;
  * Created by uran on 17-04-07.
  */
 public class ProduktetClass {
-    private String emri, prodhuesi, kategoria, qmimi, furnizuesi;
+    private String emri, qmimi, prodhuesi, kategoria, furnizuesi;
     private int id, sasia;
+    private double zbritje;
 
-    public ProduktetClass(int id, String emri, String prodhuesi, String kategoria, String qmimi, int sasia) {
+    public ProduktetClass(int id, String emri, String kategoria, String qmimi, int sasia, double zbritje) {
         this.emri = emri;
         this.id = id;
-        this.prodhuesi = prodhuesi;
         this.kategoria = kategoria;
         this.qmimi = qmimi;
         this.sasia = sasia;
+        this.zbritje = zbritje;
     }
 
     public ProduktetClass(int id, String emri, String prodhuesi, String kategoria, String furnizuesi, String qmimi, int sasia) {
@@ -23,9 +24,17 @@ public class ProduktetClass {
         this.id = id;
         this.prodhuesi = prodhuesi;
         this.kategoria = kategoria;
-        this.qmimi = qmimi;
+//        this.qmimi = qmimi;
         this.sasia = sasia;
         this.furnizuesi = furnizuesi;
+    }
+
+    public double getZbritje() {
+        return zbritje;
+    }
+
+    public void setZbritje(double zbritje) {
+        this.zbritje = zbritje;
     }
 
     public String getFurnizuesi() {

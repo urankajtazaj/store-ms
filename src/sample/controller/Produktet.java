@@ -20,6 +20,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -102,40 +104,36 @@ public class Produktet implements Initializable {
     }
 
     private void fillTable(){
-
-        ObservableList<ProduktetClass> data = FXCollections.observableArrayList(
-                new ProduktetClass(1, "Playstation", "Sony", "Teknologji", "Furnizuesi", "100", 23),
-                new ProduktetClass(2, "Xbox", "Microsoft", "Teknologji", "Furnizuesi", "95", 0),
-                new ProduktetClass(3, "Thinkpad t410", "Lenovo", "Teknologji", "Furnizuesi", "150", 11),
-                new ProduktetClass(4, "Compaq 221", "HP", "Teknologji", "Furnizuesi", "75", 3),
-                new ProduktetClass(4, "Java Runtime", "Oracle", "Teknologji", "Furnizuesi", "0", 0),
-                new ProduktetClass(5, "Shoes", "Nike", "Teknologji", "Furnizuesi", "25", 12),
-                new ProduktetClass(6, "Drive", "Google", "Teknologji", "Furnizuesi", "10", 42),
-                new ProduktetClass(7, "IntelliJ IDEA", "Intellij", "Teknologji", "Furnizuesi", "5", 10)
-        );
-
-        tblProduktet.setItems(data);
+        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery("select * from produktet")){
+            tblProduktet.getItems().clear();
+            ObservableList<ProduktetClass> data = FXCollections.observableArrayList();
+            while (rs.next()) {
+                data.add(new ProduktetClass(rs.getInt("id"), rs.getString("emri"), VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
+                        VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")), rs.getInt("sasia"), rs.getDouble("zbritje")));
+            }
+            tblProduktet.setItems(data);
+        }catch (Exception e) {e.printStackTrace();}
     }
 
     private void fillBarChart(){
 
-        String[] prodE = new String[5], katE = new String[5];
-        int[] prodN = new int[5], katN = new int[5];
+        List<String> prodE = new ArrayList<>(), katE = new ArrayList<>();
+        List<Integer> prodN = new ArrayList<>(), katN = new ArrayList<>();
 
         getTopProds(prodE, prodN, katE, katN);
 
-        if (prodN[0] > 0) {
+        if (prodN.size() == 5) {
             XYChart.Series series1 = new XYChart.Series();
             for (int i = 0; i < 5; i++) {
-                series1.getData().add(new XYChart.Data(prodE[i], prodN[i]));
+                series1.getData().add(new XYChart.Data(prodE.get(i), prodN.get(i)));
             }
             barChart.getData().add(series1);
         }
 
-        if (katN[0] > 0) {
+        if (katN.size() == 5) {
             XYChart.Series series2 = new XYChart.Series();
             for (int i = 0; i < 5; i++) {
-                series2.getData().add(new XYChart.Data(katE[i], katN[i]));
+                series2.getData().add(new XYChart.Data(katE.get(i), katN.get(i)));
             }
             barChart2.getData().add(series2);
         }
@@ -145,21 +143,21 @@ public class Produktet implements Initializable {
 
     }
 
-    private void getTopProds (String[] prodE, int[] prodN, String[] katE, int[] katN){
+    private void getTopProds (List<String> prodE, List<Integer> prodN, List<String> katE, List<Integer> katN){
         try (Statement s = con.createStatement(); ResultSet rs = s.executeQuery("select * from topproduktet");
              Statement s2 = con.createStatement(); ResultSet rs2 = s2.executeQuery("select * from topkategoria")) {
 
             int i = 0;
             while (rs.next()) {
-                prodE[i] = rs.getString(2);
-                prodN[i] = rs.getInt(1);
+                prodE.add(rs.getString(2));
+                prodN.add(rs.getInt(1));
                 i++;
             }
 
             i = 0;
             while (rs2.next()) {
-                katE[i] = rs2.getString(2);
-                katN[i] = rs2.getInt(1);
+                katE.add(rs2.getString(2));
+                katN.add(rs2.getInt(1));
                 i++;
             }
 

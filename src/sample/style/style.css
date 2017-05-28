@@ -274,7 +274,7 @@
 
 .date-picker-popup > * > .previous-month:hover,
 .date-picker-popup > * > .next-month:hover{
-    -fx-text-fill: rgba(255,255,255,.4);
+    -fx-text-fill: rgba(255,255,255,.9);
 }
 
 .date-picker .button {
@@ -375,12 +375,10 @@
 .date-picker-popup > * > .next-month {
     -fx-background-color: -fx-sidebar;
     -fx-border-color: -fx-sidebar;
-    -fx-text-fill: -fx-sidebar-hover;
+    -fx-text-fill: rgba(0,0,0,0.5);
 }
 
-.date-picker-popup > * > .spinner > .label {
-    -fx-text-fill: -fx-primary;
-}
+
 
 /*
 .text-field:focused, .combo-box:focused {
@@ -826,13 +824,13 @@
     -fx-border-radius: 0;
     -fx-padding: 20;
     -fx-font-weight: bold;
-    -fx-font-size: 17;
+    -fx-font-size: 16;
     -fx-cursor: hand;
-    -fx-max-width: 160;
-    -fx-min-width: 160;
-    -fx-min-height: 120;
-    -fx-max-height: 120;
-    -fx-text-fill: #fff;
+    -fx-max-width: 120;
+    -fx-min-width: 120;
+    -fx-min-height: 90;
+    -fx-max-height: 90;
+    -fx-text-fill: -fx-primary;
 }
 
 .btnExportImg:hover {
@@ -841,12 +839,12 @@
 }
 
 .btnC {
-    -fx-min-width: 480;
-    -fx-min-width: 480;
-    -fx-min-height: 45;
-    -fx-max-height: 45;
+    -fx-min-width: 360;
+    -fx-min-width: 360;
+    -fx-min-height: 35;
+    -fx-max-height: 35;
     -fx-padding: 0;
-    -fx-text-fill: -fx-red;
+    -fx-text-fill: -fx-primary;
     -fx-border-width: 1 0 0 0;
     -fx-border-color: rgba(0,0,0,0.05);
 }

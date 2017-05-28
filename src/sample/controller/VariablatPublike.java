@@ -51,6 +51,7 @@ public class VariablatPublike {
     static Map<Integer, String> revDep = new HashMap<>();
     static Map<String, Integer> revProdKat = new HashMap<>();
     static Map<String, Integer> revKons = new HashMap<>();
+    static Map<Integer, String> mProdKat = new HashMap<>();
 
     static Set<String> prodKat = new HashSet<>();
     static Set<String> konsEmri = new HashSet<>();
@@ -59,7 +60,7 @@ public class VariablatPublike {
     static int pnt, pntA, pntP, kons, shitje, p, ps;
 
     static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    static DecimalFormat decimalFormat = new DecimalFormat("###,###,###.##€");
+    static DecimalFormat decimalFormat = new DecimalFormat("###,###,###.00€");
     static DecimalFormat decimal = new DecimalFormat("###,###,###");
     static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 

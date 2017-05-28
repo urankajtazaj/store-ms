@@ -192,6 +192,7 @@ public class Dashboard implements Initializable{
 
             while (rs7.next()) {
                 VariablatPublike.prodKat.add(rs7.getString("k"));
+                VariablatPublike.mProdKat.put(rs7.getInt("id"), rs7.getString("k"));
                 VariablatPublike.revProdKat.put(rs7.getString("k"), rs7.getInt("id"));
             }
 

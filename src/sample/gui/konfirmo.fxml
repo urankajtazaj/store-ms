@@ -25,10 +25,10 @@
                     </ImageView>
                     <VBox>
                         <!--<Label fx:id="titulli" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #fff"/>-->
-                        <Label wrapText="true" style="-fx-font-weight: bold;-fx-padding: 5 0 7 0; -fx-font-size: 15; -fx-opacity: .95; -fx-text-fill: #fff"
+                        <Label wrapText="true" style="-fx-font-weight: bold;-fx-padding: 5 0 7 0; -fx-font-size: 15; -fx-opacity: .95; -fx-text-fill: #000"
                                fx:id="mesazhi" styleClass="mesazhiDialog" prefWidth="${konBp.width}"/>
                         <Label text="Ky aksion nuk mund te kthehet!"
-                               style="-fx-padding: 3;-fx-background-color: #fff;-fx-text-fill: -fx-orange;-fx-font-weight: bold; -fx-opacity: .9;"/>
+                               style="-fx-padding: 3; -fx-text-fill: -fx-primary;-fx-font-weight: bold; -fx-opacity: .9;"/>
                     </VBox>
                 </HBox>
             </center>
@@ -36,9 +36,9 @@
             <bottom>
                 <HBox>
                     <Button HBox.hgrow="ALWAYS" styleClass="btnT, btnOrng" onAction="#egzekuto"
-                            minWidth="210" maxWidth="210" text="Konfirmo" fx:id="btnOk" style="-fx-text-fill: #fff"/>
+                            minWidth="210" maxWidth="210" text="Konfirmo" fx:id="btnOk" style="-fx-text-fill: #000"/>
                     <Button HBox.hgrow="ALWAYS" styleClass="btnT, btnOrng" onAction="#mbyllDritaren"
-                            minWidth="210" maxWidth="210" text="Anulo" fx:id="btnAnulo" style="-fx-text-fill: #fff"/>
+                            minWidth="210" maxWidth="210" text="Anulo" fx:id="btnAnulo" style="-fx-text-fill: #000"/>
                 </HBox>
             </bottom>
         </BorderPane>
