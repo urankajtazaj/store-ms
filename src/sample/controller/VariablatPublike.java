@@ -60,7 +60,7 @@ public class VariablatPublike {
     static int pnt, pntA, pntP, kons, shitje, p, ps;
 
     static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    static DecimalFormat decimalFormat = new DecimalFormat("###,###,###.00€");
+    static DecimalFormat decimalFormat = new DecimalFormat("###,###,##0.00€");
     static DecimalFormat decimal = new DecimalFormat("###,###,###");
     static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 

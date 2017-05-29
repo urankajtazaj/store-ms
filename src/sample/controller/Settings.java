@@ -146,8 +146,12 @@ public class Settings implements Initializable {
                     String fg = ((HBox)n).getChildren().get(1).getId().split("/")[2];
                     if (id == 0)
                         s.addBatch("insert into kat_prod values (null, '"+tf+"', '" + bg + "', '"+ fg + "')");
-                    else
+                    else {
                         s.addBatch("update kat_prod set kategoria = '" + tf + "', bg = '" + bg + "', fg = '" + fg + "' where id = " + id);
+                        VariablatPublike.mProdKat.put(id, tf);
+                        VariablatPublike.revProdKat.put(tf, id);
+                        VariablatPublike.prodKat.add(tf);
+                    }
                 }
             }
             s.executeBatch();
