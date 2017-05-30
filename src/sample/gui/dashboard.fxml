@@ -35,14 +35,14 @@
 <?import javafx.scene.control.ProgressBar?>
 <GridPane fx:id="grid" styleClass="gp" vgap="3" hgap="3" fx:controller="sample.controller.Dashboard" xmlns:fx="http://javafx.com/fxml">
 
-    <HBox spacing="3" maxHeight="200" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT">
+    <HBox spacing="3" minHeight="170" maxHeight="170" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT">
         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" styleClass="shadow">
             <padding>
                 <Insets right="15"/>
             </padding>
-            <StackPane maxWidth="200">
+            <StackPane maxWidth="180" minWidth="180">
                 <PieChart fx:id="pie1" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="62"/>
+                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="60"/>
                 <Label fx:id="lPie1" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
@@ -51,13 +51,13 @@
                 <Label fx:id="lVleraHyratMuajTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
-        <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" styleClass="shadow">
+        <HBox HBox.hgrow="ALWAYS" minHeight="170" maxHeight="170" alignment="CENTER_LEFT" styleClass="shadow">
             <padding>
                 <Insets right="15"/>
             </padding>
-            <StackPane maxWidth="200">
+            <StackPane maxWidth="180" minWidth="180">
                 <PieChart fx:id="pie2" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="62"/>
+                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="60"/>
                 <Label fx:id="lPie2" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
@@ -66,13 +66,13 @@
                 <Label fx:id="lVleraHyratJaveTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
-        <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" styleClass="shadow">
+        <HBox HBox.hgrow="ALWAYS" minHeight="170" maxHeight="170" alignment="CENTER_LEFT" styleClass="shadow">
             <padding>
                 <Insets right="15"/>
             </padding>
-            <StackPane maxWidth="200">
+            <StackPane maxWidth="180" minWidth="180">
                 <PieChart fx:id="pie3" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="62"/>
+                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="60"/>
                 <Label fx:id="lPie3" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
@@ -83,55 +83,51 @@
         </HBox>
     </HBox>
 
-    <HBox  minWidth="550" prefHeight="150" minHeight="165" maxHeight="165" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="shadow">
-        <BorderPane minWidth="550"  maxHeight="165">
-            <top>
-                <Label text="Punetoret" graphicTextGap="20" styleClass="infoTtl" minWidth="550"/>
-            </top>
-            <center>
-                <BorderPane>
-                    <left>
-                        <VBox spacing="2" alignment="CENTER">
-                            <Label text="Total" styleClass="infoTtl" style="-fx-border-width: 0;-fx-opacity: .8; -fx-padding: 0 0 0 30"/>
-                            <Label fx:id="lPnt" styleClass="lVlera" style="-fx-padding: 0 0 0 30"/>
-                        </VBox>
-                    </left>
-                    <center>
-                        <VBox spacing="2" alignment="CENTER">
-                            <Label text="Aktiv" styleClass="infoTtl" style="-fx-opacity: .8;-fx-border-width: 0;"/>
-                            <Label fx:id="lPntA" styleClass="lVlera"/>
-                        </VBox>
-                    </center>
-                    <right>
-                        <VBox spacing="2" alignment="CENTER">
-                            <Label text="Pushim" styleClass="infoTtl" style="-fx-opacity: .8; -fx-padding: 0 30 0 0; -fx-border-width: 0;"/>
-                            <Label fx:id="lPntP" text="0" styleClass="lVlera" style="-fx-padding: 0 30 0 0"/>
-                        </VBox>
-                    </right>
-                </BorderPane>
-            </center>
-        </BorderPane>
-    </HBox>
-
     <HBox  minWidth="550" prefHeight="150" minHeight="165" maxHeight="165" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="shadow">
         <BorderPane minWidth="550" >
             <top><Label text="Konsumatoret" styleClass="infoTtl" minWidth="550"/> </top>
             <left>
-                <VBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 30">
+                <VBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 50">
                     <Label text="Konsumatore" styleClass="infoTtl" style="-fx-opacity: .8;-fx-border-width: 0"/>
-                    <Label fx:id="lKons" styleClass="lVlera" style="-fx-padding: 0 0 0 20" text="102€"/>
+                    <Label fx:id="lKons" styleClass="lVlera"/>
                 </VBox>
             </left>
             <center>
                 <VBox spacing="2" alignment="CENTER">
                     <Label text="Shitje" styleClass="infoTtl" style="-fx-opacity: .8; -fx-border-width: 0"/>
-                    <Label fx:id="lShitje" styleClass="lVlera" text="36"/>
+                    <Label fx:id="lShitje" styleClass="lVlera"/>
                 </VBox>
             </center>
             <right>
                 <VBox spacing="2" style="-fx-padding: 0 30 0 0" alignment="CENTER">
                     <Label text="P. Mesatare" styleClass="infoTtl" style="-fx-opacity: .8; -fx-border-width: 0"/>
-                    <Label fx:id="lShitjeM" styleClass="lVlera" text="27€"/>
+                    <Label fx:id="lShitjeM" styleClass="lVlera"/>
+                </VBox>
+            </right>
+        </BorderPane>
+    </HBox>
+
+    <HBox  minWidth="550" prefHeight="150" minHeight="165" maxHeight="165" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="shadow">
+        <BorderPane minWidth="550"  maxHeight="165">
+            <top>
+                <Label text="Punetoret" graphicTextGap="20" styleClass="infoTtl" minWidth="550"/>
+            </top>
+            <left>
+                <VBox spacing="2" alignment="CENTER">
+                    <Label text="Total" styleClass="infoTtl" style="-fx-border-width: 0;-fx-opacity: .8; -fx-padding: 0 0 0 50"/>
+                    <Label fx:id="lPnt" styleClass="lVlera"/>
+                </VBox>
+            </left>
+            <center>
+                <VBox spacing="2" alignment="CENTER">
+                    <Label text="Aktiv" styleClass="infoTtl" style="-fx-opacity: .8;-fx-border-width: 0;"/>
+                    <Label fx:id="lPntA" styleClass="lVlera"/>
+                </VBox>
+            </center>
+            <right>
+                <VBox spacing="2" alignment="CENTER">
+                    <Label text="Pushim" styleClass="infoTtl" style="-fx-opacity: .8; -fx-padding: 0 50 0 0; -fx-border-width: 0;"/>
+                    <Label fx:id="lPntP" text="0" styleClass="lVlera"/>
                 </VBox>
             </right>
         </BorderPane>

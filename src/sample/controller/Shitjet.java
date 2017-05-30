@@ -37,7 +37,7 @@ public class Shitjet implements Initializable {
     @FXML private Label lTotal;
     @FXML private TableColumn colAct, colSasia;
     @FXML private TextField txtProd;
-    @FXML private ComboBox cbCat, cbKons;
+    @FXML private ComboBox<String> cbCat, cbKons;
 
     double qmimi = 0.0;
 
@@ -56,18 +56,18 @@ public class Shitjet implements Initializable {
         lTotal.setText(VariablatPublike.decimalFormat.format(0));
         cbCat.getItems().clear();
         cbCat.getItems().add("Te gjitha");
-        Iterator it = VariablatPublike.prodKat.iterator();
+        Iterator<String> it = VariablatPublike.prodKat.iterator();
         while (it.hasNext()) {
             cbCat.getItems().add(it.next());
         }
         cbCat.getSelectionModel().select(0);
 
         cbCat.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
-            getProducts(txtProd.getText());
+            getProducts(txtProd.getText(), nv.toString());
         });
 
         txtProd.setOnKeyReleased(e -> {
-            getProducts(txtProd.getText());
+            getProducts(txtProd.getText(), cbCat.getSelectionModel().getSelectedItem());
         });
 
         txtProd.setOnKeyPressed(e -> {
@@ -129,7 +129,7 @@ public class Shitjet implements Initializable {
             };
         });
 
-        getProducts("");
+        getProducts("", "");
     }
 
 //    LEXO TE GJITH TABELEN PER SHITJE DHE KTHE QMIMIN PAS NDRYSHIMIT TE SASISE
@@ -155,16 +155,16 @@ public class Shitjet implements Initializable {
     }
 
 //    MERR PRODUKTET DHE KRIJO BUTONAT PER SHITJE
-    private void getProducts (String q) {
+    private void getProducts (String q, String kat) {
 
         try {
             Statement stmt = con.createStatement();
 
-            StringBuilder sb = new StringBuilder("select id, emri, qmimi_shitjes from produktet where barcode like lower('%" + q + "%') or lower(emri) like " +
-                    "lower('%" + q + "%')");
+            StringBuilder sb = new StringBuilder("select id, emri, qmimi_shitjes from produktet where (barcode like lower('%" + q + "%') or lower(emri) like " +
+                    "lower('%" + q + "%'))");
 
-            if (cbCat.getSelectionModel().getSelectedIndex() > 0) {
-                sb.append(" and kategoria_id = " + VariablatPublike.revProdKat.get(cbCat.getSelectionModel().getSelectedItem()));
+            if (!kat.isEmpty() && !kat.equals("Te gjitha")) {
+                sb.append(" and kategoria_id = " + VariablatPublike.revProdKat.get(kat));
             }
 
             ResultSet rs = stmt.executeQuery(sb.toString());
