@@ -18,12 +18,24 @@
     src: url("../font/Montserrat-Regular.ttf");
 }
 
+@font-face {
+    font-family: "Lato";
+    src: url("../font/Lato-Light.ttf");
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("../font/Lato-Regular.ttf");
+}
+
 * {
     -fx-primary: rgba(41, 128, 185,1); /*PINK*/
     -fx-primary: #1abc9c; /*PINK*/
     -fx-primary: rgb(235, 110, 96); /*PINK*/
     -fx-primary: #9B46E1;
     -fx-primary: linear-gradient(to bottom right, #9B46E1, #BD46E1);
+    -fx-primary: linear-gradient(to bottom right, #21D1DD, #21DDAE);
+    -fx-primary: linear-gradient(to bottom right, #42cdee, #21d1a5);
     -fx-veqant: #27A7E8;
     -fx-ppages: #9b59b6;
     -fx-secondary: #35B876;
@@ -44,9 +56,6 @@
     -fx-sidebar-darker: #343c4b;
     -fx-label-color: rgba(255,255,255,.85);
     -fx-sidebar-lg: linear-gradient(#44274E, #221E38);;
-    -fx-sidebar: #2c3754;
-    -fx-sidebar: #34495E;
-    -fx-sidebar: #3d4658;
     -fx-sidebar: #F4F4F4;
 }
 
@@ -69,6 +78,7 @@
 .gp .button, .btn {
     -fx-cursor: hand;
     -fx-background-color: -fx-primary;
+    -fx-background-color: #21ddae;
     -fx-text-fill: rgba(255,255,255,.85);
     -fx-alignment: CENTER;
     -fx-background-radius: 4;
@@ -114,9 +124,7 @@
 }
 
 .sideBar {
-    -fx-background-color: -fx-sidebar-darker;
-    -fx-background-color: #f7f7f7;
-    -fx-background-color: -fx-primary;
+    -fx-background-color: #232323;
     -fx-min-width: 110;
     -fx-max-width: 110;
     -fx-padding: 10 0 0 0;
@@ -179,7 +187,7 @@
 }
 
 .chart-horizontal-grid-lines {
-    -fx-stroke: rgba(0,0,0,0.1);
+    -fx-stroke: rgba(0,0,0,0.07);
     -fx-stroke-dash-array: none;
 }
 
@@ -218,13 +226,13 @@
 }
 
 .default-color1.chart-pie {
-    -fx-background-color: rgba(0,0,0,.045);
+    -fx-background-color: rgba(0,0,0,.04);
 }
 
 .default-color0.chart-pie {
     -fx-background-color: #ccc;
     -fx-background-color: -fx-primary;/*
-    -fx-effect: dropshadow(gaussian, -fx-primary, 20, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(33, 209, 165, .5), 20, 0, 0, 0);
 */}
 
 /*
@@ -650,7 +658,7 @@
     -fx-font-size: 35;
     -fx-text-fill: rgba(0,0,0,.85);
     -fx-text-fill: -fx-primary;
-    -fx-font-family: "Montserrat bold";
+    -fx-font-family: "Lato light";
 }
 
 .lVleraColor {
@@ -675,16 +683,17 @@
     -fx-opacity: .6;
 }
 
-.circle {
-    -fx-fill: -fx-sidebar;
-}
+.circle {/*
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.025), 20, 0, 0, 0)
+*/}
 
 .color {
-    -fx-text-fill: rgba(0,0,0,.9);
+    -fx-text-fill: rgba(0,0,0,0.8);
 }
 
 .chart-nr {
-    -fx-font-size: 23;
+    -fx-font-size: 21;
+    -fx-text-fill: -fx-primary;
 }
 
 .scroll-pane > .viewport {
@@ -900,7 +909,7 @@
 
 .detailInfoPnt-Qm {
     -fx-text-fill: -fx-primary;
-    -fx-font-family: "Montserrat bold";
+    -fx-font-family: "Lato light";
     -fx-font-size: 31;
 }
 
@@ -1044,7 +1053,7 @@
 
 .h0 {
     -fx-font-size: 30;
-    -fx-font-family: "Montserrat bold";
+    -fx-font-family: "Lato light";
     -fx-text-fill: -fx-primary;
 }
 
@@ -1204,7 +1213,11 @@
 .bigDec {
     -fx-font-size: 35;
     -fx-text-fill: -fx-primary;
-    -fx-font-family: "Montserrat bold";
+    -fx-font-family: "Lato light";
+}
+
+.bigDec2 {
+    -fx-font-size: 18;
 }
 
 .redRow .text {

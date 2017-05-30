@@ -34,7 +34,7 @@ public class Dashboard implements Initializable{
     @FXML private TableColumn sts, colPuna, colMng;
     @FXML private ComboBox cb;
     @FXML PieChart pieChart1, pieChart2, pieChart3, pieChart4;
-    @FXML private Label lVleraHyratMuaj, lVleraHyratJave, lVleraHyratSot, lPnt, lPntA, lPntP, lKons, lShitje, lShitjeM, lProd, lProdSasia;
+    @FXML private Label lVleraHyratMuaj, lVleraHyratJave, lVleraHyratSot, lPnt, lPntA, lPntP, lKons, lShitje, lShitjeM;
     @FXML NumberAxis xAxisA1, yAxisA1;
     @FXML private Hyperlink hlViti, hl6m, hl3m, hl1m, hl7d, hlSot;
     @FXML private PieChart pie1, pie2, pie3;
@@ -64,8 +64,6 @@ public class Dashboard implements Initializable{
         lKons.setText(VariablatPublike.kons+"");
         lShitje.setText(VariablatPublike.shitje+"");
         lShitjeM.setText(VariablatPublike.decimalFormat.format(VariablatPublike.mes));
-        lProd.setText(VariablatPublike.decimal.format(VariablatPublike.p));
-        lProdSasia.setText(VariablatPublike.decimal.format(VariablatPublike.ps));
 
         lVleraHyratMuajTarget.setText(VariablatPublike.decimalFormat.format(VariablatPublike.muaj));
         lVleraHyratJaveTarget.setText(VariablatPublike.decimalFormat.format(VariablatPublike.jave));

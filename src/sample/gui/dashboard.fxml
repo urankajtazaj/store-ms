@@ -42,13 +42,13 @@
             </padding>
             <StackPane maxWidth="200">
                 <PieChart fx:id="pie1" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" radius="60"/>
+                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="62"/>
                 <Label fx:id="lPie1" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
                 <Label text="Kete muaj" styleClass="color" style="-fx-font-size: 18"/>
-                <Label fx:id="lVleraHyratMuaj" styleClass="color, bigDec"/>
-                <Label fx:id="lVleraHyratMuajTarget" styleClass="color, bigDec" style="-fx-font-size: 20;"/>
+                <Label fx:id="lVleraHyratMuaj" styleClass="bigDec"/>
+                <Label fx:id="lVleraHyratMuajTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" styleClass="shadow">
@@ -57,13 +57,13 @@
             </padding>
             <StackPane maxWidth="200">
                 <PieChart fx:id="pie2" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" radius="60"/>
+                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="62"/>
                 <Label fx:id="lPie2" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
                 <Label text="Kete Jave" styleClass="color" style="-fx-font-size: 18"/>
-                <Label fx:id="lVleraHyratJave" styleClass="color, bigDec"/>
-                <Label fx:id="lVleraHyratJaveTarget" styleClass="color, bigDec" style="-fx-font-size: 20;"/>
+                <Label fx:id="lVleraHyratJave" styleClass="bigDec"/>
+                <Label fx:id="lVleraHyratJaveTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" styleClass="shadow">
@@ -72,49 +72,15 @@
             </padding>
             <StackPane maxWidth="200">
                 <PieChart fx:id="pie3" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" radius="60"/>
+                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="62"/>
                 <Label fx:id="lPie3" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
                 <Label text="Sot" styleClass="color" style="-fx-font-size: 18"/>
-                <Label fx:id="lVleraHyratSot" styleClass="color, bigDec"/>
-                <Label fx:id="lVleraHyratSotTarget" styleClass="color, bigDec" style="-fx-font-size: 20;"/>
+                <Label fx:id="lVleraHyratSot" styleClass="bigDec"/>
+                <Label fx:id="lVleraHyratSotTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
-    </HBox>
-
-    <HBox visible="false" fx:id="t" alignment="CENTER_LEFT" minHeight="165" maxHeight="165"  minWidth="550" maxWidth="650" GridPane.columnIndex="0"
-          GridPane.rowIndex="1" styleClass="shadow">
-        <BorderPane minWidth="550" >
-            <top>
-                <Label text="Fitimi NETO" graphicTextGap="20" styleClass="infoTtl" minWidth="550" maxWidth="650"/>
-            </top>
-            <left>
-                <VBox alignment="CENTER">
-                    <Label text="Kete Muaj" styleClass="infoTtl" style="-fx-opacity: .8;-fx-padding: 0 0 0 40; -fx-border-width: 0;"/>
-                    <!--<Label fx:id="lVleraHyratMuaj" styleClass="lVlera" style="-fx-padding: 0 0 0 40" text="1,295€"/>-->
-                    <!--<Label styleClass="lVleraU" text="+200€" style="-fx-padding: 0 0 0 50;"/>-->
-                </VBox>
-            </left>
-            <center>
-                <VBox spacing="2" alignment="CENTER">
-                    <Label text="Kete Jave" styleClass="infoTtl" style="-fx-opacity: .8;-fx-padding: 0 0 0 50; -fx-border-width: 0;"/>
-                    <!--<Label fx:id="lVleraHyratJave" styleClass="lVlera" style="-fx-padding: 0 0 0 50" text="1,295€"/>-->
-                </VBox>
-            </center>
-            <right>
-                <VBox spacing="2" alignment="CENTER">
-                    <Label text="Sot" styleClass="infoTtl" style="-fx-opacity: .8;-fx-border-width: 0;-fx-padding: 0 50 0 0"/>
-                    <!--<Label fx:id="lVleraHyratSot" styleClass="lVlera" style="-fx-padding: 0 50 0 0" text="862€"/>-->
-                    <!--<Label styleClass="lVleraU" text="+96€" style="-fx-padding: 0 50 0 0;"/>-->
-                </VBox>
-                <!--<StackPane scaleX=".8" scaleY=".8" style="-fx-padding: -10 0 0 0">-->
-                    <!--<PieChart fx:id="pieChart1" labelsVisible="false" minWidth="120" maxWidth="120" animated="false"/>-->
-                    <!--<Circle radius="32" styleClass="circle" />-->
-                    <!--<Label styleClass="color, chart-nr" fx:id="lbPerc1"/>-->
-                <!--</StackPane>-->
-            </right>
-        </BorderPane>
     </HBox>
 
     <HBox  minWidth="550" prefHeight="150" minHeight="165" maxHeight="165" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="shadow">
@@ -144,13 +110,6 @@
                     </right>
                 </BorderPane>
             </center>
-            <!--<right>-->
-                <!--<StackPane scaleX=".8" scaleY=".8" style="-fx-padding: -10 0 0 0">-->
-                    <!--<PieChart fx:id="pieChart2" labelsVisible="false" minWidth="120" maxWidth="120" animated="false"/>-->
-                    <!--<Circle radius="32" styleClass="circle" />-->
-                    <!--<Label styleClass="color, chart-nr" fx:id="lbPerc2"/>-->
-                <!--</StackPane>-->
-            <!--</right>-->
         </BorderPane>
     </HBox>
 
@@ -175,34 +134,6 @@
                     <Label fx:id="lShitjeM" styleClass="lVlera" text="27€"/>
                 </VBox>
             </right>
-            <!--<right>-->
-                <!--<StackPane scaleX=".8" scaleY=".8" style="-fx-padding: -10 0 0 0">-->
-                    <!--<PieChart fx:id="pieChart3" labelsVisible="false" minWidth="120" maxWidth="120" animated="false"/>-->
-                    <!--<Circle radius="32" styleClass="circle" />-->
-                    <!--<Label styleClass="color, chart-nr" fx:id="lbPerc3"/>-->
-                <!--</StackPane>-->
-            <!--</right>-->
-        </BorderPane>
-    </HBox>
-    <HBox visible="false" minWidth="550" prefHeight="150" minHeight="165" maxHeight="165" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="shadow">
-        <BorderPane minWidth="550" >
-            <top><Label text="Produktet" styleClass="infoTtl" minWidth="550"/> </top>
-            <center>
-                <BorderPane>
-                    <left>
-                        <VBox alignment="CENTER" spacing="2">
-                            <Label text="Sasia mbetur" styleClass="infoTtl" style="-fx-border-width: 0; -fx-padding: 0 0 0 30; -fx-opacity: .8" />
-                            <Label fx:id="lProdSasia" styleClass="lVlera" style="-fx-padding: 0 0 0 30" />
-                        </VBox>
-                    </left>
-                    <right>
-                        <VBox spacing="2" alignment="CENTER">
-                            <Label text="Te ndryshme" styleClass="infoTtl" style="-fx-border-width: 0; -fx-opacity: .8" />
-                            <Label fx:id="lProd" styleClass="lVlera" />
-                        </VBox>
-                    </right>
-                </BorderPane>
-            </center>
         </BorderPane>
     </HBox>
 
