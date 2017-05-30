@@ -674,8 +674,8 @@
 }
 
 .lVleraU {
-    -fx-font-weight: bold;
     -fx-text-fill: -fx-primary;
+    -fx-font-weight: bold;
 }
 
 
