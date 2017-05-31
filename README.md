@@ -1,4 +1,4 @@
 ## Store Management System
-A desktop application
+A store management system desktop application created with Java using JavaFX Framework.
 
-![Image](http://i.imgur.com/91L6AJW.png)
+![Image](http://i.imgur.com/COY5W1o.png)
