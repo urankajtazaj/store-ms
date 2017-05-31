@@ -192,7 +192,7 @@ public class PunetoretView implements Initializable {
                 }
 
                 Tooltip tooltip = new Tooltip((dita > 9 ? dita : "0" + dita) + "/" + (muaji + 1 < 10 ? "0" + (muaji + 1) : (muaji + 1)) + "/" + viti);
-                Rectangle r = new Rectangle(17,17, Color.valueOf("rgba(255,255,255,.05)"));
+                Rectangle r = new Rectangle(15,15, Color.valueOf("rgba(255,255,255,.05)"));
                 r.setId(viti+"-"+(muaji+1)+"-"+dita);
                 r.getStyleClass().add("cal");
 

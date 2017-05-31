@@ -122,21 +122,19 @@ public class Produktet implements Initializable {
 
         getTopProds(prodE, prodN, katE, katN);
 
-        if (prodN.size() == 5) {
-            XYChart.Series series1 = new XYChart.Series();
-            for (int i = 0; i < 5; i++) {
-                series1.getData().add(new XYChart.Data(prodE.get(i), prodN.get(i)));
-            }
-            barChart.getData().add(series1);
+        XYChart.Series series1 = new XYChart.Series();
+        for (int i = 0; i < katE.size(); i++) {
+            if (i == 5) break;
+            series1.getData().add(new XYChart.Data(katE.get(i), katN.get(i)));
         }
+        barChart.getData().add(series1);
 
-        if (katN.size() == 5) {
-            XYChart.Series series2 = new XYChart.Series();
-            for (int i = 0; i < 5; i++) {
-                series2.getData().add(new XYChart.Data(katE.get(i), katN.get(i)));
-            }
-            barChart2.getData().add(series2);
+        XYChart.Series series2 = new XYChart.Series();
+        for (int i = 0; i < prodE.size(); i++) {
+            if (i == 5) break;
+            series2.getData().add(new XYChart.Data(prodE.get(i), prodN.get(i)));
         }
+        barChart2.getData().add(series2);
 
         barChart.setLegendVisible(false);
         barChart2.setLegendVisible(false);
