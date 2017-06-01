@@ -114,7 +114,7 @@ public class Shitjet implements Initializable {
                         ShitjetProd sp = tbl.getItems().get(getIndex());
                         TextField tf = new TextField(sp.getSasia().getText());
                         setOnKeyReleased(e -> {
-                            if (Pattern.compile("[0-9]+").matcher(e.getText()).matches()) {
+                            if (Pattern.compile("[0-9.]+").matcher(e.getText()).matches()) {
                                 lTotal.setText(VariablatPublike.decimalFormat.format(
                                         merrQmimet(tf.getText(), getIndex())));
                             }
@@ -147,7 +147,7 @@ public class Shitjet implements Initializable {
             if (i == index)
                 sp.getSasia().setText(s);
 
-            t += sp.getQmimi() * Integer.parseInt(sp.getSasia().getText());
+            t += sp.getQmimi() * Double.parseDouble(sp.getSasia().getText());
         }
 
         qmimi = t;
@@ -160,7 +160,7 @@ public class Shitjet implements Initializable {
         try {
             Statement stmt = con.createStatement();
 
-            StringBuilder sb = new StringBuilder("select id, emri, qmimi_shitjes from produktet where (barcode like lower('%" + q + "%') or lower(emri) like " +
+            StringBuilder sb = new StringBuilder("select * from vprod where (barcode like lower('%" + q + "%') or lower(emri) like " +
                     "lower('%" + q + "%'))");
 
             if (!kat.isEmpty() && !kat.equals("Te gjitha")) {
@@ -174,8 +174,8 @@ public class Shitjet implements Initializable {
                 Button button = new Button(rs.getString("emri") + "\n(" + VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")) + ")");
                 button.setTextAlignment(TextAlignment.CENTER);
                 button.setWrapText(true);
-                button.getStyleClass().add("btn");
-                button.getStyleClass().add("bigBtn");
+                button.getStyleClass().addAll("btn", "bigBtn");
+                button.setStyle("-fx-background-color: " + rs.getString("bg") + "; -fx-text-fill: " + rs.getString("fg"));
                 button.setId(rs.getString("id") + " " + rs.getString("qmimi_shitjes"));
 
                 button.setOnAction(e -> {
@@ -204,14 +204,14 @@ public class Shitjet implements Initializable {
             Statement stmt = con.createStatement();
             stmt.addBatch("insert into rec values (null, current_timestamp())");
             for (ShitjetProd sp : tbl.getItems()) {
-                batch(stmt, sp.getId(), sp.getQmimi(), Integer.parseInt(sp.getSasia().getText()));
+                batch(stmt, sp.getId(), sp.getQmimi(), Double.parseDouble(sp.getSasia().getText()));
             }
             stmt.executeBatch();
             MesazhetPublike.suksesDritarja("Te dhenat u shtuan me sukses!");
         }catch (Exception e) {e.printStackTrace();}
     }
 
-    private void batch (Statement ps, int id, double qmimi, int sasia) throws Exception {
+    private void batch (Statement ps, int id, double qmimi, double sasia) throws Exception {
         ps.addBatch("insert into shitjet values (null, "+id+", "+VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem())+
                 ", current_timestamp(), 120, "+VariablatPublike.uid+", "+sasia+", (select max(rec_id) from rec limit 1))");
         System.err.println("insert into shitjet values (null, "+id+", "+VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem())+

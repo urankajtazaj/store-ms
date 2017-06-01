@@ -71,22 +71,12 @@ public class ShtoPune implements Initializable {
     @FXML
     private void ruajPunen (){
         tf.setText(txtEmriPunes.getText());
-        if (txtEmriPunes.getText().isEmpty()) {
+        if (id == 0) {
             shtoDepartamentin();
         }else {
             rregulloDepartamentin(id);
         }
         stage.close();
-    }
-
-    @FXML
-    private void fshiPunen (){
-        try (Statement s = con.createStatement()) {
-            s.addBatch("delete from departamenti where id = " + id);
-            s.addBatch("delete from priv where dep_id = " + id);
-            s.executeBatch();
-            stage.close();
-        }catch (Exception e) { e.printStackTrace(); }
     }
 
     private void rregulloDepartamentin(int id) {
@@ -123,7 +113,7 @@ public class ShtoPune implements Initializable {
 
             ps.setString(1, txtEmriPunes.getText());
             ps.execute();
-
+            
             s.setInt(1, cbShtim.isSelected() ? 1 : 0);
             s.setInt(2, cbFshirje.isSelected() ? 1 : 0);
             s.setInt(3, cbShikim.isSelected() ? 1 : 0);
@@ -138,15 +128,5 @@ public class ShtoPune implements Initializable {
             s.execute();
 
         }catch (Exception e) { e.printStackTrace(); }
-    }
-
-    private boolean depExists (String emri){
-        String q = "select departamenti from departamenti where lower(departamenti) = lower('" + emri + "')";
-        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(q)) {
-            while (rs.next()) {
-                return true;
-            }
-        }catch (Exception e) { e.printStackTrace(); }
-        return false;
     }
 }

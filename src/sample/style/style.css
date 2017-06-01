@@ -1196,8 +1196,6 @@
     -fx-background-radius: 0;
     -fx-effect: none;
     -fx-border-width: 0;
-    -fx-background-color: rgba(0,0,0, .085);
-    -fx-text-fill: rgba(0,0,0,0.9);
 }
 
 .bigBtn:hover {

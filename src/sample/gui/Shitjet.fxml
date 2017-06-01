@@ -18,8 +18,8 @@
             <ComboBox fx:id="cbCat"/>
         </HBox>
 
-        <ScrollPane fx:id="croll" styleClass="edge-to-edge" GridPane.rowIndex="1" GridPane.columnIndex="0" minWidth="550" maxWidth="550">
-            <FlowPane fx:id="flow" hgap="5" vgap="5" minWidth="550" maxWidth="550" orientation="HORIZONTAL">
+        <ScrollPane fx:id="scroll" styleClass="edge-to-edge" GridPane.rowIndex="1" GridPane.columnIndex="0" minWidth="550" maxWidth="550">
+            <FlowPane fx:id="flow" minWidth="550" maxWidth="550" orientation="HORIZONTAL">
                 <padding>
                     <Insets top="15"/>
                 </padding>

@@ -27,14 +27,13 @@
 
     <VBox spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="1">
         <Label text="Privilegjet" styleClass="infoTtl, intoTtlNb"/>
-        <CheckBox text="Shikim" fx:id="cbShikim"/>
-        <CheckBox text="Shtuarje" fx:id="cbShtim"/>
+        <CheckBox text="Lexim" fx:id="cbShikim"/>
+        <CheckBox text="Shtim" fx:id="cbShtim"/>
         <CheckBox text="Rregullim" fx:id="cbRregullim"/>
         <CheckBox text="Fshirje" fx:id="cbFshirje"/>
     </VBox>
 
     <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="5" alignment="CENTER_RIGHT">
-        <Button text="Fshi" fx:id="btnFshi" onAction="#fshiPunen"/>
         <Button text="Ne rregull" onAction="#ruajPunen"/>
     </HBox>
 

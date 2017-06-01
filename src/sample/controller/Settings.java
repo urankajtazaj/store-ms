@@ -61,7 +61,7 @@ public class Settings implements Initializable {
             sp.setStage(stage);
             loader.setController(sp);
             Parent parent = loader.load();
-            Scene scene = new Scene(parent, 350, 435);
+            Scene scene = new Scene(parent, 350, 450);
             scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
             stage.setScene(scene);
             stage.setResizable(false);

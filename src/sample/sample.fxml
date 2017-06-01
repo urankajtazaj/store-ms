@@ -25,74 +25,19 @@
         <BorderPane styleClass="sideBar">
             <center>
                 <VBox fx:id="btnVb">
-                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" style="-fx-background-color: #36d1dc" onAction="#changeScene">
-                        <!---<graphic>
-                            <ImageView preserveRatio="true" fitWidth="15">
-                                <Image url="/sample/photo/home.png" />
-                            </ImageView>
-                        </graphic>-->
-                    </Button>
-
-                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" style="-fx-background-color: #3fc9dd" onAction="#changeScene">
-                        <!---<graphic>
-                            <ImageView preserveRatio="true" fitWidth="15">
-                                <Image url="/sample/photo/user.png" />
-                            </ImageView>
-                        </graphic>-->
-                    </Button>
-
-                    <Button prefWidth="${btnVb.width}" fx:id="btnKons" contentDisplay="TOP" text="KONSUMATORET" style="-fx-background-color: #4cb9df" onAction="#changeScene">
-                        <!---<graphic>
-                            <ImageView preserveRatio="true" fitWidth="15">
-                                <Image url="/sample/photo/user.png" />
-                            </ImageView>
-                        </graphic>-->
-                    </Button>
-
-                    <Button prefWidth="${btnVb.width}" fx:id="btnPaisjet" contentDisplay="TOP" text="PRODUKTET" style="-fx-background-color: #56a3e2" onAction="#changeScene">
-                        <!---<graphic>
-                            <ImageView preserveRatio="true" fitWidth="15">
-                                <Image url="/sample/photo/tool.png" />
-                            </ImageView>
-                        </graphic>-->
-                    </Button>
-
-                    <Button prefWidth="${btnVb.width}" fx:id="btnStat" contentDisplay="TOP" text="RAPORTET" style="-fx-background-color: #5a8ee4" onAction="#changeScene">
-                        <!---<graphic>
-                            <ImageView preserveRatio="true" fitWidth="15">
-                                <Image url="/sample/photo/graph.png" />
-                            </ImageView>
-                        </graphic>-->
-                    </Button>
-
-                    <Button prefWidth="${btnVb.width}" fx:id="btnShit" contentDisplay="TOP" text="SHITJE" style="-fx-background-color: #5b83e5" onAction="#changeScene">
-                        <!---<graphic>
-                            <ImageView preserveRatio="true" fitWidth="15">
-                                <Image url="/sample/photo/cash.png" />
-                            </ImageView>
-                        </graphic>-->
-                    </Button>
-
-                    <Button prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene" style="-fx-background-color: #5a6ce7" contentDisplay="TOP" text="RREGULLO">
-                        <!---<graphic>
-                            <ImageView preserveRatio="true" fitWidth="15">
-                                <Image url="/sample/photo/setting.png" />
-                            </ImageView>
-                        </graphic>-->
-                    </Button>
-
-                    <Button prefWidth="${btnVb.width}" fx:id="btnLogout" contentDisplay="TOP" style="-fx-background-color: #585fe8" text="DIL">
-                        <!---<graphic>
-                            <ImageView preserveRatio="true" fitWidth="15">
-                                <Image url="/sample/photo/power-b.png" />
-                            </ImageView>
-                        </graphic>-->
-                    </Button>
+                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" style="-fx-background-color: #36d1dc" onAction="#changeScene"/>
+                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" style="-fx-background-color: #3fc9dd" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnKons" contentDisplay="TOP" text="KONSUMATORET" style="-fx-background-color: #4cb9df" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnPaisjet" contentDisplay="TOP" text="PRODUKTET" style="-fx-background-color: #56a3e2" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnStat" contentDisplay="TOP" text="RAPORTET" style="-fx-background-color: #5a8ee4" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnShit" contentDisplay="TOP" text="SHITJE" style="-fx-background-color: #5b83e5" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene" style="-fx-background-color: #5a6ce7" contentDisplay="TOP" text="RREGULLO"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnLogout" contentDisplay="TOP" style="-fx-background-color: #585fe8" text="DIL"/>
                 </VBox>
             </center>
 
             <bottom>
-                <Label wrapText="" BorderPane.alignment="BOTTOM_CENTER" fx:id="user" text="Uran Kajtazaj"
+                <Label wrapText="true" textAlignment="CENTER" BorderPane.alignment="BOTTOM_CENTER" fx:id="user" text="Uran Kajtazaj"
                        style="-fx-padding: 0 0 10 0; -fx-font-size: 16; -fx-text-fill: rgba(255,255,255,.8); -fx-font-weight: bold;"/>
             </bottom>
         </BorderPane>
