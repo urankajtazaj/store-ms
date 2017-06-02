@@ -11,8 +11,8 @@ import java.sql.Statement;
 public class DB {
     private static String db = "/~/Sistem Informacioni/databaza/db", server = "localhost";
     private static String url = "jdbc:h2:tcp://" + server + db;
-    private static String usr = "OOFJMPDRITAFRAETNFCSYWQUPXRRHQ";
-    private static String pw = "DfVxCqdKyMPz3yzYzQMHFCybn46q1iYS";
+    private static String usr = "HIDDEN";
+    private static String pw = "HIDDEN";
 
     public Connection connect(){
 
