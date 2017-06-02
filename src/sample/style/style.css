@@ -9,16 +9,6 @@
 }
 
 @font-face {
-    font-family: "Montserrat";
-    src: url("../font/Montserrat-Bold.ttf");
-}
-
-@font-face {
-    font-family: "Montserrat";
-    src: url("../font/Montserrat-Regular.ttf");
-}
-
-@font-face {
     font-family: "Lato";
     src: url("../font/Lato-Light.ttf");
 }
@@ -33,10 +23,6 @@
     -fx-primary: #1abc9c; /*PINK*/
     -fx-primary: rgb(235, 110, 96); /*PINK*/
     -fx-primary: #9B46E1;
-    -fx-primary: linear-gradient(to bottom right, #9B46E1, #BD46E1);
-    -fx-primary: linear-gradient(to bottom right, #21D1DD, #21DDAE);
-    -fx-primary: linear-gradient(to bottom right, #42cdee, #21d1a5);
-    -fx-primary: linear-gradient(to bottom right, #4776E6, #8E54E9);
     -fx-primary: linear-gradient(to bottom left, #1FA2FF, #12D8FA, #A6FFCB);
     -fx-primary: linear-gradient(to bottom right, #36D1DC, #5B86E5);
     -fx-veqant: #27A7E8;
@@ -63,7 +49,7 @@
 }
 
 .root {
-    -fx-font-family: "Nunito";
+    -fx-font-family: "Lato";
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-accent: -fx-primary;
@@ -587,16 +573,20 @@
 }
 
 .table-row-cell:odd {
-    -fx-background-color: rgba(0,0,0,0.06);
+    -fx-background-color: rgba(0,0,0,0.03);
 }
 
 .table-view .table-row-cell:filled:focused:selected {
-    -fx-background-color: rgba(0,0,0,0.07);
+    -fx-background-color: #5B86E5;
     -fx-table-cell-border-color: rgba(0,0,0,0.02);
 }
 
+.table-view .table-row-cell:filled:focused:selected .text {
+    -fx-fill: #fff;
+}
+
 .table-view .table-row-cell:filled:selected {
-    -fx-background-color: -fx-secondary;
+    -fx-background-color: #5B86E5;
 }
 
 .table-view .table-row-cell .text {
@@ -617,7 +607,6 @@
     -fx-border-width: 1;
     -fx-background-color: #2c3857;
     -fx-background-color: #f7f7f7;
-    -fx-text-fill: #fff;
     /*-fx-control-inner-background-alt: -fx-control-inner-background ;
 */}
 
@@ -668,13 +657,12 @@
 
 .lVleraColor {
     -fx-font-size: 22;
-    /*-fx-text-fill: -fx-primary;
-    */-fx-font-weight: bold;
+    -fx-font-weight: bold;
 }
 
 .l2 {
     -fx-opacity: .5;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #000;
     -fx-font-weight: bold;
 }
 
@@ -687,10 +675,6 @@
 .lbDataAction {
     -fx-opacity: .6;
 }
-
-.circle {/*
-    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.025), 20, 0, 0, 0)
-*/}
 
 .color {
     -fx-text-fill: rgba(0,0,0,0.8);

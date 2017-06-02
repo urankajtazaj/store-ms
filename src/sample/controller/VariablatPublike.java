@@ -61,7 +61,7 @@ public class VariablatPublike {
 
     static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     static DecimalFormat decimalFormat = new DecimalFormat("###,###,##0.00€");
-    static DecimalFormat decimal = new DecimalFormat("###,###,###");
+    static DecimalFormat decimal = new DecimalFormat("###,###,###.#");
     static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     static StringConverter converter = new StringConverter<LocalDate>() {

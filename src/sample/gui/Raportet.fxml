@@ -19,18 +19,22 @@
 
     <children>
 
-        <HBox styleClass="filterHb" spacing="5" alignment="CENTER_RIGHT" GridPane.columnSpan="4" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <HBox styleClass="filterHb" spacing="5" alignment="CENTER_RIGHT" GridPane.columnSpan="4"
+              GridPane.columnIndex="0"
+              GridPane.rowIndex="0">
             <DatePicker fx:id="dpPrej" maxWidth="120" maxHeight="28"/>
             <Label text="-"/>
             <DatePicker fx:id="dpDeri" maxWidth="120" maxHeight="28"/>
-            <Button text="Filtro" />
+            <Button text="Filtro" onAction="#merrFaturat"/>
         </HBox>
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="0">
-            <top><Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Fitimi NET"/> </top>
+            <top>
+                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Fitimi NET"/>
+            </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera"  text="150€"/>
+                    <Label styleClass="lVlera" text="150€"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
                         <Label text="+20%" styleClass="percGreen"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
@@ -40,10 +44,12 @@
         </BorderPane>
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="1">
-            <top><Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Pagesa mesatare"/> </top>
+            <top>
+                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Pagesa mesatare"/>
+            </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera"  text="20.56€"/>
+                    <Label styleClass="lVlera" text="20.56€"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
                         <Label text="-72%" styleClass="percRed"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
@@ -53,10 +59,12 @@
         </BorderPane>
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="2">
-            <top><Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Produkte te shitura"/> </top>
+            <top>
+                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Produkte te shitura"/>
+            </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera"  text="436"/>
+                    <Label styleClass="lVlera" text="436"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
                         <Label text="+63%" styleClass="percGreen"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
@@ -66,10 +74,12 @@
         </BorderPane>
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="3">
-            <top><Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Konsumatore te rinj"/> </top>
+            <top>
+                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Konsumatore te rinj"/>
+            </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera"  text="12"/>
+                    <Label styleClass="lVlera" text="12"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
                         <Label text="+15%" styleClass="percGreen"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
@@ -78,57 +88,43 @@
             </center>
         </BorderPane>
 
-        <BorderPane GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="shadow" GridPane.columnSpan="4">
-            <top>
-                <HBox styleClass="bbHb">
-                    <Label styleClass="infoTtl" style="-fx-border-width: 0;" text="Produktet e shitura"/>
-                    <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" spacing="5">
-                        <Button text="CSV" />
-                        <Button text="Excel"  />
-                        <Button text="PDF" />
-                    </HBox>
-                </HBox>
-            </top>
-            <center>
-                <TableView fx:id="tbl">
-                    <columns>
-                        <TableColumn text="ID"/>
-                        <TableColumn text="ID"/>
-                        <TableColumn text="ID"/>
-                        <TableColumn text="ID"/>
-                        <TableColumn text="ID"/>
-                        <TableColumn text="ID"/>
-                    </columns>
-                </TableView>
-            </center>
-        </BorderPane>
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" styleClass="shadow">
+            <Label text="Fatura" styleClass="infoTtl"/>
+            <TableView VBox.vgrow="ALWAYS" fx:id="tblFatura">
+                <placeholder>
+                    <Label text="Nuk ka te dhena"/>
+                </placeholder>
+                <columns>
+                    <TableColumn text="ID" minWidth="80" maxWidth="80"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Konsumatori" minWidth="120" maxWidth="130"><cellValueFactory><PropertyValueFactory property="konsumatori"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Punetori" minWidth="130" maxWidth="130"><cellValueFactory><PropertyValueFactory property="punetori"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Pagesa" maxWidth="80" minWidth="80"><cellValueFactory><PropertyValueFactory property="cash"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Koha"><cellValueFactory><PropertyValueFactory property="koha"/></cellValueFactory></TableColumn>
+                </columns>
+            </TableView>
+        </VBox>
 
-        <BorderPane GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="shadow" GridPane.columnSpan="4">
-            <top>
-                <HBox styleClass="bbHb">
-                    <Label styleClass="infoTtl" style="-fx-border-width: 0;" text="Konsumatoret"/>
-                    <HBox HBox.hgrow="ALWAYS" spacing="5" alignment="CENTER_RIGHT">
-                        <Button text="CSV"  />
-                        <Button text="Excel"  />
-                        <Button text="PDF" />
-                    </HBox>
-                </HBox>
-            </top>
-            <center>
-                <TableView fx:id="tblKns">
-                    <columns>
-                        <TableColumn maxWidth="70" minWidth="70" text="id"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
-                        <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
-                        <TableColumn minWidth="90" maxWidth="90" text="Qyteti"><cellValueFactory><PropertyValueFactory property="qyteti"/></cellValueFactory></TableColumn>
-                        <TableColumn maxWidth="90" minWidth="90" text="Shteti"><cellValueFactory><PropertyValueFactory property="shteti"/></cellValueFactory></TableColumn>
-                        <TableColumn text="Adresa"><cellValueFactory><PropertyValueFactory property="adresa"/></cellValueFactory></TableColumn>
-                        <TableColumn maxWidth="90" minWidth="90" text="Tel"><cellValueFactory><PropertyValueFactory property="tel"/></cellValueFactory></TableColumn>
-                        <TableColumn text="Email"><cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory></TableColumn>
-                        <TableColumn maxWidth="70" minWidth="70" text="Blerje"><cellValueFactory><PropertyValueFactory property="p"/></cellValueFactory></TableColumn>
-                    </columns>
-                </TableView>
-            </center>
-        </BorderPane>
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2" styleClass="shadow">
+            <Label text="Te dhenat" styleClass="infoTtl"/>
+            <TableView VBox.vgrow="ALWAYS" fx:id="tblDhenat">
+                <placeholder>
+                    <Label text="Nuk ka te dhena"/>
+                </placeholder>
+                <columns>
+                    <TableColumn text="BC"><cellValueFactory><PropertyValueFactory property="bc"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Produkti"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+                </columns>
+            </TableView>
+            <HBox spacing="5" alignment="CENTER_RIGHT" style="-fx-background-color: -fx-primary">
+                <padding>
+                    <Insets right="10"/>
+                </padding>
+                <Label fx:id="lTotal" style="-fx-font-size: 25; -fx-text-fill: #fff; -fx-font-family: 'Lato light'"/>
+            </HBox>
+        </VBox>
+
     </children>
 
     <columnConstraints>
@@ -137,5 +133,11 @@
         <ColumnConstraints hgrow="ALWAYS"/>
         <ColumnConstraints hgrow="ALWAYS"/>
     </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
 
 </GridPane>

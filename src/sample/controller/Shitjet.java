@@ -176,7 +176,7 @@ public class Shitjet implements Initializable {
                 button.setWrapText(true);
                 button.getStyleClass().addAll("btn", "bigBtn");
                 button.setStyle("-fx-background-color: " + rs.getString("bg") + "; -fx-text-fill: " + rs.getString("fg"));
-                button.setId(rs.getString("id") + " " + rs.getString("qmimi_shitjes"));
+                button.setId(rs.getString("id") + " " + rs.getString("qmimi_shitjes") + " " + rs.getString("njesia"));
 
                 button.setOnAction(e -> {
                     firstButton(button);
@@ -192,7 +192,7 @@ public class Shitjet implements Initializable {
     private void firstButton (Button button){
         try {
             tbl.getItems().add(new ShitjetProd(Integer.parseInt(button.getId().split(" ")[0]),
-                    button.getText().split("\n")[0], Double.parseDouble(button.getId().split(" ")[1])));
+                    button.getText().split("\n")[0], Double.parseDouble(button.getId().split(" ")[1]), button.getId().split(" ")[2]));
             qmimi += Double.parseDouble(button.getId().split(" ")[1]);
             lTotal.setText(VariablatPublike.decimalFormat.format(qmimi));
         }catch (Exception ex) { ex.printStackTrace(); }

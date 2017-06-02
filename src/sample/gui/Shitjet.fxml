@@ -27,19 +27,13 @@
         </ScrollPane>
 
         <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.rowSpan="2">
-            <!--<HBox spacing="5">-->
-                <!--<Label style="-fx-font-size: 15; -fx-text-fill: rgba(255,255,255,.7)" text="Fatura:"/>-->
-                <!--<Label fx:id="lFatura" style="-fx-font-size: 15; -fx-text-fill: rgba(255,255,255,.85)" text="1"/>-->
-            <!--</HBox>-->
-            <HBox alignment="CENTER_RIGHT">
-                <Button text="Historiku" onAction="#historiku" styleClass="btn"/>
-            </HBox>
             <TableView fx:id="tbl" minWidth="450" maxWidth="450">
                 <columns>
                     <TableColumn text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
                     <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
                     <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
                     <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
                     <TableColumn minWidth="40" maxWidth="45" fx:id="colAct"/>
                 </columns>
             </TableView>
@@ -50,7 +44,7 @@
                 <Label text="TVSH" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <Label text="10 (18%)" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 <Label style="-fx-font-size: 30" text="Total" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                <Label fx:id="lTotal" style="-fx-font-size: 30; -fx-text-fill: -fx-primary; -fx-font-family: 'Montserrat bold'" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label fx:id="lTotal" style="-fx-font-size: 30; -fx-text-fill: -fx-primary; -fx-font-family: 'Lato'" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS"/>
