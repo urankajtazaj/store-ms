@@ -117,7 +117,7 @@
                     <TableColumn text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
                 </columns>
             </TableView>
-            <HBox spacing="5" alignment="CENTER_RIGHT" style="-fx-background-color: -fx-primary">
+            <HBox spacing="5" alignment="CENTER_RIGHT" style="-fx-background-color: #5B86E5">
                 <padding>
                     <Insets right="10"/>
                 </padding>

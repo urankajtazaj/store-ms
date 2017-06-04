@@ -74,14 +74,14 @@ public class Raportet implements Initializable {
     }
 
     private void merrTeDhenat(int id) {
-        try (PreparedStatement pstmt = con.prepareStatement("select bc, produkti, qmimi_shitjes, sasia from vshitjet where red_id = ?")) {
+        try (PreparedStatement pstmt = con.prepareStatement("select p_id, produkti, qmimi_shitjes, sasia from vshitjet where red_id = ?")) {
             pstmt.setInt(1, id);
             total = 0;
             ResultSet rs = pstmt.executeQuery();
 
             ObservableList<FaturaDhenat> data = FXCollections.observableArrayList();
             while (rs.next()) {
-                data.add(new FaturaDhenat(rs.getString("bc"), rs.getString("produkti"), VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")),
+                data.add(new FaturaDhenat(rs.getString("p_id"), rs.getString("produkti"), VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")),
                         VariablatPublike.decimal.format(rs.getDouble("sasia"))));
                 total += rs.getDouble("qmimi_shitjes") * rs.getDouble("sasia");
             }

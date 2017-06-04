@@ -45,7 +45,7 @@ public class Login implements Initializable {
 
     public void checkUser (Stage stage){
         try {
-            PreparedStatement stmt = con.prepareStatement("select id, pnt_id, emri, pw from MERREMRINPNT where " +
+            PreparedStatement stmt = con.prepareStatement("select id, pnt_id, usr, pw from perdoruesi where " +
                     "lower(usr) = lower(?) and pw = ? limit 1");
             stmt.setString(1, txtUser.getText());
             stmt.setString(2, txtPw.getText());
@@ -56,8 +56,8 @@ public class Login implements Initializable {
             while (rs.next()) {
                 r++;
                 VariablatPublike.uid = rs.getInt("pnt_id");
-                VariablatPublike.uemri = rs.getString("emri");
-                hapDritarenKryesore(stage, rs.getString("emri"), rs.getInt("pnt_id"));
+                VariablatPublike.uemri = rs.getString("usr");
+                hapDritarenKryesore(stage, rs.getString("usr"), rs.getInt("pnt_id"));
             }
 
             if (r == 0) {

@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  * Created by uran on 17-04-05.
  */
 public class Export implements Initializable {
-    @FXML Button btnAnulo, btnCsv, btnExcel;
+    @FXML Button btnAnulo, btnCsv, btnExcel, btnRaport, btnPdf;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

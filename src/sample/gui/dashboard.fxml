@@ -42,7 +42,7 @@
             </padding>
             <StackPane maxWidth="180" minWidth="180">
                 <PieChart fx:id="pie1" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="60"/>
+                <Circle styleClass="circle" radius="60"/>
                 <Label fx:id="lPie1" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
@@ -57,7 +57,7 @@
             </padding>
             <StackPane maxWidth="180" minWidth="180">
                 <PieChart fx:id="pie2" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="60"/>
+                <Circle styleClass="circle" radius="60"/>
                 <Label fx:id="lPie2" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
@@ -72,7 +72,7 @@
             </padding>
             <StackPane maxWidth="180" minWidth="180">
                 <PieChart fx:id="pie3" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle style="-fx-fill: #f7f7f7" styleClass="circle" radius="60"/>
+                <Circle styleClass="circle" radius="60"/>
                 <Label fx:id="lPie3" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">

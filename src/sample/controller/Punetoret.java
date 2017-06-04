@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +18,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -30,6 +33,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.*;
 import java.util.Date;
 
@@ -46,6 +50,7 @@ public class Punetoret implements Initializable {
     DB db = new DB();
     Connection con = db.connect();
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat tf = new SimpleDateFormat("-dd-MM-yyyy H-m");
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     BorderPane stage;
@@ -222,6 +227,22 @@ public class Punetoret implements Initializable {
             createFile(stage, "csv");
         });
 
+        export.btnPdf.setOnAction(e -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    jasperFile();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            MesazhetPublike.suksesDritarja("Fajlli u exportua me sukses!");
+                        }
+                    });
+                }
+            }).start();
+            stage.close();
+        });
+
         Scene scene = new Scene(bpExport, 400, 165);
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
@@ -274,25 +295,20 @@ public class Punetoret implements Initializable {
     public void excelFile(Stage stage, String extension){
 
 //        KRIJOHET NJE FILE I RI I EXCEL-IT
-        System.out.print("Duke krijuar excel file te ri");
         XSSFWorkbook workbook = new XSSFWorkbook();
         System.out.println("..OK");
 
 //        KRIJOHET FLETA E RE E EXCELIT
-        System.out.print("Duke krijuar fleten");
         XSSFSheet sheet = workbook.createSheet();
         System.out.println("..OK");
 
 //        MERREN TE DHENAT DHE VENDOSEN NE MAP
-        System.out.print("Duke nxjerre te dhenat nga programi");
         Map<String, Object[]> xlsData = new TreeMap<>();
         int i = 1;
         for (Punetori p : tbl.getItems()) {
             xlsData.put((i++)+"", new Object[] {p.getId(), p.getEmri(), p.getPuna(), p.getPaga(), p.getDepartamenti()});
         }
-        System.out.println("..OK");
 
-        System.out.print("Duke shkruajtur ne excel file");
         Set<String> keySet = xlsData.keySet();
         int r = 0;
         for (String s : keySet) {
@@ -341,6 +357,25 @@ public class Punetoret implements Initializable {
             return path.substring(0, path.length())+"."+extension;
         }
         return path;
+    }
+
+    private void jasperFile(){
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(System.getProperty("user.home") +
+                    "/Sistem Informacioni/Raportet/Punetoret.jrxml");
+            Map<String, Object> params = new HashMap();
+            params.put("Punetori", VariablatPublike.uemri);
+
+            JasperPrint jprint = JasperFillManager.fillReport(jasperReport, params, con);
+
+            File dir = new File(System.getProperty("user.home") + "/Raportet");
+            dir.mkdir();
+
+            JasperExportManager.exportReportToPdfFile(jprint, dir.getAbsolutePath() + "/Punetoret" + tf.format(new Date()) + ".pdf");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void lidhuDb(){

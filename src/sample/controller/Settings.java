@@ -102,7 +102,7 @@ public class Settings implements Initializable {
         vbPunet.getChildren().add(0, hb);
     }
 
-    private void hapNgjyren (Button btn, int id){
+    private void hapNgjyren (Button btn, int id, String bg, String fg){
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ZgjedhNgjyren.fxml"));
@@ -110,6 +110,8 @@ public class Settings implements Initializable {
             zgj.setId(id);
             zgj.setStage(stage);
             zgj.setButton(btn);
+            zgj.setBg(bg);
+            zgj.setFg(fg);
             loader.setController(zgj);
             Parent parent = loader.load();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -174,7 +176,7 @@ public class Settings implements Initializable {
         btn.setId(id + "/" + bg + "/" + fg);
 
         btn.setOnAction(e -> {
-            hapNgjyren((Button) e.getSource(), id);
+            hapNgjyren((Button) e.getSource(), id, bg, fg);
         });
 
         btnDel.setOnAction(e -> {
