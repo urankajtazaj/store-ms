@@ -25,14 +25,14 @@
         <BorderPane styleClass="sideBar">
             <center>
                 <VBox fx:id="btnVb">
-                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" style="-fx-background-color: #36d1dc" onAction="#changeScene"/>
-                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" style="-fx-background-color: #3fc9dd" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnKons" contentDisplay="TOP" text="KONSUMATORET" style="-fx-background-color: #4cb9df" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnPaisjet" contentDisplay="TOP" text="PRODUKTET" style="-fx-background-color: #56a3e2" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnStat" contentDisplay="TOP" text="RAPORTET" style="-fx-background-color: #5a8ee4" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnShit" contentDisplay="TOP" text="SHITJE" style="-fx-background-color: #5b83e5" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene" style="-fx-background-color: #5a6ce7" contentDisplay="TOP" text="RREGULLO"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnLogout" contentDisplay="TOP" style="-fx-background-color: #585fe8" text="DIL"/>
+                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" onAction="#changeScene"/>
+                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnKons" contentDisplay="TOP" text="KONSUMATORET" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnPaisjet" contentDisplay="TOP" text="PRODUKTET" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnStat" contentDisplay="TOP" text="RAPORTET" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnShit" contentDisplay="TOP" text="SHITJE" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene" contentDisplay="TOP" text="RREGULLO"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnLogout" contentDisplay="TOP" text="DIL"/>
                 </VBox>
             </center>
 

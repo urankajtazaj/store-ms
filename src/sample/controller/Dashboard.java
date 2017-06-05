@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import org.controlsfx.control.PopOver;
 
 import java.io.IOException;
@@ -116,7 +117,6 @@ public class Dashboard implements Initializable{
         x.setTickLabelsVisible(false);
         x.setTickUnit(1);
         x.setMinorTickVisible(false);
-        x.setStyle("-fx-opacity: .9; -fx-fill: #000");
     }
 
     private void Events (Axis<Double> xa, XYChart.Series series, Tooltip tp, MouseEvent event, String lookup) {

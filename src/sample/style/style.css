@@ -25,11 +25,9 @@
     -fx-primary: #9B46E1;
     -fx-primary: linear-gradient(to bottom right, #36D1DC, #5B86E5);
     -fx-primary: #2ecc71;
+    -fx-primary: rgba(255,255,255,.85);
     -fx-veqant: #27A7E8;
     -fx-ppages: #9b59b6;
-    -fx-secondary: #35B876;
-    -fx-secondary: #6b6e70;
-    -fx-secondary: -fx-primary;
     -fx-g-hover: #2e9e66;
     -fx-r-hover: #e83a30;
     -fx-clr: #444;
@@ -48,8 +46,9 @@
     -fx-sidebar: #F4F4F4;
     -fx-sidebar: #1B2338;
     -fx-sidebar: #1C1C1C;
-    -fx-secondary: #222A41;
+    -fx-sidebar: #333F69;
     -fx-secondary: #282828;
+    -fx-secondary: #3a4878;
 }
 
 .root {
@@ -70,12 +69,11 @@
 
 .gp .button, .btn {
     -fx-cursor: hand;
-    -fx-background-color: -fx-primary;
-    -fx-background-color: #5B86E5;
+    -fx-background-color: #8171ED;
     -fx-text-fill: rgba(255,255,255,.9);
     -fx-alignment: CENTER;
-    -fx-background-radius: 4;
-    -fx-border-radius: 4;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
     -fx-padding: 0 15 0 15;
     -fx-min-height: 34;
     -fx-max-height: 34;
@@ -95,13 +93,13 @@
     -fx-opacity: .9;
 }
 
-.sideBar .button, .side-btn {/*
-    -fx-background-color: transparent;*/
+.sideBar .button, .side-btn {
+    -fx-background-color: transparent;
     -fx-text-fill: #fff;
     -fx-background-radius: 0;
     -fx-border-radius: 0;
     -fx-alignment: CENTER;
-    -fx-padding: 30 0 30 0;
+    -fx-padding: 13 0 13 0;
     -fx-font-size: 12;
     -fx-font-weight: bold;
     -fx-cursor: hand;
@@ -114,12 +112,16 @@
 .sideBar .button:hover {
     -fx-background-color: rgba(255,255,255,.2);
     -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-sidebar;
     -fx-opacity: 1;
 }
 
 .sideBar {
     -fx-background-color: #232323;
-    -fx-background-color: #585fe8;
+    -fx-background-color: -fx-secondary;
+    -fx-padding: 10 0 0 0;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: rgba(255,255,255,.06);
     -fx-min-width: 110;
     -fx-max-width: 110;
 }
@@ -150,12 +152,8 @@
     -fx-border-color: #eaeaea;
 }
 
-.axis:bottom > .axis-label, .axis:left > .axis-label {
-    -fx-text-fill: #000;
-}
-
 .axis {
-    -fx-tick-label-fill: #000;
+    -fx-tick-label-fill: rgba(255,255,255,.9);
 }
 
 .chart-area-symbol {
@@ -168,16 +166,17 @@
 .chart-series-area-line {
     -fx-stroke-width: 1;
     -fx-stroke: -fx-primary;
+    -fx-stroke: linear-gradient(to right, #8171ED, #5453A4);
 }
 
 .chart-series-area-fill {
     -fx-fill: -fx-primary;
-    -fx-fill: -fx-primary;
-    -fx-opacity: .1;
+    -fx-fill: linear-gradient(to right, #8171ED, #5453A4);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 25, 0, 0, 0);
 }
 
 .chart-vertical-grid-lines {
-    -fx-stroke: rgba(0,0,0,0.07);
+    -fx-stroke: rgba(255,255,255,0.07);
     -fx-stroke-dash-array: none;
 }
 
@@ -229,9 +228,9 @@
 }
 
 .default-color0.chart-pie {
-    -fx-background-color: -fx-primary;
-    -fx-effect: dropshadow(gaussian, -fx-primary, 20, 0, 0, 0);
-}
+    -fx-background-color: #8171ED;/*
+    -fx-effect: dropshadow(gaussian, #8171ED, 20, 0, 0, 0);
+*/}
 
 /*
 .chart-series-area-fill {
@@ -266,7 +265,7 @@
     -fx-background-color: -fx-sidebar;
     -fx-text-fill: -fx-label-color;
     -fx-border-width: 0 0 2 0;
-    -fx-border-color: rgba(0,0,0,.3);
+    -fx-border-color: rgba(255,255,255,.3);
     -fx-border-radius: 1;
 }
 
@@ -331,23 +330,19 @@
 .date-picker-popup {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
     -fx-border-width: 0;
-    -fx-background-color: -fx-sidebar;
-}
-
-.date-picker-popup > * > .spinner {
-    -fx-text-fill: red;
+    -fx-background-color: -fx-secondary;
 }
 
 .date-picker-popup .month-year-pane {
-    -fx-background-color: -fx-sidebar;
+    -fx-background-color: -fx-secondary;
 }
 
 .date-picker-popup > * > .day-cell {
-    -fx-border-color: -fx-sidebar;
-    -fx-text-fill: rgba(0,0,0,0.9);
+    -fx-border-color: -fx-secondary;
+    -fx-text-fill: rgba(255,255,255,0.8);
     -fx-font-weight: bold;
     -fx-padding: 14;
-    -fx-background-color: -fx-sidebar;
+    -fx-background-color: -fx-secondary;
 }
 
 .date-picker-popup > * > .today {
@@ -362,11 +357,11 @@
 }
 
 .date-picker-popup > * > .day-name-cell {
-    -fx-background-color: -fx-sidebar;
-    -fx-text-fill: rgba(0,0,0,0.85);
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: rgba(255,255,255,0.85);
     -fx-font-weight: bold;
     -fx-font-size: 15;
-    -fx-border-color: -fx-sidebar;
+    -fx-border-color: -fx-secondary;
 }
 
 .date-picker-popup > * > .day-cell:hover {
@@ -377,26 +372,23 @@
     -fx-fill: #fff;
 }
 
+.date-picker-popup > * > .spinner > .label {
+    -fx-text-fill: #fff;
+}rgba(255,255,255,.04)
+
 .date-picker-popup > * > .previous-month,
 .date-picker-popup > * > .next-month {
-    -fx-background-color: -fx-sidebar;
-    -fx-border-color: -fx-sidebar;
-    -fx-text-fill: rgba(0,0,0,0.5);
+    -fx-background-color: -fx-secondary;
+    -fx-border-color: -fx-secondary;
+    -fx-text-fill: rgba(255,255,255,0.5);
 }
 
-
-
-/*
-.text-field:focused, .combo-box:focused {
-    -fx-border-color: -fx-primary;
-}*/
-
 .combo-box-base > .arrow-button > .arrow {
-    -fx-background-color: rgba(0,0,0,.6);
+    -fx-background-color: rgba(255,255,255,.6);
 }
 
 .date-picker > .arrow-button > .arrow {
-    -fx-background-color: rgba(0,0,0,.6);
+    -fx-background-color: rgba(255,255,255,.6);
 }
 
 .date-picker > .arrow-button:hover > .arrow {
@@ -464,13 +456,12 @@
  }
 
  .shadow {
-    /*-fx-background-color: #fff;*/
     -fx-background-color: #f7f7f7;
     -fx-background-color: -fx-secondary;
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
+    -fx-background-radius: 2;
+    -fx-border-radius: 2;
     -fx-border-width: 1;
-    -fx-border-color: rgba(0,0,0,0.05);
+    -fx-border-color: rgba(255,255,255,0.05);
  }
 
  .tooltip {
@@ -478,12 +469,11 @@
     -fx-background-radius: 0;
     -fx-border-radius: 0;
     -fx-padding: 5 15 5 15;
-    -fx-text-fill: rgba(255,255,255,.9);
+    -fx-text-fill: -fx-sidebar;
     -fx-effect: none;
     -fx-font-weight: bold;
-    -fx-font-size: 14;/*
-    -fx-text-alignment: CENTER;
- */}
+    -fx-font-size: 14;
+ }
 
  .toggle-button {
     -fx-background-radius: 0;
@@ -621,7 +611,7 @@
 
 .hyperlink {
     -fx-padding: 0;
-    -fx-text-fill: rgba(0,0,0,.8);
+    -fx-text-fill: -fx-primary;
     -fx-font-weight: bold;
 }
 
@@ -667,7 +657,7 @@
 
 .l2 {
     -fx-opacity: .5;
-    -fx-text-fill: #000;
+    -fx-text-fill: #fff;
     -fx-font-weight: bold;
 }
 
@@ -837,7 +827,7 @@
 }
 
 .btnExportImg:hover {
-    -fx-text-fill: #fff;
+    -fx-text-fill: -fx-sidebar;
     -fx-background-color: -fx-primary;
 }
 
@@ -940,7 +930,7 @@
     -fx-font-size: 13;
     -fx-font-weight: bold;
     -fx-word-wrap: true;
-    -fx-text-fill: #000;
+    -fx-text-fill: #fff;
 }
 
 .newWindow {
@@ -991,7 +981,7 @@
 }
 
 .percGreen {
-    -fx-text-fill: -fx-secondary;
+    -fx-text-fill: -fx-primary;
 }
 
 .percRed {
@@ -1195,7 +1185,7 @@
 }
 
 .gpL .label {
-    -fx-text-fill: rgba(0,0,0,.85);
+    -fx-text-fill: rgba(255,255,255,.85);
     -fx-font-size: 15;
 }
 

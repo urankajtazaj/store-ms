@@ -19,7 +19,6 @@
         <BorderPane fx:id="inBp" styleClass="newWindow">
             <center>
                 <GridPane alignment="TOP_CENTER">
-                    <!--<Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="RAPORT" fx:id="btnRaport" styleClass="btnExportImg"/>-->
                     <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="EXCEL" fx:id="btnExcel" styleClass="btnExportImg"/>
                     <Button GridPane.rowIndex="0" GridPane.columnIndex="1" text="PDF" fx:id="btnPdf" styleClass="btnExportImg"/>
                     <Button GridPane.rowIndex="0" GridPane.columnIndex="2" text="CSV" fx:id="btnCsv" styleClass="btnExportImg"/>

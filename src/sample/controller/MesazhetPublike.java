@@ -71,7 +71,7 @@ public class MesazhetPublike {
             pause.setOnFinished(e -> stage.hide());
 
             stage.setX(rect.getMinX() + rect.getWidth() - 380);
-            stage.setY(rect.getMinY() + rect.getHeight() - 110);
+            stage.setY(rect.getMinY());
 
             stage.setAlwaysOnTop(true);
             stage.initStyle(StageStyle.TRANSPARENT);

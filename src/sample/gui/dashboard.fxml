@@ -33,9 +33,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.control.ProgressBar?>
-<GridPane fx:id="grid" styleClass="gp" vgap="3" hgap="3" fx:controller="sample.controller.Dashboard" xmlns:fx="http://javafx.com/fxml">
+<GridPane fx:id="grid" styleClass="gp" vgap="7" hgap="7" fx:controller="sample.controller.Dashboard" xmlns:fx="http://javafx.com/fxml">
 
-    <HBox spacing="3" minHeight="170" maxHeight="170" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT">
+    <HBox spacing="7" minHeight="170" maxHeight="170" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT">
         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" styleClass="shadow">
             <padding>
                 <Insets right="15"/>

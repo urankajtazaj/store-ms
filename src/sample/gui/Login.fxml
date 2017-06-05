@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<BorderPane styleClass="bg" style="-fx-background-color: -fx-primary;" xmlns="http://javafx.com/javafx"
+<BorderPane styleClass="bg" style="-fx-background-color: -fx-sidebar;" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sample.controller.Login">
 
