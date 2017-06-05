@@ -25,14 +25,14 @@
         <BorderPane styleClass="sideBar">
             <center>
                 <VBox fx:id="btnVb">
-                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" onAction="#changeScene"/>
-                    <Button contentDisplay="TOP" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnKons" contentDisplay="TOP" text="KONSUMATORET" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnPaisjet" contentDisplay="TOP" text="PRODUKTET" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnStat" contentDisplay="TOP" text="RAPORTET" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnShit" contentDisplay="TOP" text="SHITJE" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene" contentDisplay="TOP" text="RREGULLO"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnLogout" contentDisplay="TOP" text="DIL"/>
+                    <Button  prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" onAction="#changeScene"/>
+                    <Button  prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnKons"  text="KONSUMATORET" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnPaisjet"  text="PRODUKTET" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnStat"  text="RAPORTET" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnShit"  text="SHITJE" onAction="#changeScene"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene"  text="RREGULLO"/>
+                    <Button prefWidth="${btnVb.width}" fx:id="btnLogout"  text="DIL"/>
                 </VBox>
             </center>
 

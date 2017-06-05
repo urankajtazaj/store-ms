@@ -21,7 +21,7 @@
             <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3"
                   GridPane.columnSpan="2">
                 <Button fx:id="btnLogin" styleClass="btn"
-                        style="-fx-min-width: 250; -fx-max-width: 250; -fx-border-width: 2; -fx-border-color: #fff; -fx-background-color: transparent" text="Kyqu"/>
+                        style="-fx-min-width: 250; -fx-max-width: 250;" text="Kyqu"/>
             </HBox>
         </GridPane>
     </center>

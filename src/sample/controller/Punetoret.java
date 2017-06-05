@@ -118,13 +118,18 @@ public class Punetoret implements Initializable {
 
                     setText(item);
                     if (item != null && !empty) {
+                        ImageView iv = new ImageView();
+                        iv.setPreserveRatio(true);
+                        iv.setFitWidth(15);
                         if (getText().equals("1")) {
-                            setStyle("-fx-alignment: CENTER; -fx-background-color: -fx-green; -fx-font-size: 14; -fx-text-fill: #fff; -fx-font-weight: bold;");
-                            setText("Aktiv");
+                            iv.setImage(new Image("/sample/photo/green-flag.png"));
+                            setGraphic(iv);
+                            setText("");
                         }
                         else {
-                            setStyle("-fx-alignment: CENTER; -fx-text-fill: #fff; -fx-font-size: 14; -fx-background-color: -fx-red; -fx-font-weight: bold;");
-                            setText("Jo aktiv");
+                            iv.setImage(new Image("/sample/photo/red-flag.png"));
+                            setGraphic(iv);
+                            setText("");
                         }
 
                     }else {
@@ -198,6 +203,7 @@ public class Punetoret implements Initializable {
             loader.setController(pv);
             Parent parent = loader.load();
             ScrollPane sp = new ScrollPane(parent);
+            sp.getStyleClass().add("edge-to-edge");
             stage.setCenter(sp);
 
         }catch (Exception e) { e.printStackTrace(); }
