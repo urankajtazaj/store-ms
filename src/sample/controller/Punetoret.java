@@ -241,7 +241,7 @@ public class Punetoret implements Initializable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            MesazhetPublike.suksesDritarja("Fajlli u exportua me sukses!");
+                            MesazhetPublike.Lajmerim("Fajli u exportua me sukses", MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 0);
                         }
                     });
                 }
@@ -290,7 +290,8 @@ public class Punetoret implements Initializable {
         try {
             bw.write(stringBuilder.toString());
             bw.close();
-            MesazhetPublike.suksesDritarja("Fajlli u krijua me sukses dhe mund te gjinded ne\n" + file.getAbsolutePath());
+            MesazhetPublike.Lajmerim("Fajlli u krijua me sukses dhe mund te gjinded ne\n" + file.getAbsolutePath(),
+                    MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
             stage.close();
         } catch (IOException e) {
             System.out.println("Fajlli nuk mund te mbyllet: " + file.getName());
@@ -349,7 +350,8 @@ public class Punetoret implements Initializable {
             fileOutputStream = new FileOutputStream(file);
             workbook.write(fileOutputStream);
             fileOutputStream.close();
-            MesazhetPublike.suksesDritarja("Fajlli u krijua me sukses dhe mund te gjinded ne\n" + file.getAbsolutePath());
+            MesazhetPublike.Lajmerim("Fajlli u krijua me sukses dhe mund te gjinded ne\n" + file.getAbsolutePath(),
+                    MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
             stage.close();
         } catch (Exception e) {
             e.printStackTrace();

@@ -207,8 +207,10 @@ public class Shitjet implements Initializable {
                 batch(stmt, sp.getId(), sp.getQmimi(), Double.parseDouble(sp.getSasia().getText()));
             }
             stmt.executeBatch();
-            MesazhetPublike.suksesDritarja("Te dhenat u shtuan me sukses!");
-        }catch (Exception e) {e.printStackTrace();}
+            MesazhetPublike.Lajmerim("Shitja u krye me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
+        }catch (Exception e) {
+            MesazhetPublike.Lajmerim("Shitja nuk u krye me sukses.\nNje gabim ka ndodhur.", MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 0);
+            e.printStackTrace();}
     }
 
     private void batch (Statement ps, int id, double qmimi, double sasia) throws Exception {

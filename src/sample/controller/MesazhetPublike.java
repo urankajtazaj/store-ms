@@ -18,15 +18,37 @@ import javafx.util.Duration;
  */
 public class MesazhetPublike {
 
-    static void suksesDritarja(String msg) {
+    static void Lajmerim (String msg, ButtonType btns, NotificationType ntf, double duration) {
         try {
             Rectangle2D rect = Screen.getPrimary().getBounds();
-            FXMLLoader loader = new FXMLLoader(MesazhetPublike.class.getResource("/sample/gui/LajmeroGreen.fxml"));
+            String fxml = "";
+
+            switch (ntf) {
+                case SUCCESS: {
+                    switch (btns) {
+                        case NO_BUTTON: fxml = "/sample/gui/LajmeroGreen.fxml"; break;
+                        case OK_BUTTON: fxml = "/sample/gui/LajmeroGreenBtn.fxml"; break;
+                    }
+                    break;
+                }
+                case ERROR: {
+                    switch (btns) {
+                        case NO_BUTTON: fxml = "/sample/gui/LajmeroRed.fxml"; break;
+                        case OK_BUTTON: fxml = "/sample/gui/LajmeroRedBtn.fxml"; break;
+                    }
+                    break;
+                }
+            }
+
+            FXMLLoader loader = new FXMLLoader(MesazhetPublike.class.getResource(fxml));
             Parent parent = loader.load();
             LajmeroGreen lajmero = loader.getController();
             lajmero.setMesazhi(msg);
             Stage stage = new Stage();
-            Scene scene = new Scene(parent, 400, 130);
+            Scene scene = new Scene(parent, 400, 150);
+
+            lajmero.setStage(stage);
+
             scene.setOnKeyPressed(e -> {
                 if (e.getCode().equals(KeyCode.ENTER) || e.getCode().equals(KeyCode.ESCAPE)) {
                     stage.close();
@@ -34,51 +56,30 @@ public class MesazhetPublike {
             });
             scene.getStylesheets().add(MesazhetPublike.class.getResource("/sample/style/style.css").toExternalForm());
             scene.setFill(Color.TRANSPARENT);
-
-            stage.setX(rect.getMinX() + rect.getWidth() - 380);
-            stage.setY(rect.getMinY() + rect.getHeight() - 110);
-
-            PauseTransition pause = new PauseTransition(Duration.seconds(5));
-            pause.setOnFinished(e -> stage.hide());
-
-            stage.setAlwaysOnTop(true);
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setScene(scene);
-            stage.setResizable(false);
-            pause.play();
-            stage.show();
-        }catch (Exception e) {e.printStackTrace();}
-    }
-
-    static void suksesDritarjaRed(String msg) {
-        try {
-            Rectangle2D rect = Screen.getPrimary().getBounds();
-            FXMLLoader loader = new FXMLLoader(MesazhetPublike.class.getResource("/sample/gui/LajmeroRed.fxml"));
-            Parent parent = loader.load();
-            LajmeroRed lajmero = loader.getController();
-            lajmero.setMesazhi(msg);
-            Stage stage = new Stage();
-            Scene scene = new Scene(parent, 400, 130);
-            scene.setOnKeyPressed(e -> {
-                if (e.getCode().equals(KeyCode.ENTER) || e.getCode().equals(KeyCode.ESCAPE)) {
-                    stage.close();
-                }
-            });
-            scene.getStylesheets().add(MesazhetPublike.class.getResource("/sample/style/style.css").toExternalForm());
-            scene.setFill(Color.TRANSPARENT);
-
-            PauseTransition pause = new PauseTransition(Duration.seconds(6));
-            pause.setOnFinished(e -> stage.hide());
 
             stage.setX(rect.getMinX() + rect.getWidth() - 380);
             stage.setY(rect.getMinY());
 
+            PauseTransition pause = new PauseTransition(Duration.seconds(duration < 1 ? 1 : duration));
+            pause.setOnFinished(e -> stage.hide());
+
             stage.setAlwaysOnTop(true);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
             stage.setResizable(false);
-            pause.play();
+            if (duration > 0) pause.play();
             stage.show();
         }catch (Exception e) {e.printStackTrace();}
     }
+
+    public enum ButtonType {
+        NO_BUTTON,
+        OK_BUTTON,
+    }
+
+    public enum NotificationType {
+        ERROR,
+        SUCCESS
+    }
+
 }

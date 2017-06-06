@@ -66,7 +66,6 @@ public class Settings implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
-
         }catch (Exception ex) {ex.printStackTrace();}
     }
 
@@ -157,8 +156,11 @@ public class Settings implements Initializable {
                 }
             }
             s.executeBatch();
+            MesazhetPublike.Lajmerim("Ndryshimet ne kategori u ruajten me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
 
-        }catch (Exception e) { e.printStackTrace(); }
+        }catch (Exception e) {
+            MesazhetPublike.Lajmerim("Diqka nuk ka shkuar siq duhet!", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.ERROR, 5);
+            e.printStackTrace(); }
     }
 
     private void addKats (int id, String emri, String bg, String fg) {
@@ -207,9 +209,10 @@ public class Settings implements Initializable {
                 p.setDouble(1, Double.parseDouble(tMujor.getText()));
                 p.setInt(2, cbTipi.getSelectionModel().getSelectedIndex());
                 p.execute();
-                MesazhetPublike.suksesDritarja("Sukses");
+                MesazhetPublike.Lajmerim("Targeti u azhurnua me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
             }else {
-                MesazhetPublike.suksesDritarjaRed("Fusha e qmimit duhet te jete numer me i madh se 0, dhe nuk duhet te permbaje hapesira.");
+                MesazhetPublike.Lajmerim("Fusha e qmimit duhet te jete numer me i madh se 0, dhe nuk duhet te permbaje hapesira.",
+                        MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 8);
             }
         }catch (Exception e) {e.printStackTrace();}
     }

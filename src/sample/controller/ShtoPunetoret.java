@@ -166,7 +166,8 @@ public class ShtoPunetoret implements Initializable {
                     && !paga.getText().equals("") && !punesuar.getEditor().getText().equals("") && !titulli.getText().equals("")
                     && !telefoni.getText().equals("") && !email.getText().equals("")) {
                 if (!paga.getText().trim().matches("[0-9]+.") || !telefoni.getText().trim().matches("[0-9 ]+")) {
-                    MesazhetPublike.suksesDritarjaRed("Fushat 'Paga' dhe 'Telefoni' duhet te permajne vetem numra!");
+                    MesazhetPublike.Lajmerim("Fushat 'Paga' dhe 'Telefoni' duhet te permajne vetem numra!",
+                            MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 8);
                 }else {
                     pstmt.setInt(1, VariablatPublike.dep.get(departamenti.getSelectionModel().getSelectedItem()));
                     pstmt.setString(2, emri.getText());
@@ -191,10 +192,12 @@ public class ShtoPunetoret implements Initializable {
                     pstmt2.execute();
 
                     pastro();
-                    MesazhetPublike.suksesDritarja("Te dhenat u ruajten me sukses!");
+                    MesazhetPublike.Lajmerim("Te dhenat u ruajten me sukses!", MesazhetPublike.ButtonType.NO_BUTTON,
+                            MesazhetPublike.NotificationType.SUCCESS, 5);
                 }
             }else
-                MesazhetPublike.suksesDritarjaRed("Fushat e kerkuara duhet te permbajne te dhena!");
+                MesazhetPublike.Lajmerim("Fushat e kerkuara duhet te permbajne te dhena!",
+                        MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 8);
 
         }catch (Exception ex) {ex.printStackTrace();}
 

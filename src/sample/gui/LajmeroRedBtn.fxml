@@ -11,7 +11,7 @@
 <?import javafx.scene.image.Image?>
 <BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.controller.LajmeroRed">
+            fx:controller="sample.controller.LajmeroGreen">
 
     <padding>
         <Insets top="20" left="20" right="20" bottom="20"/>
@@ -19,16 +19,24 @@
 
     <center>
         <BorderPane fx:id="bp" styleClass="newWindow" style="-fx-background-color: #e74c3c; -fx-border-radius: 15; -fx-background-radius: 15;">
+            <padding>
+                <Insets left="15" bottom="15" top="15"/>
+            </padding>
+            <left>
+                <ImageView preserveRatio="true" fitWidth="48">
+                    <Image url="/sample/photo/errormark.png"/>
+                </ImageView>
+            </left>
             <center>
                 <Label graphicTextGap="20" BorderPane.alignment="CENTER_LEFT" wrapText="true" maxWidth="${bp.width}"
                        fx:id="mesazhi" style="-fx-text-fill: #fff; -fx-opacity: .8; -fx-font-family: 'Nunito'; -fx-padding: 0 15 0 20; -fx-font-weight: bold" styleClass="mesazhiDialog">
-                    <graphic>
-                        <ImageView preserveRatio="true" fitWidth="48">
-                            <Image url="/sample/photo/errormark.png"/>
-                        </ImageView>
-                    </graphic>
                 </Label>
             </center>
+            <bottom>
+                <HBox alignment="CENTER">
+                    <Button text="OK" onAction="#closeStage" fx:id="btnOk" styleClass="btn" style="-fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: rgba(0,0,0,0.15)"/>
+                </HBox>
+            </bottom>
         </BorderPane>
     </center>
 

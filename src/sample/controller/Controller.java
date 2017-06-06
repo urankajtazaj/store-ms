@@ -60,7 +60,6 @@ public class Controller implements Initializable {
         }
 
         user.setText(usr);
-
     }
 
     private String cap(String text) {
@@ -73,7 +72,6 @@ public class Controller implements Initializable {
 
         if (((Button) e.getSource()).getText().equals("SHTEPI")) {
             pntRoot = FXMLLoader.load(getClass().getResource("/sample/gui/dashboard.fxml"));
-            root.setCenter(pntRoot);
         }else if (((Button) e.getSource()).getText().equals("PUNETORET")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/punetoret.fxml"));
             pntRoot = loader.load();
@@ -85,42 +83,35 @@ public class Controller implements Initializable {
             punetoret.btnShtoPnt.setOnAction(a -> {
                 try {
                     FXMLLoader l = new FXMLLoader(getClass().getResource("/sample/gui/ShtoPunetoret.fxml"));
-                    ShtoPunetoret sp = new ShtoPunetoret();
-                    l.setController(sp);
+                    ShtoPunetoret shp = new ShtoPunetoret();
+                    l.setController(shp);
                     root.setCenter(l.load());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             });
-
-            root.setCenter(pntRoot);
         }else if (((Button) e.getSource()).getText().equals("PRODUKTET")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/produktet.fxml"));
             pntRoot = loader.load();
             Produktet p = loader.getController();
             p.setBp(root);
-            root.setCenter(pntRoot);
         }else if (((Button) e.getSource()).getText().equals("KONSUMATORET")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/konsumatoret.fxml"));
             pntRoot = loader.load();
             Konsumatoret konsumatoret = loader.getController();
             konsumatoret.setRoot(root);
-            root.setCenter(pntRoot);
         }else if (((Button) e.getSource()).getText().equals("RAPORTET")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Raportet.fxml"));
             pntRoot = loader.load();
-            root.setCenter(pntRoot);
         }else if (((Button) e.getSource()).getText().equals("SHITJE")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Shitjet.fxml"));
             pntRoot = loader.load();
-            root.setCenter(pntRoot);
         }else if (((Button) e.getSource()).getText().equals("RREGULLO")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Settings.fxml"));
             pntRoot = loader.load();
-            root.setCenter(pntRoot);
         }
 
-//        scrollPane.setContent(pntRoot);
+        root.setCenter(pntRoot);
     }
 
 }

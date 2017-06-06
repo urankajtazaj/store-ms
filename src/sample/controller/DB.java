@@ -16,7 +16,10 @@ public class DB {
         Connection con = null;
         try {
             con = DriverManager.getConnection(conStr, usr, pw);
-        }catch (Exception e) { e.printStackTrace(); }
+        }catch (Exception e) {
+            MesazhetPublike.Lajmerim("Nuk mund te behet lidhja me Databaze, kontrollo serverin.",
+                    MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 0);
+        }
         return con;
     }
 

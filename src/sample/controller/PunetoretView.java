@@ -234,7 +234,7 @@ public class PunetoretView implements Initializable {
                 ps.setDate(3, java.sql.Date.valueOf(dpDeriPushim.getValue()));
                 ps.setString(4, arsyeja);
                 ps.execute();
-                MesazhetPublike.suksesDritarja("Pushimi u shtua me sukses");
+                MesazhetPublike.Lajmerim("Pushimi u shtua me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
                 getData();
                 fillCbViti();
             } else {

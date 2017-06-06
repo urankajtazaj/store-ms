@@ -47,8 +47,11 @@
                 <Label text="Punet" styleClass="infoTtl"/>
             </top>
             <center>
-                <VBox spacing="10" fx:id="vbPunet" alignment="CENTER_RIGHT">
-                    <Separator orientation="HORIZONTAL"/>
+                <VBox spacing="10">
+                    <ScrollPane styleClass="edge-to-edge" minHeight="150" maxHeight="150">
+                        <VBox spacing="10" fx:id="vbPunet" alignment="CENTER_RIGHT">
+                        </VBox>
+                    </ScrollPane>
                     <Button text="Shto" onAction="#shtoPune" fx:id="shtoPune"/>
                 </VBox>
             </center>
@@ -64,11 +67,10 @@
             <center>
                 <VBox spacing="15" alignment="TOP_RIGHT">
                     <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Label text="TVSH (%)"/>
+                        <Label text="TVSH (%)" style="-fx-text-fill: rgba(255,255,255,.85)"/>
                         <TextField minWidth="100" maxWidth="130"/>
                         <Button text="Ruaj"/>
                     </HBox>
-                    <Separator orientation="HORIZONTAL"/>
                     <ScrollPane VBox.vgrow="ALWAYS" maxHeight="240" styleClass="edge-to-edge">
                         <VBox alignment="CENTER_LEFT" fx:id="vbPnt" spacing="5">
 

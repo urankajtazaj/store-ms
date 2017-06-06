@@ -106,7 +106,7 @@ public class Konfirmo implements Initializable {
 
         Statement stmt = con.createStatement();
         stmt.execute(query);
-        MesazhetPublike.suksesDritarja(emri + " u fshi me sukses");
+        MesazhetPublike.Lajmerim(emri + " u fshi me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
     }
 
 }

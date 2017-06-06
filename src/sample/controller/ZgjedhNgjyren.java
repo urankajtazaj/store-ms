@@ -46,6 +46,9 @@ public class ZgjedhNgjyren implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        cpBg.setValue(Color.valueOf(button.getId().split("/")[1]));
+        cpFg.setValue(Color.valueOf(button.getId().split("/")[2]));
+
         cpBg.setOnAction(e -> {
             background = toRGB(cpBg.getValue());
             System.out.println(background);

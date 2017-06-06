@@ -52,9 +52,11 @@ public class ShtoProdukte implements Initializable {
             ps.setString(7, bc.getText());
             ps.setInt(8, zbritje.getText().isEmpty() ? 0 : Integer.parseInt(zbritje.getText()));
             ps.execute();
-            MesazhetPublike.suksesDritarja("Produkti " + emri.getText() + ", u shtua me sukses.");
+            MesazhetPublike.Lajmerim("Produkti " + emri.getText() + ", u shtua me sukses.",
+                    MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
         }catch (NumberFormatException nfe) {
-            MesazhetPublike.suksesDritarjaRed("Fushat ku kerkohen vetem numra nuk duhet te permbajne shkronja ose karaktere tjera.");
+            MesazhetPublike.Lajmerim("Fushat ku kerkohen vetem numra nuk duhet te permbajne shkronja ose karaktere tjera.",
+                    MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 8);
         }catch (Exception e){ e.printStackTrace(); }
     }
 

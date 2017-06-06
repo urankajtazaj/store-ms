@@ -18,6 +18,10 @@
     src: url("../font/Lato-Regular.ttf");
 }
 
+.gp .label, .gp .check-box {
+    -fx-text-fill: rgba(255,255,255,.8);
+}
+
 * {
     -fx-primary: rgba(41, 128, 185,1); /*PINK*/
     -fx-primary: #1abc9c; /*PINK*/
@@ -303,7 +307,7 @@
     -fx-max-height: 32;
     -fx-font-weight: bold;
     -fx-opacity: .85;
-    -fx-text-fill: #000;
+    -fx-text-fill: #fff;
 }
 
 .text-field, .date-picker > .text-field {
@@ -403,6 +407,40 @@
     -fx-background-color: -fx-primary;
 }
 
+.color-picker {
+    -fx-background-color: transparent;
+}
+
+.color-palette {
+    -fx-background-color: -fx-secondary;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 0);
+}
+
+.custom-color-dialog .label {
+    -fx-text-fill: rgba(255,255,255,.8);
+}
+
+.custom-color-dialog .button, .custom-color-dialog .toggle-button:selected {
+    -fx-background-color: -fx-btn;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: rgba(255,255,255,.9);
+    -fx-font-size: 14;
+}
+
+.custom-color-dialog .toggle-button {
+    -fx-font-size: 12;
+    -fx-background-color: -fx-btn;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: rgba(255,255,255,.9);
+}
+
+.custom-color-dialog .controls-pane #settings-pane .settings-label {
+    -fx-text-fill: #000;
+}
 
 .combo-box .cell {
     -fx-font-weight: bold;
@@ -485,17 +523,9 @@
     -fx-text-fill: rgba(0,0,0,0.6);
     -fx-background-color: rgba(255,255,255,0.2);
     -fx-padding: 6 20 6 20;
-    -fx-font-size: 15;
     -fx-border-color: rgba(0,0,0,0.05);
     -fx-font-weight: bold;
  }
-
- .toggle-button:selected {
-    -fx-opacity: 1;
-    -fx-background-color: -fx-primary;
-    -fx-text-fill: #fff;/*
-    -fx-border-color: rgba(0,0,0,0.1);
- */}
 
  .vbTbl {
     -fx-padding: 10 5;
@@ -714,17 +744,17 @@
 }
 
 .scroll-bar:vertical > .thumb, .scroll-bar:horizontal > .thumb {
-    -fx-background-color: rgba(0,0,0,.1);
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
+    -fx-background-color: rgba(255,255,255,.15);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
 
 .check-box .box {
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
     -fx-background-color: transparent;
     -fx-border-width: 2;
-    -fx-border-color: #5B86E5;
+    -fx-border-color: -fx-btn;
     -fx-padding: 6;
     -fx-scale-x: .8;
     -fx-scale-y: .8;
@@ -742,7 +772,7 @@
 }
 
 .check-box:selected .box {
-    -fx-background-color: #5B86E5;
+    -fx-background-color: -fx-btn;
 }
 
 .check-box:selected .mark {
@@ -831,8 +861,7 @@
 }
 
 .btnExportImg:hover {
-    -fx-text-fill: -fx-sidebar;
-    -fx-background-color: -fx-primary;
+    -fx-background-color: -fx-btn;
 }
 
 .btnC {

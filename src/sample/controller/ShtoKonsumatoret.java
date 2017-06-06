@@ -67,7 +67,7 @@ public class ShtoKonsumatoret implements Initializable {
 
             pstmt.close();
             pastro();
-            MesazhetPublike.suksesDritarja("Te dhenat u ruajten me sukses");
+            MesazhetPublike.Lajmerim("Te dhenat u ruajten me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
 
         }catch (Exception e) {e.printStackTrace();}
     }

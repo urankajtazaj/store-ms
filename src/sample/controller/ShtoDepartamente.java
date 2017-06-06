@@ -75,7 +75,7 @@ public class ShtoDepartamente implements Initializable {
             }
         }
         stmt.executeBatch();
-        MesazhetPublike.suksesDritarja("Te dhenat u ruajten me sukses.");
+        MesazhetPublike.Lajmerim("Te dhenat u ruajten me sukses.", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
     }
 
     private void shtoOpsion(String t, boolean disabled){
