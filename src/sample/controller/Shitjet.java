@@ -13,9 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.constructors.ShitjetProd;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,7 +45,7 @@ public class Shitjet implements Initializable {
     @FXML private TextField txtProd;
     @FXML private ComboBox<String> cbCat, cbKons;
 
-    double qmimi = 0.0, pgs = 0.0;
+    BigDecimal qmimi = BigDecimal.ZERO, pgs = BigDecimal.ZERO;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -95,9 +97,9 @@ public class Shitjet implements Initializable {
                         btn.setGraphic(iv);
                         btn.setOnAction(e -> {
                             ShitjetProd sp = tbl.getItems().get(getIndex());
-                            qmimi -= sp.getQmimi() * Double.parseDouble(sp.getSasia().getText());
+                            qmimi = qmimi.subtract(new BigDecimal((sp.getQmimi() * Double.parseDouble(sp.getSasia().getText()))+""));
                             tbl.getItems().remove(getIndex());
-                            lTotal.setText(VariablatPublike.decimalFormat.format(qmimi));
+                            lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
                         });
                         setGraphic(btn);
                     }else {
@@ -120,7 +122,7 @@ public class Shitjet implements Initializable {
                         setOnKeyReleased(e -> {
                             if (Pattern.compile("[0-9.]+").matcher(e.getText()).matches()) {
                                 lTotal.setText(VariablatPublike.decimalFormat.format(
-                                        merrQmimet(tf.getText(), getIndex())));
+                                        merrQmimet(tf.getText(), getIndex()).doubleValue()));
                             }
                         });
 
@@ -137,21 +139,21 @@ public class Shitjet implements Initializable {
     }
 
 //    LEXO TE GJITH TABELEN PER SHITJE DHE KTHE QMIMIN PAS NDRYSHIMIT TE SASISE
-    private double merrQmimet (String s, int index){
-        double t = 0;
+    private BigDecimal merrQmimet (String s, int index){
+        BigDecimal t = BigDecimal.ZERO;
 
         for (int i = 0; i < tbl.getItems().size(); i++) {
             ShitjetProd sp = tbl.getItems().get(i);
 
             if (s.equals("0") || s.isEmpty()) {
-                t += sp.getQmimi();
+                t = t.add(new BigDecimal(sp.getQmimi()));
                 continue;
             }
 
             if (i == index)
                 sp.getSasia().setText(s);
 
-            t += sp.getQmimi() * Double.parseDouble(sp.getSasia().getText());
+            t = t.add(new BigDecimal((sp.getQmimi() * Double.parseDouble(sp.getSasia().getText()))+""));
         }
 
         qmimi = t;
@@ -180,7 +182,7 @@ public class Shitjet implements Initializable {
                 button.setWrapText(true);
                 button.getStyleClass().addAll("btn", "bigBtn");
                 button.setStyle("-fx-background-color: " + rs.getString("bg") + "; -fx-text-fill: " + rs.getString("fg"));
-                button.setId(rs.getString("id") + " " + rs.getString("qmimi_shitjes") + " " + rs.getString("njesia"));
+                button.setId(rs.getString("id") + " " + rs.getDouble("qmimi_shitjes") + " " + rs.getString("njesia"));
 
                 button.setOnAction(e -> {
                     firstButton(button);
@@ -197,43 +199,44 @@ public class Shitjet implements Initializable {
         try {
             tbl.getItems().add(new ShitjetProd(Integer.parseInt(button.getId().split(" ")[0]),
                     button.getText().split("\n")[0], Double.parseDouble(button.getId().split(" ")[1]), button.getId().split(" ")[2]));
-            qmimi += Double.parseDouble(button.getId().split(" ")[1]);
-            lTotal.setText(VariablatPublike.decimalFormat.format(qmimi));
+            qmimi = qmimi.add(new BigDecimal(button.getId().split(" ")[1]));
+            lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
         }catch (Exception ex) { ex.printStackTrace(); }
     }
 
     @FXML
     private void perfundoPagesen (){
         try {
-            Statement stmt = con.createStatement();
-            stmt.addBatch("insert into rec values (null, current_timestamp())");
-            for (ShitjetProd sp : tbl.getItems()) {
-                batch(stmt, sp.getId(), sp.getQmimi(), Double.parseDouble(sp.getSasia().getText()));
+            if (tbl.getItems().size() > 0 && pgs.compareTo(BigDecimal.ZERO) > 0 && qmimi.compareTo(BigDecimal.ZERO) > 0) {
+                Statement stmt = con.createStatement();
+                stmt.addBatch("insert into rec values (null, current_timestamp())");
+                for (ShitjetProd sp : tbl.getItems()) {
+                    batch(stmt, sp.getId(), sp.getQmimi(), pgs, Double.parseDouble(sp.getSasia().getText()));
+                }
+                stmt.executeBatch();
+                MesazhetPublike.Lajmerim("Shitja u krye me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
+                pastro();
+            }else {
+                MesazhetPublike.Lajmerim(tbl.getItems().size() == 0 ? "Duhet te zgjedhet se paku nje produkt" : "Nuk eshte procesuar pagesa",
+                        MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.ERROR, 5);
             }
-            stmt.executeBatch();
-            MesazhetPublike.Lajmerim("Shitja u krye me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
-            pastro();
         }catch (Exception e) {
             MesazhetPublike.Lajmerim("Shitja nuk u krye me sukses.\nNje gabim ka ndodhur.", MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 0);
             e.printStackTrace();}
     }
 
     private void pastro (){
-        qmimi = 0.0;
-        lTotal.setText(VariablatPublike.decimalFormat.format(qmimi));
+        qmimi = BigDecimal.ZERO;
+        pgs = BigDecimal.ZERO;
+        lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
+        lKusuri.setText("0");
+        lPagesa.setText("0");
         tbl.getItems().clear();
     }
 
-    private void batch (Statement ps, int id, double qmimi, double sasia) throws Exception {
+    private void batch (Statement ps, int id, double qmimi, BigDecimal pagesa, double sasia) throws Exception {
         ps.addBatch("insert into shitjet values (null, "+id+", "+VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem())+
-                ", current_timestamp(), 120, "+VariablatPublike.uid+", "+sasia+", (select max(rec_id) from rec limit 1))");
-        System.err.println("insert into shitjet values (null, "+id+", "+VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem())+
-                ", current_timestamp(), 120, "+VariablatPublike.uid+", "+sasia+", (select max(rec_id) from rec limit 1))");
-    }
-
-    @FXML
-    private void historiku (){
-
+                ", current_timestamp(), "+pagesa+", "+VariablatPublike.uid+", "+sasia+", (select max(rec_id) from rec limit 1))");
     }
 
     private void merrKons(){
@@ -269,7 +272,9 @@ public class Shitjet implements Initializable {
             scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.show();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.showAndWait();
+            pgs = pagesa.getPagesa();
 
         }catch (Exception e) {e.printStackTrace();}
     }

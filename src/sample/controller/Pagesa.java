@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -19,9 +20,9 @@ public class Pagesa implements Initializable {
 
     private Label lPagesa, lKusuri;
     private Stage stage;
-    private double total, pagesa, ksr;
+    private BigDecimal total, pagesa, ksr;
 
-    public void setKsr (double ksr) {
+    public void setKsr (BigDecimal ksr) {
         this.ksr = ksr;
     }
 
@@ -29,11 +30,15 @@ public class Pagesa implements Initializable {
         this.lKusuri = lKusuri;
     }
 
-    public void setPagesa (double pagesa) {
+    public void setPagesa (BigDecimal pagesa) {
         this.pagesa = pagesa;
     }
 
-    public void setTotal (double total) {
+    public BigDecimal getPagesa (){
+        return this.pagesa;
+    }
+
+    public void setTotal (BigDecimal total) {
         this.total = total;
     }
 
@@ -53,13 +58,15 @@ public class Pagesa implements Initializable {
     @FXML
     public void shtoPagesen(){
         if (Pattern.compile("[0-9.]+").matcher(txtPagesa.getText()).matches()) {
-            System.out.println(total);
-            if (total <= Double.parseDouble(txtPagesa.getText())) {
-                lPagesa.setText(VariablatPublike.decimalFormat.format(Double.parseDouble(txtPagesa.getText())));
-                pagesa = Double.parseDouble(txtPagesa.getText());
-                lKusuri.setText(VariablatPublike.decimalFormat.format(pagesa-total));
+            BigDecimal ttl = new BigDecimal(total+"");
+            BigDecimal pag = new BigDecimal(txtPagesa.getText());
+            if (ttl.compareTo(pag) <= 0) {
+                lPagesa.setText(VariablatPublike.decimalFormat.format(pag.doubleValue()));
+                pagesa = pag;
+                lKusuri.setText(VariablatPublike.decimalFormat.format(pagesa.subtract(ttl)));
                 stage.close();
             }else {
+                System.err.println(ttl.toString() + ", " + pag.toString());
                 MesazhetPublike.Lajmerim("Pagesa nuk mund te jete me e vogel se shuma qe duhet paguar",
                         MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.ERROR, 5);
                 txtPagesa.clear();
