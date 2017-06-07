@@ -15,6 +15,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -64,9 +65,7 @@ public class Login implements Initializable {
                 System.out.println(r);
                 txtUser.selectAll();
                 txtPw.clear();
-
-                txtUser.getStyleClass().add("wrong");
-                txtPw.getStyleClass().add("wrong");
+                MesazhetPublike.Lajmerim("Emri ose fjalekalimi jane gabim", MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 5);
             }
 
         }catch (Exception e) { e.printStackTrace(); }
@@ -93,6 +92,7 @@ public class Login implements Initializable {
         stage.setScene(scene);
         stage.show();
         login.close();
+        MesazhetPublike.Lajmerim(" Miresevini " + username + "!", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 3);
     }
 
 }

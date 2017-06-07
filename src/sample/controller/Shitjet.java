@@ -3,13 +3,17 @@ package sample.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import sample.constructors.ShitjetProd;
 
 import java.net.URL;
@@ -34,12 +38,12 @@ public class Shitjet implements Initializable {
     @FXML private TableView<ShitjetProd> tbl;
     @FXML private FlowPane flow;
     @FXML private ScrollPane scroll;
-    @FXML private Label lTotal;
+    @FXML private Label lTotal, lPagesa, lKusuri;
     @FXML private TableColumn colAct, colSasia;
     @FXML private TextField txtProd;
     @FXML private ComboBox<String> cbCat, cbKons;
 
-    double qmimi = 0.0;
+    double qmimi = 0.0, pgs = 0.0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -208,9 +212,16 @@ public class Shitjet implements Initializable {
             }
             stmt.executeBatch();
             MesazhetPublike.Lajmerim("Shitja u krye me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
+            pastro();
         }catch (Exception e) {
             MesazhetPublike.Lajmerim("Shitja nuk u krye me sukses.\nNje gabim ka ndodhur.", MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 0);
             e.printStackTrace();}
+    }
+
+    private void pastro (){
+        qmimi = 0.0;
+        lTotal.setText(VariablatPublike.decimalFormat.format(qmimi));
+        tbl.getItems().clear();
     }
 
     private void batch (Statement ps, int id, double qmimi, double sasia) throws Exception {
@@ -232,6 +243,35 @@ public class Shitjet implements Initializable {
                 VariablatPublike.revKons.put(rs.getString("emri"), rs.getInt("id"));
             }
         }catch (Exception e ){ e.printStackTrace(); }
+    }
+
+    @FXML
+    private void pagesa (){
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Pagesa.fxml"));
+            Pagesa pagesa = new Pagesa();
+            pagesa.setlPagesa(lPagesa);
+            pagesa.setlKusuri(lKusuri);
+            pagesa.setPagesa(pgs);
+            pagesa.setStage(stage);
+            pagesa.setTotal(qmimi);
+            loader.setController(pagesa);
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent, 300, 100);
+            scene.setOnKeyPressed(e -> {
+                if (e.getCode().equals(KeyCode.ENTER)) {
+                    pagesa.shtoPagesen();
+                }else if (e.getCode().equals(KeyCode.ESCAPE)) {
+                    stage.close();
+                }
+            });
+            scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+        }catch (Exception e) {e.printStackTrace();}
     }
 
 }

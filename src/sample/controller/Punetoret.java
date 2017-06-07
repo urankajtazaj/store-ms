@@ -241,7 +241,7 @@ public class Punetoret implements Initializable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            MesazhetPublike.Lajmerim("Fajli u exportua me sukses", MesazhetPublike.ButtonType.OK_BUTTON, MesazhetPublike.NotificationType.ERROR, 0);
+                            MesazhetPublike.Lajmerim("Fajli u exportua me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
                         }
                     });
                 }

@@ -72,16 +72,6 @@
                 <TextField fx:id="titulli" minWidth="200" maxWidth="200"/>
                 <HBox spacing="2">
                     <ComboBox fx:id="departamenti" minWidth="200" maxWidth="200"/>
-                    <Button
-                    style="-fx-background-color: -fx-secondary; -fx-border-radius: 3;
-                    -fx-background-radius: 3; -fx-text-fill: #fff
-;-fx-font-weight: bold; -fx-max-height: 31;" onAction="#openAddDep">
-                        <graphic>
-                            <ImageView preserveRatio="true" fitWidth="10">
-                                <Image url="/sample/photo/add1.png"/>
-                            </ImageView>
-                        </graphic>
-                    </Button>
                 </HBox>
                 <TextField fx:id="paga" minWidth="200" maxWidth="200"/>
                 <TextField fx:id="telefoni" minWidth="200" maxWidth="200"/>
@@ -103,7 +93,7 @@
 
             <HBox GridPane.rowIndex="1" GridPane.columnIndex="2" spacing="3" alignment="BOTTOM_RIGHT" GridPane.columnSpan="2">
                 <padding>
-                    <Insets top="10" right="35"/>
+                    <Insets top="10"/>
                 </padding>
                     <Button text="Ruaj" fx:id="btnRuaj" styleClass="btn" minWidth="200"></Button>
             </HBox>

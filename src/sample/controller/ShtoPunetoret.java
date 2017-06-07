@@ -66,6 +66,9 @@ public class ShtoPunetoret implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        punesuar.setValue(LocalDate.now());
+        cbStatusi.getSelectionModel().select(1);
+
         emri.focusedProperty().addListener((o, ov, nv) -> {
             if (nv.booleanValue() == false && !mbiemri.getText().isEmpty()) {
                 txtUser.setText(emri.getText().toLowerCase() + "." + mbiemri.getText().toLowerCase());

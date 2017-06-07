@@ -11,7 +11,7 @@
 <?import javafx.scene.image.Image?>
 <BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.controller.LajmeroRed">
+            fx:controller="sample.controller.LajmeroGreen">
 
     <padding>
         <Insets top="20" left="20" right="20" bottom="20"/>

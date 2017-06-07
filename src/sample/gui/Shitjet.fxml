@@ -19,7 +19,7 @@
         </HBox>
 
         <ScrollPane fx:id="scroll" styleClass="edge-to-edge" GridPane.rowIndex="1" GridPane.columnIndex="0" minWidth="550" maxWidth="550">
-            <FlowPane fx:id="flow" minWidth="550" maxWidth="550" orientation="HORIZONTAL">
+            <FlowPane fx:id="flow" vgap="7" hgap="6" minWidth="550" maxWidth="550" orientation="HORIZONTAL">
                 <padding>
                     <Insets top="15"/>
                 </padding>
@@ -45,6 +45,10 @@
                 <Label text="10 (18%)" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 <Label style="-fx-font-size: 30" text="Total" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                 <Label fx:id="lTotal" style="-fx-font-size: 30; -fx-text-fill: -fx-primary; -fx-font-family: 'Lato'" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label text="Pagesa" style="-fx-font-size: 16;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label fx:id="lPagesa" text="0" style="-fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label text="Kusuri" style="-fx-font-size: 16;" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <Label fx:id="lKusuri" text="0" style=" -fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS"/>
@@ -53,7 +57,7 @@
             </GridPane>
 
             <HBox spacing="5">
-                <Button HBox.hgrow="ALWAYS" text="KRYEJ PAGESEN" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60; -fx-border-radius: 5; -fx-background-radius: 5;"
+                <Button HBox.hgrow="ALWAYS" text="KRYEJ PAGESEN" onAction="#pagesa" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60; -fx-border-radius: 5; -fx-background-radius: 5;"
                         minWidth="200" maxWidth="600" textAlignment="CENTER"/>
                 <Button HBox.hgrow="ALWAYS" text="PERFUNDO" onAction="#perfundoPagesen" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60; -fx-border-radius: 5; -fx-background-radius: 5;"
                         minWidth="200" maxWidth="600" textAlignment="CENTER"/>
