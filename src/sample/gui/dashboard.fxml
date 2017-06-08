@@ -11,8 +11,18 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <GridPane fx:id="grid" styleClass="gp" vgap="7" hgap="7" fx:controller="sample.controller.Dashboard" xmlns:fx="http://javafx.com/fxml">
     <HBox spacing="7" minHeight="170" maxHeight="170" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT">
+
+        <fx:define>
+            <ToggleGroup fx:id="tg"/>
+        </fx:define>
+
         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" styleClass="shadow">
             <padding>
                 <Insets right="15"/>
@@ -23,8 +33,8 @@
                 <Label fx:id="lPie1" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
-                <Label text="Kete muaj" styleClass="color" style="-fx-font-size: 18"/>
-                <Label fx:id="lVleraHyratMuaj" styleClass="bigDec"/>
+                <Label text="KETE MUAJ" styleClass="color" style="-fx-font-size: 16"/>
+                <Label fx:id="lVleraHyratMuaj" styleClass="bigDec" />
                 <Label fx:id="lVleraHyratMuajTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
@@ -38,8 +48,8 @@
                 <Label fx:id="lPie2" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
-                <Label text="Kete Jave" styleClass="color" style="-fx-font-size: 18"/>
-                <Label fx:id="lVleraHyratJave" styleClass="bigDec"/>
+                <Label text="KETE JAVE" styleClass="color" style="-fx-font-size: 16"/>
+                <Label fx:id="lVleraHyratJave" styleClass="bigDec" />
                 <Label fx:id="lVleraHyratJaveTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
@@ -53,7 +63,7 @@
                 <Label fx:id="lPie3" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
-                <Label text="Sot" styleClass="color" style="-fx-font-size: 18"/>
+                <Label text="SOT" styleClass="color" style="-fx-font-size: 16"/>
                 <Label fx:id="lVleraHyratSot" styleClass="bigDec"/>
                 <Label fx:id="lVleraHyratSotTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
@@ -112,13 +122,24 @@
 
     <VBox fx:id="chartVb" minHeight="310" minWidth="1100" styleClass="chartVb, shadow"
           GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.rowSpan="1" GridPane.columnSpan="2" spacing="5">
-        <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 6">
-            <Hyperlink fx:id="hlViti" text="1 VIT"/>
-            <Hyperlink fx:id="hl6m" text="6 MUAJ"/>
-            <Hyperlink fx:id="hl3m" text="3 MUAJ"/>
-            <Hyperlink fx:id="hl1m" text="1 MUAJ"/>
-            <Hyperlink fx:id="hl7d" text="7 DITE"/>
-            <Hyperlink fx:id="hlSot" text="SOT"/>
+        <HBox spacing="0" alignment="CENTER_RIGHT" style="-fx-padding: 6">
+            <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                <ComboBox fx:id="cbChartTp" value="Dite">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Dite"/>
+                            <String fx:value="Jave"/>
+                            <String fx:value="Muaj"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </HBox>
+            <ToggleButton text="1 VIT" fx:id="hlViti" toggleGroup="$tg" style="-fx-border-radius: 20 0 0 20; -fx-background-radius: 20 0 0 20"/>
+            <ToggleButton text="6 MUAJ" fx:id="hl6m" toggleGroup="$tg"/>
+            <ToggleButton text="3 MUAJ" fx:id="hl3m" toggleGroup="$tg"/>
+            <ToggleButton text="1 MUAJ" fx:id="hl1m" toggleGroup="$tg"/>
+            <ToggleButton text="7 DITE" fx:id="hl7d" toggleGroup="$tg"/>
+            <ToggleButton selected="true" text="SOT" fx:id="hlSot" toggleGroup="$tg" style="-fx-border-radius: 0 20 20 0; -fx-background-radius: 0 20 20 0"/>
         </HBox>
     </VBox>
 

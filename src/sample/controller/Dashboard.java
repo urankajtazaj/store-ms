@@ -33,11 +33,12 @@ public class Dashboard implements Initializable{
 
     @FXML VBox chartVb;
     @FXML private TableColumn sts, colPuna, colMng;
-    @FXML private ComboBox cb;
+    @FXML private ComboBox cb, cbChartTp;
     @FXML PieChart pieChart1, pieChart2, pieChart3, pieChart4;
     @FXML private Label lVleraHyratMuaj, lVleraHyratJave, lVleraHyratSot, lPnt, lPntA, lPntP, lKons, lShitje, lShitjeM;
     @FXML NumberAxis xAxisA1, yAxisA1;
-    @FXML private Hyperlink hlViti, hl6m, hl3m, hl1m, hl7d, hlSot;
+    @FXML private ToggleButton hlViti, hl6m, hl3m, hl1m, hl7d, hlSot;
+    @FXML private ToggleGroup tg;
     @FXML private PieChart pie1, pie2, pie3;
     @FXML private Label lPie1, lPie2, lPie3, lVleraHyratMuajTarget, lVleraHyratJaveTarget, lVleraHyratSotTarget;
 
@@ -51,6 +52,10 @@ public class Dashboard implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        tg.selectedToggleProperty().addListener((o, ov, nv) -> {
+            enableCb();
+        });
 
         getDataFromDb();
 
@@ -78,6 +83,15 @@ public class Dashboard implements Initializable{
         hlSot.setOnAction(e -> dataForAreaChart("sot"));
 
         displayChart();
+    }
+
+    private void enableCb (){
+        if (hlSot.isSelected()) cbChartTp.setDisable(true);
+        if (hl7d.isSelected()) cbChartTp.setDisable(true);
+        if (hl1m.isSelected()) cbChartTp.setDisable(false);
+        if (hl3m.isSelected()) cbChartTp.setDisable(false);
+        if (hl6m.isSelected()) cbChartTp.setDisable(false);
+        if (hlViti.isSelected()) cbChartTp.setDisable(false);
     }
 
     private void displayChart(){

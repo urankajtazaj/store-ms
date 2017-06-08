@@ -21,18 +21,22 @@
 <BorderPane style="-fx-background-color: #fafafa" fx:id="root" xmlns="http://javafx.com/javafx/8.0.111"
             xmlns:fx="http://javafx.com/fxml/1" >
 
+    <fx:define>
+        <ToggleGroup fx:id="sideTg"/>
+    </fx:define>
+
     <left>
         <BorderPane styleClass="sideBar">
             <center>
                 <VBox fx:id="btnVb">
-                    <Button  prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" onAction="#changeScene"/>
-                    <Button  prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnKons"  text="KONSUMATORET" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnPaisjet"  text="PRODUKTET" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnStat"  text="RAPORTET" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnShit"  text="SHITJE" onAction="#changeScene"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene"  text="RREGULLO"/>
-                    <Button prefWidth="${btnVb.width}" fx:id="btnLogout"  text="DIL"/>
+                    <ToggleButton selected="true" toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" onAction="#changeScene"/>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" onAction="#changeScene"/>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnKons" text="KONSUMATORET" onAction="#changeScene"/>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnPaisjet" text="PRODUKTET" onAction="#changeScene"/>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnStat" text="RAPORTET" onAction="#changeScene"/>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnShit" text="SHITJE" onAction="#changeScene"/>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene"  text="RREGULLO"/>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnLogout" text="DIL"/>
                 </VBox>
             </center>
 

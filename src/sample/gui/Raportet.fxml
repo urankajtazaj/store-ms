@@ -34,9 +34,9 @@
             </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera" text="150€"/>
+                    <Label styleClass="lVlera" fx:id="lCurrTtl"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
-                        <Label text="+20%" styleClass="percGreen"/>
+                        <Label styleClass="perc" fx:id="lLastTtl"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
                     </HBox>
                 </VBox>
@@ -51,7 +51,7 @@
                 <VBox alignment="CENTER">
                     <Label styleClass="lVlera" text="20.56€"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
-                        <Label text="-72%" styleClass="percRed"/>
+                        <Label text="-72%" styleClass="perc"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
                     </HBox>
                 </VBox>
@@ -66,7 +66,7 @@
                 <VBox alignment="CENTER">
                     <Label styleClass="lVlera" text="436"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
-                        <Label text="+63%" styleClass="percGreen"/>
+                        <Label text="+63%" styleClass="perc"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
                     </HBox>
                 </VBox>
@@ -79,9 +79,9 @@
             </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera" text="12"/>
+                    <Label styleClass="lVlera" fx:id="lKons"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
-                        <Label text="+15%" styleClass="percGreen"/>
+                        <Label fx:id="lKonsL" styleClass="perc"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
                     </HBox>
                 </VBox>
@@ -117,12 +117,23 @@
                     <TableColumn text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
                 </columns>
             </TableView>
-            <HBox spacing="5" alignment="CENTER_RIGHT" style="-fx-background-color: #5B86E5">
+            <VBox spacing="5" alignment="CENTER_RIGHT">
                 <padding>
                     <Insets right="10"/>
                 </padding>
-                <Label fx:id="lTotal" style="-fx-font-size: 25; -fx-text-fill: #fff; -fx-font-family: 'Lato light'"/>
-            </HBox>
+                <HBox spacing="5" alignment="CENTER_RIGHT">
+                    <Label text="Pagesa:" style="-fx-text-fill: #fff;"/>
+                    <Label fx:id="lPagesa" text="0" style="-fx-text-fill: #fff;"/>
+                </HBox>
+                <HBox spacing="5" alignment="CENTER_RIGHT">
+                    <Label text="Kusuri:" style="-fx-text-fill: #fff;"/>
+                    <Label fx:id="lKusuri" text="0" style="-fx-text-fill: #fff;"/>
+                </HBox>
+                <HBox spacing="5" alignment="CENTER_RIGHT">
+                    <Label text="Total:" style="-fx-font-size: 20; -fx-text-fill: #fff;"/>
+                    <Label fx:id="lTotal" text="0" style="-fx-font-size: 21; -fx-text-fill: #fff;"/>
+                </HBox>
+            </VBox>
         </VBox>
 
     </children>

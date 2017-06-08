@@ -333,8 +333,6 @@ public class Punetoret implements Initializable {
                 }
             }
         }
-        System.out.println("..OK");
-
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialFileName(new Date()+"");

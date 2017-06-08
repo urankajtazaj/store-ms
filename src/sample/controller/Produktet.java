@@ -14,6 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import sample.constructors.ProduktetClass;
 
 import java.net.URL;
@@ -138,6 +140,26 @@ public class Produktet implements Initializable {
 
         barChart.setLegendVisible(false);
         barChart2.setLegendVisible(false);
+
+        for (XYChart.Series<String, Number> series : barChart.getData()) {
+            for (XYChart.Data data : series.getData()) {
+                StackPane bar = (StackPane) data.getNode();
+
+                Text dt = new Text(data.getYValue() + "");
+                dt.getStyleClass().add("bar-text");
+                bar.getChildren().add(dt);
+            }
+        }
+
+        for (XYChart.Series<String, Number> series : barChart2.getData()) {
+            for (XYChart.Data data : series.getData()) {
+                StackPane bar = (StackPane) data.getNode();
+
+                Text dt = new Text(data.getYValue() + "");
+                dt.getStyleClass().add("bar-text");
+                bar.getChildren().add(dt);
+            }
+        }
 
     }
 
