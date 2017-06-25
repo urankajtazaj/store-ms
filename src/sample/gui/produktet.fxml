@@ -51,23 +51,23 @@
         <Button text="Filtro"/>
         <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="5">
             <Button text="Shto" onAction="#shtoProdukt"/>
-            <Button text="Eksporto"/>
+            <Button text="Eksporto" onAction="#export"/>
         </HBox>
     </HBox>
 
-    <TableView styleClass="shadow" minWidth="1000" fx:id="tblProduktet" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
+    <TableView editable="true" styleClass="shadow" minWidth="1000" fx:id="tblProduktet" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
         <columns>
             <TableColumn maxWidth="50" minWidth="50" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
             <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
             <TableColumn text="Kategoria"><cellValueFactory><PropertyValueFactory property="kategoria"/></cellValueFactory></TableColumn>
             <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
-            <TableColumn text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="colZbritje" text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
             <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
             <TableColumn fx:id="colAksion" minWidth="50" maxWidth="50"></TableColumn>
         </columns>
     </TableView>
 
-    <BorderPane maxHeight="300" styleClass="shadow" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="1">
+    <BorderPane styleClass="shadow" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="1">
         <top>
             <Label text="Kategorite me te shitura" styleClass="infoTtl"/>
         </top>
@@ -85,7 +85,7 @@
         </center>
     </BorderPane>
 
-    <BorderPane maxHeight="300" styleClass="shadow" GridPane.rowIndex="2" GridPane.columnIndex="1">
+    <BorderPane styleClass="shadow" GridPane.rowIndex="2" GridPane.columnIndex="1">
         <top>
             <Label text="Produktet me te shitura" styleClass="infoTtl"/>
         </top>
@@ -108,6 +108,8 @@
         <ColumnConstraints hgrow="ALWAYS"/>
     </columnConstraints>
     <rowConstraints>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="ALWAYS"/>
         <RowConstraints vgrow="ALWAYS"/>
     </rowConstraints>
 

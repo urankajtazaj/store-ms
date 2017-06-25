@@ -12,23 +12,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.shape.Rectangle?>
-<GridPane vgap="5" hgap="5" styleClass="gp" xmlns="http://javafx.com/javafx"
+<GridPane alignment="TOP_CENTER" vgap="5" hgap="5" styleClass="gp" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml">         <!--fx:controller="sample.controller.PunetoretView"> -->
 
     <padding>
-        <Insets left="30" top="20"/>
+        <Insets left="30" top="40"/>
     </padding>
 
     <children>
 
-        <HBox styleClass="shadow" alignment="CENTER_LEFT" spacing="10"
+        <HBox GridPane.halignment="CENTER" styleClass="shadow" alignment="CENTER" spacing="10"
               GridPane.rowIndex="0" GridPane.columnIndex="0">
             <padding>
                 <Insets top="7" right="7" left="7" bottom="7"/>
             </padding>
-            <StackPane fx:id="sp" alignment="CENTER">
-                <ImageView fx:id="iv" fitHeight="125" preserveRatio="true"></ImageView>
-            </StackPane>
             <VBox HBox.hgrow="ALWAYS" spacing="2" alignment="CENTER_LEFT">
                 <HBox alignment="CENTER_LEFT" spacing="8">
                     <Label fx:id="emri" styleClass="infoTtl, intoTtlNb" style="-fx-font-size: 25;"/>
@@ -48,7 +45,7 @@
             </VBox>
         </HBox>
 
-        <VBox GridPane.rowIndex="1" styleClass="shadow" style="-fx-padding: 10;"
+        <VBox GridPane.rowIndex="1" styleClass="shadow" GridPane.halignment="CENTER" style="-fx-padding: 10;"
               GridPane.columnIndex="0" spacing="5">
             <Label text="Detajet personale" styleClass="infoTtl, intoTtlNb"/>
             <HBox spacing="50">
@@ -74,7 +71,7 @@
                 </VBox>
             </HBox>
         </VBox>
-        <VBox spacing="5" styleClass="shadow" style="-fx-padding: 10;"
+        <VBox spacing="5" styleClass="shadow" style="-fx-padding: 10;" GridPane.halignment="CENTER"
             GridPane.columnIndex="0" GridPane.rowIndex="2">
             <Label text="Tjera" styleClass="infoTtl, intoTtlNb"/>
             <HBox spacing="50">
@@ -96,11 +93,11 @@
             <Button styleClass="btn" fx:id="btnExport" text="Eksporto"/>
             <Button styleClass="btn" fx:id="btnRregullo" text="Rregullo"/>
         </HBox>
-        <VBox fx:id="hbGrid" GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER_LEFT" spacing="5">
+        <VBox fx:id="hbGrid" GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER_LEFT" GridPane.halignment="CENTER" spacing="5">
             <padding>
                 <Insets top="50"/>
             </padding>
-            <HBox spacing="5" alignment="BOTTOM_LEFT">
+            <HBox spacing="5" alignment="BOTTOM_CENTER">
                 <Label text="Kalendari i pushimeve" styleClass="infoTtl, intoTtlNb"/>
                 <HBox HBox.hgrow="ALWAYS" spacing="20" alignment="BOTTOM_CENTER">
                     <HBox spacing="5" alignment="CENTER_LEFT">
@@ -127,7 +124,7 @@
                 <ComboBox fx:id="cbViti"/>
             </HBox>
         </VBox>
-        <HBox GridPane.rowIndex="5" GridPane.columnIndex="0" alignment="BOTTOM_LEFT"
+        <HBox GridPane.rowIndex="5" GridPane.columnIndex="0" alignment="BOTTOM_CENTER"
               spacing="5">
             <DatePicker maxWidth="110" fx:id="dpPrejPushim"/>
             <DatePicker maxWidth="110" fx:id="dpDeriPushim"/>

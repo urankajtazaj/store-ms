@@ -53,7 +53,7 @@ public class HapeExporto {
 
         Scene scene = new Scene(bpExport, 520, 205);
         scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);

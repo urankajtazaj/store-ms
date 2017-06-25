@@ -46,11 +46,6 @@
                         </FXCollections>
                     </items>
                 </ComboBox>
-                <HBox spacing="5">
-                    <Button fx:id="btnFoto" text="Foto" onAction="#zgjedhFoto"/>
-                    <Button fx:id="btnFotoPastro" text="Pastro" onAction="#pastroFoto"/>
-                    <Button fx:id="btnFotoHape" text="Hape" onAction="#hapeFoto" disable="true"/>
-                </HBox>
                 <Label fx:id="lblFoto" style="-fx-text-fill: rgba(0,0,0,.7)" wrapText="true" maxWidth="200"/>
             </VBox>
 
@@ -58,7 +53,6 @@
                 <padding>
                     <Insets left="70"/>
                 </padding>
-                <Label text="Puna"/>
                 <Label text="Departamenti"/>
                 <Label text="Paga"/>
                 <Label text="Telefoni"/>
@@ -69,7 +63,6 @@
             </VBox>
 
             <VBox GridPane.columnIndex="3" GridPane.rowIndex="0" spacing="10">
-                <TextField fx:id="titulli" minWidth="200" maxWidth="200"/>
                 <HBox spacing="2">
                     <ComboBox fx:id="departamenti" minWidth="200" maxWidth="200"/>
                 </HBox>

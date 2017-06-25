@@ -16,104 +16,115 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<GridPane fx:id="grid" styleClass="gp" vgap="7" hgap="7" fx:controller="sample.controller.Dashboard" xmlns:fx="http://javafx.com/fxml">
-    <HBox spacing="7" minHeight="170" maxHeight="170" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT">
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Tooltip?>
+<GridPane fx:id="grid" styleClass="gp" vgap="2" hgap="2" fx:controller="sample.controller.Dashboard" xmlns:fx="http://javafx.com/fxml">
+    <HBox spacing="2" minHeight="170" maxHeight="220" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT">
 
         <fx:define>
             <ToggleGroup fx:id="tg"/>
         </fx:define>
 
-        <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" styleClass="shadow">
+        <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" minHeight="170" styleClass="shadow">
             <padding>
                 <Insets right="15"/>
             </padding>
-            <StackPane maxWidth="180" minWidth="180">
-                <PieChart fx:id="pie1" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle styleClass="circle" radius="60"/>
+            <StackPane maxWidth="180" minWidth="180" styleClass="first">
+                <PieChart fx:id="pie1" rotate="-90" maxHeight="170" legendVisible="false" labelsVisible="false"/>
+                <Circle styleClass="circle" radius="62"/>
                 <Label fx:id="lPie1" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
-                <Label text="KETE MUAJ" styleClass="color" style="-fx-font-size: 16"/>
+                <Label text="KETE MUAJ" styleClass="color" style="-fx-font-size: 16;"/>
                 <Label fx:id="lVleraHyratMuaj" styleClass="bigDec" />
                 <Label fx:id="lVleraHyratMuajTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
-        <HBox HBox.hgrow="ALWAYS" minHeight="170" maxHeight="170" alignment="CENTER_LEFT" styleClass="shadow">
+        <HBox HBox.hgrow="ALWAYS" minHeight="170" alignment="CENTER_LEFT" styleClass="shadow">
             <padding>
                 <Insets right="15"/>
             </padding>
-            <StackPane maxWidth="180" minWidth="180">
-                <PieChart fx:id="pie2" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle styleClass="circle" radius="60"/>
+            <StackPane maxWidth="180" minWidth="180" styleClass="second">
+                <PieChart fx:id="pie2" rotate="-90" maxHeight="170" legendVisible="false" labelsVisible="false"/>
+                <Circle styleClass="circle" radius="62"/>
                 <Label fx:id="lPie2" styleClass="chart-nr, color"/>
             </StackPane>
             <VBox alignment="CENTER_LEFT">
-                <Label text="KETE JAVE" styleClass="color" style="-fx-font-size: 16"/>
-                <Label fx:id="lVleraHyratJave" styleClass="bigDec" />
+                <Label text="KETE JAVE" styleClass="color" style="-fx-font-size: 16;"/>
+                <Label fx:id="lVleraHyratJave" styleClass="bigDec"/>
                 <Label fx:id="lVleraHyratJaveTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
-        <HBox HBox.hgrow="ALWAYS" minHeight="170" maxHeight="170" alignment="CENTER_LEFT" styleClass="shadow">
+        <HBox HBox.hgrow="ALWAYS" minHeight="170" alignment="CENTER_LEFT" styleClass="shadow">
             <padding>
                 <Insets right="15"/>
             </padding>
-            <StackPane maxWidth="180" minWidth="180">
-                <PieChart fx:id="pie3" rotate="-90" legendVisible="false" labelsVisible="false"/>
-                <Circle styleClass="circle" radius="60"/>
-                <Label fx:id="lPie3" styleClass="chart-nr, color"/>
+            <StackPane maxWidth="180" minWidth="180" styleClass="third">
+                <PieChart fx:id="pie3" rotate="-90" maxHeight="170" legendVisible="false" labelsVisible="false"/>
+                <Circle styleClass="circle" radius="62"/>
+                <Label fx:id="lPie3" styleClass="chart-nr, color" />
             </StackPane>
             <VBox alignment="CENTER_LEFT">
-                <Label text="SOT" styleClass="color" style="-fx-font-size: 16"/>
+                <Label text="SOT" styleClass="color" style="-fx-font-size: 16;"/>
                 <Label fx:id="lVleraHyratSot" styleClass="bigDec"/>
                 <Label fx:id="lVleraHyratSotTarget" styleClass="bigDec, bigDec2"/>
             </VBox>
         </HBox>
     </HBox>
 
-    <HBox  minWidth="550" prefHeight="150" minHeight="165" maxHeight="165" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="shadow">
+    <HBox  minWidth="550" minHeight="165" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="shadow">
         <BorderPane minWidth="550" >
-            <top><Label text="Konsumatoret" styleClass="infoTtl" minWidth="550"/> </top>
+            <top><Label text="KONSUMATORET" styleClass="infoTtl" minWidth="550"/> </top>
             <left>
                 <VBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 50">
-                    <Label text="Konsumatore" styleClass="infoTtl" style="-fx-opacity: .8;-fx-border-width: 0"/>
+                    <Label text="Konsumatore" styleClass="infoTtl" style="-fx-opacity: .8; -fx-padding: 0; -fx-border-width: 0"/>
                     <Label fx:id="lKons" styleClass="lVlera"/>
                 </VBox>
             </left>
             <center>
                 <VBox spacing="2" alignment="CENTER">
-                    <Label text="Shitje" styleClass="infoTtl" style="-fx-opacity: .8; -fx-border-width: 0"/>
-                    <Label fx:id="lShitje" styleClass="lVlera"/>
+                    <Label text="Numri shitjeve" styleClass="infoTtl" style="-fx-opacity: .8;  -fx-padding: 0; -fx-border-width: 0"/>
+                    <Label fx:id="lShitje" styleClass="lVlera">
+                        <tooltip>
+                            <Tooltip text="Restartohet qdo muaj"/>
+                        </tooltip>
+                    </Label>
                 </VBox>
             </center>
             <right>
                 <VBox spacing="2" style="-fx-padding: 0 30 0 0" alignment="CENTER">
-                    <Label text="P. Mesatare" styleClass="infoTtl" style="-fx-opacity: .8; -fx-border-width: 0"/>
-                    <Label fx:id="lShitjeM" styleClass="lVlera"/>
+                    <Label text="Shitja mesatare" wrapText="true" styleClass="infoTtl" style="-fx-opacity: .8; -fx-padding: 0; -fx-border-width: 0"/>
+                    <Label fx:id="lShitjeM" styleClass="lVlera">
+                        <tooltip>
+                            <Tooltip text="Restartohet qdo muaj"/>
+                        </tooltip>
+                    </Label>
                 </VBox>
             </right>
         </BorderPane>
     </HBox>
 
-    <HBox  minWidth="550" prefHeight="150" minHeight="165" maxHeight="165" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="shadow">
-        <BorderPane minWidth="550"  maxHeight="165">
+    <HBox  minWidth="550" minHeight="165" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="shadow">
+        <BorderPane minWidth="550">
             <top>
-                <Label text="Punetoret" graphicTextGap="20" styleClass="infoTtl" minWidth="550"/>
+                <Label text="PUNETORET" graphicTextGap="20" styleClass="infoTtl"/>
             </top>
             <left>
-                <VBox spacing="2" alignment="CENTER">
-                    <Label text="Total" styleClass="infoTtl" style="-fx-border-width: 0;-fx-opacity: .8; -fx-padding: 0 0 0 50"/>
+                <VBox spacing="2" alignment="CENTER" style="-fx-padding: 0 0 0 50">
+                    <Label text="Total" styleClass="infoTtl" style="-fx-border-width: 0;-fx-opacity: .8; -fx-padding: 0"/>
                     <Label fx:id="lPnt" styleClass="lVlera"/>
                 </VBox>
             </left>
             <center>
                 <VBox spacing="2" alignment="CENTER">
-                    <Label text="Aktiv" styleClass="infoTtl" style="-fx-opacity: .8;-fx-border-width: 0;"/>
+                    <Label text="Aktiv" styleClass="infoTtl" style="-fx-opacity: .8;-fx-border-width: 0; -fx-padding: 0;"/>
                     <Label fx:id="lPntA" styleClass="lVlera"/>
                 </VBox>
             </center>
             <right>
-                <VBox spacing="2" alignment="CENTER">
-                    <Label text="Pushim" styleClass="infoTtl" style="-fx-opacity: .8; -fx-padding: 0 50 0 0; -fx-border-width: 0;"/>
+                <VBox spacing="2" alignment="CENTER" style="-fx-padding: 0 30 0 0">
+                    <Label text="Pushim" styleClass="infoTtl" style="-fx-opacity: .8; -fx-padding: 0; -fx-border-width: 0;"/>
                     <Label fx:id="lPntP" text="0" styleClass="lVlera"/>
                 </VBox>
             </right>
@@ -138,9 +149,17 @@
             <ToggleButton text="6 MUAJ" fx:id="hl6m" toggleGroup="$tg"/>
             <ToggleButton text="3 MUAJ" fx:id="hl3m" toggleGroup="$tg"/>
             <ToggleButton text="1 MUAJ" fx:id="hl1m" toggleGroup="$tg"/>
-            <ToggleButton text="7 DITE" fx:id="hl7d" toggleGroup="$tg"/>
+            <ToggleButton text="1 JAVE" fx:id="hl7d" toggleGroup="$tg"/>
             <ToggleButton selected="true" text="SOT" fx:id="hlSot" toggleGroup="$tg" style="-fx-border-radius: 0 20 20 0; -fx-background-radius: 0 20 20 0"/>
         </HBox>
+        <AreaChart fx:id="lineChart" VBox.vgrow="ALWAYS" maxHeight="500">
+            <xAxis>
+                <NumberAxis fx:id="x"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="y"/>
+            </yAxis>
+        </AreaChart>
     </VBox>
 
     <columnConstraints>
@@ -149,7 +168,7 @@
     </columnConstraints>
 
     <rowConstraints>
-        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="ALWAYS" maxHeight="220"/>
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="ALWAYS"/>
     </rowConstraints>

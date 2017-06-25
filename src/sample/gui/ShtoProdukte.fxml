@@ -9,13 +9,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.collections.FXCollections?>
 <GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="sample.controller.ShtoProdukte">
+          xmlns:fx="http://javafx.com/fxml">
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" styleClass="h0" text="Shto Produkte"/>
 
     <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="1">
-        <Label text="Barkodi*"/>
+        <Label text="Barkodi"/>
         <Label text="Emri*"/>
         <Label text="Kategoria*"/>
         <Label text="Njesia*"/>
@@ -25,16 +24,21 @@
         <TextField fx:id="bc" minWidth="200" maxWidth="200"/>
         <TextField fx:id="emri" minWidth="200" maxWidth="200"/>
         <ComboBox fx:id="cbKategoria" minWidth="200" maxWidth="200"/>
-        <ComboBox fx:id="cbNjesia" value="Cope" minWidth="200" maxWidth="200">
+        <ChoiceBox fx:id="cbNjesia" value="Cope" minWidth="200" maxWidth="200">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Cope"/>
                     <String fx:value="Paketim"/>
-                    <String fx:value="kg"/>
-                    <String fx:value="liter"/>
+                    <Separator />
+                    <String fx:value="Kilogram (kg)"/>
+                    <String fx:value="Gram (g)"/>
+                    <String fx:value="Miligram (mg)"/>
+                    <Separator />
+                    <String fx:value="Liter (l)"/>
+                    <String fx:value="Mililiter (ml)"/>
                 </FXCollections>
             </items>
-        </ComboBox>
+        </ChoiceBox>
     </VBox>
 
     <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="2" GridPane.rowIndex="1">

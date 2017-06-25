@@ -8,7 +8,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.collections.FXCollections?>
-<GridPane vgap="10" hgap="10" styleClass="gp" xmlns="http://javafx.com/javafx"
+<GridPane alignment="TOP_CENTER" vgap="5" hgap="5" styleClass="gp" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Settings">
 
@@ -65,16 +65,16 @@
                 <Label text="Produktet" styleClass="infoTtl"/>
             </top>
             <center>
-                <VBox spacing="15" alignment="TOP_RIGHT">
+                <VBox spacing="5" alignment="TOP_LEFT">
                     <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Label text="TVSH (%)" style="-fx-text-fill: rgba(255,255,255,.85)"/>
-                        <TextField minWidth="100" maxWidth="130"/>
-                        <Button text="Ruaj"/>
+                        <Label text="TVSH (%)"/>
+                        <TextField minWidth="100" fx:id="txtTvsh" maxWidth="130"/>
+                        <Button text="Ruaj" onAction="#ruajTvsh"/>
                     </HBox>
-                    <ScrollPane VBox.vgrow="ALWAYS" maxHeight="240" styleClass="edge-to-edge">
-                        <VBox alignment="CENTER_LEFT" fx:id="vbPnt" spacing="5">
 
-                        </VBox>
+                    <Label text="Kategorite" styleClass="infoTtl" style="-fx-padding: 10 0 0 0"/>
+                    <ScrollPane VBox.vgrow="ALWAYS" maxHeight="240" styleClass="edge-to-edge">
+                        <VBox alignment="CENTER_LEFT" fx:id="vbPnt" spacing="5"/>
                     </ScrollPane>
                     <HBox spacing="5" alignment="CENTER_RIGHT">
                         <Button text="Ruaj" onAction="#ruajProdKat"/>

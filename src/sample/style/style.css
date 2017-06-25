@@ -9,53 +9,47 @@
 }
 
 @font-face {
-    font-family: "Lato";
-    src: url("../font/Lato-Light.ttf");
+    font-family: "Roboto";
+    src: url("../font/Roboto-Regular.ttf");
 }
 
 @font-face {
-    font-family: "Lato";
-    src: url("../font/Lato-Regular.ttf");
+    font-family: "Roboto";
+    src: url("../font/Roboto-Light.ttf");
 }
+
 /*
 .gp .label, .gp .check-box {
     -fx-text-fill: rgba(255,255,255,.8);
 }
 */
 
+.label, .check-box {
+    -fx-text-fill: rgba(255,255,255,.8);
+}
+
 * {
-    -fx-primary: rgba(41, 128, 185,1); /*PINK*/
-    -fx-primary: #1abc9c; /*PINK*/
-    -fx-primary: rgb(235, 110, 96); /*PINK*/
-    -fx-primary: #9B46E1;
-    -fx-primary: linear-gradient(to bottom right, #36D1DC, #5B86E5);
-    -fx-primary: #2ecc71;
     -fx-primary: rgba(255,255,255,.85);
     -fx-veqant: #27A7E8;
     -fx-ppages: #9b59b6;
     -fx-g-hover: #2e9e66;
     -fx-r-hover: #e83a30;
-    -fx-clr: #444;
-    -fx-green: #2ecc71;
-    -fx-red: #e74c3c;
-    -fx-sidebar: #262E3A;
-    -fx-sidebar: #222629;
-    -fx-sidebar-w: #384A56;
-    -fx-sidebar: #32424d;
-    -fx-sidebar: #2c3e50;
-    -fx-sidebar: #493658;
-    -fx-sidebar-hover: #475d6c;
-    -fx-sidebar-darker: #343c4b;
+    -fx-green: #79bd9a;
+    -fx-red: #f1404b;
     -fx-label-color: rgba(255,255,255,.85);
-    -fx-sidebar-lg: linear-gradient(#44274E, #221E38);;
-    -fx-sidebar: #333F69;
-    -fx-sidebar: #34343C;
-    -fx-secondary: #282828;
-    -fx-secondary: #3a4878;
-    -fx-secondary: #34343C;
-    -fx-btn: #8171ED;
-    -fx-btn: #41CD8C;
-    -fx-btn: #34D096;
+    -fx-sidebar: #1D2B30;
+    -fx-sidebar: #242734;
+    -fx-sidebar: #3a4654; /*BEST*/
+    -fx-sidebar: #1A2129;
+    -fx-secondary: #282c3b;
+    -fx-secondary: #2e4756;
+    -fx-secondary: #303a46; /*BEST*/
+    -fx-secondary: #202731;
+    -fx-btn: #67C0EF;
+    -fx-btn: #7fb391;
+    -fx-btn: #0E97F5;
+    -fx-second: #F16B6F;
+    -fx-third: -fx-btn;
 }
 
 .root {
@@ -63,24 +57,21 @@
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-accent: -fx-btn;
-    -fx-background-color: rgb(246, 248, 248);
     -fx-background-color: -fx-sidebar;
 }
 
 .gp {
-    -fx-padding: 10;/*
-    -fx-background-color: rgb(246, 248, 248);
+    -fx-padding: 2;
     -fx-background-color: -fx-sidebar;
-    */-fx-background-color: -fx-sidebar;
 }
 
 .gp .button, .btn {
     -fx-cursor: hand;
     -fx-background-color: -fx-btn;
-    -fx-text-fill: -fx-sidebar;
+    -fx-text-fill: #fff;
     -fx-alignment: CENTER;
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
+    -fx-background-radius: 1;
+    -fx-border-radius: 1;
     -fx-padding: 0 15 0 15;
     -fx-min-height: 34;
     -fx-max-height: 34;
@@ -88,7 +79,6 @@
     -fx-min-width: 60;
     -fx-border-width: 0;
     -fx-opacity: .85;
-    -fx-border-color: -fx-primary;
     -fx-font-weight: bold;/*
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 7, 0, 0, 0);
 */}
@@ -103,44 +93,31 @@
 
 .sideBar .toggle-button, .side-btn {
     -fx-background-color: transparent;
-    -fx-text-fill: #fff;
-    -fx-opacity: .85;
+    -fx-text-fill: rgba(255,255,255,.8);
     -fx-background-radius: 0;
     -fx-border-radius: 0;
     -fx-alignment: CENTER-LEFT;
-    -fx-padding: 15 5 15 15;
+    -fx-padding: 0 5 0 15;
+    -fx-min-height: 53;
+    -fx-max-height: 53;
     -fx-font-size: 12;
-    -fx-font-weight: bold;
     -fx-cursor: hand;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: rgba(255,255,255,.1);
     -fx-effect: none;
-}
-
-.side-btn {
-    -fx-text-fill: rgba(0,0,0,0.8);
 }
 
 .sideBar .toggle-button:selected, .sideBar .toggle-button:focused {
     -fx-background-color: -fx-btn;
-    -fx-text-fill: -fx-sidebar;
-    -fx-opacity: 1;
 }
 
 .sideBar .toggle-button:hover {
     -fx-background-color: -fx-btn;
-    -fx-text-fill: -fx-sidebar;
-    -fx-opacity: 1;
 }
 
 .sideBar {
-    -fx-background-color: #232323;
     -fx-background-color: -fx-secondary;
-    -fx-padding: 10 0 0 0;
-    -fx-border-width: 0 1 0 0;
-    -fx-border-color: rgba(255,255,255,.06);
-    -fx-min-width: 130;
-    -fx-max-width: 130;
+    -fx-padding: 0;
+    -fx-min-width: 50;
+    -fx-max-width: 50;
 }
 
 .hbBtn {
@@ -173,9 +150,9 @@
     -fx-tick-label-fill: rgba(255,255,255,.9);
 }
 
-.chart-area-symbol {
+.chart-area-symbol {/*
     -fx-effect: dropshadow(gaussian, -fx-btn, 15, 0, 0, 0);
-    -fx-padding: 4;
+    */-fx-padding: 4;
     -fx-border-radius: 50;
     -fx-border-width: 4;
     -fx-background-color: -fx-secondary, -fx-btn;
@@ -184,11 +161,12 @@
 .chart-series-area-line {
     -fx-stroke-width: 2;
     -fx-stroke: -fx-btn;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0, 0, 0);
 }
 
 .chart-series-area-fill {
     -fx-opacity: .07;
-    -fx-fill: -fx-btn;/*
+    -fx-fill: linear-gradient(transparent, -fx-btn);/*
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 25, 0, 0, 0);
 */}
 
@@ -204,20 +182,15 @@
 
 .default-color0.chart-bar {
     -fx-background-color: -fx-btn;
-    -fx-opacity: .85;
-    -fx-border-radius: 5 5 0 0;
-    -fx-background-radius: 5 5 0 0;
-}
-
-.default-color0.chart-bar:hover {
-    -fx-opacity: 1;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
 }
 
 .default-color0.chart-line-symbol {
     -fx-padding: 6;/*
     -fx-background-color: -fx-sidebar, -fx-primary;
-*/    -fx-effect: dropshadow(gaussian, -fx-primary, 20, 0, 0, 0);
-}
+    -fx-effect: dropshadow(gaussian, -fx-primary, 20, 0, 0, 0);
+*/}
 
 .default-color1.chart-line-symbol {
     -fx-padding: 5;
@@ -239,6 +212,7 @@
 
 .default-color1.chart-pie {
     -fx-background-color: rgba(255,255,255,.04);
+    -fx-background-color: #29323f;
 }
 
 .circle {
@@ -246,6 +220,10 @@
 }
 
 .default-color0.chart-pie {
+    -fx-background-color: -fx-btn;
+}
+
+.default-color0.chart-pie {/*
     -fx-effect: dropshadow(gaussian, -fx-btn, 15, 0, 0, 0);
     -fx-background-color: -fx-btn;/*
     -fx-effect: dropshadow(gaussian, #8171ED, 20, 0, 0, 0);
@@ -268,6 +246,7 @@
 
 .chart-pie {
     -fx-border-width: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 20, 0, -15, 0);
 }
 
 .chart-pie-label {
@@ -283,7 +262,7 @@
 .date-picker {
     -fx-background-color: -fx-sidebar;
     -fx-text-fill: -fx-label-color;
-    -fx-border-width: 0 0 2 0;
+    -fx-border-width: 0 0 1 0;
     -fx-border-color: rgba(255,255,255,.3);
     -fx-border-radius: 1;
 }
@@ -322,7 +301,7 @@
 }
 
 .text-field, .date-picker > .text-field {
-    -fx-border-width: 0 0 2 0;
+    -fx-border-width: 0 0 1 0;
     -fx-min-height: 32;
     -fx-max-height: 32;
     -fx-padding: 0 5 0 5;
@@ -335,7 +314,7 @@
     -fx-font-weight: bold;
 }
 
-.text-field:focused, .combo-box:focused {
+.text-field:focused, .combo-box:focused, .choice-box:focused {
     -fx-border-color: -fx-primary;/*
     -fx-effect: dropshadow(gaussian, -fx-primary, 20, 0, 0, 0);
 */}
@@ -437,9 +416,9 @@
     -fx-background-color: -fx-btn;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
-    -fx-text-fill: -fx-sidebar;
+    -fx-text-fill: -fx-sidebar;/*
     -fx-effect: dropshadow(gaussian, -fx-btn, 15, 0, 0, 0);
-}
+*/}
 
 .slct {
     -fx-background-color: -fx-btn;
@@ -447,7 +426,7 @@
 }
 
 .toggle-button {
-    -fx-background-color: rgba(255,255,255,.15);
+    -fx-background-color: rgba(255,255,255,.05);
     -fx-border-radius: 0;
     -fx-background-radius: 0;
     -fx-text-fill: rgba(255,255,255,.7);
@@ -463,8 +442,8 @@
     -fx-text-fill: rgba(255,255,255,0.9);
 }
 
-.combo-box {
-    -fx-border-width: 0 0 2 0;
+.combo-box, .choice-box {
+    -fx-border-width: 0 0 1 0;
     -fx-border-color: rgba(255,255,255,.3);
     -fx-padding: 0 7 0 7;
     -fx-border-radius: 1;
@@ -475,7 +454,7 @@
     -fx-background-color: transparent;
 }
 
- .combo-box:disabled {
+ .combo-box:disabled, .choice-box:disabled {
     -fx-opacity: .45;
     -fx-effect: none;
     -fx-border-color: -fx-sidebar;
@@ -492,21 +471,25 @@
     -fx-padding: 0;
  }
 
- .combo-box-popup .list-view .list-cell {
-    -fx-text-fill: rgba(0,0,0,0.85);
+ .combo-box-popup .list-view .list-cell, .choice-box .context-menu {
+    -fx-text-fill: rgba(255,255,255,0.85);
     -fx-font-weight: bold;
     -fx-padding: 5;
-    -fx-background-color: #fff;
+    -fx-background-color: -fx-secondary;
  }
 
  .combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: rgba(0,0,0,0.1);/*
-    -fx-background-color: -fx-sidebar-darker;*/
+    -fx-background-color: -fx-btn;
+    -fx-text-fill: rgba(255,255,255,.85);
  }
 
  .combo-box-popup .list-view .list-cell:selected {
     -fx-background-color: -fx-btn;
-    -fx-text-fill: #fff;
+    -fx-text-fill: -fx-sidebar;
+ }
+
+ .choice-box .label {
+    -fx-font-weight: bold;
  }
 
  .chartVb {
@@ -515,19 +498,22 @@
 
  .shadow {
     -fx-background-color: #f7f7f7;
+    -fx-background-color: -fx-sidebar;
     -fx-background-color: -fx-secondary;
-    -fx-background-radius: 2;
-    -fx-border-radius: 2;
-    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;/*
     -fx-border-color: rgba(255,255,255,0.05);
- }
+ */}
 
  .tooltip {
     -fx-background-color: -fx-btn;
+    -fx-background-color: -fx-sidebar;
     -fx-background-radius: 0;
     -fx-border-radius: 0;
     -fx-padding: 5 15 5 15;
     -fx-text-fill: -fx-sidebar;
+    -fx-text-fill: rgba(255,255,255,.85);
     -fx-effect: none;
     -fx-font-weight: bold;
     -fx-font-size: 14;
@@ -613,18 +599,17 @@
 }
 
 .table-view .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-btn;
     -fx-table-cell-border-color: rgba(0,0,0,0.02);
 }
 
 .table-view .table-row-cell:filled:focused:selected .text {
-    -fx-fill: -fx-sidebar;
-    -fx-font-weight: bold;
+    -fx-fill: -fx-btn;
 }
 
-.table-view .table-row-cell:filled:selected {
-    -fx-background-color: -fx-btn;
-}
+/*.table-view .table-row-cell:filled:selected {
+    -fx-border-color: -fx-btn;
+    -fx-border-width: 1 0 1 0;
+}*/
 
 .table-view .table-row-cell .text {
     -fx-fill: rgba(255,255,255,.85);
@@ -662,12 +647,12 @@
 }
 
 .infoTtl {
-    -fx-text-fill: rgba(255,255,255,0.75);
+    -fx-text-fill: rgba(255,255,255,0.6);
     -fx-padding: 5 0 15 10;
     -fx-font-size: 15;
     -fx-border-width: 0;
     -fx-border-color: rgba(0,0,0,.05);
-    -fx-font-weight: bold;
+    -fx-font-family: "Roboto light";
 }
 
 .intoTtlNb {
@@ -685,10 +670,9 @@
 }
 
 .lVlera {
-    -fx-font-size: 35;
-    -fx-text-fill: rgba(0,0,0,.85);
-    -fx-text-fill: -fx-btn;
-    -fx-font-family: "Lato light";
+    -fx-font-size: 30;
+    -fx-text-fill: rgba(255,255,255,.87);
+    -fx-font-family: "Roboto light";
 }
 
 .lVleraColor {
@@ -713,7 +697,7 @@
 }
 
 .color {
-    -fx-font-family: "Lato";
+    -fx-font-family: "Nunito";
     -fx-text-fill: rgba(255,255,255,0.8);
 }
 
@@ -721,7 +705,7 @@
     -fx-font-size: 21;
     -fx-text-fill: rgba(255,255,255,.8);/*
     -fx-effect: dropshadow(gaussian, -fx-btn, 15, 0, 0, 0);
-    */-fx-text-fill: -fx-btn;
+    */
 }
 
 .scroll-pane > .viewport {
@@ -760,25 +744,14 @@
 }
 
 .check-box .box {
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
     -fx-background-color: transparent;
     -fx-border-width: 2;
     -fx-border-color: -fx-btn;
-    -fx-padding: 6;
-    -fx-scale-x: .8;
-    -fx-scale-y: .8;
-}
-
-.radio-button .box {
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
-    -fx-background-color: transparent;
-    -fx-border-width: 2;
-    -fx-border-color: -fx-primary;
-    -fx-padding: 6;
-    -fx-scale-x: .8;
-    -fx-scale-y: .8;
+    -fx-padding: 5;
+    -fx-scale-x: .75;
+    -fx-scale-y: .75;
 }
 
 .check-box:selected .box {
@@ -786,13 +759,11 @@
 }
 
 .check-box:selected .mark {
-    -fx-background-color: #fff;
+    -fx-background-color: -fx-sidebar;
 }
 
 .check-box .mark {
     -fx-shape: "M14.596,2.055L12.455,0C9.687,2.884,6.011,6.714,5.158,7.602L2.055,4.624L0,6.765l5.242,5.037l0.003-0.004l0.003,0.004L14.596,2.055z";
-    /*-fx-alignment: CENTER;
-    -fx-shape: "M-5,0a5,5 0 1,0 10,0a5,5 0 1,0 -10,0";*/
 }
 
 .barBtn {
@@ -929,16 +900,16 @@
 }
 
 .detailInfoPnt {
-    -fx-font-size: 14;
+    -fx-font-size: 13;
     -fx-opacity: .4;
-    -fx-font-weight: bold;
+    -fx-font-family: "Nunito";
     -fx-text-fill: #fff;
 }
 
 .detailInfoPnt-Qm {
     -fx-text-fill: -fx-btn;
-    -fx-font-family: "Lato light";
-    -fx-font-size: 31;
+    -fx-font-size: 30;
+    -fx-font-family: "Roboto light";
 }
 
 .stack .default-color0.chart-pie {
@@ -979,7 +950,7 @@
 
 .newWindow {
     -fx-background-color: -fx-secondary;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 25, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 0);
 }
 
 .smallBtn {
@@ -987,9 +958,8 @@
 }
 
 .mesazhiDialog {
-    -fx-padding: 10 0 9 0;
-    -fx-font-size: 14;
-    -fx-opacity: .9;
+    -fx-padding: 10 0 9 20;
+    -fx-font-size: 13;
 }
 
 .green {
@@ -1010,19 +980,19 @@
 
 .littleIcon {
     -fx-cursor: hand;
-    -fx-opacity: .5;
+    -fx-opacity: .8;
     -fx-background-color: transparent;
     -fx-border-width: 0;
 }
 
 .littleIcon:hover {
-    -fx-opacity: .9;
+    -fx-opacity: 1;
 }
 
 .perc {
     -fx-font-weight: bold;
     -fx-font-size: 15;
-    -fx-font-family: "Lato";
+    -fx-font-family: "Roboto light";
 }
 
 .bbHb {
@@ -1070,7 +1040,6 @@
 
 .h0 {
     -fx-font-size: 30;
-    -fx-font-family: "Lato light";
     -fx-text-fill: -fx-primary;
 }
 
@@ -1226,9 +1195,9 @@
 }
 
 .bigDec {
-    -fx-font-size: 35;
+    -fx-font-size: 30;
     -fx-text-fill: -fx-btn;
-    -fx-font-family: "Lato light";
+    -fx-font-family: "Roboto light";
 }
 
 .bigDec2 {
@@ -1257,5 +1226,14 @@
 
 .bar-text {
     -fx-font-size: 16;
-    -fx-font-family: "Lato";
+    -fx-fill: #fff;
+    -fx-font-family: "Nunito";
+}
+
+.bottom {
+    -fx-background-color: -fx-btn;
+}
+
+.menuTp {
+    -fx-background-color: -fx-btn;
 }

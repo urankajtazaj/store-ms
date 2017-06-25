@@ -18,9 +18,10 @@
     </padding>
 
     <center>
-        <BorderPane fx:id="bp" styleClass="newWindow" style="-fx-background-color: #1abc9c; -fx-border-radius: 7; -fx-background-radius: 7;">
+        <BorderPane fx:id="bp" styleClass="newWindow" style="-fx-background-color: -fx-green;
+        -fx-border-radius: 2; -fx-background-radius: 2;">
             <padding>
-                <Insets left="15" bottom="15" top="15"/>
+                <Insets left="20" bottom="15" top="15"/>
             </padding>
             <left>
                 <ImageView preserveRatio="true" fitWidth="48">
@@ -29,7 +30,7 @@
             </left>
             <center>
                 <Label BorderPane.alignment="CENTER_LEFT" wrapText="true" maxWidth="${bp.width}"
-                       fx:id="mesazhi" style="-fx-text-fill: #fff; -fx-opacity: .8; -fx-padding: 0 15 0 20; -fx-font-weight: bold" styleClass="mesazhiDialog">
+                       fx:id="mesazhi" styleClass="mesazhiDialog">
                 </Label>
             </center>
             <bottom>

@@ -13,6 +13,9 @@ import sample.controller.DB;
 import sample.controller.Login;
 import sample.controller.VariablatPublike;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +26,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        lexoServerin();
+
         FXMLLoader login = new FXMLLoader(getClass().getResource("/sample/gui/Login.fxml"));
         Parent root = login.load();
 
@@ -39,17 +45,23 @@ public class Main extends Application {
             }
         });
 
-        primaryStage.setTitle("Information System");
-        scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
+        primaryStage.setTitle("Sistemi per Menaxhim te Biznesit");
+        scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+    }
 
+    private void lexoServerin(){
+        File file = new File(System.getProperty("user.home") + "/store-ms-files/config/config.txt");
+        try (FileReader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr)) {
+            VariablatPublike.server = br.readLine().split(":")[1];
+            VariablatPublike.emriShitores = br.readLine().split(":")[1];
+            VariablatPublike.styleSheet = br.readLine().split(":")[1].equals("Dark") ? "/sample/style/style.css" : "/sample/style/styleLight.css";
+        }catch (Exception e) { e.printStackTrace(); }
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 }
-
-//1100 x 600

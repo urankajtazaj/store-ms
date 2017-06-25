@@ -16,24 +16,20 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.*;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import sample.Enums.*;
+import sample.Enums.ButtonType;
 import sample.constructors.Punetori;
 
 import java.io.*;
 import java.net.URL;
 import java.sql.*;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.*;
 import java.util.Date;
 
@@ -46,11 +42,16 @@ public class Punetoret implements Initializable {
     @FXML public GridPane gp;
     @FXML private Label lblTotalPnt, lblTotalM, lblMes, lblPntPsh, lblPntAktiv;
     @FXML public Button btnShtoPnt;
+    @FXML private TextField txtId, txtEmri;
+    @FXML private ComboBox<String> cbDep, cbStat;
 
     DB db = new DB();
     Connection con = db.connect();
+
+    Notification ntf = new Notification();
+
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    SimpleDateFormat tf = new SimpleDateFormat("-dd-MM-yyyy H-m");
+    SimpleDateFormat tf = new SimpleDateFormat("dd-MM-yyyy HH-mm-s");
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     BorderPane stage;
@@ -61,6 +62,15 @@ public class Punetoret implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        ShtoPunetoret sp = new ShtoPunetoret();
+        cbDep.getItems().clear();
+        cbDep.getItems().add("Te gjithe");
+        try {
+            sp.merrDeps("select * from departamenti", cbDep);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         lidhuDb();
         colAct.setStyle("-fx-alignment: CENTER-RIGHT");
@@ -77,6 +87,7 @@ public class Punetoret implements Initializable {
                     super.updateItem(item, empty);
 
                     hBox.setSpacing(7);
+                    hBox.setAlignment(Pos.CENTER);
                     ImageView btIvDel = new ImageView(new Image("/sample/photo/trash.png"));
                     btIvDel.setFitWidth(15);
                     btIvDel.setPreserveRatio(true);
@@ -148,29 +159,30 @@ public class Punetoret implements Initializable {
     }
 
     private void dritarjaKonfirmo(String emri, int id, int index) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/konfirmo.fxml"));
-        Parent parent = loader.load();
-        Konfirmo konfirmo = loader.getController();
+        ntf.setType(NotificationType.ERROR);
+        ntf.setMessage("A jeni te sigurte qe deshironi ta fshini " + emri + " nga lista e punetoreve?\nKy veprim nuk mund te kthehet!");
+        ntf.setButton(ButtonType.YES_NO);
+        ntf.showAndWait();
 
-        konfirmo.setId(id);
-        konfirmo.setTabela(1); /*1 = PUNETORET, 2 = KONSUMATORET, 3 = PRODUKTET*/
-        konfirmo.setMessage("Konfirmo fshirjen e '" + emri + "' nga lista e punetoreve.");
-
-        Scene scene = new Scene(parent, 460, 200);
-        Stage stage = new Stage();
-
-        konfirmo.setStage(stage);
-        konfirmo.setTableView(tbl);
-        konfirmo.setIndex(index);
-
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
-        scene.setFill(Color.TRANSPARENT);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+        if (ntf.getDelete()) {
+            fshiPunetorin(id);
+            tbl.getItems().remove(index);
+        }
     }
 
+    private void fshiPunetorin(int id) {
+        try (PreparedStatement ps = con.prepareStatement("delete from punetoret where id = ?");
+        PreparedStatement ps2 = con.prepareStatement("delete from perdoruesi where pnt_id = ?")) {
+            ps.setInt(1, id);
+            ps2.setInt(1, id);
+            ps.execute();
+            ps2.execute();
+            ntf.setType(NotificationType.SUCCESS);
+            ntf.setButton(ButtonType.NO_BUTTON);
+            ntf.setMessage("Punetori u fshi me sukses");
+            ntf.show();
+        }catch (Exception e) { e.printStackTrace(); }
+    }
     private void fillTable(){
 
         double paga = 0;
@@ -180,7 +192,8 @@ public class Punetoret implements Initializable {
         int psh = 0;
 
         for (int i = 0; i < tbl.getItems().size(); i++) {
-            paga += Double.parseDouble(""+tbl.getColumns().get(5).getCellData(i));
+            String s = ""+tbl.getColumns().get(5).getCellData(i);
+            paga += Double.parseDouble(s.substring(0, s.length()-1));
             psh += tbl.getColumns().get(7).getCellData(i).equals("1") ? 0 : 1;
         }
 
@@ -226,7 +239,23 @@ public class Punetoret implements Initializable {
         });
 
         export.btnExcel.setOnAction(e -> {
-            excelFile(stage, "xls");
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    excelFile("Punëtorët", "xlsx", keySet());
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ntf.setMessage("Fajlli u krijua me sukses!");
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.show();
+                        }
+                    });
+                }
+            });
+            t.setDaemon(true);
+            t.start();
+            stage.close();
         });
 
         export.btnCsv.setOnAction(e -> {
@@ -241,7 +270,9 @@ public class Punetoret implements Initializable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            MesazhetPublike.Lajmerim("Fajli u exportua me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
+                            ntf.setMessage("Fajli u exportua me sukses");
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.show();
                         }
                     });
                 }
@@ -251,7 +282,7 @@ public class Punetoret implements Initializable {
 
         Scene scene = new Scene(bpExport, 400, 165);
         scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
@@ -261,13 +292,9 @@ public class Punetoret implements Initializable {
 
     //    CSV FILE
     public void createFile(Stage stage, String extension) {
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Ruaj");
-        fileChooser.setInitialFileName(new Date()+"");
-
 //        EMRI I FAJLLIT
-        String fileName = fileChooser.showSaveDialog(stage).getAbsolutePath();
+        String path = System.getProperty("user.home") + "/store-ms-files/Raportet/CSV/";
+        String fileName = fileNaming(path + "Punetoret " + tf.format(new Date()), extension);
 
 //        KRIJO FILE TE RI
         File file = new File(fileNaming(fileName, extension));
@@ -282,16 +309,17 @@ public class Punetoret implements Initializable {
 //        SHKRUAJ TE DHENAT
         StringBuilder stringBuilder = new StringBuilder("");
         for (Punetori p : tbl.getItems()) {
-            stringBuilder.append(p.getEmri() + ", " + p.getDepartamenti() + ", " + p.getPuna() + ", " + p.getPergjigjet() + ", "
-                    + p.getDtl() + ", " + p.getTel() + ", " + p.getPaga() + "\n");
+            stringBuilder.append(p.getId() + ", " + p.getEmri() + ", " + p.getDepartamenti() + ", " + p.getPaga() + ", " +
+                    p.getHyrat() + ", " + p.getStatusi() + "\n");
         }
 
 //        VENDOSI NE FILE
         try {
             bw.write(stringBuilder.toString());
             bw.close();
-            MesazhetPublike.Lajmerim("Fajlli u krijua me sukses dhe mund te gjinded ne\n" + file.getAbsolutePath(),
-                    MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
+            ntf.setType(NotificationType.SUCCESS);
+            ntf.setMessage("Fajlli u krijua me sukses dhe mund te gjinded ne\n" + file.getAbsolutePath());
+            ntf.show();
             stage.close();
         } catch (IOException e) {
             System.out.println("Fajlli nuk mund te mbyllet: " + file.getName());
@@ -299,28 +327,19 @@ public class Punetoret implements Initializable {
     }
 
     //    EXCEL FILE
-    public void excelFile(Stage stage, String extension){
+    public void excelFile(String fileName, String extension, Map<String, Object[]> map){
 
 //        KRIJOHET NJE FILE I RI I EXCEL-IT
         XSSFWorkbook workbook = new XSSFWorkbook();
-        System.out.println("..OK");
 
 //        KRIJOHET FLETA E RE E EXCELIT
         XSSFSheet sheet = workbook.createSheet();
-        System.out.println("..OK");
 
-//        MERREN TE DHENAT DHE VENDOSEN NE MAP
-        Map<String, Object[]> xlsData = new TreeMap<>();
-        int i = 1;
-        for (Punetori p : tbl.getItems()) {
-            xlsData.put((i++)+"", new Object[] {p.getId(), p.getEmri(), p.getPuna(), p.getPaga(), p.getDepartamenti()});
-        }
-
-        Set<String> keySet = xlsData.keySet();
+        Set<String> keySet = map.keySet();
         int r = 0;
         for (String s : keySet) {
             Row row = sheet.createRow(r++);
-            Object[] obj = xlsData.get(s);
+            Object[] obj = map.get(s);
             int c = 0;
 
             for (Object object : obj) {
@@ -334,27 +353,35 @@ public class Punetoret implements Initializable {
             }
         }
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialFileName(new Date()+"");
-        fileChooser.setTitle("Ruaj");
+        String path = System.getProperty("user.home") + "/store-ms-files/Raportet/EXCEL/";
 
-        String path = fileChooser.showSaveDialog(stage).getAbsolutePath();
+        File file = new File(fileNaming(path + fileName + " " + tf.format(new Date()), extension));
 
-        File file = new File(fileNaming(path, extension));
-
-        System.out.println("File u krijua: " + file.getAbsolutePath());
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(file);
             workbook.write(fileOutputStream);
             fileOutputStream.close();
-            MesazhetPublike.Lajmerim("Fajlli u krijua me sukses dhe mund te gjinded ne\n" + file.getAbsolutePath(),
-                    MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
-            stage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    private Map<String, Object[]> keySet (){
+        Map<String, Object[]> xlsData = new TreeMap<>();
+        int i = 1;
+        double total = 0;
+        xlsData.put((i++)+"", new Object[] {"ID", "EMRI", "GJINIA", "PUNA", "PAGA", "TË HYRAT", "DITËLINDJA", "STATUSI", "ADRESA", "QYTETI", "SHTETI", "EMAIL"});
+        for (Punetori p : tbl.getItems()) {
+            xlsData.put((i++)+"", new Object[] {p.getId(), p.getEmri(), p.getGjinia(), p.getDepartamenti(), p.getPaga(), p.getHyrat(),
+                    p.getDtl(), p.getStatusi().equals("1") ? "Aktiv" : "Jo aktiv", p.getAdresa(), p.getQyteti(), p.getShteti(), p.getEmail()});
+            total += Double.parseDouble(p.getPaga().substring(0, p.getPaga().length()-1));
+        }
+        xlsData.put((i++) + "", new Object[] {}); //RRESHT I ZBRAZET
+        xlsData.put((i++) + "", new Object[] {"Punëtorë", i-4});
+        xlsData.put((i) + "", new Object[] {"Shpenzime", total + ""});
+        return xlsData;
     }
 
     //    EMERTIMI I RREGULLT I FILE
@@ -367,17 +394,14 @@ public class Punetoret implements Initializable {
 
     private void jasperFile(){
         try {
-            JasperReport jasperReport = JasperCompileManager.compileReport(System.getProperty("user.home") +
-                    "/Sistem Informacioni/Raportet/Punetoret.jrxml");
+            String path = System.getProperty("user.home") + "/store-ms-files/Raportet/";
+            JasperReport jasperReport = JasperCompileManager.compileReport(path + "raportet/Punetoret.jrxml");
             Map<String, Object> params = new HashMap();
             params.put("Punetori", VariablatPublike.uemri);
 
             JasperPrint jprint = JasperFillManager.fillReport(jasperReport, params, con);
 
-            File dir = new File(System.getProperty("user.home") + "/Raportet");
-            dir.mkdir();
-
-            JasperExportManager.exportReportToPdfFile(jprint, dir.getAbsolutePath() + "/Punetoret" + tf.format(new Date()) + ".pdf");
+            JasperExportManager.exportReportToPdfFile(jprint, path + "PDF/" + tf.format(new Date()) + ".pdf");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -391,12 +415,12 @@ public class Punetoret implements Initializable {
 
             ObservableList<Punetori> data = FXCollections.observableArrayList();
             while (rs.next()) {
-                String d = format.format(rs.getDate("ditelindja"));
-                String d2 = format.format(rs.getDate("data_punesimit"));
 
-                data.add(new Punetori(rs.getInt("id"), rs.getString("emri"),
-                        rs.getString("titulli"), d, rs.getInt("statusi")+"", rs.getString("telefoni"),
-                        rs.getString("departamenti"), d2, rs.getInt("paga")+""));
+                data.add(new Punetori(rs.getInt("id"), rs.getString("emri"), rs.getString("departamenti"), VariablatPublike.decimalFormat.format(rs.getDouble("paga")),
+                        VariablatPublike.decimalFormat.format(rs.getDouble("hyrat")), rs.getString("statusi"),
+                        VariablatPublike.sdf.format(rs.getDate("ditelindja")), rs.getString("telefoni"), VariablatPublike.sdf.format(rs.getDate("data_punesimit")),
+                        rs.getString("adresa"), rs.getString("qyteti"), rs.getString("shteti"), rs.getString("email"), rs.getInt("gjinia") == 0 ? "Mashkull" : "Femer"));
+
             }
             tbl.getItems().addAll(data);
         }catch (Exception ex) {
@@ -428,5 +452,25 @@ public class Punetoret implements Initializable {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @FXML
+    private void filtroTabelen(){
+        String q = "select * from merrpunetoret where id "+ (txtId.getText().isEmpty() ? "> 0" : "= " + txtId.getText()) + " and lower(emri) like " +
+                "lower('%"+txtEmri.getText()+"%') and departamenti " + (cbDep.getSelectionModel().getSelectedIndex() == 0 ? "like '%%'" : "= '" +
+                cbDep.getSelectionModel().getSelectedItem() + "'") +
+                " and statusi " +
+                (cbStat.getSelectionModel().getSelectedIndex() == 0 ? ">= 0" : "= " + (cbStat.getSelectionModel().getSelectedIndex() == 1 ? "1" : "0"));
+        try (PreparedStatement ps = con.prepareStatement(q)) {
+
+            System.out.println(q);
+            ResultSet rs = ps.executeQuery();
+
+            tbl.getItems().clear();
+            while (rs.next()) {
+                tbl.getItems().add(new Punetori(rs.getInt("id"), rs.getString("emri"), rs.getString("departamenti"), VariablatPublike.decimalFormat.format(rs.getDouble("paga")),
+                        VariablatPublike.sdf.format(rs.getDate("data_punesimit")), VariablatPublike.decimalFormat.format(rs.getDouble("hyrat")), rs.getString("statusi")));
+            }
+        }catch (Exception e) { e.printStackTrace(); }
     }
 }

@@ -18,7 +18,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.geometry.Insets?>
-<BorderPane style="-fx-background-color: #fafafa" fx:id="root" xmlns="http://javafx.com/javafx/8.0.111"
+<BorderPane style="-fx-background-color: transparent" fx:id="root" xmlns="http://javafx.com/javafx/8.0.111"
             xmlns:fx="http://javafx.com/fxml/1" >
 
     <fx:define>
@@ -29,21 +29,64 @@
         <BorderPane styleClass="sideBar">
             <center>
                 <VBox fx:id="btnVb">
-                    <ToggleButton selected="true" toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnKons" text="KONSUMATORET" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnPaisjet" text="PRODUKTET" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnStat" text="RAPORTET" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnShit" text="SHITJE" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene"  text="RREGULLO"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnLogout" text="DIL"/>
+                    <ToggleButton selected="true" contentDisplay="GRAPHIC_ONLY" toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnHome" text="SHTEPI" onAction="#changeScene">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="24">
+                                <Image url="/sample/photo/home.png"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" contentDisplay="GRAPHIC_ONLY" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" onAction="#changeScene">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="24">
+                                <Image url="/sample/photo/user.png"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" contentDisplay="GRAPHIC_ONLY" prefWidth="${btnVb.width}" fx:id="btnKons" text="KONSUMATORET" onAction="#changeScene">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="24">
+                                <Image url="/sample/photo/user.png"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" contentDisplay="GRAPHIC_ONLY" prefWidth="${btnVb.width}" fx:id="btnPaisjet" text="PRODUKTET" onAction="#changeScene">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="24">
+                                <Image url="/sample/photo/tool.png"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" contentDisplay="GRAPHIC_ONLY" prefWidth="${btnVb.width}" fx:id="btnStat" text="RAPORTET" onAction="#changeScene">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="24">
+                                <Image url="/sample/photo/graph.png"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" contentDisplay="GRAPHIC_ONLY" prefWidth="${btnVb.width}" fx:id="btnShit" text="SHITJE" onAction="#changeScene">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="24">
+                                <Image url="/sample/photo/shitje.png"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" contentDisplay="GRAPHIC_ONLY" prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene"  text="RREGULLO">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="24">
+                                <Image url="/sample/photo/setting.png"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton onAction="#exit" toggleGroup="$sideTg" contentDisplay="GRAPHIC_ONLY" prefWidth="${btnVb.width}" fx:id="btnLogout" text="DIL">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="24">
+                                <Image url="/sample/photo/power.png"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
                 </VBox>
             </center>
-
-            <bottom>
-                <Label wrapText="true" textAlignment="CENTER" BorderPane.alignment="BOTTOM_CENTER" fx:id="user" text="Uran Kajtazaj"
-                       style="-fx-padding: 0 0 10 0; -fx-font-size: 16; -fx-text-fill: rgba(255,255,255,.8); -fx-font-weight: bold;"/>
-            </bottom>
         </BorderPane>
     </left>
 

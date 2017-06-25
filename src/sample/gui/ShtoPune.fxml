@@ -34,6 +34,7 @@
     </VBox>
 
     <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="5" alignment="CENTER_RIGHT">
+        <Button text="Fshi" fx:id="btnFshi" onAction="#fshiPunen"/>
         <Button text="Ne rregull" onAction="#ruajPunen"/>
     </HBox>
 

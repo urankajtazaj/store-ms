@@ -17,7 +17,12 @@ public class LajmeroGreen implements Initializable {
     @FXML public Button btnOk;
     @FXML private Label mesazhi;
 
+    private boolean delete;
     private Stage stage;
+
+    boolean getDelete (){
+        return delete;
+    }
 
     public void setStage (Stage stage) {
         this.stage = stage;
@@ -38,13 +43,15 @@ public class LajmeroGreen implements Initializable {
     }
 
     @FXML
-    private boolean retTrue (){
-        return true;
+    private void retTrue (){
+        delete = true;
+        stage.close();
     }
 
     @FXML
-    private boolean retFalse (){
-        return false;
+    private void retFalse (){
+        delete = false;
+        stage.close();
     }
 
 }

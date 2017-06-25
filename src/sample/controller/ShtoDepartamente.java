@@ -5,14 +5,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
@@ -23,6 +22,9 @@ public class ShtoDepartamente implements Initializable {
 
     DB db = new DB();
     Connection con = db.connect();
+
+    Notification ntf = new Notification();
+
     @FXML public Button btnKthehu, btnRuaj, btnShto;
     @FXML private VBox vb;
 
@@ -75,7 +77,8 @@ public class ShtoDepartamente implements Initializable {
             }
         }
         stmt.executeBatch();
-        MesazhetPublike.Lajmerim("Te dhenat u ruajten me sukses.", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
+        ntf.setMessage("Te dhenat u ruajten me sukses");
+        ntf.show();
     }
 
     private void shtoOpsion(String t, boolean disabled){

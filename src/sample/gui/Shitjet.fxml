@@ -19,7 +19,7 @@
         </HBox>
 
         <ScrollPane fx:id="scroll" styleClass="edge-to-edge" GridPane.rowIndex="1" GridPane.columnIndex="0" minWidth="550" maxWidth="550">
-            <FlowPane fx:id="flow" vgap="7" hgap="6" minWidth="550" maxWidth="550" orientation="HORIZONTAL">
+            <FlowPane fx:id="flow" vgap="3" hgap="2" minWidth="550" maxWidth="550" orientation="HORIZONTAL">
                 <padding>
                     <Insets top="15"/>
                 </padding>
@@ -28,6 +28,9 @@
 
         <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.rowSpan="2">
             <TableView fx:id="tbl" minWidth="450" maxWidth="450">
+                <placeholder>
+                    <Label text="Zgjedhni produktet"/>
+                </placeholder>
                 <columns>
                     <TableColumn text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
                     <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
@@ -40,11 +43,11 @@
 
             <GridPane hgap="25" vgap="5" styleClass="gpL">
                 <Label text="Subtotal" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <Label text="55" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <Label text="TVSH" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <Label text="10 (18%)" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label fx:id="lSubTtl" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="TVSH" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label fx:id="lTvsh" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 <Label style="-fx-font-size: 30" text="Total" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                <Label fx:id="lTotal" style="-fx-font-size: 30; -fx-text-fill: -fx-primary; -fx-font-family: 'Lato'" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label fx:id="lTotal" style="-fx-font-size: 30; -fx-text-fill: -fx-primary;" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                 <Label text="Pagesa" style="-fx-font-size: 16;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
                 <Label fx:id="lPagesa" text="0" style="-fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                 <Label text="Kusuri" style="-fx-font-size: 16;" GridPane.rowIndex="5" GridPane.columnIndex="0"/>

@@ -9,7 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.geometry.Insets?>
-<GridPane vgap="5" hgap="5" fx:id="gp" styleClass="gp" xmlns="http://javafx.com/javafx"
+<GridPane vgap="2" hgap="2" fx:id="gp" styleClass="gp" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Raportet">
 
@@ -19,7 +19,7 @@
 
     <children>
 
-        <HBox styleClass="filterHb" spacing="5" alignment="CENTER_RIGHT" GridPane.columnSpan="4"
+        <HBox styleClass="filterHb" spacing="2" alignment="CENTER_RIGHT" GridPane.columnSpan="4"
               GridPane.columnIndex="0"
               GridPane.rowIndex="0">
             <DatePicker fx:id="dpPrej" maxWidth="120" maxHeight="28"/>
@@ -30,7 +30,7 @@
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <top>
-                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Fitimi NET"/>
+                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="FITIMI NETO"/>
             </top>
             <center>
                 <VBox alignment="CENTER">
@@ -45,13 +45,13 @@
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="1">
             <top>
-                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Pagesa mesatare"/>
+                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="SHITJA MESATARE"/>
             </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera" text="20.56€"/>
+                    <Label styleClass="lVlera" fx:id="lPagMes"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
-                        <Label text="-72%" styleClass="perc"/>
+                        <Label fx:id="lPagMesL" styleClass="perc"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
                     </HBox>
                 </VBox>
@@ -60,13 +60,13 @@
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="2">
             <top>
-                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Produkte te shitura"/>
+                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="NUMRI I SHITJEVE"/>
             </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera" text="436"/>
+                    <Label styleClass="lVlera" fx:id="lShitje"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
-                        <Label text="+63%" styleClass="perc"/>
+                        <Label fx:id="lShitjeL" styleClass="perc"/>
                         <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
                     </HBox>
                 </VBox>
@@ -75,7 +75,7 @@
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="3">
             <top>
-                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="Konsumatore te rinj"/>
+                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="KONSUMATORE TE RINJ"/>
             </top>
             <center>
                 <VBox alignment="CENTER">
@@ -105,7 +105,7 @@
         </VBox>
 
         <VBox GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2" styleClass="shadow">
-            <Label text="Te dhenat" styleClass="infoTtl"/>
+            <Label text="Produktet" styleClass="infoTtl"/>
             <TableView VBox.vgrow="ALWAYS" fx:id="tblDhenat">
                 <placeholder>
                     <Label text="Nuk ka te dhena"/>
@@ -122,16 +122,20 @@
                     <Insets right="10"/>
                 </padding>
                 <HBox spacing="5" alignment="CENTER_RIGHT">
-                    <Label text="Pagesa:" style="-fx-text-fill: #fff;"/>
-                    <Label fx:id="lPagesa" text="0" style="-fx-text-fill: #fff;"/>
+                    <Label text="Pagesa:"/>
+                    <Label fx:id="lPagesa" text="0" />
                 </HBox>
                 <HBox spacing="5" alignment="CENTER_RIGHT">
-                    <Label text="Kusuri:" style="-fx-text-fill: #fff;"/>
-                    <Label fx:id="lKusuri" text="0" style="-fx-text-fill: #fff;"/>
+                    <Label text="Kusuri:" />
+                    <Label fx:id="lKusuri" text="0"/>
                 </HBox>
                 <HBox spacing="5" alignment="CENTER_RIGHT">
-                    <Label text="Total:" style="-fx-font-size: 20; -fx-text-fill: #fff;"/>
-                    <Label fx:id="lTotal" text="0" style="-fx-font-size: 21; -fx-text-fill: #fff;"/>
+                    <Label text="TVSH:"/>
+                    <Label fx:id="lTvsh" text="0" />
+                </HBox>
+                <HBox spacing="5" alignment="CENTER_RIGHT">
+                    <Label text="Total:" style="-fx-font-size: 20;"/>
+                    <Label fx:id="lTotal" text="0" style="-fx-font-size: 21;"/>
                 </HBox>
             </VBox>
         </VBox>

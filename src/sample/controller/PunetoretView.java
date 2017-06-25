@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import org.controlsfx.control.Notifications;
+import sample.Enums.*;
+import sample.Enums.ButtonType;
 
 import java.net.URL;
 import java.sql.*;
@@ -32,11 +34,13 @@ public class PunetoretView implements Initializable {
     GridPane grid = new GridPane();
     DB db = new DB();
     Connection con = db.connect();
+
+    Notification ntf = new Notification();
+
     @FXML private Circle crcStatusi;
     @FXML private Button btnRregullo;
     @FXML private VBox hbGrid;
     @FXML private ComboBox<String> cbViti, cbArsyeja;
-    @FXML private ImageView iv;
     @FXML private StackPane sp;
     private Circle circle = new Circle(95, 62, 62);
     @FXML private Label emri, gjinia, dtl, rruga, qyteti, shteti, dep, titulli, email, telefoni, pagesa, adresa;
@@ -92,9 +96,6 @@ public class PunetoretView implements Initializable {
             getData();
         });
 
-        circle.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 0)");
-        iv.setClip(circle);
-
     }
 
     private void fillCbViti (){
@@ -139,17 +140,11 @@ public class PunetoretView implements Initializable {
 
             ResultSet r = pstmt.executeQuery();
 
-            System.out.println(getId());
-
-            iv.setImage(new Image("/sample/photo/punetoret/user.png"));
-
             r.next();
             emri.setText(r.getString("emri"));
-            titulli.setText(r.getString("titulli") + ",");
             dep.setText(r.getString("departamenti"));
             pagesa.setText(r.getString("paga"));
             dtl.setText(VariablatPublike.sdf.format(r.getDate("ditelindja")));
-            iv.setImage(new Image("file:" + r.getString("foto")));
             shteti.setText(r.getString("shteti"));
             qyteti.setText(r.getString("qyteti"));
             adresa.setText(r.getString("adresa"));
@@ -234,7 +229,8 @@ public class PunetoretView implements Initializable {
                 ps.setDate(3, java.sql.Date.valueOf(dpDeriPushim.getValue()));
                 ps.setString(4, arsyeja);
                 ps.execute();
-                MesazhetPublike.Lajmerim("Pushimi u shtua me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
+                ntf.setMessage("Pushimi u shtua me sukses");
+                ntf.show();
                 getData();
                 fillCbViti();
             } else {

@@ -7,6 +7,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -25,7 +27,9 @@ public class ShtoPune implements Initializable {
 
     private TextField tf;
     private Stage stage;
-    private int id;
+    private int id = 0;
+
+    Notification ntf = new Notification();
 
     @FXML private Button btnFshi;
     @FXML private TextField txtEmriPunes;
@@ -79,6 +83,31 @@ public class ShtoPune implements Initializable {
         stage.close();
     }
 
+    @FXML
+    private void fshiPunen(){
+        ntf.setMessage("Te gjithe anetaret qe jane ne kete pune do te fshihen.\nA jeni te sigurte?");
+        ntf.setButton(ButtonType.YES_NO);
+        ntf.setType(NotificationType.ERROR);
+        ntf.showAndWait();
+        if (ntf.getDelete()) {
+            fshi(id);
+        }
+    }
+
+    private void fshi(int id){
+        try(Statement st = con.createStatement()) {
+            st.addBatch("delete from departamenti where id = " + id);
+            st.addBatch("delete from punetoret where dep_id = " + id);
+            st.addBatch("delete from perdoruesi where dep_id = " + id);
+            st.executeBatch();
+            ntf.setType(NotificationType.SUCCESS);
+            ntf.setButton(ButtonType.NO_BUTTON);
+            ntf.setMessage("Puna e fshi me sukses");
+            ntf.show();
+            stage.close();
+        }catch (Exception e) {e.printStackTrace();}
+    }
+
     private void rregulloDepartamentin(int id) {
         String q = "update priv set shto = ?, fshi = ?, lexo = ?, rregullo = ?, shtepi = ?, punetoret = ?, konsumatoret = ?, raportet = ?, shitje = ?," +
                 "produktet = ?, settings = ? where dep_id = ?";
@@ -103,6 +132,11 @@ public class ShtoPune implements Initializable {
             ps2.setInt(2, id);
             ps2.execute();
 
+            ntf.setMessage("Puna u rregullua me sukses");
+            ntf.setType(NotificationType.SUCCESS);
+            ntf.setButton(ButtonType.NO_BUTTON);
+            ntf.show();
+
         }catch (Exception e) {e.printStackTrace();}
     }
 
@@ -126,6 +160,11 @@ public class ShtoPune implements Initializable {
             s.setInt(10, cbProduktet.isSelected() ? 1 : 0);
             s.setInt(11, cbRregullo.isSelected() ? 1 : 0);
             s.execute();
+
+            ntf.setMessage("Puna u shtua me sukses");
+            ntf.setType(NotificationType.SUCCESS);
+            ntf.setButton(ButtonType.NO_BUTTON);
+            ntf.show();
 
         }catch (Exception e) { e.printStackTrace(); }
     }

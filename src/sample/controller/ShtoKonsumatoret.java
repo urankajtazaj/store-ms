@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -19,6 +21,8 @@ public class ShtoKonsumatoret implements Initializable {
 
     DB db = new DB();
     Connection con = db.connect();
+
+    Notification ntf = new Notification();
 
     @FXML private TextField emri, adresa, qyteti, shteti, telefoni, email;
 
@@ -67,7 +71,8 @@ public class ShtoKonsumatoret implements Initializable {
 
             pstmt.close();
             pastro();
-            MesazhetPublike.Lajmerim("Te dhenat u ruajten me sukses", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.SUCCESS, 5);
+            ntf.setMessage("Te dhenat u ruajten me sukses");
+            ntf.show();
 
         }catch (Exception e) {e.printStackTrace();}
     }
@@ -83,9 +88,8 @@ public class ShtoKonsumatoret implements Initializable {
 
     private void mbushTeDhenat (){
         try {
-
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from konsumatoret limit 1");
+            ResultSet rs = stmt.executeQuery("select * from konsumatoret where id = "+id+" limit 1");
 
             rs.next();
             emri.setText(rs.getString("emri"));

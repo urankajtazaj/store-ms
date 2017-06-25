@@ -1,10 +1,13 @@
 package sample.controller;
 
+import com.sun.xml.internal.bind.v2.TODO;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,13 +19,19 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.Enums.*;
+import sample.Enums.ButtonType;
+import sample.constructors.Punetori;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 /**
  * Created by uran on 17-04-20.
@@ -33,6 +42,10 @@ public class Konsumatoret implements Initializable {
     Connection con = db.connect();
 
     private BorderPane root;
+
+    Notification ntf = new Notification();
+
+    Punetoret pnt = new Punetoret();
 
     public void setRoot (BorderPane root){
         this.root = root;
@@ -57,13 +70,32 @@ public class Konsumatoret implements Initializable {
         Export export = loader.getController();
         Stage stage = new Stage();
 
+        export.btnExcel.setOnAction(e -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pnt.excelFile("Konsumatoret", "xlsx", keySet());
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ntf.setMessage("Dokumenti u eksportua me sukses!");
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.setButton(ButtonType.NO_BUTTON);
+                            ntf.show();
+                        }
+                    });
+                }
+            }).start();
+            stage.close();
+        });
+
         export.btnAnulo.setOnAction(e -> {
             stage.close();
         });
 
         Scene scene = new Scene(bpExport, 400, 165);
         scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
@@ -91,6 +123,7 @@ public class Konsumatoret implements Initializable {
                     btnDel.setGraphic(btIvDel);
 
                     hb.setSpacing(7);
+                    hb.setAlignment(Pos.CENTER);
 
                     super.updateItem(item, empty);
                     if (!empty) {
@@ -110,6 +143,8 @@ public class Konsumatoret implements Initializable {
                             }catch (IOException ex) {ex.printStackTrace();}
                         });
 
+                    }else {
+                        setGraphic(null);
                     }
 
                 }
@@ -119,27 +154,26 @@ public class Konsumatoret implements Initializable {
     }
 
     private void dritarjaKonfirmo(String emri, int id, int index) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/konfirmo.fxml"));
-        Parent parent = loader.load();
-        Konfirmo konfirmo = loader.getController();
+        ntf.setType(NotificationType.ERROR);
+        ntf.setMessage("A jeni te sigurte qe deshironi ta fshini " + emri + " nga lista e konsumatoreve?");
+        ntf.setButton(ButtonType.YES_NO);
+        ntf.showAndWait();
 
-        konfirmo.setId(id);
-        konfirmo.setTabela(2); /* 1 = PUNETORET, 2 = KONSUMATORET, 3 = PRODUKTET */
-        konfirmo.setMessage("Konfirmo fshirjen e '" + emri + "' nga lista e konsumatoreve.");
+        if (ntf.getDelete()) {
+            fshiPunetorin(id);
+            tbl.getItems().remove(index);
+        }
+    }
 
-        Scene scene = new Scene(parent, 460, 200);
-        Stage stage = new Stage();
-
-        konfirmo.setStage(stage);
-        konfirmo.setTableView(tbl);
-        konfirmo.setIndex(index);
-
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("/sample/style/style.css").toExternalForm());
-        scene.setFill(Color.TRANSPARENT);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+    private void fshiPunetorin(int id) {
+        try (PreparedStatement ps = con.prepareStatement("delete from konsumatoret where id = ?")) {
+            ps.setInt(1, id);
+            ps.execute();
+            ntf.setType(NotificationType.SUCCESS);
+            ntf.setButton(ButtonType.NO_BUTTON);
+            ntf.setMessage("Konsumatori u fshi me sukses");
+            ntf.show();
+        }catch (Exception e) { e.printStackTrace(); }
     }
 
     private void fillTableWithData() {
@@ -193,5 +227,17 @@ public class Konsumatoret implements Initializable {
 
         root.setCenter(loader.load());
 
+    }
+
+    private Map<String, Object[]> keySet (){
+        Map<String, Object[]> xlsData = new TreeMap<>();
+        int i = 1;
+        xlsData.put((i++)+"", new Object[] {"ID", "EMRI", "ADRESA", "TELEFONI", "EMAIL", "QYTETI", "SHTETI", "KRIJUAR"});
+        for (sample.constructors.Konsumatoret k : tbl.getItems()) {
+            xlsData.put((i++)+"", new Object[] {k.getId(), k.getEmri(), k.getAdresa(), k.getTel(), k.getEmail(), k.getQyteti(), k.getShteti()});
+        }
+        xlsData.put((i++) + "", new Object[] {});
+        xlsData.put((i++) + "", new Object[] {"Konsumatorë", i-4});
+        return xlsData;
     }
 }

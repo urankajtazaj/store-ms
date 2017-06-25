@@ -3,16 +3,23 @@
     <output-path>$PROJECT_DIR$/out/artifacts/store_ms_jar</output-path>
     <root id="archive" name="store-ms.jar">
       <element id="module-output" name="store-ms" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-codec-1.10.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-logging-1.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/poi-ooxml-3.16.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/res/xmlbeans-2.6.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/res/poi-excelant-3.16.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/res/poi-3.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/iText-2.1.7.js2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-beanutils-1.8.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-collections4-4.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/res/h2-1.4.195.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/res/controlsfx-8.40.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/poi-3.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/jasperreports-6.3.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-codec-1.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/xmlbeans-2.6.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/poi-ooxml-schemas-3.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-collections-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/h2-1.4.195.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/poi-excelant-3.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/groovy-all-2.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/controlsfx-8.40.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/jdt-compiler-3.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-digester-2.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

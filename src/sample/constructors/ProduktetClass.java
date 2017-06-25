@@ -6,17 +6,20 @@ import javafx.scene.control.Label;
  * Created by uran on 17-04-07.
  */
 public class ProduktetClass {
-    private String emri, qmimi, prodhuesi, kategoria, furnizuesi;
-    private int id, sasia;
-    private double zbritje;
+    private String zbritje, bc, emri, prodhuesi, kategoria, furnizuesi;
+    private int id, sasia, sasiaKrit;
+    private double qmimi, qmimiStd;
 
-    public ProduktetClass(int id, String emri, String kategoria, String qmimi, int sasia, double zbritje) {
+    public ProduktetClass(String barcode, int id, String emri, String kategoria, double qmimi, double qmimiStd, int sasia, int sasiaKrit, String zbritje) {
         this.emri = emri;
         this.id = id;
         this.kategoria = kategoria;
         this.qmimi = qmimi;
         this.sasia = sasia;
         this.zbritje = zbritje;
+        this.bc = barcode;
+        this.qmimiStd = qmimiStd;
+        this.sasiaKrit = sasiaKrit;
     }
 
     public ProduktetClass(int id, String emri, String prodhuesi, String kategoria, String furnizuesi, String qmimi, int sasia) {
@@ -24,16 +27,39 @@ public class ProduktetClass {
         this.id = id;
         this.prodhuesi = prodhuesi;
         this.kategoria = kategoria;
-//        this.qmimi = qmimi;
         this.sasia = sasia;
         this.furnizuesi = furnizuesi;
     }
 
-    public double getZbritje() {
+    public String getBc() {
+        return bc;
+    }
+
+    public void setBc(String bc) {
+        this.bc = bc;
+    }
+
+    public int getSasiaKrit() {
+        return sasiaKrit;
+    }
+
+    public void setSasiaKrit(int sasiaKrit) {
+        this.sasiaKrit = sasiaKrit;
+    }
+
+    public double getQmimiStd() {
+        return qmimiStd;
+    }
+
+    public void setQmimiStd(double qmimiStd) {
+        this.qmimiStd = qmimiStd;
+    }
+
+    public String getZbritje() {
         return zbritje;
     }
 
-    public void setZbritje(double zbritje) {
+    public void setZbritje(String zbritje) {
         this.zbritje = zbritje;
     }
 
@@ -69,11 +95,11 @@ public class ProduktetClass {
         this.kategoria = kategoria;
     }
 
-    public String getQmimi() {
+    public double getQmimi() {
         return qmimi;
     }
 
-    public void setQmimi(String qmimi) {
+    public void setQmimi(double qmimi) {
         this.qmimi = qmimi;
     }
 

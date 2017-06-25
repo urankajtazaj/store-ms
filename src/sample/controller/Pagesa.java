@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -17,6 +19,8 @@ import java.util.regex.Pattern;
 public class Pagesa implements Initializable {
 
     @FXML private TextField txtPagesa;
+
+    Notification ntf = new Notification();
 
     private Label lPagesa, lKusuri;
     private Stage stage;
@@ -59,20 +63,24 @@ public class Pagesa implements Initializable {
     public void shtoPagesen(){
         if (Pattern.compile("[0-9.]+").matcher(txtPagesa.getText()).matches()) {
             BigDecimal ttl = new BigDecimal(total+"");
-            BigDecimal pag = new BigDecimal(txtPagesa.getText());
+            ttl = ttl.add(ttl.multiply(new BigDecimal(VariablatPublike.tvsh/100)));
+            ttl = ttl.setScale(2, BigDecimal.ROUND_HALF_DOWN);
+            BigDecimal pag = new BigDecimal(txtPagesa.getText()).setScale(2, BigDecimal.ROUND_HALF_DOWN);
             if (ttl.compareTo(pag) <= 0) {
                 lPagesa.setText(VariablatPublike.decimalFormat.format(pag.doubleValue()));
                 pagesa = pag;
                 lKusuri.setText(VariablatPublike.decimalFormat.format(pagesa.subtract(ttl)));
                 stage.close();
             }else {
-                System.err.println(ttl.toString() + ", " + pag.toString());
-                MesazhetPublike.Lajmerim("Pagesa nuk mund te jete me e vogel se shuma qe duhet paguar",
-                        MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.ERROR, 5);
+                ntf.setMessage("Pagesa nuk mund te jete me e vogel se shuma qe duhet paguar");
+                ntf.setType(NotificationType.ERROR);
+                ntf.show();
                 txtPagesa.clear();
             }
         }else {
-            MesazhetPublike.Lajmerim("Pagesa duhet te permbaje vetem numra", MesazhetPublike.ButtonType.NO_BUTTON, MesazhetPublike.NotificationType.ERROR, 4);
+            ntf.setMessage("Pagesa duhet te permbaje vetem numra");
+            ntf.setType(NotificationType.ERROR);
+            ntf.show();
             txtPagesa.clear();
         }
     }

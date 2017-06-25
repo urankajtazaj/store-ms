@@ -17,7 +17,12 @@ import java.util.Set;
 public class VariablatPublike {
 
     static int uid = 0;
+    static int uid2 = 0;
     static String uemri = "";
+
+    public static String server = "localhost";
+    public static String emriShitores;
+    public static String styleSheet;
 
     public static boolean leapYear(int viti) {
         return viti%4==0?(viti%200==0?false:viti%400==0?true:false):false;
@@ -43,8 +48,8 @@ public class VariablatPublike {
         return ditet / 7 + (ditet % 7 > 0 ? 1 : 0);
     }
 
-    static int shto, rregullo, fshi, shiko, shtepi, punetoret, konsumatoret, shitjet, settings, raportet, produktet;
-    static double muaj, jave, dite;
+    static boolean shto, rregullo, fshi, shiko;
+    static double muaj, jave, dite, tvsh;
 
     static Map<Integer, String> dataMap = new HashMap<>();
     static Map<String, Integer> dep = new HashMap<>();
@@ -63,6 +68,7 @@ public class VariablatPublike {
     static DecimalFormat decimalFormat = new DecimalFormat("###,###,##0.00€");
     static DecimalFormat decimal = new DecimalFormat("###,###,###.#");
     static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    static SimpleDateFormat hms = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     static StringConverter converter = new StringConverter<LocalDate>() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -82,5 +88,7 @@ public class VariablatPublike {
                 return null;
         }
     };
+
+    static boolean shitjeBool, konsumatoret, punetoret, shtepi, raportet, produktet, settings;
 
 }
