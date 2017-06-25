@@ -1,8 +1,8 @@
-# Store Management System
-A store management system desktop application created with Java using JavaFX Framework.
+## Store Management System
+A Store Management System (SMS), desktop application created with Java using JavaFX Framework.
 
-## Dark mode
+### Dark mode
 ![Image](http://i.imgur.com/SRTDMAB.png)
 
-## Light mode
+### Light mode
 ![Image](http://i.imgur.com/6qh83WN.png)
