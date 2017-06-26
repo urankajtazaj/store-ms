@@ -252,7 +252,7 @@ public class Raportet implements Initializable {
     }
 
     private void merrTeDhenat(int id) {
-        try (PreparedStatement pstmt = con.prepareStatement("select p_id, produkti, qmimi_shitjes, tvsh, cash, total, sasia from vshitjet where red_id = ?")) {
+        try (PreparedStatement pstmt = con.prepareStatement("select p_id, produkti, qmimi_shitjes, tvsh, prod_zbritje, cash, total, sasia from vshitjet where red_id = ?")) {
             pstmt.setInt(1, id);
             total = 0;
             double tvsh = 0;
@@ -260,10 +260,13 @@ public class Raportet implements Initializable {
             ResultSet rs = pstmt.executeQuery();
 
             ObservableList<FaturaDhenat> data = FXCollections.observableArrayList();
+            double zbritje = 0.0;
             while (rs.next()) {
+                zbritje = rs.getDouble("qmimi_shitjes") - (rs.getDouble("qmimi_shitjes") * rs.getDouble("prod_zbritje")/100);
                 data.add(new FaturaDhenat(rs.getString("p_id"), rs.getString("produkti"), VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")),
-                        VariablatPublike.decimal.format(rs.getDouble("sasia"))));
-                total += rs.getDouble("qmimi_shitjes") * rs.getDouble("sasia");
+                        VariablatPublike.decimal.format(rs.getDouble("sasia")), VariablatPublike.decimalFormat.format(zbritje) +
+                        " (" + VariablatPublike.decimal.format(rs.getDouble("prod_zbritje")) + "%)"));
+                total += zbritje * rs.getDouble("sasia");
                 pag = rs.getDouble("cash");
                 tvsh = rs.getDouble("tvsh");
             }

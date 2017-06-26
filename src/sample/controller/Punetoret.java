@@ -63,6 +63,8 @@ public class Punetoret implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        btnShtoPnt.setDisable(!VariablatPublike.shto);
+
         ShtoPunetoret sp = new ShtoPunetoret();
         cbDep.getItems().clear();
         cbDep.getItems().add("Te gjithe");
@@ -96,6 +98,8 @@ public class Punetoret implements Initializable {
                     btIvEd.setPreserveRatio(true);
                     btnDel.setGraphic(btIvDel);
                     btnEd.setGraphic(btIvEd);
+                    btnDel.setDisable(!VariablatPublike.shto);
+                    btnEd.setDisable(!VariablatPublike.shto);
 
                     if (!empty) {
                     Punetori punetori = tbl.getItems().get(getIndex());

@@ -474,7 +474,7 @@
  .combo-box-popup .list-view .list-cell, .choice-box .context-menu {
     -fx-text-fill: rgba(255,255,255,0.85);
     -fx-font-weight: bold;
-    -fx-padding: 5;
+    -fx-padding: 7;
     -fx-background-color: -fx-secondary;
  }
 
@@ -1236,4 +1236,10 @@
 
 .menuTp {
     -fx-background-color: -fx-btn;
+}
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: #fff;
+    -fx-opacity: .1;
+    -fx-padding: 0 1 0 1;
 }

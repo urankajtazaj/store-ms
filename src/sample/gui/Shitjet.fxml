@@ -9,73 +9,93 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<GridPane hgap="10" style="-fx-background-color: -fx-sidebar; -fx-padding: 15" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<BorderPane style="-fx-background-color: -fx-sidebar; -fx-padding: 15" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Shitjet">
 
-    <children>
-        <HBox GridPane.rowIndex="0" GridPane.columnIndex="0" spacing="5">
-            <TextField fx:id="txtProd" minWidth="330" promptText="Emri ose Barkodi i produktit"/>
-            <ComboBox fx:id="cbCat"/>
-        </HBox>
+    <center>
+        <SplitPane orientation="HORIZONTAL" styleClass="shadow" >
+            <items>
 
-        <ScrollPane fx:id="scroll" styleClass="edge-to-edge" GridPane.rowIndex="1" GridPane.columnIndex="0" minWidth="550" maxWidth="550">
-            <FlowPane fx:id="flow" vgap="3" hgap="2" minWidth="550" maxWidth="550" orientation="HORIZONTAL">
-                <padding>
-                    <Insets top="15"/>
-                </padding>
-            </FlowPane>
-        </ScrollPane>
+                <VBox spacing="10">
+                    <padding>
+                        <Insets right="10"/>
+                    </padding>
+                    <HBox spacing="5">
+                        <TextField fx:id="txtProd" style="-fx-font-size: 22; -fx-padding: 5" minWidth="330" promptText="Emri ose Barkodi i produktit"/>
+                        <ComboBox fx:id="cbCat"/>
+                    </HBox>
 
-        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.rowSpan="2">
-            <TableView fx:id="tbl" minWidth="450" maxWidth="450">
-                <placeholder>
-                    <Label text="Zgjedhni produktet"/>
-                </placeholder>
-                <columns>
-                    <TableColumn text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
-                    <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
-                    <TableColumn minWidth="40" maxWidth="45" fx:id="colAct"/>
-                </columns>
-            </TableView>
+                    <ScrollPane fitToWidth="true" fx:id="scroll" styleClass="edge-to-edge" minWidth="450">
+                        <FlowPane fx:id="flow" vgap="3" hgap="2" minWidth="450" orientation="HORIZONTAL">
+                            <padding>
+                                <Insets top="15"/>
+                            </padding>
+                        </FlowPane>
+                    </ScrollPane>
+                </VBox>
 
-            <GridPane hgap="25" vgap="5" styleClass="gpL">
-                <Label text="Subtotal" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <Label fx:id="lSubTtl" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <Label text="TVSH" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <Label fx:id="lTvsh" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Label style="-fx-font-size: 30" text="Total" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                <Label fx:id="lTotal" style="-fx-font-size: 30; -fx-text-fill: -fx-primary;" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                <Label text="Pagesa" style="-fx-font-size: 16;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                <Label fx:id="lPagesa" text="0" style="-fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                <Label text="Kusuri" style="-fx-font-size: 16;" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                <Label fx:id="lKusuri" text="0" style=" -fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-                <columnConstraints>
-                    <ColumnConstraints hgrow="ALWAYS"/>
-                    <ColumnConstraints hgrow="ALWAYS" halignment="RIGHT"/>
-                </columnConstraints>
-            </GridPane>
+                <VBox spacing="5">
+                    <padding>
+                        <Insets left="15" right="15"/>
+                    </padding>
+                    <TableView fx:id="tbl" minWidth="450">
+                        <placeholder>
+                            <Label text="Zgjedhni produktet"/>
+                        </placeholder>
+                        <columns>
+                            <TableColumn text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+                            <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                            <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
+                            <TableColumn text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
+                            <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+                            <TableColumn text="Njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
+                            <TableColumn minWidth="40" maxWidth="45" fx:id="colAct"/>
+                        </columns>
+                    </TableView>
 
-            <HBox spacing="5">
-                <Button HBox.hgrow="ALWAYS" text="KRYEJ PAGESEN" onAction="#pagesa" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60; -fx-border-radius: 5; -fx-background-radius: 5;"
-                        minWidth="200" maxWidth="600" textAlignment="CENTER"/>
-                <Button HBox.hgrow="ALWAYS" text="PERFUNDO" onAction="#perfundoPagesen" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60; -fx-border-radius: 5; -fx-background-radius: 5;"
-                        minWidth="200" maxWidth="600" textAlignment="CENTER"/>
-            </HBox>
+                    <GridPane hgap="25" vgap="5" styleClass="gpL">
+                        <Label text="Subtotal" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label fx:id="lSubTtl" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="TVSH" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <Label fx:id="lTvsh" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label style="-fx-font-size: 30" text="Total" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <Label fx:id="lTotal" style="-fx-font-size: 30; -fx-text-fill: -fx-primary;" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label text="Pagesa" style="-fx-font-size: 16;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <Label fx:id="lPagesa" text="0" style="-fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <Label text="Kusuri" style="-fx-font-size: 16;" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <Label fx:id="lKusuri" text="0" style=" -fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-            <CheckBox text="Shtyp faturen" selected="true" fx:id="cbShtypPagesen"/>
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER"/>
+                            <ColumnConstraints hgrow="ALWAYS" halignment="RIGHT"/>
+                        </columnConstraints>
 
-            <HBox spacing="5" alignment="CENTER_RIGHT">
-                <padding>
-                    <Insets top="15"/>
-                </padding>
-                <Label text="Konsumatori:"/>
-                <ComboBox fx:id="cbKons"/>
-            </HBox>
+                    </GridPane>
 
-        </VBox>
-    </children>
-</GridPane>
+                    <HBox spacing="5" alignment="CENTER">
+                        <Button HBox.hgrow="ALWAYS" text="KRYEJ PAGESEN" onAction="#pagesa" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60;
+                        -fx-border-radius: 1; -fx-background-radius: 1;"
+                                minWidth="200" maxWidth="500" textAlignment="CENTER"/>
+                        <Button HBox.hgrow="ALWAYS" text="PERFUNDO" onAction="#perfundoPagesen" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60;
+                        -fx-border-radius: 1; -fx-background-radius: 1; -fx-background-color: -fx-green"
+                                minWidth="200" maxWidth="500" textAlignment="CENTER"/>
+                    </HBox>
+
+                    <CheckBox text="Shtyp faturen" selected="true" fx:id="cbShtypPagesen"/>
+
+                    <HBox spacing="5" alignment="CENTER_RIGHT">
+                        <padding>
+                            <Insets top="15"/>
+                        </padding>
+                        <Label text="Konsumatori:"/>
+                        <ComboBox fx:id="cbKons"/>
+                    </HBox>
+
+                </VBox>
+
+            </items>
+        </SplitPane>
+    </center>
+
+</BorderPane>

@@ -205,6 +205,7 @@ public class Controller implements Initializable {
                     e1.printStackTrace();
                 }
             });
+
         }else if (((ToggleButton) e.getSource()).getText().equals("PRODUKTET")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/produktet.fxml"));
             pntRoot = loader.load();

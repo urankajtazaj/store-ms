@@ -115,6 +115,7 @@
                     <TableColumn text="Produkti"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
                     <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
                     <TableColumn text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+                    <TableColumn text="Total (Zbritje)"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
                 </columns>
             </TableView>
             <VBox spacing="5" alignment="CENTER_RIGHT">

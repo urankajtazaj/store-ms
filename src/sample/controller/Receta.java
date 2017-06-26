@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Receta {
     private String produkti;
-    private double qmimi, sasia, pagesa, total = 0;
+    private double qmimi, sasia, pagesa, total = 0, zbritje = 0;
     private int tvsh = 0, len = 0;
 
     String[][] rec = new String[100][3];
@@ -25,14 +25,15 @@ public class Receta {
         this.tvsh = tvsh;
     }
 
-    public void setData(String produkti, double sasia, double qmimi, int i) {
+    public void setData(String produkti, double sasia, double qmimi, double zbritje, int i) {
         this.produkti = produkti;
-        this.qmimi = qmimi;
+        this.qmimi = qmimi - (qmimi * zbritje);
         this.sasia = sasia;
-        this.total += qmimi * sasia;
+        this.zbritje = zbritje;
+        this.total += (qmimi - (qmimi * zbritje)) * sasia;
         rec[i][0] = produkti;
         rec[i][1] = VariablatPublike.decimal.format(sasia);
-        rec[i][2] = qmimi+"";
+        rec[i][2] = (qmimi - (qmimi * zbritje))+"";
         len = i;
     }
 
@@ -42,14 +43,14 @@ public class Receta {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         sb.append(String.format("\n\t\t%s\n\n\t%s\n\n", VariablatPublike.emriShitores, sdf.format(date)));
-        sb.append(String.format("%-18s%-6s %-9s\n--------------------------------\n", "Produkti", "Qmimi", "Total"));
+        sb.append(String.format("%-22s%-6s %-9s\n------------------------------------\n", "Produkti", "Qmimi", "Total"));
         for (int i = 0; i <= len; i++) {
-            sb.append(String.format("%-18s%-6.2f%.2f€\n", rec[i][0] + " x" + rec[i][1], Double.parseDouble(rec[i][2]), (Double.parseDouble(rec[i][1]) *
+            sb.append(String.format("%-22s%-6.2f%.2f€\n", rec[i][0] + " x" + rec[i][1], Double.parseDouble(rec[i][2]), (Double.parseDouble(rec[i][1]) *
             Double.parseDouble(rec[i][2]))));
         }
-        sb.append("--------------------------------\n");
-        sb.append(String.format("%-18s%10.2f€\n%-18s%10d%%\n%-18s%10.2f€\n\n","Total pa tvsh:", total, "TVSH:", tvsh, "TOTAL:", total + (total * tvsh/100)));
-        sb.append(String.format("%-18s%10.2f€\n%-18s%10.2f€", "Pagesa:", pagesa, "Kusuri:", pagesa - (total + (total * tvsh/100))));
+        sb.append("------------------------------------\n");
+        sb.append(String.format("%-22s%10.2f€\n%-18s%10d%%\n%-18s%10.2f€\n\n","Total pa tvsh:", total, "TVSH:", tvsh, "TOTAL:", total + (total * tvsh/100)));
+        sb.append(String.format("%-22s%10.2f€\n%-18s%10.2f€", "Pagesa:", pagesa, "Kusuri:", pagesa - (total + (total * tvsh/100))));
         sb.append(String.format("\n\nPunetori: %s", VariablatPublike.uemri));
         sb.append("\n\n\t\tJU FALEMINDERIT");
         krijoFile(date);

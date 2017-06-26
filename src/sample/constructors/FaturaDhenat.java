@@ -4,13 +4,22 @@ package sample.constructors;
  * Created by uran on 17-06-02.
  */
 public class FaturaDhenat {
-    private String emri, qmimi, sasia, bc;
+    private String emri, qmimi, sasia, bc, zbritje;
 
-    public FaturaDhenat (String bc, String emri, String qmimi, String sasia) {
+    public FaturaDhenat (String bc, String emri, String qmimi, String sasia, String zbritje) {
         this.bc = bc;
         this.emri = emri;
         this.qmimi = qmimi;
         this.sasia = sasia;
+        this.zbritje = zbritje;
+    }
+
+    public void setZbritje (String zbritje) {
+        this.zbritje = zbritje;
+    }
+
+    public String getZbritje () {
+        return this.zbritje;
     }
 
     public String getBc() {

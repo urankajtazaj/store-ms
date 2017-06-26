@@ -159,7 +159,7 @@ public class Shitjet implements Initializable {
             if (i == index)
                 sp.getSasia().setText(s);
 
-            t = t.add(new BigDecimal((sp.getQmimi() * Double.parseDouble(sp.getSasia().getText()))+""));
+            t = t.add(new BigDecimal((((sp.getQmimi() - (sp.getQmimi() * Double.parseDouble(sp.getZbritje())/100)) * Double.parseDouble(sp.getSasia().getText()))+"")));
         }
 
         qmimi = t;
@@ -189,7 +189,7 @@ public class Shitjet implements Initializable {
                 button.setWrapText(true);
                 button.getStyleClass().addAll("btn", "bigBtn");
                 button.setStyle("-fx-background-color: " + rs.getString("bg") + "; -fx-text-fill: " + rs.getString("fg"));
-                button.setId(rs.getString("id") + " " + rs.getDouble("qmimi_shitjes") + " " + rs.getString("njesia"));
+                button.setId(rs.getString("id") + " " + rs.getDouble("qmimi_shitjes") + " " + rs.getString("njesia") + " " + rs.getDouble("zbritje"));
 
                 button.setOnAction(e -> {
                     firstButton(button);
@@ -204,9 +204,10 @@ public class Shitjet implements Initializable {
 
     private void firstButton (Button button){
         try {
-            tbl.getItems().add(new ShitjetProd(Integer.parseInt(button.getId().split(" ")[0]),
-                    button.getText().split("\n")[0], Double.parseDouble(button.getId().split(" ")[1]), button.getId().split(" ")[2]));
-            qmimi = qmimi.add(new BigDecimal(button.getId().split(" ")[1]));
+            String[] dt = button.getId().split(" ");
+            tbl.getItems().add(new ShitjetProd(Integer.parseInt(dt[0]),
+                    button.getText().split("\n")[0], Double.parseDouble(dt[1]), dt[2], dt[3]));
+            qmimi = qmimi.add(new BigDecimal(Double.parseDouble(dt[1]) - (Double.parseDouble(dt[1]) * Double.parseDouble(dt[3])/100)));
             lSubTtl.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
             lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue() + (qmimi.doubleValue() * VariablatPublike.tvsh/100)));
         }catch (Exception ex) { ex.printStackTrace(); }
@@ -228,13 +229,13 @@ public class Shitjet implements Initializable {
     @FXML
     private void perfundoPagesen (){
         try {
-            if (tbl.getItems().size() > 0 && pgs.compareTo(BigDecimal.ZERO) > 0 && qmimi.compareTo(BigDecimal.ZERO) > 0) {
+            if (tbl.getItems().size() > 0 && pgs.compareTo(BigDecimal.ZERO) > 0 && qmimi.compareTo(BigDecimal.ZERO) > 0 && qmimi.compareTo(pgs) <= 0) {
                 Statement stmt = con.createStatement();
                 stmt.addBatch("insert into rec values (null, current_timestamp(), "+VariablatPublike.tvsh+")");
                 int i = 0;
                 for (ShitjetProd sp : tbl.getItems()) {
                     if (cbShtypPagesen.isSelected())
-                        receta.setData(sp.getEmri(), Double.parseDouble(sp.getSasia().getText()), sp.getQmimi(), i++);
+                        receta.setData(sp.getEmri(), Double.parseDouble(sp.getSasia().getText()), sp.getQmimi(), Double.parseDouble(sp.getZbritje())/100, i++);
                     batch(stmt, sp.getId(), sp.getQmimi(), pgs.compareTo(BigDecimal.ZERO) <= 0 ? new BigDecimal(0+"") : pgs, Double.parseDouble(sp.getSasia().getText()));
                 }
                 stmt.executeBatch();
