@@ -68,16 +68,16 @@ public class Produktet implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        fillTable();
         fillBarChart();
+        fillTable();
 
-        colZbritje.setCellFactory(TextFieldTableCell.<ProduktetClass>forTableColumn());
-        colZbritje.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<ProduktetClass, String>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<ProduktetClass, String> event) {
-                System.out.println(event.getNewValue());
-            }
-        });
+//        colZbritje.setCellFactory(TextFieldTableCell.<ProduktetClass>forTableColumn());
+//        colZbritje.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<ProduktetClass, String>>() {
+//            @Override
+//            public void handle(TableColumn.CellEditEvent<ProduktetClass, String> event) {
+//                System.out.println(event.getNewValue());
+//            }
+//        });
 
         colAksion.setCellFactory(e -> {
             return new TableCell<String, HBox>() {
@@ -115,7 +115,7 @@ public class Produktet implements Initializable {
                                 ntf.setType(NotificationType.SUCCESS);
                                 ntf.setButton(ButtonType.NO_BUTTON);
                                 ntf.show();
-                                rregulloProd(p.getId(), p.getEmri(), p.getBc(), p.getQmimiStd(), p.getQmimi(), p.getSasia(), p.getSasiaKrit(), p.getZbritje(),
+                                rregulloProd(p.getId(), p.getEmri(), p.getBc(), p.getQmimiStd(), p.getQmimi().substring(0, p.getQmimi().length()-1), p.getSasia(), p.getSasiaKrit(), p.getZbritje(),
                                         p.getKategoria());
                             }catch (Exception ex) {ex.printStackTrace(); }
                         });
@@ -136,21 +136,26 @@ public class Produktet implements Initializable {
 
         tblProduktet.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        tblProduktet.setRowFactory(e -> {
-            return new TableRow<ProduktetClass>(){
+        colSasia.setCellFactory(e -> {
+            return new TableCell<ProduktetClass, Integer>() {
                 @Override
-                protected void updateItem(ProduktetClass item, boolean empty) {
+                protected void updateItem(Integer item, boolean empty) {
                     super.updateItem(item, empty);
 
-                    if (!empty && item != null) {
-                        if (item.getSasia() < 60) {
-                            setStyle("-fx-fill: red; -fx-text-fill: green");
+                    TableRow<ProduktetClass> row = getTableRow();
+
+                    if (!empty && row != null) {
+                        ProduktetClass pc = tblProduktet.getItems().get(getIndex());
+                        setText(item + "");
+                        if (item <= pc.getSasiaKrit() || item == 0) {
+                            row.getStyleClass().add("redRow");
                         }
                     }
 
                 }
             };
         });
+
     }
 
     @FXML private void export() throws Exception {
@@ -211,15 +216,14 @@ public class Produktet implements Initializable {
         stage.show();
     }
 
-
-    private void rregulloProd (int id, String emri, String bc, double qstd, double qs, int stok, int stokk, String zbritje, String catIndex) throws Exception {
+    private void rregulloProd (int id, String emri, String bc, double qstd, String qs, int stok, int stokk, String zbritje, String catIndex) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoProdukte.fxml"));
         ShtoProdukte sp = new ShtoProdukte();
         sp.setId(id);
         sp.setEmri(emri);
         sp.setBc(bc);
         sp.setQmimiStd(qstd);
-        sp.setQmimiShitjes(qs);
+        sp.setQmimiShitjes(Double.parseDouble(qs));
         sp.setStok(stok);
         sp.setStokCrit(stokk);
         sp.setZbritje(Double.parseDouble(zbritje.substring(0, zbritje.length()-1)));
@@ -229,13 +233,13 @@ public class Produktet implements Initializable {
     }
 
     private void fillTable(){
-        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery("select * from produktet")){
+        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery("select * from produktet order by sasia")){
             tblProduktet.getItems().clear();
             ObservableList<ProduktetClass> data = FXCollections.observableArrayList();
             while (rs.next()) {
                 data.add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"),
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
-                        rs.getDouble("qmimi_shitjes"), rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokcrit"),
+                        VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")), rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokcrit"),
                         rs.getDouble("zbritje") + "%"));
             }
             tblProduktet.setItems(data);

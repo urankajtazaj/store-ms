@@ -6,14 +6,13 @@ import javafx.scene.control.TextField;
  * Created by uran on 17-05-19.
  */
 public class ShitjetProd {
-    private String emri, njesia, zbritje;
+    private String emri, njesia, zbritje, qmimi;
     private int id;
     private TextField sasia = new TextField("1");
-    private double qmimi;
 
     public ShitjetProd (){}
 
-    public ShitjetProd (int id, String emri, double qmimi, String njesia, String zbritje) {
+    public ShitjetProd (int id, String emri, String qmimi, String njesia, String zbritje) {
         this.emri = emri;
         this.id = id;
         this.qmimi = qmimi;
@@ -53,11 +52,11 @@ public class ShitjetProd {
         this.emri = emri;
     }
 
-    public double getQmimi() {
+    public String getQmimi() {
         return qmimi;
     }
 
-    public void setQmimi(double qmimi) {
+    public void setQmimi(String qmimi) {
         this.qmimi = qmimi;
     }
 

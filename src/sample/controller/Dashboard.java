@@ -346,9 +346,11 @@ public class Dashboard implements Initializable {
         int j = (int) (VariablatPublike.hyratJ / VariablatPublike.jave * 100);
         int d = (int) (VariablatPublike.hyratS / VariablatPublike.dite * 100);
 
+        boolean dark = VariablatPublike.styleSheet.substring(VariablatPublike.styleSheet.length()-9, VariablatPublike.styleSheet.length()).equals("style.css");
+
         if (m >= 100) {
             lPie1.setText("");
-            lPie1.setGraphic(new ImageView(new Image("/sample/photo/done.png")));
+            lPie1.setGraphic(new ImageView(new Image("/sample/photo/" + (dark ? "payment.png" : "done.png"))));
             pie1.getData().add(new PieChart.Data("", 100));
             pie1.getData().add(new PieChart.Data("", 0));
         } else {
@@ -360,7 +362,7 @@ public class Dashboard implements Initializable {
 
         if (j >= 100) {
             lPie2.setText("");
-            lPie2.setGraphic(new ImageView(new Image("/sample/photo/done.png")));
+            lPie2.setGraphic(new ImageView(new Image("/sample/photo/" + (dark ? "payment.png" : "done.png"))));
             pie2.getData().add(new PieChart.Data("", 100));
             pie2.getData().add(new PieChart.Data("", 0));
         } else {
@@ -371,7 +373,7 @@ public class Dashboard implements Initializable {
 
         if (d >= 100) {
             lPie3.setText("");
-            lPie3.setGraphic(new ImageView(new Image("/sample/photo/done.png")));
+            lPie3.setGraphic(new ImageView(new Image("/sample/photo/" + (dark ? "payment.png" : "done.png"))));
             pie3.getData().add(new PieChart.Data("", 100));
             pie3.getData().add(new PieChart.Data("", 0));
         } else {

@@ -100,7 +100,7 @@ public class Shitjet implements Initializable {
                         btn.setGraphic(iv);
                         btn.setOnAction(e -> {
                             ShitjetProd sp = tbl.getItems().get(getIndex());
-                            qmimi = qmimi.subtract(new BigDecimal((sp.getQmimi() * Double.parseDouble(sp.getSasia().getText()))+""));
+                            qmimi = qmimi.subtract(new BigDecimal((Double.parseDouble(sp.getQmimi()) * Double.parseDouble(sp.getSasia().getText()))+""));
                             tbl.getItems().remove(getIndex());
                             lSubTtl.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
                             lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue() + (qmimi.doubleValue()*VariablatPublike.tvsh/100)));
@@ -159,7 +159,9 @@ public class Shitjet implements Initializable {
             if (i == index)
                 sp.getSasia().setText(s);
 
-            t = t.add(new BigDecimal((((sp.getQmimi() - (sp.getQmimi() * Double.parseDouble(sp.getZbritje())/100)) * Double.parseDouble(sp.getSasia().getText()))+"")));
+            double qm = Double.parseDouble(sp.getQmimi().substring(0, sp.getQmimi().length()-1));
+            t = t.add(new BigDecimal((((qm - (qm * Double.parseDouble(sp.getZbritje().substring(0, sp.getZbritje().length()-1))/100)) *
+                    Double.parseDouble(sp.getSasia().getText()))+"")));
         }
 
         qmimi = t;
@@ -205,8 +207,12 @@ public class Shitjet implements Initializable {
     private void firstButton (Button button){
         try {
             String[] dt = button.getId().split(" ");
+            double qm = Double.parseDouble(dt[1]);
+            double zbr = Double.parseDouble(dt[3]);
+            double zbrttl = qm - (qm * zbr/100);
             tbl.getItems().add(new ShitjetProd(Integer.parseInt(dt[0]),
-                    button.getText().split("\n")[0], Double.parseDouble(dt[1]), dt[2], dt[3]));
+                    button.getText().split("\n")[0], VariablatPublike.decimalFormat.format(zbrttl), dt[2],
+                    VariablatPublike.decimal.format(zbr) + "%"));
             qmimi = qmimi.add(new BigDecimal(Double.parseDouble(dt[1]) - (Double.parseDouble(dt[1]) * Double.parseDouble(dt[3])/100)));
             lSubTtl.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
             lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue() + (qmimi.doubleValue() * VariablatPublike.tvsh/100)));
@@ -233,10 +239,14 @@ public class Shitjet implements Initializable {
                 Statement stmt = con.createStatement();
                 stmt.addBatch("insert into rec values (null, current_timestamp(), "+VariablatPublike.tvsh+")");
                 int i = 0;
+                double qm = 0;
                 for (ShitjetProd sp : tbl.getItems()) {
-                    if (cbShtypPagesen.isSelected())
-                        receta.setData(sp.getEmri(), Double.parseDouble(sp.getSasia().getText()), sp.getQmimi(), Double.parseDouble(sp.getZbritje())/100, i++);
-                    batch(stmt, sp.getId(), sp.getQmimi(), pgs.compareTo(BigDecimal.ZERO) <= 0 ? new BigDecimal(0+"") : pgs, Double.parseDouble(sp.getSasia().getText()));
+                    qm = Double.parseDouble(sp.getQmimi().substring(0, sp.getQmimi().length()-1));
+                    if (cbShtypPagesen.isSelected()) {
+                        receta.setData(sp.getEmri(), Double.parseDouble(sp.getSasia().getText()), qm,
+                                Double.parseDouble(sp.getZbritje().substring(0, sp.getZbritje().length()-1)) / 100, i++);
+                    }
+                    batch(stmt, sp.getId(), qm, pgs.compareTo(BigDecimal.ZERO) <= 0 ? new BigDecimal(0+"") : pgs, Double.parseDouble(sp.getSasia().getText()));
                 }
                 stmt.executeBatch();
                 updateProd();

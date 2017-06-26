@@ -34,7 +34,7 @@
             <TextField fx:id="txtEmri"/>
         </VBox>
         <VBox alignment="BOTTOM_LEFT">
-            <Label text="Departamenti" styleClass="filterLbl"/>
+            <Label text="Roli" styleClass="filterLbl"/>
             <ComboBox fx:id="cbDep" value="Shitje">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -93,8 +93,7 @@
         <columns>
             <TableColumn maxWidth="60" minWidth="60" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
             <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
-            <TableColumn text="Puna"><cellValueFactory><PropertyValueFactory property="puna"/></cellValueFactory></TableColumn>
-            <TableColumn text="Departamenti"><cellValueFactory><PropertyValueFactory property="departamenti"/></cellValueFactory></TableColumn>
+            <TableColumn text="Roli"><cellValueFactory><PropertyValueFactory property="departamenti"/></cellValueFactory></TableColumn>
             <TableColumn text="Data e punesimit"><cellValueFactory><PropertyValueFactory property="punesimi"/></cellValueFactory></TableColumn>
             <TableColumn text="Paga"><cellValueFactory><PropertyValueFactory property="paga"/></cellValueFactory></TableColumn>
             <TableColumn fx:id="colMng" text="Shitje"><cellValueFactory><PropertyValueFactory property="hyrat"/></cellValueFactory></TableColumn>

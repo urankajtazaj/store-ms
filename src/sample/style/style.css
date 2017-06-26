@@ -53,7 +53,7 @@
 }
 
 .root {
-    -fx-font-family: "Nunito";
+    -fx-font-family: "Roboto";
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-accent: -fx-btn;
@@ -611,12 +611,13 @@
     -fx-border-width: 1 0 1 0;
 }*/
 
+
 .table-view .table-row-cell .text {
     -fx-fill: rgba(255,255,255,.85);
 }
 
 .table-view .table-row-cell:hover {
-    -fx-background-color: rgba(0,0,0,0.15);
+    -fx-background-color: rgba(0,0,0,0.13);
 }
 
 .table-view .table-row-cell:empty {
@@ -1205,11 +1206,6 @@
     -fx-font-size: 18;
 }
 
-.redRow .text {
-    -fx-font-weight: bold;
-    -fx-fill: -fx-primary;
-}
-
 .smallVb .toggle-button {
     -fx-min-width: 20;
     -fx-max-width: 20;
@@ -1242,4 +1238,8 @@
     -fx-background-color: #fff;
     -fx-opacity: .1;
     -fx-padding: 0 1 0 1;
+}
+
+.redRow .text {
+    -fx-fill: -fx-red;
 }

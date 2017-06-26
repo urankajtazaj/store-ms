@@ -161,10 +161,6 @@ public class Controller implements Initializable {
             VariablatPublike.shitjeBool = rs.getBoolean("shitje");
             VariablatPublike.produktet = rs.getBoolean("produktet");
             VariablatPublike.settings = rs.getBoolean("settings");
-            VariablatPublike.rregullo = rs.getBoolean("rregullo");
-            VariablatPublike.shiko = rs.getBoolean("lexo");
-            VariablatPublike.fshi = rs.getBoolean("fshi");
-            VariablatPublike.shto = rs.getBoolean("shto");
 
         }catch (Exception e){ e. printStackTrace(); }
     }

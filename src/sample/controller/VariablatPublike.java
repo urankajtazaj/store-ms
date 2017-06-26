@@ -48,7 +48,6 @@ public class VariablatPublike {
         return ditet / 7 + (ditet % 7 > 0 ? 1 : 0);
     }
 
-    static boolean shto, rregullo, fshi, shiko;
     static double muaj, jave, dite, tvsh;
 
     static Map<Integer, String> dataMap = new HashMap<>();

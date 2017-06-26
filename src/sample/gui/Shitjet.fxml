@@ -9,8 +9,10 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane style="-fx-background-color: -fx-sidebar; -fx-padding: 15" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-          fx:controller="sample.controller.Shitjet">
+            fx:controller="sample.controller.Shitjet">
 
     <center>
         <SplitPane orientation="HORIZONTAL" styleClass="shadow" >
@@ -74,12 +76,30 @@
                     </GridPane>
 
                     <HBox spacing="5" alignment="CENTER">
-                        <Button HBox.hgrow="ALWAYS" text="KRYEJ PAGESEN" onAction="#pagesa" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60;
+                        <Button HBox.hgrow="ALWAYS" onAction="#pagesa" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60;
                         -fx-border-radius: 1; -fx-background-radius: 1;"
-                                minWidth="200" maxWidth="500" textAlignment="CENTER"/>
-                        <Button HBox.hgrow="ALWAYS" text="PERFUNDO" onAction="#perfundoPagesen" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60;
-                        -fx-border-radius: 1; -fx-background-radius: 1; -fx-background-color: -fx-green"
-                                minWidth="200" maxWidth="500" textAlignment="CENTER"/>
+                                minWidth="200" maxWidth="500" textAlignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Kryej pagesen"/>
+                            </tooltip>
+                            <graphic>
+                                <ImageView preserveRatio="true" fitWidth="25">
+                                    <Image url="/sample/photo/euro.png"/>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button HBox.hgrow="ALWAYS" onAction="#perfundoPagesen" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60;
+                        -fx-border-radius: 1; -fx-background-radius: 1;"
+                                minWidth="200" maxWidth="500" textAlignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Perfundo shitjen"/>
+                            </tooltip>
+                            <graphic>
+                                <ImageView preserveRatio="true" fitWidth="25">
+                                    <Image url="/sample/photo/payment.png"/>
+                                </ImageView>
+                            </graphic>
+                        </Button>
                     </HBox>
 
                     <CheckBox text="Shtyp faturen" selected="true" fx:id="cbShtypPagesen"/>

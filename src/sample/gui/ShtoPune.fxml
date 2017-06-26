@@ -6,31 +6,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <GridPane vgap="25" hgap="55" alignment="TOP_CENTER" styleClass="gp" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml">
+          xmlns:fx="http://javafx.com/fxml">
 
     <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnSpan="2" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <padding>
+            <Insets top="15"/>
+        </padding>
         <Label text="Emri i punes"/>
         <TextField minWidth="200" fx:id="txtEmriPunes"/>
     </HBox>
 
-    <VBox spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="0">
+    <VBox spacing="10" fx:id="cbVb1" GridPane.rowIndex="1" GridPane.columnIndex="0">
         <Label text="Menyte aktive" styleClass="infoTtl, intoTtlNb"/>
-        <CheckBox text="Shtepi" fx:id="cbShtepi"/>
-        <CheckBox text="Punetoret" fx:id="cbPunetoret"/>
-        <CheckBox text="Konsumatoret" fx:id="cbKonsumatoret"/>
-        <CheckBox text="Produktet" fx:id="cbProduktet"/>
-        <CheckBox text="Raportet" fx:id="cbRaportet"/>
-        <CheckBox text="Rregullo" fx:id="cbRregullo"/>
-        <CheckBox text="Shitjet" fx:id="cbShitjet"/>
+        <CheckBox text="Shtepi" fx:id="cbShtepi" selected="true"/>
+        <CheckBox text="Punetoret" fx:id="cbPunetoret" selected="true"/>
+        <CheckBox text="Konsumatoret" fx:id="cbKonsumatoret" selected="true"/>
+        <CheckBox text="Produktet" fx:id="cbProduktet" selected="true"/>
     </VBox>
 
-    <VBox spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="1">
-        <Label text="Privilegjet" styleClass="infoTtl, intoTtlNb"/>
-        <CheckBox text="Lexim" fx:id="cbShikim"/>
-        <CheckBox text="Shtim" fx:id="cbShtim"/>
-        <CheckBox text="Rregullim" fx:id="cbRregullim"/>
-        <CheckBox text="Fshirje" fx:id="cbFshirje"/>
+    <VBox spacing="10" fx:id="cbVb2" GridPane.rowIndex="1" GridPane.columnIndex="1">
+        <Label styleClass="infoTtl, intoTtlNb"/>
+        <CheckBox text="Raportet" fx:id="cbRaportet" selected="true"/>
+        <CheckBox text="Rregullo" fx:id="cbRregullo" selected="true"/>
+        <CheckBox text="Shitjet" fx:id="cbShitjet" selected="true"/>
     </VBox>
 
     <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="5" alignment="CENTER_RIGHT">

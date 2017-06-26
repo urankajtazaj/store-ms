@@ -6,11 +6,11 @@ import javafx.scene.control.Label;
  * Created by uran on 17-04-07.
  */
 public class ProduktetClass {
-    private String zbritje, bc, emri, prodhuesi, kategoria, furnizuesi;
+    private String qmimi, zbritje, bc, emri, prodhuesi, kategoria, furnizuesi;
     private int id, sasia, sasiaKrit;
-    private double qmimi, qmimiStd;
+    private double qmimiStd;
 
-    public ProduktetClass(String barcode, int id, String emri, String kategoria, double qmimi, double qmimiStd, int sasia, int sasiaKrit, String zbritje) {
+    public ProduktetClass(String barcode, int id, String emri, String kategoria, String qmimi, double qmimiStd, int sasia, int sasiaKrit, String zbritje) {
         this.emri = emri;
         this.id = id;
         this.kategoria = kategoria;
@@ -95,11 +95,11 @@ public class ProduktetClass {
         this.kategoria = kategoria;
     }
 
-    public double getQmimi() {
+    public String getQmimi() {
         return qmimi;
     }
 
-    public void setQmimi(double qmimi) {
+    public void setQmimi(String qmimi) {
         this.qmimi = qmimi;
     }
 

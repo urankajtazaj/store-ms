@@ -56,17 +56,19 @@ public class Settings implements Initializable {
         addDeps("", 0);
     }
 
-    private void rregulloPunen(TextField tf, int id) {
+    private void rregulloPunen(TextField tf, int id, HBox hb) {
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoPune.fxml"));
             ShtoPune sp = new ShtoPune();
             sp.setTf(tf);
             sp.setId(id);
+            sp.setHBox(hb);
+            sp.setVbox(vbPunet);
             sp.setStage(stage);
             loader.setController(sp);
             Parent parent = loader.load();
-            Scene scene = new Scene(parent, 350, 450);
+            Scene scene = new Scene(parent, 345, 335);
             scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
             stage.setScene(scene);
             stage.initModality(Modality.WINDOW_MODAL);
@@ -100,7 +102,7 @@ public class Settings implements Initializable {
         btnRregullo.setId(index+"");
 
         btnRregullo.setOnAction(e -> {
-            rregulloPunen(tfEmri, index);
+            rregulloPunen(tfEmri, index, hb);
         });
 
         hb.getChildren().addAll(tfEmri, btnRregullo);
