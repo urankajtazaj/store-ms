@@ -100,7 +100,8 @@ public class Shitjet implements Initializable {
                         btn.setGraphic(iv);
                         btn.setOnAction(e -> {
                             ShitjetProd sp = tbl.getItems().get(getIndex());
-                            qmimi = qmimi.subtract(new BigDecimal((Double.parseDouble(sp.getQmimi()) * Double.parseDouble(sp.getSasia().getText()))+""));
+                            qmimi = qmimi.subtract(new BigDecimal((Double.parseDouble(sp.getQmimi().substring(0, sp.getQmimi().length()-1)) *
+                                    Double.parseDouble(sp.getSasia().getText()))+""));
                             tbl.getItems().remove(getIndex());
                             lSubTtl.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
                             lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue() + (qmimi.doubleValue()*VariablatPublike.tvsh/100)));

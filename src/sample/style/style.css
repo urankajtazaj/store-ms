@@ -1234,10 +1234,14 @@
     -fx-background-color: -fx-btn;
 }
 
-.split-pane:horizontal > .split-pane-divider {
+.split-pane:horizontal > .split-pane-divider, .split-pane:vertical > .split-pane-divider {
     -fx-background-color: #fff;
     -fx-opacity: .1;
     -fx-padding: 0 1 0 1;
+}
+
+.split-pane {
+    -fx-background-color: transparent, -fx-sidebar;
 }
 
 .redRow .text {

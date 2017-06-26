@@ -120,9 +120,15 @@ public class ShtoPunetoret implements Initializable {
         try {
 
             Statement stmt = con.createStatement();
-            Statement stmt2 = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from punetoret where id = " + id + " limit 1");
-            ResultSet rs2 = stmt2.executeQuery("select usr, pw from perdoruesi where pnt_id = " + id + " limit 1");
+
+            Statement stmt2 = null;
+            ResultSet rs2 = null;
+
+            if (id > 0) {
+                stmt2 = con.createStatement();
+                rs2 = stmt2.executeQuery("select usr, pw from perdoruesi where pnt_id = " + id + " limit 1");
+            }
 
             while (rs.next()) {
                 emri.setText(rs.getString("emri"));
@@ -141,9 +147,11 @@ public class ShtoPunetoret implements Initializable {
                 punesuar.setValue(LocalDate.parse(rs.getString("data_punesimit"), VariablatPublike.dtf));
             }
 
-            rs2.next();
-            txtUser.setText(rs2.getString("usr"));
-            txtPw.setText(rs2.getString("pw"));
+            if (id > 0) {
+                rs2.next();
+                txtUser.setText(rs2.getString("usr"));
+                txtPw.setText(rs2.getString("pw"));
+            }
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -171,10 +179,9 @@ public class ShtoPunetoret implements Initializable {
             }
 
             if (!emri.getText().equals("") && !mbiemri.getText().equals("")
-                    && !paga.getText().equals("") && !punesuar.getEditor().getText().equals("")
-                    && !telefoni.getText().equals("") && !email.getText().equals("")) {
-                if (!paga.getText().trim().matches("^\\d+(\\.\\d)*$") || !telefoni.getText().trim().matches("[0-9 ]+")) {
-                    ntf.setMessage("Fushat 'Paga' dhe 'Telefoni' duhet te permajne vetem numra");
+                    && !paga.getText().equals("") && !punesuar.getEditor().getText().equals("")) {
+                if (!paga.getText().trim().matches("^\\d+(\\.\\d)*$") || !telefoni.getText().trim().matches("|^[0-9 ]+")) {
+                    ntf.setMessage("Gabim ne konvertim te te dhenave, kontrolloni fushat ku kerkohen numra");
                     ntf.setType(NotificationType.ERROR);
                     ntf.show();
                 }else {

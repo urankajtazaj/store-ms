@@ -171,12 +171,11 @@ public class Punetoret implements Initializable {
     }
 
     private void fshiPunetorin(int id) {
-        try (PreparedStatement ps = con.prepareStatement("delete from punetoret where id = ?");
-        PreparedStatement ps2 = con.prepareStatement("delete from perdoruesi where pnt_id = ?")) {
-            ps.setInt(1, id);
-            ps2.setInt(1, id);
-            ps.execute();
-            ps2.execute();
+        try (Statement st = con.createStatement()) {
+            st.addBatch("delete from punetoret where id = " + id);
+            st.addBatch("delete from perdoruesi where pnt_id = " + id);
+            st.addBatch("delete from pushimet where pnt_id = " + id);
+            st.executeBatch();
             ntf.setType(NotificationType.SUCCESS);
             ntf.setButton(ButtonType.NO_BUTTON);
             ntf.setMessage("Punetori u fshi me sukses");
