@@ -159,6 +159,7 @@ public class Dashboard implements Initializable {
         x.setMinorTickVisible(false);
     }
 
+    //    TOOLTIP EVENET - AREA CHART
     private void Events(Axis<Double> xa, XYChart.Series series, Tooltip tp, MouseEvent event, String lookup) {
 
         Node n = ((XYChart.Data) series.getData().get((int) xa.toNumericValue(xa.getValueForDisplay(event.getX()) + 0.5) - 1)).getNode();
@@ -232,10 +233,13 @@ public class Dashboard implements Initializable {
     private void handleCb(int index, String p) {
         try {
 
-            if (index > 0) {
-                Statement stm = con.createStatement();
-                String q = null;
+//            if (index > 0) {
+            Statement stm = con.createStatement();
+            String q = null;
 
+            if (index == 0) {
+                dataForAreaChart(p, index);
+            } else {
                 if (index == 1) {
                     if (p.equals("vit")) {
                         q = "select week(koha_shitjes) as data, year(koha_shitjes) as viti, sum(totalneto) as qmimi_shitjes from vshitjet " +
@@ -346,7 +350,7 @@ public class Dashboard implements Initializable {
         int j = (int) (VariablatPublike.hyratJ / VariablatPublike.jave * 100);
         int d = (int) (VariablatPublike.hyratS / VariablatPublike.dite * 100);
 
-        boolean dark = VariablatPublike.styleSheet.substring(VariablatPublike.styleSheet.length()-9, VariablatPublike.styleSheet.length()).equals("style.css");
+        boolean dark = VariablatPublike.styleSheet.substring(VariablatPublike.styleSheet.length() - 9, VariablatPublike.styleSheet.length()).equals("style.css");
 
         if (m >= 100) {
             lPie1.setText("");
