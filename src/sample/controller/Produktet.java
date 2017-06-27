@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.sf.jasperreports.engine.*;
 import sample.Enums.*;
 import sample.Enums.ButtonType;
 import sample.constructors.ProduktetClass;
@@ -57,7 +58,7 @@ public class Produktet implements Initializable {
     @FXML private TableColumn colStatusi, colAksion, colSasia, colZbritje;
     @FXML private BarChart<String, Number> barChart, barChart2;
 
-    SimpleDateFormat tf = new SimpleDateFormat("dd-MM-yyyy HH-mm-s");
+    SimpleDateFormat tf = new SimpleDateFormat("dd-MM-yyyy_HH-mm-s");
 
     private BorderPane bp;
 
@@ -209,6 +210,28 @@ public class Produktet implements Initializable {
             stage.close();
         });
 
+        export.btnPdf.setOnAction(e -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    iv.setImage(VariablatPublike.spinning);
+                    transition.play();
+                    toPdf();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            VariablatPublike.stopSpinning(transition, iv);
+                            stage.close();
+                            ntf.setMessage("Dokumenti u eksportua me sukses");
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.setButton(ButtonType.NO_BUTTON);
+                            ntf.show();
+                        }
+                    });
+                }
+            }).start();
+        });
+
         export.btnAnulo.setOnAction(e -> {
             stage.close();
         });
@@ -221,6 +244,19 @@ public class Produktet implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void toPdf() {
+        try {
+            String path = System.getProperty("user.home") + "/store-ms-files/Raportet/";
+            JasperReport jasperReport = JasperCompileManager.compileReport(path + "raportet/Produktet.jrxml");
+            Map<String, Object> params = new HashMap();
+            params.put("Punetori", VariablatPublike.uemri);
+
+            JasperPrint jprint = JasperFillManager.fillReport(jasperReport, params, con);
+
+            JasperExportManager.exportReportToPdfFile(jprint, path + "PDF/Produktet " + tf.format(new Date()) + ".pdf");
+        }catch (Exception e) { e.printStackTrace(); }
     }
 
     private void rregulloProd (int id, String emri, String bc, double qstd, String qs, int stok, int stokk, String zbritje, String catIndex) throws Exception {
