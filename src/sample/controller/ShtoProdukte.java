@@ -96,6 +96,15 @@ public class ShtoProdukte implements Initializable {
 
     }
 
+    private String unit (String s) {
+        if (s.equals("Kilogram (kg)")) return "kg";
+        else if (s.equals("Gram (g)")) return "g";
+        else if (s.equals("Miligram (mg)")) return "mg";
+        else if (s.equals("Liter (l)")) return "l";
+        else if (s.equals("Mililiter (ml)")) return "ml";
+        return s;
+    }
+
     private void addToDatabase(){
         String q = "insert into produktet values (null, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(q)) {
@@ -104,7 +113,7 @@ public class ShtoProdukte implements Initializable {
             ps.setInt(3, Integer.parseInt(stok.getText()));
             ps.setDouble(4, qmimiStd.getText().isEmpty() ? 0 : Double.parseDouble(qmimiStd.getText()));
             ps.setDouble(5, Double.parseDouble(qmimiShitjes.getText()));
-            ps.setString(6, cbNjesia.getSelectionModel().getSelectedItem());
+            ps.setString(6, unit(cbNjesia.getSelectionModel().getSelectedItem()));
             ps.setString(7, bc.getText());
             ps.setInt(8, zbritje.getText().isEmpty() ? 0 : Integer.parseInt(zbritje.getText()));
             ps.setInt(9, stokCrit.getText().isEmpty() ? 0 : Integer.parseInt(stokCrit.getText()));
@@ -154,7 +163,7 @@ public class ShtoProdukte implements Initializable {
             ps.setInt(5, stokCrit.getText().isEmpty() ? 0 : Integer.parseInt(stokCrit.getText()));
             ps.setDouble(6, qmimiStd.getText().isEmpty() ? 0 : Double.parseDouble(qmimiStd.getText()));
             ps.setDouble(7, Double.parseDouble(qmimiShitjes.getText()));
-            ps.setString(8, cbNjesia.getSelectionModel().getSelectedItem());
+            ps.setString(8, unit(cbNjesia.getSelectionModel().getSelectedItem()));
             ps.setDouble(9, zbritje.getText().isEmpty() ? 0 : Double.parseDouble(zbritje.getText()));
             ps.setInt(10, id);
 
