@@ -210,6 +210,7 @@ public class ShtoPunetoret implements Initializable {
                     pastro();
                     ntf.setMessage("Te dhenat u ruajten me sukses");
                     ntf.setType(NotificationType.SUCCESS);
+                    ntf.setButton(ButtonType.NO_BUTTON);
                     ntf.show();
                 }
             }else

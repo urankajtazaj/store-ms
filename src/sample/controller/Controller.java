@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,6 +43,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import sample.Main;
 
 import javax.tools.Tool;
@@ -52,6 +54,7 @@ public class Controller implements Initializable {
     @FXML BorderPane root;
     @FXML VBox btnVb;
     @FXML private Label user;
+    @FXML private ImageView spinner;
     private String usr = "null";
     private int pntId = 0;
 
@@ -67,7 +70,6 @@ public class Controller implements Initializable {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -189,6 +191,8 @@ public class Controller implements Initializable {
 
             Punetoret punetoret = loader.getController();
 
+            punetoret.setTransition(startSpinning(spinner));
+            punetoret.setIv(spinner);
             punetoret.setStage(root);
 
             punetoret.btnShtoPnt.setOnAction(a -> {
@@ -206,6 +210,8 @@ public class Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/produktet.fxml"));
             pntRoot = loader.load();
             Produktet p = loader.getController();
+            p.setTransition(startSpinning(spinner));
+            p.setIv(spinner);
             p.setBp(root);
         }else if (((ToggleButton) e.getSource()).getText().equals("KONSUMATORET")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/konsumatoret.fxml"));
@@ -229,6 +235,13 @@ public class Controller implements Initializable {
     @FXML
     private void exit(){
         Platform.exit();
+    }
+
+    public RotateTransition startSpinning(ImageView iv){
+        RotateTransition transition = new RotateTransition(Duration.millis(700), iv);
+        transition.setByAngle(360);
+        transition.setCycleCount(-1);
+        return transition;
     }
 
 }

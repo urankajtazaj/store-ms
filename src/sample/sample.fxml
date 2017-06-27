@@ -87,6 +87,16 @@
                     </ToggleButton>
                 </VBox>
             </center>
+            <bottom>
+                <HBox alignment="CENTER">
+                    <padding>
+                        <Insets bottom="15"/>
+                    </padding>
+                    <ImageView fx:id="spinner" preserveRatio="true">
+                        <Image url="/sample/photo/doneSpinning.png"/>
+                    </ImageView>
+                </HBox>
+            </bottom>
         </BorderPane>
     </left>
 

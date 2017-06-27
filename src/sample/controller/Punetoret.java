@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.*;
+import javafx.util.Duration;
 import net.sf.jasperreports.engine.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -44,6 +46,12 @@ public class Punetoret implements Initializable {
     @FXML public Button btnShtoPnt;
     @FXML private TextField txtId, txtEmri;
     @FXML private ComboBox<String> cbDep, cbStat;
+    private ImageView iv;
+    private RotateTransition transition;
+
+    public void setTransition (RotateTransition transition) {
+        this.transition = transition;
+    }
 
     DB db = new DB();
     Connection con = db.connect();
@@ -182,6 +190,7 @@ public class Punetoret implements Initializable {
             ntf.show();
         }catch (Exception e) { e.printStackTrace(); }
     }
+
     private void fillTable(){
 
         double paga = 0;
@@ -241,10 +250,13 @@ public class Punetoret implements Initializable {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    iv.setImage(VariablatPublike.spinning);
+                    transition.play();
                     excelFile("Punëtorët", "xlsx", keySet());
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
+                            VariablatPublike.stopSpinning(transition, iv);
                             ntf.setMessage("Fajlli u krijua me sukses!");
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.show();
@@ -258,17 +270,23 @@ public class Punetoret implements Initializable {
         });
 
         export.btnCsv.setOnAction(e -> {
+            iv.setImage(VariablatPublike.spinning);
+            transition.play();
             createFile(stage, "csv");
+            VariablatPublike.stopSpinning(transition, iv);
         });
 
         export.btnPdf.setOnAction(e -> {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    iv.setImage(VariablatPublike.spinning);
+                    transition.play();
                     jasperFile();
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
+                            VariablatPublike.stopSpinning(transition, iv);
                             ntf.setMessage("Fajli u exportua me sukses");
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.show();
@@ -391,6 +409,7 @@ public class Punetoret implements Initializable {
         return path;
     }
 
+    // PDF FILE
     private void jasperFile(){
         try {
             String path = System.getProperty("user.home") + "/store-ms-files/Raportet/";
@@ -471,5 +490,9 @@ public class Punetoret implements Initializable {
                         VariablatPublike.sdf.format(rs.getDate("data_punesimit")), VariablatPublike.decimalFormat.format(rs.getDouble("hyrat")), rs.getString("statusi")));
             }
         }catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void setIv(ImageView iv) {
+        this.iv = iv;
     }
 }

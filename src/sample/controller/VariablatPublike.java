@@ -1,5 +1,9 @@
 package sample.controller;
 
+import javafx.animation.RotateTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 
 import java.text.DecimalFormat;
@@ -23,6 +27,9 @@ public class VariablatPublike {
     public static String server = "localhost";
     public static String emriShitores;
     public static String styleSheet;
+
+    public static Image spinning = new Image("/sample/photo/spinner.png");
+    public static Image doneSpinning = new Image("/sample/photo/doneSpinning.png");
 
     public static boolean leapYear(int viti) {
         return viti%4==0?(viti%200==0?false:viti%400==0?true:false):false;
@@ -89,5 +96,20 @@ public class VariablatPublike {
     };
 
     static boolean shitjeBool, konsumatoret, punetoret, shtepi, raportet, produktet, settings;
+
+
+    public static RotateTransition startSpinning(ImageView iv){
+        RotateTransition transition = new RotateTransition(Duration.millis(700), iv);
+        transition.setByAngle(360);
+        transition.setCycleCount(-1);
+        return transition;
+    }
+
+    public static void stopSpinning (RotateTransition transition, ImageView iv) {
+        transition.stop();
+        iv.setImage(doneSpinning);
+        iv.setRotate(0);
+    }
+
 
 }

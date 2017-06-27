@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,18 +67,21 @@ public class Produktet implements Initializable {
 
     Random rand = new Random();
 
+    private RotateTransition transition;
+    private ImageView iv;
+
+    public void setTransition(RotateTransition transition) {
+        this.transition = transition;
+    }
+
+    public void setIv(ImageView iv) {
+        this.iv = iv;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fillBarChart();
         fillTable();
-
-//        colZbritje.setCellFactory(TextFieldTableCell.<ProduktetClass>forTableColumn());
-//        colZbritje.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<ProduktetClass, String>>() {
-//            @Override
-//            public void handle(TableColumn.CellEditEvent<ProduktetClass, String> event) {
-//                System.out.println(event.getNewValue());
-//            }
-//        });
 
         colAksion.setCellFactory(e -> {
             return new TableCell<String, HBox>() {
@@ -168,10 +172,13 @@ public class Produktet implements Initializable {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    iv.setImage(VariablatPublike.spinning);
+                    transition.play();
                     pnt.excelFile("Produktet", "xlsx", keySet());
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
+                            VariablatPublike.stopSpinning(transition, iv);
                             ntf.setMessage("Dokumenti u eksportua me sukses!");
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.setButton(ButtonType.NO_BUTTON);
@@ -342,10 +349,8 @@ public class Produktet implements Initializable {
         xlsData.put((i++)+"", new Object[] {"BARKODI", "ID", "PRODUKTI", "KATEGORIA", "SASIA", "NJESIA", "QMIMI", "ZBRITJE"});
         for (ProduktetClass p : tblProduktet.getItems()) {
             xlsData.put((i++)+"", new Object[] {p.getBc(), p.getId(), p.getEmri(), p.getKategoria(), p.getSasia(), "",
-                    VariablatPublike.decimalFormat.format(p.getQmimi()), p.getZbritje()});
+                    p.getQmimi(), p.getZbritje()});
         }
-        xlsData.put((i++) + "", new Object[] {});
-        xlsData.put((i++) + "", new Object[] {"Produkte", i-4});
         return xlsData;
     }
 
