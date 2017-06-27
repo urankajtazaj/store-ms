@@ -10,7 +10,7 @@ import java.sql.DriverManager;
  * Created by uran on 17-06-05.
  */
 public class DB {
-    private String db = "Sistem Informacioni/databaza/db";
+    private String db = "store-ms-files/Sistem Informacioni/databaza/db";
     private String conStr = "jdbc:h2:tcp://"+VariablatPublike.server+"/~/" + db;
     private String usr = "OOFJMPDRITAFRAETNFCSYWQUPXRRHQ";
     private String pw = "DfVxCqdKyMPz3yzYzQMHFCybn46q1iYS";
