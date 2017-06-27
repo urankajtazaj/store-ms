@@ -88,9 +88,9 @@
                 </VBox>
             </center>
             <bottom>
-                <HBox alignment="CENTER">
+                <HBox alignment="CENTER" style="-fx-background-color: -fx-secondary">
                     <padding>
-                        <Insets bottom="15"/>
+                        <Insets bottom="15" top="15"/>
                     </padding>
                     <ImageView fx:id="spinner" preserveRatio="true">
                         <Image url="/sample/photo/doneSpinning.png"/>

@@ -221,7 +221,6 @@ public class Produktet implements Initializable {
                         @Override
                         public void run() {
                             VariablatPublike.stopSpinning(transition, iv);
-                            stage.close();
                             ntf.setMessage("Dokumenti u eksportua me sukses");
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.setButton(ButtonType.NO_BUTTON);
@@ -230,6 +229,7 @@ public class Produktet implements Initializable {
                     });
                 }
             }).start();
+            stage.close();
         });
 
         export.btnAnulo.setOnAction(e -> {
