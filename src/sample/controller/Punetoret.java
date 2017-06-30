@@ -327,7 +327,7 @@ public class Punetoret implements Initializable {
         StringBuilder stringBuilder = new StringBuilder("");
         for (Punetori p : tbl.getItems()) {
             stringBuilder.append(p.getId() + ", " + p.getEmri() + ", " + p.getDepartamenti() + ", " + p.getPaga() + ", " +
-                    p.getHyrat() + ", " + p.getStatusi() + "\n");
+                    p.getHyrat() + ", " + p.getStatusi() + "\n\r");
         }
 
 //        VENDOSI NE FILE

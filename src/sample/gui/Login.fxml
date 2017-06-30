@@ -40,13 +40,6 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="btnAbout" styleClass="littleIcon">
-                <graphic>
-                    <ImageView preserveRatio="true" fitWidth="13">
-                        <Image url="/sample/photo/qblack.png"/>
-                    </ImageView>
-                </graphic>
-            </Button>
         </HBox>
     </bottom>
 

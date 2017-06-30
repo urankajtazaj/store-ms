@@ -398,7 +398,8 @@ public class Produktet implements Initializable {
 
             sb.append("BARKODI,ID,PRODUKTI,KATEGORIA,SASIA,QMIMI,ZBRITJE\n\n");
             for (ProduktetClass p : tblProduktet.getItems()) {
-                sb.append(p.getBc() + "," + p.getId() + "," + p.getEmri() + "," + p.getKategoria() + "," + p.getSasia() + "," + p.getQmimi() + "," + p.getZbritje() + "\n");
+                sb.append(p.getBc() + "," + p.getId() + "," + p.getEmri() + "," + p.getKategoria() + "," + p.getSasia() + "," +
+                        p.getQmimi() + "," + p.getZbritje() + "\n\r");
             }
 
             bw.write(sb.toString());
