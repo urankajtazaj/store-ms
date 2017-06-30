@@ -1,8 +1,7 @@
-## Store Management System
-A Store Management System (SMS), desktop application created with Java using JavaFX Framework.
+![Image](http://i.imgur.com/rhffLep.png)
 
-### Dark mode
-![Image](http://i.imgur.com/SRTDMAB.png)
-
-### Light mode
-![Image](http://i.imgur.com/6qh83WN.png)
+## Perdorimi
+1. Vendos folderin `store-ms-files` ne folderin kryesor *(C://User/%emri-folderit%)*
+2. Starto serverin duke hapur `Server.jar` dhe duke klikuar `Start`
+3. Starto aplikacionin `store-ms.jar`
+4. Perdor `admin` si user, dhe `123` si fjalekalim
