@@ -167,16 +167,14 @@ public class Produktet implements Initializable {
 
     @FXML
     private void filterTable(){
-        String q = "select * from produktet where (id " + (!txtId.getText().isEmpty() ? "= ?" : "> ?") + ") or " +
+        String q = "select * from produktet where (id " + (!txtId.getText().isEmpty() ? "= ?" : "> ?") + ") or (" +
                 "lower(emri) like lower('%?%') and kategoria_id " + (cbCat.getSelectionModel().getSelectedIndex()==0 ? "> ?" : "= ?") +
-                " and qmimi_shitjes " + cbOp.getSelectionModel().getSelectedItem() + " ?";
+                " and qmimi_shitjes " + cbOp.getSelectionModel().getSelectedItem() + " ?)";
         try (PreparedStatement ps = con.prepareStatement(q)) {
             ps.setInt(1, txtId.getText().isEmpty() ? 0 : Integer.parseInt(txtId.getText()));
             ps.setString(2, txtProd.getText());
             ps.setString(3, cbCat.getSelectionModel().getSelectedItem());
-            ps.setDouble(4, txtQmimi.getText().isEmpty() ? 0.0 : Double.parseDouble(txtQmimi.getText()));
-
-            System.out.println(ps.toString());
+//            ps.setDouble(4, txtQmimi.getText().isEmpty() ? 0.0 : Double.parseDouble(txtQmimi.getText()));
 
             ResultSet rs = ps.executeQuery();
 

@@ -53,8 +53,8 @@ public class Raportet implements Initializable {
     @FXML
     private void merrFaturat (){
         tblDhenat.getItems().clear();
-        try (PreparedStatement pstmt = con.prepareStatement("select distinct * from vfatura where formatdatetime(koha, 'yyyy-MM-dd') >= ? " +
-                "and formatdatetime(koha, 'yyyy-MM-dd') <= ? order by koha desc")) {
+        try (PreparedStatement pstmt = con.prepareStatement("select rec_id, usr, konsumatori, cash from vfatura where formatdatetime(koha, 'yyyy-MM-dd') >= ? " +
+                "and formatdatetime(koha, 'yyyy-MM-dd') <= ? group by rec_id order by rec_id desc")) {
             pstmt.setDate(1, java.sql.Date.valueOf(dpPrej.getValue()));
             pstmt.setDate(2, java.sql.Date.valueOf(dpDeri.getValue()));
 
@@ -62,7 +62,7 @@ public class Raportet implements Initializable {
             ObservableList<Faturat> data = FXCollections.observableArrayList();
             while (rs.next()) {
                 data.add(new Faturat(rs.getInt("rec_id"), rs.getString("usr"), rs.getString("konsumatori"),
-                        VariablatPublike.hms.format(rs.getTimestamp("koha")),
+                        "---",
                         VariablatPublike.decimalFormat.format(rs.getDouble("cash"))));
             }
             tblFatura.setItems(data);
