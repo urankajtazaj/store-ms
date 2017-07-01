@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -79,6 +80,11 @@ public class Punetoret implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        cbDep.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> filtroTabelen());
+        cbStat.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> filtroTabelen());
+        txtId.setOnKeyPressed(e -> {if (e.getCode().equals(KeyCode.ENTER)) filtroTabelen();});
+        txtEmri.setOnKeyPressed(e -> {if (e.getCode().equals(KeyCode.ENTER)) filtroTabelen();});
 
         lidhuDb();
         colAct.setStyle("-fx-alignment: CENTER-RIGHT");
@@ -481,7 +487,6 @@ public class Punetoret implements Initializable {
                 (cbStat.getSelectionModel().getSelectedIndex() == 0 ? ">= 0" : "= " + (cbStat.getSelectionModel().getSelectedIndex() == 1 ? "1" : "0"));
         try (PreparedStatement ps = con.prepareStatement(q)) {
 
-            System.out.println(q);
             ResultSet rs = ps.executeQuery();
 
             tbl.getItems().clear();
