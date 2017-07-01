@@ -54,6 +54,8 @@ public class Produktet implements Initializable {
 
     Punetoret pnt = new Punetoret();
 
+    @FXML private TextField txtId, txtProd, txtProdh, txtQmimi, txtFurn;
+    @FXML private ComboBox<String> cbCat, cbOp;
     @FXML private TableView<ProduktetClass> tblProduktet;
     @FXML private TableColumn colStatusi, colAksion, colSasia, colZbritje;
     @FXML private BarChart<String, Number> barChart, barChart2;
@@ -161,6 +163,31 @@ public class Produktet implements Initializable {
             };
         });
 
+    }
+
+    @FXML
+    private void filterTable(){
+        String q = "select * from produktet where (id " + (!txtId.getText().isEmpty() ? "= ?" : "> ?") + ") or " +
+                "lower(emri) like lower('%?%') and kategoria_id " + (cbCat.getSelectionModel().getSelectedIndex()==0 ? "> ?" : "= ?") +
+                " and qmimi_shitjes " + cbOp.getSelectionModel().getSelectedItem() + " ?";
+        try (PreparedStatement ps = con.prepareStatement(q)) {
+            ps.setInt(1, txtId.getText().isEmpty() ? 0 : Integer.parseInt(txtId.getText()));
+            ps.setString(2, txtProd.getText());
+            ps.setString(3, cbCat.getSelectionModel().getSelectedItem());
+            ps.setDouble(4, txtQmimi.getText().isEmpty() ? 0.0 : Double.parseDouble(txtQmimi.getText()));
+
+            System.out.println(ps.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            tblProduktet.getItems().clear();
+            while (rs.next()) {
+                tblProduktet.getItems().add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"), rs.getString("qmimi_shitjes"),
+                        VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")), rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokCrit"),
+                        rs.getString("zbritje"), rs.getString("njesia")));
+            }
+
+        }catch (Exception e) {e.printStackTrace(); }
     }
 
     @FXML private void export() throws Exception {
@@ -283,7 +310,7 @@ public class Produktet implements Initializable {
                 data.add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"),
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
                         VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")), rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokcrit"),
-                        rs.getDouble("zbritje") + "%"));
+                        rs.getDouble("zbritje") + "%", rs.getString("njesia")));
             }
             tblProduktet.setItems(data);
         }catch (Exception e) {e.printStackTrace();}

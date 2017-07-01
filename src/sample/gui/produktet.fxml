@@ -17,29 +17,21 @@
         <HBox alignment="BOTTOM_LEFT" styleClass="filterHb" spacing="2" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
             <VBox alignment="BOTTOM_LEFT">
                 <Label text="ID" styleClass="filterLbl"/>
-                <TextField maxWidth="50" minWidth="50" />
-            </VBox>
-            <VBox alignment="BOTTOM_LEFT">
-                <Label text="Prodhuesi" styleClass="filterLbl"/>
-                <TextField maxWidth="120" minWidth="120"/>
+                <TextField maxWidth="50" minWidth="50" fx:id="txtId" />
             </VBox>
             <VBox alignment="BOTTOM_LEFT">
                 <Label text="Produkti" styleClass="filterLbl"/>
-                <TextField maxWidth="120" minWidth="120"/>
-            </VBox>
-            <VBox alignment="BOTTOM_LEFT">
-                <Label text="Frunizuesi" styleClass="filterLbl"/>
-                <TextField maxWidth="120" minWidth="120"/>
+                <TextField maxWidth="120" minWidth="120" fx:id="txtProd"/>
             </VBox>
             <VBox alignment="BOTTOM_LEFT">
                 <Label text="Kategoria" styleClass="filterLbl"/>
-                <ComboBox value="Kategoria"/>
+                <ComboBox value="Kategoria" fx:id="cbCat"/>
             </VBox>
             <VBox alignment="BOTTOM_LEFT">
                 <Label text="Qmimi" styleClass="filterLbl"/>
-                <TextField maxWidth="100"/>
+                <TextField maxWidth="100" fx:id="txtQmimi"/>
             </VBox>
-            <ComboBox value="=">
+            <ComboBox value="=" fx:id="cbOp">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="="/>
@@ -48,7 +40,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Button text="Filtro"/>
+            <Button text="Filtro" onAction="#filterTable"/>
             <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="5">
                 <Button text="Shto" onAction="#shtoProdukt"/>
                 <Button text="Eksporto" onAction="#export"/>
@@ -65,6 +57,7 @@
                 <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colZbritje" text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+                <TableColumn fx:id="colNjesia" text="Njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colAksion" minWidth="50" maxWidth="50"></TableColumn>
             </columns>
         </TableView>
