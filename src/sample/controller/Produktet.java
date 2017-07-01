@@ -86,6 +86,14 @@ public class Produktet implements Initializable {
         fillBarChart();
         fillTable();
 
+        cbCat.getItems().clear();
+        cbCat.getItems().add("Te gjitha");
+        Iterator<String> it = VariablatPublike.prodKat.iterator();
+        while (it.hasNext()) {
+            cbCat.getItems().add(it.next());
+        }
+        cbCat.getSelectionModel().select(0);
+
         colAksion.setCellFactory(e -> {
             return new TableCell<String, HBox>() {
 
@@ -157,6 +165,9 @@ public class Produktet implements Initializable {
                         if (item <= pc.getSasiaKrit() || item == 0) {
                             row.getStyleClass().add("redRow");
                         }
+                    }else {
+                        setGraphic(null);
+                        setText("");
                     }
 
                 }
@@ -167,14 +178,15 @@ public class Produktet implements Initializable {
 
     @FXML
     private void filterTable(){
-        String q = "select * from produktet where (id " + (!txtId.getText().isEmpty() ? "= ?" : "> ?") + ") or (" +
-                "lower(emri) like lower('%?%') and kategoria_id " + (cbCat.getSelectionModel().getSelectedIndex()==0 ? "> ?" : "= ?") +
-                " and qmimi_shitjes " + cbOp.getSelectionModel().getSelectedItem() + " ?)";
+        String q = "select * from produktet where id " + (!txtId.getText().isEmpty() ? "= ?" : "> ?") + " and " +
+                "lower(emri) like lower(?) and kategoria_id " + (cbCat.getSelectionModel().getSelectedIndex()==0 ? "> ?" : "= ?") +
+                " and qmimi_shitjes " + (txtQmimi.getText().isEmpty() ? "> ?" : cbOp.getSelectionModel().getSelectedItem() + " ?");
         try (PreparedStatement ps = con.prepareStatement(q)) {
+
             ps.setInt(1, txtId.getText().isEmpty() ? 0 : Integer.parseInt(txtId.getText()));
-            ps.setString(2, txtProd.getText());
-            ps.setString(3, cbCat.getSelectionModel().getSelectedItem());
-//            ps.setDouble(4, txtQmimi.getText().isEmpty() ? 0.0 : Double.parseDouble(txtQmimi.getText()));
+            ps.setString(2, "%" + txtProd.getText() + "%");
+            ps.setInt(3, cbCat.getSelectionModel().getSelectedIndex() == 0 ? 0 : VariablatPublike.revProdKat.get(cbCat.getSelectionModel().getSelectedItem()));
+            ps.setDouble(4, txtQmimi.getText().isEmpty() ? 0.0 : Double.parseDouble(txtQmimi.getText()));
 
             ResultSet rs = ps.executeQuery();
 
@@ -185,7 +197,16 @@ public class Produktet implements Initializable {
                         rs.getString("zbritje"), rs.getString("njesia")));
             }
 
-        }catch (Exception e) {e.printStackTrace(); }
+        }catch (NumberFormatException nfe) {
+            txtQmimi.clear();
+            txtId.clear();
+        }
+        catch (Exception e) {
+            ntf.setMessage("Ka ndodhur nje problem, ju lutem kontaktoni ne 'ukajtazi@gmail.com'");
+            ntf.setType(NotificationType.ERROR);
+            ntf.setButton(ButtonType.NO_BUTTON);
+            ntf.show();
+        }
     }
 
     @FXML private void export() throws Exception {
