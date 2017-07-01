@@ -45,7 +45,7 @@ public class Main extends Application {
             }
         });
 
-        primaryStage.setTitle("Sistemi per Menaxhim te Biznesit");
+        primaryStage.setTitle("Sistemi per Menaxhimin te Shitjeve");
         scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

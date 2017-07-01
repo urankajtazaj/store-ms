@@ -211,6 +211,7 @@ public class Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/produktet.fxml"));
             pntRoot = loader.load();
             Produktet p = loader.getController();
+
             p.setTransition(startSpinning(spinner));
             p.setIv(spinner);
             p.setBp(root);

@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -85,6 +86,12 @@ public class Produktet implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         fillBarChart();
         fillTable();
+
+        cbCat.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> filterTable());
+        cbOp.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> filterTable());
+        txtId.setOnKeyPressed(e -> { if (e.getCode().equals(KeyCode.ENTER)) filterTable(); });
+        txtProd.setOnKeyPressed(e -> { if (e.getCode().equals(KeyCode.ENTER)) filterTable(); });
+        txtQmimi.setOnKeyPressed(e -> { if (e.getCode().equals(KeyCode.ENTER)) filterTable(); });
 
         cbCat.getItems().clear();
         cbCat.getItems().add("Te gjitha");
@@ -180,7 +187,7 @@ public class Produktet implements Initializable {
     private void filterTable(){
         String q = "select * from produktet where id " + (!txtId.getText().isEmpty() ? "= ?" : "> ?") + " and " +
                 "lower(emri) like lower(?) and kategoria_id " + (cbCat.getSelectionModel().getSelectedIndex()==0 ? "> ?" : "= ?") +
-                " and qmimi_shitjes " + (txtQmimi.getText().isEmpty() ? "> ?" : cbOp.getSelectionModel().getSelectedItem() + " ?");
+                " and qmimi_shitjes " + (txtQmimi.getText().isEmpty() ? "> ?" : cbOp.getSelectionModel().getSelectedItem() + " ?") + " order by sasia";
         try (PreparedStatement ps = con.prepareStatement(q)) {
 
             ps.setInt(1, txtId.getText().isEmpty() ? 0 : Integer.parseInt(txtId.getText()));
@@ -206,6 +213,7 @@ public class Produktet implements Initializable {
             ntf.setType(NotificationType.ERROR);
             ntf.setButton(ButtonType.NO_BUTTON);
             ntf.show();
+            e.printStackTrace();
         }
     }
 
