@@ -73,6 +73,12 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        stage.setOnCloseRequest(e -> {
+            Server.stopServer();
+            Platform.exit();
+        });
+
         stage.setTitle("Sistemi per Menaxhim te Shitjeve");
         if (pntId > 0)
             setPrivileges();
@@ -238,6 +244,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void exit(){
+        Server.stopServer();
         Platform.exit();
     }
 

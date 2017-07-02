@@ -146,7 +146,7 @@ public class Konsumatoret implements Initializable {
             String path = System.getProperty("user.home") + "/store-ms-files/Raportet/";
             JasperReport jasperReport = JasperCompileManager.compileReport(path + "raportet/Konsumatoret.jrxml");
             Map<String, Object> params = new HashMap();
-            params.put("Punetori", VariablatPublike.uemri);
+            params.put("punetori", VariablatPublike.uemri);
 
             JasperPrint jprint = JasperFillManager.fillReport(jasperReport, params, con);
 

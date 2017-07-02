@@ -8,10 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sample.controller.Controller;
-import sample.controller.DB;
-import sample.controller.Login;
-import sample.controller.VariablatPublike;
+import sample.controller.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,9 +21,11 @@ import java.sql.Statement;
 
 public class Main extends Application {
 
+    Server server = new Server();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        server.startServer();
         lexoServerin();
 
         FXMLLoader login = new FXMLLoader(getClass().getResource("/sample/gui/Login.fxml"));
