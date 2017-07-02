@@ -187,7 +187,8 @@ public class Shitjet implements Initializable {
 
             flow.getChildren().clear();
             while (rs.next()) {
-                Button button = new Button(rs.getString("emri") + "\n(" + VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")) + ")");
+                Button button = new Button((rs.getString("emri").length() >= 30 ? rs.getString("emri").substring(0, 30) : rs.getString("emri")) +
+                        "\n(" + VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")) + ")");
                 button.setTextAlignment(TextAlignment.CENTER);
                 button.setWrapText(true);
                 button.getStyleClass().addAll("btn", "bigBtn");
