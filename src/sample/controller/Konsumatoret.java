@@ -1,6 +1,7 @@
 package sample.controller;
 
 import com.sun.xml.internal.bind.v2.TODO;
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.sf.jasperreports.engine.*;
 import sample.Enums.*;
 import sample.Enums.ButtonType;
 import sample.constructors.Punetori;
@@ -29,23 +31,34 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.TreeMap;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 /**
  * Created by uran on 17-04-20.
  */
 public class Konsumatoret implements Initializable {
 
+    SimpleDateFormat tf = new SimpleDateFormat("dd-MM-yyyy_HH-mm-s");
+
     DB db = new DB();
     Connection con = db.connect();
-
     private BorderPane root;
 
     Notification ntf = new Notification();
 
     Punetoret pnt = new Punetoret();
+
+    private RotateTransition transition;
+    public void setTransition(RotateTransition transition) {
+        this.transition = transition;
+    }
+
+    private ImageView iv;
+    public void setIv (ImageView iv) {
+        this.iv = iv;
+    }
 
     public void setRoot (BorderPane root){
         this.root = root;
@@ -74,10 +87,35 @@ public class Konsumatoret implements Initializable {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    iv.setImage(VariablatPublike.spinning);
+                    transition.play();
                     pnt.excelFile("Konsumatoret", "xlsx", keySet());
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
+                            VariablatPublike.stopSpinning(transition, iv);
+                            ntf.setMessage("Dokumenti u eksportua me sukses!");
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.setButton(ButtonType.NO_BUTTON);
+                            ntf.show();
+                        }
+                    });
+                }
+            }).start();
+            stage.close();
+        });
+
+        export.btnPdf.setOnAction(e -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    iv.setImage(VariablatPublike.spinning);
+                    transition.play();
+                    toPdf();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            VariablatPublike.stopSpinning(transition, iv);
                             ntf.setMessage("Dokumenti u eksportua me sukses!");
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.setButton(ButtonType.NO_BUTTON);
@@ -101,6 +139,19 @@ public class Konsumatoret implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void toPdf() {
+        try {
+            String path = System.getProperty("user.home") + "/store-ms-files/Raportet/";
+            JasperReport jasperReport = JasperCompileManager.compileReport(path + "raportet/Konsumatoret.jrxml");
+            Map<String, Object> params = new HashMap();
+            params.put("Punetori", VariablatPublike.uemri);
+
+            JasperPrint jprint = JasperFillManager.fillReport(jasperReport, params, con);
+
+            JasperExportManager.exportReportToPdfFile(jprint, path + "PDF/Konsumatoret " + tf.format(new Date()) + ".pdf");
+        }catch (Exception e) { e.printStackTrace(); }
     }
 
     private void addButtonToCell(){

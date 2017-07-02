@@ -219,6 +219,8 @@ public class Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/konsumatoret.fxml"));
             pntRoot = loader.load();
             Konsumatoret konsumatoret = loader.getController();
+            konsumatoret.setIv(spinner);
+            konsumatoret.setTransition(startSpinning(spinner));
             konsumatoret.setRoot(root);
         }else if (((ToggleButton) e.getSource()).getText().equals("RAPORTET")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Raportet.fxml"));
