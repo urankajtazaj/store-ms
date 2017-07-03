@@ -212,11 +212,12 @@ public class ShtoPunetoret implements Initializable {
                     ntf.setButton(ButtonType.NO_BUTTON);
                     ntf.show();
                 }
-            }else
+            }else {
                 ntf.setMessage("Fushat e kerkuara duhet te permbajne te dhena");
                 ntf.setType(NotificationType.ERROR);
+                ntf.setButton(ButtonType.NO_BUTTON);
                 ntf.show();
-
+            }
         }catch (Exception ex) {ex.printStackTrace();}
 
     }
