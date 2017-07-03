@@ -36,13 +36,6 @@
                     <Label wrapText="true" minWidth="0" fx:id="dep" styleClass="infoTtl, intoTtlNb"/>
                 </HBox>
             </VBox>
-            <VBox alignment="CENTER">
-                <padding>
-                    <Insets right="15"/>
-                </padding>
-                <Label text="Te hyrat" styleClass="infoTtl, intoTtlNb"/>
-                <Label text="1,243" styleClass="infoTtl, intoTtlNb" style="-fx-font-size: 33; -fx-text-fill: -fx-primary"/>
-            </VBox>
         </HBox>
 
         <VBox GridPane.rowIndex="1" styleClass="shadow" GridPane.halignment="CENTER" style="-fx-padding: 10;"
