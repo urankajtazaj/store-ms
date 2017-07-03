@@ -26,6 +26,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         server.startServer();
+        primaryStage.setOnCloseRequest(e -> {
+            Server.stopServer();
+        });
         lexoServerin();
 
         FXMLLoader login = new FXMLLoader(getClass().getResource("/sample/gui/Login.fxml"));
