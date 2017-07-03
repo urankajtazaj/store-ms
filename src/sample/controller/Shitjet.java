@@ -161,8 +161,9 @@ public class Shitjet implements Initializable {
                 sp.getSasia().setText(s);
 
             double qm = Double.parseDouble(sp.getQmimi().substring(0, sp.getQmimi().length()-1));
-            t = t.add(new BigDecimal((((qm - (qm * Double.parseDouble(sp.getZbritje().substring(0, sp.getZbritje().length()-1))/100)) *
-                    Double.parseDouble(sp.getSasia().getText()))+"")));
+//            t = t.add(new BigDecimal((((qm - (qm * Double.parseDouble(sp.getZbritje().substring(0, sp.getZbritje().length()-1))/100)) *
+//                    Double.parseDouble(sp.getSasia().getText()))+"")));
+            t = t.add(new BigDecimal(qm).multiply(new BigDecimal(sp.getSasia().getText())));
         }
 
         qmimi = t;
