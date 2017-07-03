@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -32,9 +33,7 @@ import sample.Enums.*;
 import sample.Enums.ButtonType;
 import sample.constructors.ProduktetClass;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,8 +60,8 @@ public class Produktet implements Initializable {
     @FXML private TableColumn colStatusi, colAksion, colSasia, colZbritje;
     @FXML private BarChart<String, Number> barChart, barChart2;
 
+    private Stage stage;
     SimpleDateFormat tf = new SimpleDateFormat("dd-MM-yyyy_HH-mm-s");
-
     private BorderPane bp;
 
     public void setBp (BorderPane bp) {
@@ -214,6 +213,24 @@ public class Produktet implements Initializable {
         }
     }
 
+    @FXML
+    private void importo(){
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("SQL files (*.sql)", "*.sql"));
+        File file = fc.showOpenDialog(stage);
+        try (FileReader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr); Statement stmt = con.createStatement()) {
+
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                stmt.addBatch(line);
+            }
+            stmt.executeBatch();
+            fillTable();
+
+        }catch (NullPointerException npe) {npe.printStackTrace();}
+        catch (Exception e) { e.printStackTrace(); }
+    }
+
     @FXML private void export() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/export.fxml"));
         Parent bpExport = loader.load();
@@ -324,10 +341,19 @@ public class Produktet implements Initializable {
         try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
             StringBuilder sb = new StringBuilder();
 
+            Set<String> kategoria = new HashSet<>();
+
             for (ProduktetClass p : tblProduktet.getItems()) {
                 sb.append("merge into produktet key(id) values (" + p.getId() + "," + VariablatPublike.revProdKat.get(p.getKategoria()) + ",'" + p.getEmri() + "'," +
                 p.getSasia() + "," + p.getQmimiStd() + "," + p.getQmimi() + ",'" + p.getNjesia() + "',current_timestamp(),'" + p.getBc() + "'," +
-                p.getZbritje().substring(0, p.getZbritje().length()-1) + "," + p.getSasiaKrit() + ")\n");
+                p.getZbritje().substring(0, p.getZbritje().length()-1) + "," + p.getSasiaKrit() + ");\n");
+                kategoria.add(p.getKategoria());
+            }
+
+            Iterator<String> it = kategoria.iterator();
+            while (it.hasNext()) {
+                String cat = it.next();
+                sb.append("merge into kat_prod key(id) values ("+VariablatPublike.revProdKat.get(cat)+", '"+cat+"', '#000', '#fff');\n");
             }
 
             bw.write(sb.toString());
@@ -371,7 +397,7 @@ public class Produktet implements Initializable {
             while (rs.next()) {
                 data.add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"),
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
-                        VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")) + " E",
+                        VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")),
                         rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokcrit"),
                         rs.getDouble("zbritje") + "%", rs.getString("njesia")));
             }
@@ -495,5 +521,9 @@ public class Produktet implements Initializable {
             bw.write(sb.toString());
 
         }catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

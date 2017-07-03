@@ -218,6 +218,7 @@ public class Controller implements Initializable {
             pntRoot = loader.load();
             Produktet p = loader.getController();
 
+            p.setStage(stage);
             p.setTransition(startSpinning(spinner));
             p.setIv(spinner);
             p.setBp(root);

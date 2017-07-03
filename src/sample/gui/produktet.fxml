@@ -43,6 +43,7 @@
             <Button text="Filtro" onAction="#filterTable"/>
             <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="5">
                 <Button text="Shto" onAction="#shtoProdukt"/>
+                <Button text="Importo" onAction="#importo"/>
                 <Button text="Eksporto" onAction="#export"/>
             </HBox>
         </HBox>

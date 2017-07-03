@@ -48,7 +48,7 @@ public class Receta {
             sb.append(String.format("%-22s%-6.2f%.2f€\n\r", rec[i][0] + " x" + rec[i][1], Double.parseDouble(rec[i][2]), (Double.parseDouble(rec[i][1]) *
             Double.parseDouble(rec[i][2]))));
         }
-        sb.append("------------------------------------\n\r");
+        sb.append("\n\r------------------------------------\n\r");
         sb.append(String.format("%-22s%10.2f€\n\r%-18s%10d%%\n\r%-18s%10.2f€\n\r\n\r","Total pa tvsh:", total, "TVSH:", tvsh, "TOTAL:", total + (total * tvsh/100)));
         sb.append(String.format("%-22s%10.2f€\n\r%-18s%10.2f€", "Pagesa:", pagesa, "Kusuri:", pagesa - (total + (total * tvsh/100))));
         sb.append(String.format("\n\r\n\rPunetori: %s", VariablatPublike.uemri));
