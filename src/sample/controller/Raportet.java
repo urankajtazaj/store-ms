@@ -262,16 +262,16 @@ public class Raportet implements Initializable {
             ObservableList<FaturaDhenat> data = FXCollections.observableArrayList();
             double zbritje = 0.0;
             while (rs.next()) {
-                zbritje = rs.getDouble("qmimi_shitjes") - (rs.getDouble("qmimi_shitjes") * rs.getDouble("prod_zbritje")/100);
+                zbritje = rs.getDouble("sasia") * rs.getDouble("qmimi_shitjes") - ((rs.getDouble("sasia") * rs.getDouble("qmimi_shitjes")) * rs.getDouble("prod_zbritje")/100);
                 data.add(new FaturaDhenat(rs.getString("p_id"), rs.getString("produkti"), VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")),
                         VariablatPublike.decimal.format(rs.getDouble("sasia")), VariablatPublike.decimalFormat.format(zbritje) +
                         " (" + VariablatPublike.decimal.format(rs.getDouble("prod_zbritje")) + "%)"));
-                total += zbritje * rs.getDouble("sasia");
+                total += zbritje;
                 pag = rs.getDouble("cash");
                 tvsh = rs.getDouble("tvsh");
             }
             lTvsh.setText(VariablatPublike.decimal.format(tvsh) + "%");
-            total = total + total*(tvsh/100);
+            total += total*(tvsh/100);
             tblDhenat.setItems(data);
             lTotal.setText(VariablatPublike.decimalFormat.format(total));
             lPagesa.setText(VariablatPublike.decimalFormat.format(pag));

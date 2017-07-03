@@ -199,9 +199,10 @@ public class Produktet implements Initializable {
 
             tblProduktet.getItems().clear();
             while (rs.next()) {
-                tblProduktet.getItems().add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"), rs.getString("qmimi_shitjes"),
-                        VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")), rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokCrit"),
-                        rs.getString("zbritje"), rs.getString("njesia")));
+                tblProduktet.getItems().add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"),
+                        VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
+                        rs.getString("qmimi_shitjes"), rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokCrit"),
+                        rs.getString("zbritje") + "%", rs.getString("njesia")));
             }
 
         }catch (NumberFormatException nfe) {
@@ -336,7 +337,8 @@ public class Produktet implements Initializable {
             while (rs.next()) {
                 data.add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"),
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
-                        VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")), rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokcrit"),
+                        VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")) + " E",
+                        rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokcrit"),
                         rs.getDouble("zbritje") + "%", rs.getString("njesia")));
             }
             tblProduktet.setItems(data);
