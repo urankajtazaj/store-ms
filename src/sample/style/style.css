@@ -848,8 +848,8 @@
 }
 
 .btnC {
-    -fx-min-width: 360;
-    -fx-min-width: 360;
+    -fx-min-width: 480;
+    -fx-min-width: 480;
     -fx-min-height: 35;
     -fx-max-height: 35;
     -fx-padding: 0;

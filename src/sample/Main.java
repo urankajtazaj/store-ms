@@ -34,9 +34,7 @@ public class Main extends Application {
         FXMLLoader login = new FXMLLoader(getClass().getResource("/sample/gui/Login.fxml"));
         Parent root = login.load();
 
-        System.err.println(VariablatPublike.javetNeMuaj(28));
-
-        Scene scene = new Scene(root, 700, 450);
+        Scene scene = new Scene(root, 700, 400);
 
         Login loginController = login.getController();
         loginController.setStage(primaryStage);

@@ -287,7 +287,26 @@ public class Produktet implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 400, 165);
+        export.btnSql.setOnAction(e -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    toSql();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ntf.setMessage("Te dhenat u eksportuan me sukses");
+                            ntf.setButton(ButtonType.NO_BUTTON);
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.show();
+                        }
+                    });
+                }
+            }).start();
+            stage.close();
+        });
+
+        Scene scene = new Scene(bpExport, 520, 165);
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -295,6 +314,25 @@ public class Produktet implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void toSql() {
+
+        String path = System.getProperty("user.home") + "/store-ms-files/Raportet/SQL/";
+        File file = new File(path + "Produktet_" + tf.format(new Date()) + ".sql");
+
+        try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
+            StringBuilder sb = new StringBuilder();
+
+            for (ProduktetClass p : tblProduktet.getItems()) {
+                sb.append("insert into produktet values (" + p.getId() + "," + VariablatPublike.revProdKat.get(p.getKategoria()) + ",'" + p.getEmri() + "'," +
+                p.getSasia() + "," + p.getQmimiStd() + "," + p.getQmimi() + ",'" + p.getNjesia() + "',current_timestamp(),'" + p.getBc() + "'," +
+                p.getZbritje().substring(0, p.getZbritje().length()-1) + p.getSasiaKrit() + ")\n");
+            }
+
+            bw.write(sb.toString());
+
+        }catch (Exception e){ e.printStackTrace(); }
     }
 
     private void toPdf() {
