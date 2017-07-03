@@ -50,6 +50,8 @@ public class Punetoret implements Initializable {
     private ImageView iv;
     private RotateTransition transition;
 
+    private String path = System.getProperty("user.home") + "/store-ms-files/Raportet/";
+
     public void setTransition (RotateTransition transition) {
         this.transition = transition;
     }
@@ -275,6 +277,25 @@ public class Punetoret implements Initializable {
             stage.close();
         });
 
+        export.btnSql.setOnAction(e -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    toSql();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ntf.setMessage("Dokumenti u eksportua me sukses");
+                            ntf.setButton(ButtonType.NO_BUTTON);
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.show();
+                        }
+                    });
+                }
+            }).start();
+            stage.close();
+        });
+
         export.btnCsv.setOnAction(e -> {
             iv.setImage(VariablatPublike.spinning);
             transition.play();
@@ -311,6 +332,20 @@ public class Punetoret implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void toSql(){
+        File file = new File(path + "SQL/Punetoret_" + tf.format(new Date()) + ".sql");
+        try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
+
+            for (Punetori p : tbl.getItems()){
+                bw.write("merge punetoret key(id) values (" + p.getId() + "," + VariablatPublike.dep.get(p.getDepartamenti()) + ",'" +
+                p.getEmri().split(" ")[0] + "','" + p.getEmri().split(" ")[1] + "'," + (p.getGjinia().equals("Femer") ? 1 : 0) + ",'" + p.getDtl() + "'," +
+                p.getPaga().substring(0, p.getPaga().length()-1) + ",'" + p.getPunesimi() + "',''," + (p.getStatusi().equals("Aktiv") ? 1 : 0) + ",'current_timestamp()','" +
+                p.getTel() + "','" + p.getEmail() + "','" + p.getQyteti() + "','" + p.getShteti() + "', '')");
+            }
+
+        }catch (Exception e) {e.printStackTrace();}
     }
 
     //    CSV FILE
