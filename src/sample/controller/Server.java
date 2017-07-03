@@ -8,7 +8,6 @@ import sample.Enums.NotificationType;
  */
 public class Server {
 
-    private static Notification ntf = new Notification();
 
     public static void stopServer() {
         try {
@@ -22,9 +21,9 @@ public class Server {
         try {
             org.h2.tools.Server server = org.h2.tools.Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();
         } catch (Exception ex) {
-            ntf.setMessage("Ju lutem mbyllini te gjitha dritaret tjera te ketij programi dhe provoni perseri.");
-            ntf.setButton(ButtonType.NO_BUTTON);
+            Notification ntf = new Notification("Ju lutem mbyllini te gjitha dritaret tjera te ketij programi dhe provoni perseri.");
             ntf.setType(NotificationType.ERROR);
+            ntf.setButton(ButtonType.NO_BUTTON);
             ntf.setDuration(4);
             ntf.show();
         }
