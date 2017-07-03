@@ -325,9 +325,9 @@ public class Produktet implements Initializable {
             StringBuilder sb = new StringBuilder();
 
             for (ProduktetClass p : tblProduktet.getItems()) {
-                sb.append("insert into produktet values (" + p.getId() + "," + VariablatPublike.revProdKat.get(p.getKategoria()) + ",'" + p.getEmri() + "'," +
+                sb.append("merge into produktet key(id) values (" + p.getId() + "," + VariablatPublike.revProdKat.get(p.getKategoria()) + ",'" + p.getEmri() + "'," +
                 p.getSasia() + "," + p.getQmimiStd() + "," + p.getQmimi() + ",'" + p.getNjesia() + "',current_timestamp(),'" + p.getBc() + "'," +
-                p.getZbritje().substring(0, p.getZbritje().length()-1) + p.getSasiaKrit() + ")\n");
+                p.getZbritje().substring(0, p.getZbritje().length()-1) + "," + p.getSasiaKrit() + ")\n");
             }
 
             bw.write(sb.toString());

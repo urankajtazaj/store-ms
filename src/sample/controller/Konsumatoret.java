@@ -23,8 +23,12 @@ import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.*;
 import sample.Enums.*;
 import sample.Enums.ButtonType;
+import sample.constructors.ProduktetClass;
 import sample.constructors.Punetori;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -127,11 +131,47 @@ public class Konsumatoret implements Initializable {
             stage.close();
         });
 
+        export.btnCsv.setOnAction(e -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    toCsv();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ntf.setMessage("Dokumenti u eksportua me sukses");
+                            ntf.setButton(ButtonType.NO_BUTTON);
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.show();
+                        }
+                    });
+                }
+            }).start();
+        });
+
+        export.btnSql.setOnAction(e -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    toSql();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ntf.setMessage("Dokumenti u eksportua me sukses");
+                            ntf.setButton(ButtonType.NO_BUTTON);
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.show();
+                        }
+                    });
+                }
+            }).start();
+        });
+
         export.btnAnulo.setOnAction(e -> {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 400, 165);
+        Scene scene = new Scene(bpExport, 520, 165);
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -139,6 +179,40 @@ public class Konsumatoret implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void toCsv (){
+        String path = System.getProperty("user.home") + "/store-ms-files/Raportet/CSV/";
+        File file = new File(path + "Konsumatoret " + tf.format(new Date()) + ".csv");
+        try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
+
+            for (sample.constructors.Konsumatoret k : tbl.getItems()) {
+                bw.write(k.getId() + "," + k.getEmri() + "," + k.getEmail() + "," + k.getTel() + "," + k.getAdresa() + "," + k.getQyteti() + "," +
+                k.getShteti() + "," + (k.getStatusi() == 1 ? "Aktiv," : "Joaktiv,") + k.getKrijuar());
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void toSql() {
+
+        String path = System.getProperty("user.home") + "/store-ms-files/Raportet/SQL/";
+        File file = new File(path + "Konsumatoret " + tf.format(new Date()) + ".sql");
+
+        try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
+            StringBuilder sb = new StringBuilder();
+
+            for (sample.constructors.Konsumatoret k : tbl.getItems()) {
+                sb.append("merge into konsumatoret key(id) values(" + k.getId() + ",'" + k.getEmri() + "','" + k.getAdresa()+ "','" +
+                        k.getTel() + "','" + k.getEmail() + "'," + k.getStatusi() + ",'" + k.getKrijuar() + "',current_timestamp(),'" + k.getQyteti() + "','" +
+                        k.getShteti() + "')\n");
+            }
+
+            bw.write(sb.toString());
+
+        }catch (Exception e){ e.printStackTrace(); }
     }
 
     private void toPdf() {
@@ -241,7 +315,8 @@ public class Konsumatoret implements Initializable {
 
             while (rs.next()) {
                 data.add(new sample.constructors.Konsumatoret(rs.getInt("id"), rs.getString("emri"), rs.getString("email"),
-                        rs.getString("telefoni"), rs.getString("adresa"), rs.getString("qyteti"), rs.getString("shteti")));
+                        rs.getString("telefoni"), rs.getString("adresa"), rs.getString("qyteti"), rs.getString("shteti"), rs.getInt("aktiv"),
+                        rs.getString("data_krijimit")));
             }
 
         }catch (Exception ex ) {ex.printStackTrace();}
