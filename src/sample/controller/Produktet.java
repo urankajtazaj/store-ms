@@ -133,10 +133,6 @@ public class Produktet implements Initializable {
 
                         btnEd.setOnAction(e -> {
                             try {
-                                ntf.setMessage(p.getEmri() + ", " + p.getKategoria());
-                                ntf.setType(NotificationType.SUCCESS);
-                                ntf.setButton(ButtonType.NO_BUTTON);
-                                ntf.show();
                                 rregulloProd(p.getId(), p.getEmri(), p.getBc(), p.getQmimiStd(), p.getQmimi().substring(0, p.getQmimi().length()-1), p.getSasia(), p.getSasiaKrit(), p.getZbritje(),
                                         p.getKategoria());
                             }catch (Exception ex) {ex.printStackTrace(); }

@@ -53,6 +53,10 @@ public class Raportet implements Initializable {
     @FXML
     private void merrFaturat (){
         tblDhenat.getItems().clear();
+        lTotal.setText("0");
+        lPagesa.setText("0");
+        lTvsh.setText("0");
+        lKusuri.setText("0");
         try (PreparedStatement pstmt = con.prepareStatement("select rec_id, usr, konsumatori, cash from vfatura where formatdatetime(koha, 'yyyy-MM-dd') >= ? " +
                 "and formatdatetime(koha, 'yyyy-MM-dd') <= ? group by rec_id order by rec_id desc")) {
             pstmt.setDate(1, java.sql.Date.valueOf(dpPrej.getValue()));
