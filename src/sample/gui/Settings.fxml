@@ -83,6 +83,8 @@
                 </VBox>
             </center>
         </BorderPane>
+        <Button text="Pastro te gjitha te dhenat" onAction="#pastroDb" GridPane.halignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4"
+                style="-fx-background-color: -fx-red"/>
 
     </children>
 

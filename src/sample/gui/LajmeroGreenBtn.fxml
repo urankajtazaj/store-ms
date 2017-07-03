@@ -35,7 +35,7 @@
             </center>
             <bottom>
                 <HBox alignment="CENTER">
-                    <Button text="OK" onAction="#closeStage" fx:id="btnOk" styleClass="btn" style="-fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: rgba(0,0,0,0.15)"/>
+                    <Button text="OK" onAction="#retTrue" fx:id="btnOk" styleClass="btn" style="-fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: rgba(0,0,0,0.15)"/>
                 </HBox>
             </bottom>
         </BorderPane>

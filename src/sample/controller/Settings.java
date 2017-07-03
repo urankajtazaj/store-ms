@@ -1,5 +1,7 @@
 package sample.controller;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +21,9 @@ import javafx.stage.Stage;
 import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -282,4 +287,35 @@ public class Settings implements Initializable {
         catch (Exception e) { e.printStackTrace(); }
     }
 
+    @FXML
+    private void pastroDb() {
+        try {
+
+            ntf.setMessage("Te gjitha te dhenat do te fshihen duke perfshire punetoret, konsumatoret shitjet etj. Deshironi te vazhdoni?");
+            ntf.setType(NotificationType.ERROR);
+            ntf.setButton(ButtonType.YES_NO);
+            ntf.showAndWait();
+
+            if (ntf.getDelete()) {
+                BufferedReader br = new BufferedReader(new FileReader(new File(System.getProperty("user.home") + "/store-ms-files/config/exec.sql")));
+
+                Statement stmt = con.createStatement();
+                String cmd = null;
+                while ((cmd = br.readLine()) != null) {
+                    stmt.addBatch(cmd);
+                }
+
+                stmt.executeBatch();
+                ntf.setMessage("Te gjitha te dhenat u fshine. Programi do te mbyllet.");
+                ntf.setButton(ButtonType.OK);
+                ntf.setType(NotificationType.SUCCESS);
+                ntf.showAndWait();
+                if (ntf.getDelete()) {
+                    Server.stopServer();
+                    Platform.exit();
+                }
+            }
+
+        }catch (Exception e) { e.printStackTrace(); }
+    }
 }
