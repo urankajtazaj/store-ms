@@ -178,8 +178,7 @@ public class ShtoPunetoret implements Initializable {
                 "where id = " + id);
             }
 
-            if (!emri.getText().equals("") && !mbiemri.getText().equals("")
-                    && !paga.getText().equals("") && !punesuar.getEditor().getText().equals("")) {
+            if (!emri.getText().equals("") && !paga.getText().equals("") && !punesuar.getEditor().getText().equals("")) {
                 if (!paga.getText().trim().matches("^\\d+(\\.\\d)*$") || !telefoni.getText().trim().matches("|^[0-9 ]+")) {
                     ntf.setMessage("Gabim ne konvertim te te dhenave, kontrolloni fushat ku kerkohen numra");
                     ntf.setType(NotificationType.ERROR);

@@ -17,12 +17,12 @@
     <center>
         <GridPane alignment="TOP_CENTER" vgap="5" hgap="10">
             <VBox styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="10">
-                <Label text="Emri"/>
+                <Label text="Emri*"/>
                 <Label text="Mbiemri"/>
-                <Label text="Gjinia"/>
-                <Label text="Ditelindja"/>
-                <Label text="Punesuar"/>
-                <Label text="Statusi"/>
+                <Label text="Gjinia*"/>
+                <Label text="Ditelindja*"/>
+                <Label text="Punesuar*"/>
+                <Label text="Statusi*"/>
             </VBox>
 
             <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="10">
@@ -53,8 +53,8 @@
                 <padding>
                     <Insets left="70"/>
                 </padding>
-                <Label text="Departamenti"/>
-                <Label text="Paga"/>
+                <Label text="Puna*"/>
+                <Label text="Paga*"/>
                 <Label text="Telefoni"/>
                 <Label text="Email"/>
                 <Label text="Adresa"/>
