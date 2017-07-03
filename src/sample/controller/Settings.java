@@ -297,32 +297,33 @@ public class Settings implements Initializable {
             ntf.showAndWait();
 
             if (ntf.getDelete()) {
-                String query = "delete from punetoret;\n" +
-                        "delete from konsumatoret;\n" +
-                        "delete from produktet;\n" +
-                        "delete from departamenti;\n" +
-                        "delete from kat_prod;\n" +
-                        "delete from priv;\n" +
-                        "delete from perdoruesi;\n" +
-                        "delete from shitjet;\n" +
-                        "delete from rec;\n" +
-                        "delete from pushimet;\n" +
-                        "alter table punetoret alter column id restart with 1;\n" +
-                        "alter table konsumatoret alter column id restart with 1;\n" +
-                        "alter table produktet alter column id restart with 1;\n" +
-                        "alter table rec alter column rec_id restart with 1;\n" +
-                        "alter table shitjet alter column id restart with 1;\n" +
-                        "alter table departamenti alter column id restart with 1;\n" +
-                        "alter table perdoruesi alter column id restart with 1;\n" +
-                        "update tvsh set tvsh.tvsh = 0;\n" +
-                        "update target set qmimi = 1000;\n" +
-                        "insert into punetoret values (null, 1, 'Admin', '', 0, current_timestamp(), 0, current_timestamp(), current_timestamp(), 1, current_timestamp(), '','','','','','');\n" +
-                        "insert into perdoruesi values (null, 1, 'admin', 123, 1);\n" +
-                        "insert into konsumatoret values (null, 'Publik', '','','',1, current_timestamp(), current_timestamp(), '','Kosove');\n" +
-                        "insert into departamenti values (null, 'Menagjer');\n" +
-                        "insert into priv values (1, 1, 1,1,1,1,1,1);";
+                String query =
+                        "delete from punetoret;" +
+                        "delete from konsumatoret;" +
+                        "delete from produktet;" +
+                        "delete from departamenti;" +
+                        "delete from kat_prod;" +
+                        "delete from priv;" +
+                        "delete from perdoruesi;" +
+                        "delete from shitjet;" +
+                        "delete from rec;" +
+                        "delete from pushimet;" +
+                        "alter table punetoret alter column id restart with 1;" +
+                        "alter table konsumatoret alter column id restart with 1;" +
+                        "alter table produktet alter column id restart with 1;" +
+                        "alter table rec alter column rec_id restart with 1;" +
+                        "alter table shitjet alter column id restart with 1;" +
+                        "alter table departamenti alter column id restart with 1;" +
+                        "alter table perdoruesi alter column id restart with 1;" +
+                        "update tvsh set tvsh.tvsh = 0;" +
+                        "update target set qmimi = 1000;" +
+                        "insert into punetoret values (null, 1, 'Admin', '', 0, current_timestamp(), 0, current_timestamp(), current_timestamp(), 1, current_timestamp(), '','','','','','');" +
+                        "insert into perdoruesi values (null, 1, 'admin', 123, 1);" +
+                        "insert into konsumatoret values (null, 'Publik', '','','',1, current_timestamp(), current_timestamp(), '','Kosove');" +
+                        "insert into departamenti values (null, 'Menagjer');" +
+                        "insert into priv values (1, 1, 1,1,1,1,1,1)";
 
-                String[] cmds = query.split("\n");
+                String[] cmds = query.split(";");
 
                 Statement stmt = con.createStatement();
                 for (String s : cmds) {
