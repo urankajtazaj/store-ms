@@ -2,6 +2,5 @@
 
 ## Perdorimi
 1. Vendos folderin `store-ms-files` ne folderin kryesor *(C://User/%emri-folderit%)*
-2. Starto serverin duke hapur `Server.jar` dhe duke klikuar `Start`
-3. Starto aplikacionin `store-ms.jar`
-4. Perdor `admin` si user, dhe `123` si fjalekalim
+2. Starto aplikacionin `store-ms.jar`
+3. Perdor `admin` si user, dhe `123` si fjalekalim
