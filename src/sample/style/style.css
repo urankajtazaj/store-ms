@@ -1226,10 +1226,6 @@
     -fx-font-family: "Nunito";
 }
 
-.bottom {
-    -fx-background-color: -fx-btn;
-}
-
 .menuTp {
     -fx-background-color: -fx-btn;
 }

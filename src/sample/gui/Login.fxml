@@ -30,13 +30,16 @@
             <padding>
                 <Insets right="5" left="5"/>
             </padding>
-            <HBox alignment="BOTTOM_LEFT" HBox.hgrow="ALWAYS">
-                <Label style="-fx-text-fill: rgba(255,255,255,.35);" text="Copyrights © Uran Kajtazaj, 2017"/>
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <Label style="-fx-text-fill: rgba(255,255,255,.5)" text="Copyrights © Uran Kajtazaj, 2017"/>
             </HBox>
             <Button fx:id="btnSetting" onAction="#openSettings" styleClass="littleIcon">
+                <tooltip>
+                    <Tooltip text="Rregullo"/>
+                </tooltip>
                 <graphic>
-                    <ImageView preserveRatio="true" fitWidth="13">
-                        <Image url="/sample/photo/setting.png"/>
+                    <ImageView preserveRatio="true" fitWidth="16">
+                        <Image url="/sample/photo/settings.png"/>
                     </ImageView>
                 </graphic>
             </Button>
