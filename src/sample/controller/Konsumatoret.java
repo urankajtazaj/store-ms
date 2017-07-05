@@ -42,6 +42,7 @@ import java.util.*;
 public class Konsumatoret implements Initializable {
 
     SimpleDateFormat tf = new SimpleDateFormat("dd-MM-yyyy_HH-mm-s");
+    SimpleDateFormat sqlDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     DB db = new DB();
     Connection con = db.connect();
@@ -204,14 +205,13 @@ public class Konsumatoret implements Initializable {
         try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
             StringBuilder sb = new StringBuilder();
 
+            sb.append("-- id, emri, adresa, telefoni, email, statusi, krijuar, modifikuar, qyteti, shteti\n");
             for (sample.constructors.Konsumatoret k : tbl.getItems()) {
-                sb.append("merge into konsumatoret key(id) values(" + k.getId() + ",'" + k.getEmri() + "','" + k.getAdresa()+ "','" +
-                        k.getTel() + "','" + k.getEmail() + "'," + k.getStatusi() + ",'" + k.getKrijuar() + "',current_timestamp(),'" + k.getQyteti() + "','" +
+                sb.append("insert into konsumatoret values(" + k.getId() + ",'" + k.getEmri() + "','" + k.getAdresa()+ "','" +
+                        k.getTel() + "','" + k.getEmail() + "'," + k.getStatusi() + ",'" + k.getKrijuar() + "','"+sqlDf.format(new Date())+"','" + k.getQyteti() + "','" +
                         k.getShteti() + "')\n");
             }
-
             bw.write(sb.toString());
-
         }catch (Exception e){ e.printStackTrace(); }
     }
 

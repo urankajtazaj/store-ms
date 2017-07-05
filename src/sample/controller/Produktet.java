@@ -326,19 +326,12 @@ public class Produktet implements Initializable {
 
             Set<String> kategoria = new HashSet<>();
 
+            sb.append("-- id, kategoria, emri, sasia, qmimi_blerjes, qmimi, njesia, modifikuar, barkodi, zbritje, sasia_minimale\n");
             for (ProduktetClass p : tblProduktet.getItems()) {
-                sb.append("merge into produktet key(id) values (" + p.getId() + "," + VariablatPublike.revProdKat.get(p.getKategoria()) + ",'" + p.getEmri() + "'," +
+                sb.append("insert into produktet values (" + p.getId() + ",'" + p.getKategoria() + "','" + p.getEmri() + "'," +
                 p.getSasia() + "," + p.getQmimiStd() + "," + p.getQmimi() + ",'" + p.getNjesia() + "'"+sqlDf.format(new Date())+"'" + p.getBc() + "'," +
                 p.getZbritje().substring(0, p.getZbritje().length()-1) + "," + p.getSasiaKrit() + ");\n");
-                kategoria.add(p.getKategoria());
             }
-
-            Iterator<String> it = kategoria.iterator();
-            while (it.hasNext()) {
-                String cat = it.next();
-                sb.append("merge into kat_prod key(id) values ("+VariablatPublike.revProdKat.get(cat)+", '"+cat+"', '#000', '#fff');\n");
-            }
-
             bw.write(sb.toString());
 
         }catch (Exception e){ e.printStackTrace(); }

@@ -329,7 +329,7 @@ public class Punetoret implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 400, 175);
+        Scene scene = new Scene(bpExport, 520, 175);
         scene.setFill(Color.TRANSPARENT);
         scene.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ESCAPE)) stage.close();
@@ -345,10 +345,11 @@ public class Punetoret implements Initializable {
     private void toSql(){
         File file = new File(path + "SQL/Punetoret_" + tf.format(new Date()) + ".sql");
         try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
+            bw.write("-- id, roli, emri, gjinia, ditelindja, paga, data_punesimit, krijuar, statusi, modifikuar, telefoni, email, qyteti, shteti\n");
             for (Punetori p : tbl.getItems()){
-                bw.write("insert into punetoret values (" + p.getId() + "," + VariablatPublike.dep.get(p.getDepartamenti()) + ",'" +
-                p.getEmri().split(" ")[0] + "','" + p.getEmri().split(" ")[1] + "'," + (p.getGjinia().equals("Femer") ? 1 : 0) + ",'" + p.getDtl() + "'," +
-                p.getPaga().substring(0, p.getPaga().length()-1) + ",'" + p.getPunesimi() + "',''," + (p.getStatusi().equals("Aktiv") ? 1 : 0) + ",'"+
+                bw.write("insert into punetoret values (" + p.getId() + ",'" + p.getDepartamenti() + "','" +
+                p.getEmri() + "','" + p.getGjinia() + "','" + p.getDtl() + "'," +
+                p.getPaga().substring(0, p.getPaga().length()-1) + ",'" + p.getPunesimi() + "','" + p.getStatusi() + "','"+
                         sqlDf.format(new Date())+"','" +
                 p.getTel() + "','" + p.getEmail() + "','" + p.getQyteti() + "','" + p.getShteti() + "', '')");
             }

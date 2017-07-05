@@ -74,6 +74,10 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 7, 0, 0, 0);
 */}
 
+.gp .button:disabled, .btn:disabled {
+    -fx-opacity: .25;
+}
+
 .gp .button:hover {
     -fx-opacity: 1;
 }

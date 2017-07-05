@@ -92,7 +92,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button text="Rikthe te dhenat" minWidth="200" maxWidth="220" onAction="#importDb" GridPane.halignment="RIGHT">
+                <Button text="Rikthe te dhenat" fx:id="btnImport" minWidth="200" maxWidth="220" onAction="#importDb" GridPane.halignment="RIGHT">
                     <graphic>
                         <ImageView preserveRatio="true" rotate="-90">
                             <Image url="/sample/photo/right-arrow.png"/>

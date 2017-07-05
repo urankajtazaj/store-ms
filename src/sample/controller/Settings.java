@@ -47,7 +47,7 @@ public class Settings implements Initializable {
     @FXML private TextField tMujor, txtTvsh;
     @FXML private ComboBox cbTipi;
     @FXML private VBox vbPunet;
-    @FXML private Button shtoPune;
+    @FXML private Button shtoPune, btnImport;
     @FXML private VBox vbPnt;
 
     private RotateTransition transition;
@@ -59,6 +59,10 @@ public class Settings implements Initializable {
         merrTvsh();
         getJobs();
         merrProdKats();
+
+        File file = new File(path + "Backup/backup.sql");
+        if (!file.exists()) btnImport.setDisable(true);
+
     }
 
     @FXML
