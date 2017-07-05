@@ -6,4 +6,12 @@
 3. Starto aplikacionin `store-ms.jar`
 4. Perdor `admin` si user, dhe `123` si fjalekalim (te ndryshohet pas perdorimit te pare)
 
+### Si te gjesh folderin kryesor?
+**Windows**:
+Ne cmd shkruaj `echo %USERPROFILE%`
+
+**Linux**:
+Ne terminal shkruaj `echo $HOME`
+
+
 > Nese deshironi te lidheni me nje kompjuter tjeter, ndryshoni IP tek Settings ne dritaren per kyqje.
