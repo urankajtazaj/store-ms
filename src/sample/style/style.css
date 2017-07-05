@@ -1,21 +1,16 @@
 @font-face {
-    font-family: "Nunito";
-    src: url("../font/Nunito-Regular.ttf");
+    font-family: "Lato";
+    src: url("../font/Lato-Regular.ttf");
 }
 
 @font-face {
-    font-family: "Nunito";
-    src: url("../font/Nunito-Bold.ttf");
+    font-family: "Lato";
+    src: url("../font/Lato-Light.ttf");
 }
 
 @font-face {
-    font-family: "Roboto";
-    src: url("../font/Roboto-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Roboto";
-    src: url("../font/Roboto-Light.ttf");
+    font-family: "Lato";
+    src: url("../font/Lato-Bold.ttf");
 }
 
 /*
@@ -53,7 +48,7 @@
 }
 
 .root {
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Lato";
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-accent: -fx-btn;
@@ -653,7 +648,7 @@
     -fx-font-size: 15;
     -fx-border-width: 0;
     -fx-border-color: rgba(0,0,0,.05);
-    -fx-font-family: "Roboto light";
+    -fx-font-family: "Lato bold";
 }
 
 .intoTtlNb {
@@ -673,7 +668,7 @@
 .lVlera {
     -fx-font-size: 30;
     -fx-text-fill: rgba(255,255,255,.87);
-    -fx-font-family: "Roboto light";
+    -fx-font-family: "Lato light";
 }
 
 .lVleraColor {
@@ -698,7 +693,6 @@
 }
 
 .color {
-    -fx-font-family: "Nunito";
     -fx-text-fill: rgba(255,255,255,0.8);
 }
 
@@ -904,14 +898,13 @@
 .detailInfoPnt {
     -fx-font-size: 13;
     -fx-opacity: .4;
-    -fx-font-family: "Nunito";
     -fx-text-fill: #fff;
 }
 
 .detailInfoPnt-Qm {
     -fx-text-fill: -fx-btn;
     -fx-font-size: 30;
-    -fx-font-family: "Roboto light";
+    -fx-font-family: "Lato light";
 }
 
 .stack .default-color0.chart-pie {
@@ -994,7 +987,7 @@
 .perc {
     -fx-font-weight: bold;
     -fx-font-size: 15;
-    -fx-font-family: "Roboto light";
+    -fx-font-family: "Lato light";
 }
 
 .bbHb {
@@ -1199,7 +1192,7 @@
 .bigDec {
     -fx-font-size: 30;
     -fx-text-fill: -fx-btn;
-    -fx-font-family: "Roboto light";
+    -fx-font-family: "Lato light";
 }
 
 .bigDec2 {
@@ -1224,7 +1217,6 @@
 .bar-text {
     -fx-font-size: 16;
     -fx-fill: #fff;
-    -fx-font-family: "Nunito";
 }
 
 .menuTp {
