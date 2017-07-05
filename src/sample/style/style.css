@@ -837,14 +837,15 @@
     -fx-cursor: hand;
     -fx-max-width: 120;
     -fx-min-width: 120;
-    -fx-min-height: 90;
-    -fx-max-height: 90;
+    -fx-min-height: 100;
+    -fx-max-height: 100;
+    -fx-opacity: .7;
     -fx-text-fill: -fx-primary;
 }
 
 .btnExportImg:hover {
-    -fx-background-color: -fx-btn;
-    -fx-text-fill: -fx-sidebar;
+    -fx-background-color: -fx-sidebar;
+    -fx-opacity: .9;
 }
 
 .btnC {

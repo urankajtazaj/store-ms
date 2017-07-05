@@ -1,6 +1,5 @@
 package sample.controller;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -14,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -21,10 +21,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.*;
-import sample.Enums.*;
 import sample.Enums.ButtonType;
-import sample.constructors.ProduktetClass;
-import sample.constructors.Punetori;
+import sample.Enums.NotificationType;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -36,7 +34,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -171,8 +168,11 @@ public class Konsumatoret implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 520, 165);
+        Scene scene = new Scene(bpExport, 520, 175);
         scene.setFill(Color.TRANSPARENT);
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ESCAPE)) stage.close();
+        });
         scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <BorderPane style="-fx-background-color: transparent" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sample.controller.Export">
@@ -19,10 +14,34 @@
         <BorderPane fx:id="inBp" styleClass="newWindow">
             <center>
                 <GridPane alignment="TOP_CENTER">
-                    <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="EXCEL" fx:id="btnExcel" styleClass="btnExportImg"/>
-                    <Button GridPane.rowIndex="0" GridPane.columnIndex="1" text="PDF" fx:id="btnPdf" styleClass="btnExportImg"/>
-                    <Button GridPane.rowIndex="0" GridPane.columnIndex="2" text="CSV" fx:id="btnCsv" styleClass="btnExportImg"/>
-                    <Button GridPane.rowIndex="0" GridPane.columnIndex="3" text="SQL" fx:id="btnSql" styleClass="btnExportImg"/>
+                    <Button contentDisplay="TOP" text="Excel" GridPane.rowIndex="0" GridPane.columnIndex="0" fx:id="btnExcel" styleClass="btnExportImg">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="32">
+                                <Image url="/sample/photo/xls.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button contentDisplay="TOP" text="Pdf" GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="btnPdf" styleClass="btnExportImg">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="32">
+                                <Image url="/sample/photo/pdf.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button contentDisplay="TOP" text="Csv" GridPane.rowIndex="0" GridPane.columnIndex="2" fx:id="btnCsv" styleClass="btnExportImg">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="32">
+                                <Image url="/sample/photo/csv.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button contentDisplay="TOP" text="Sql" GridPane.rowIndex="0" GridPane.columnIndex="3" fx:id="btnSql" styleClass="btnExportImg">
+                        <graphic>
+                            <ImageView preserveRatio="true" fitWidth="32">
+                                <Image url="/sample/photo/sql.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
                     <Button GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4"
                             fx:id="btnAnulo" text="ANULO" styleClass="btnExportImg, btnC"/>
                 </GridPane>

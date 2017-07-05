@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
 <GridPane vgap="3" hgap="3" fx:id="root" styleClass="gp" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Produktet">
@@ -43,8 +41,13 @@
             <Button text="Filtro" onAction="#filterTable"/>
             <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="5">
                 <Button text="Shto" onAction="#shtoProdukt"/>
-                <Button text="Importo" onAction="#importo"/>
-                <Button text="Eksporto" onAction="#export"/>
+                <Button contentDisplay="RIGHT" text="Eksporto" onAction="#export">
+                    <graphic>
+                        <ImageView preserveRatio="true">
+                            <Image url="/sample/photo/right-arrow.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
         </HBox>
 

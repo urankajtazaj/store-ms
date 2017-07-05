@@ -18,23 +18,26 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.stage.*;
-import javafx.util.Duration;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.*;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import sample.Enums.*;
 import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 import sample.constructors.Punetori;
 
 import java.io.*;
 import java.net.URL;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.Date;
 
 /**
  * Created by Uran on 14/03/2017.
@@ -49,6 +52,7 @@ public class Punetoret implements Initializable {
     @FXML private ComboBox<String> cbDep, cbStat;
     private ImageView iv;
     private RotateTransition transition;
+    private Stage primaryStage;
 
     private String path = System.getProperty("user.home") + "/store-ms-files/Raportet/";
 
@@ -64,10 +68,11 @@ public class Punetoret implements Initializable {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat tf = new SimpleDateFormat("dd-MM-yyyy HH-mm-s");
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    SimpleDateFormat sqlDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     BorderPane stage;
 
-    public void setStage(BorderPane stage) {
+    public void setBorderPane(BorderPane stage) {
         this.stage = stage;
     }
 
@@ -324,8 +329,11 @@ public class Punetoret implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 400, 165);
+        Scene scene = new Scene(bpExport, 400, 175);
         scene.setFill(Color.TRANSPARENT);
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ESCAPE)) stage.close();
+        });
         scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -337,14 +345,13 @@ public class Punetoret implements Initializable {
     private void toSql(){
         File file = new File(path + "SQL/Punetoret_" + tf.format(new Date()) + ".sql");
         try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
-
             for (Punetori p : tbl.getItems()){
-                bw.write("merge punetoret key(id) values (" + p.getId() + "," + VariablatPublike.dep.get(p.getDepartamenti()) + ",'" +
+                bw.write("insert into punetoret values (" + p.getId() + "," + VariablatPublike.dep.get(p.getDepartamenti()) + ",'" +
                 p.getEmri().split(" ")[0] + "','" + p.getEmri().split(" ")[1] + "'," + (p.getGjinia().equals("Femer") ? 1 : 0) + ",'" + p.getDtl() + "'," +
-                p.getPaga().substring(0, p.getPaga().length()-1) + ",'" + p.getPunesimi() + "',''," + (p.getStatusi().equals("Aktiv") ? 1 : 0) + ",'current_timestamp()','" +
+                p.getPaga().substring(0, p.getPaga().length()-1) + ",'" + p.getPunesimi() + "',''," + (p.getStatusi().equals("Aktiv") ? 1 : 0) + ",'"+
+                        sqlDf.format(new Date())+"','" +
                 p.getTel() + "','" + p.getEmail() + "','" + p.getQyteti() + "','" + p.getShteti() + "', '')");
             }
-
         }catch (Exception e) {e.printStackTrace();}
     }
 
@@ -534,5 +541,9 @@ public class Punetoret implements Initializable {
 
     public void setIv(ImageView iv) {
         this.iv = iv;
+    }
+
+    public void setStage(Stage stage) {
+        this.primaryStage = stage;
     }
 }

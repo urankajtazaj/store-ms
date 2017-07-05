@@ -4,7 +4,6 @@ import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,10 +11,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -24,16 +21,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.*;
-import sample.Enums.*;
 import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 import sample.constructors.ProduktetClass;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,6 +60,7 @@ public class Produktet implements Initializable {
 
     private Stage stage;
     SimpleDateFormat tf = new SimpleDateFormat("dd-MM-yyyy_HH-mm-s");
+    SimpleDateFormat sqlDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private BorderPane bp;
 
     public void setBp (BorderPane bp) {
@@ -213,24 +212,6 @@ public class Produktet implements Initializable {
         }
     }
 
-    @FXML
-    private void importo(){
-        FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("SQL files (*.sql)", "*.sql"));
-        File file = fc.showOpenDialog(stage);
-        try (FileReader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr); Statement stmt = con.createStatement()) {
-
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                stmt.addBatch(line);
-            }
-            stmt.executeBatch();
-            fillTable();
-
-        }catch (NullPointerException npe) {npe.printStackTrace();}
-        catch (Exception e) { e.printStackTrace(); }
-    }
-
     @FXML private void export() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/export.fxml"));
         Parent bpExport = loader.load();
@@ -323,8 +304,11 @@ public class Produktet implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 520, 165);
+        Scene scene = new Scene(bpExport, 520, 175);
         scene.setFill(Color.TRANSPARENT);
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ESCAPE)) stage.close();
+        });
         scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -334,7 +318,6 @@ public class Produktet implements Initializable {
     }
 
     private void toSql() {
-
         String path = System.getProperty("user.home") + "/store-ms-files/Raportet/SQL/";
         File file = new File(path + "Produktet_" + tf.format(new Date()) + ".sql");
 
@@ -345,7 +328,7 @@ public class Produktet implements Initializable {
 
             for (ProduktetClass p : tblProduktet.getItems()) {
                 sb.append("merge into produktet key(id) values (" + p.getId() + "," + VariablatPublike.revProdKat.get(p.getKategoria()) + ",'" + p.getEmri() + "'," +
-                p.getSasia() + "," + p.getQmimiStd() + "," + p.getQmimi() + ",'" + p.getNjesia() + "',current_timestamp(),'" + p.getBc() + "'," +
+                p.getSasia() + "," + p.getQmimiStd() + "," + p.getQmimi() + ",'" + p.getNjesia() + "'"+sqlDf.format(new Date())+"'" + p.getBc() + "'," +
                 p.getZbritje().substring(0, p.getZbritje().length()-1) + "," + p.getSasiaKrit() + ");\n");
                 kategoria.add(p.getKategoria());
             }
