@@ -34,14 +34,10 @@
     -fx-label-color: rgba(255,255,255,.85);
     -fx-sidebar: #1D2B30;
     -fx-sidebar: #242734;
-    -fx-sidebar: #3a4654; /*BEST*/
     -fx-sidebar: #1A2129;
     -fx-secondary: #282c3b;
     -fx-secondary: #2e4756;
-    -fx-secondary: #303a46; /*BEST*/
     -fx-secondary: #202731;
-    -fx-btn: #67C0EF;
-    -fx-btn: #7fb391;
     -fx-btn: #0E97F5;
     -fx-second: #F16B6F;
     -fx-third: -fx-btn;
@@ -1191,13 +1187,14 @@
 
 .bigDec {
     -fx-font-size: 30;
-    -fx-text-fill: -fx-btn;
-    -fx-font-family: "Lato light";
+    -fx-text-fill: rgba(255,255,255,.8);
+    -fx-font-family: "Lato bold";
 }
 
 .bigDec2 {
-    -fx-text-fill: #fff;
+    -fx-text-fill: -fx-label-color;
     -fx-font-size: 18;
+    -fx-font-family: "Lato";
 }
 
 .smallVb .toggle-button {
