@@ -350,30 +350,39 @@ public class Settings implements Initializable {
 
     @FXML
     private void importDb() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try (Statement st = con.createStatement()) {
-                    iv.setImage(VariablatPublike.spinning);
-                    transition.play();
-                    st.addBatch("drop all objects");
-                    st.addBatch("runscript from '" + path + "Backup/backup.sql'");
-                    st.executeBatch();
-                }catch (Exception e) {e.printStackTrace();}
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        VariablatPublike.stopSpinning(transition, iv);
-                        ntf.setMessage("Te dhenat u shtuan, programi do te mbyllet.");
-                        ntf.setButton(ButtonType.OK);
-                        ntf.setType(NotificationType.SUCCESS);
-                        ntf.showAndWait();
-                        Server.stopServer();
-                        Platform.exit();
+        ntf.setMessage("Te gjitha te dhenat qe ndodhet tani do te zevendesohen me te dhenat tjera. Vazhdoni?");
+        ntf.setButton(ButtonType.YES_NO);
+        ntf.setType(NotificationType.ERROR);
+        ntf.showAndWait();
+
+        if (ntf.getDelete()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try (Statement st = con.createStatement()) {
+                        iv.setImage(VariablatPublike.spinning);
+                        transition.play();
+                        st.addBatch("drop all objects");
+                        st.addBatch("runscript from '" + path + "Backup/backup.sql'");
+                        st.executeBatch();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                });
-            }
-        }).start();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            VariablatPublike.stopSpinning(transition, iv);
+                            ntf.setMessage("Te dhenat u shtuan, programi do te mbyllet.");
+                            ntf.setButton(ButtonType.OK);
+                            ntf.setType(NotificationType.SUCCESS);
+                            ntf.showAndWait();
+                            Server.stopServer();
+                            Platform.exit();
+                        }
+                    });
+                }
+            }).start();
+        }
     }
 
     @FXML
