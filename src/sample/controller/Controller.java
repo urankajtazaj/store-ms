@@ -212,10 +212,10 @@ public class Controller implements Initializable {
             pntRoot = loader.load();
         }else if (((ToggleButton) e.getSource()).getText().equals("RREGULLO")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Settings.fxml"));
+            pntRoot = loader.load();
             Settings settings = loader.getController();
             settings.setIv(spinner);
             settings.setTransition(startSpinning(spinner));
-            pntRoot = loader.load();
         }
 
         root.setCenter(pntRoot);

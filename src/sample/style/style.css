@@ -70,8 +70,8 @@
     -fx-background-color: -fx-btn;
     -fx-text-fill: #fff;
     -fx-alignment: CENTER;
-    -fx-background-radius: 1;
-    -fx-border-radius: 1;
+    -fx-background-radius: 3;
+    -fx-border-radius: 4;
     -fx-padding: 0 15 0 15;
     -fx-min-height: 34;
     -fx-max-height: 34;
