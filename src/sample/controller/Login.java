@@ -1,22 +1,21 @@
 package sample.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,23 +32,32 @@ public class Login implements Initializable {
 
     Notification ntf = new Notification();
 
-    @FXML public Button btnLogin, btnSetting;
-    @FXML private TextField txtUser, txtPw;
+
+    @FXML private Hyperlink hyperlink;
+    @FXML
+    public Button btnLogin, btnSetting;
+    @FXML
+    private TextField txtUser, txtPw;
 
     private Stage stage;
 
-    public void setStage (Stage stage) {
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        String theme = VariablatPublike.styleSheet.substring(VariablatPublike.styleSheet.length()-9, VariablatPublike.styleSheet.length());
+        if (!theme.equals("style.css"))
+            hyperlink.setStyle("-fx-text-fill: rgba(0,0,0,0.7)");
+
         btnLogin.setOnAction(e -> {
             checkUser(stage);
         });
     }
 
-    public void checkUser (Stage stage){
+    public void checkUser(Stage stage) {
         try {
             PreparedStatement stmt = con.prepareStatement("select id, pnt_id, usr, pw, dep_id from perdoruesi where " +
                     "lower(usr) = lower(?) and pw = ? limit 1");
@@ -76,13 +84,14 @@ public class Login implements Initializable {
                 ntf.show();
             }
 
-        }catch (NullPointerException npe) {
+        } catch (NullPointerException npe) {
             ntf.setMessage("Ju lutem kontrolloni serverin");
             ntf.setType(NotificationType.ERROR);
             ntf.setButton(ButtonType.NO_BUTTON);
             ntf.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e) { e.printStackTrace(); }
     }
 
     private void hapDritarenKryesore(Stage login, String username, int dep_id) {
@@ -112,7 +121,7 @@ public class Login implements Initializable {
     }
 
     @FXML
-    private void openSettings(){
+    private void openSettings() {
         try {
             Stage stage = new Stage();
 
@@ -128,7 +137,21 @@ public class Login implements Initializable {
             stage.setResizable(false);
             stage.show();
 
-        }catch (Exception e) {e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    public void openGithub(ActionEvent actionEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.github.com/urankajtazaj/store-ms"));
+                } catch (Exception e) {
+
+                }
+            }
+        }).start();
+    }
 }

@@ -27,7 +27,7 @@
                 <Insets right="5" left="5"/>
             </padding>
             <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                <Label style="-fx-text-fill: rgba(0,0,0,.75)" text="Copyrights © Uran Kajtazaj, 2017"/>
+                <Hyperlink fx:id="hyperlink" onAction="#openGithub" style="-fx-text-fill: rgba(255,255,255,.7)" text="github.com/urankajtazaj/store-ms"/>
             </HBox>
             <Button fx:id="btnSetting" onAction="#openSettings" styleClass="littleIcon">
                 <tooltip>
