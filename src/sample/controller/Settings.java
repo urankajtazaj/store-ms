@@ -1,7 +1,7 @@
 package sample.controller;
 
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,9 +21,9 @@ import javafx.stage.Stage;
 import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileWriter;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,11 +42,16 @@ public class Settings implements Initializable {
 
     Notification ntf = new Notification();
 
+    private String path = System.getProperty("user.home") + "/store-ms-files/";
+
     @FXML private TextField tMujor, txtTvsh;
     @FXML private ComboBox cbTipi;
     @FXML private VBox vbPunet;
     @FXML private Button shtoPune;
     @FXML private VBox vbPnt;
+
+    private RotateTransition transition;
+    private ImageView iv;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -290,7 +295,6 @@ public class Settings implements Initializable {
     @FXML
     private void pastroDb() {
         try {
-
             ntf.setMessage("Te gjitha te dhenat do te fshihen duke perfshire punetoret, konsumatoret shitjet etj. Deshironi te vazhdoni?");
             ntf.setType(NotificationType.ERROR);
             ntf.setButton(ButtonType.YES_NO);
@@ -342,5 +346,92 @@ public class Settings implements Initializable {
             }
 
         }catch (Exception e) { e.printStackTrace(); }
+    }
+
+    @FXML
+    private void importDb() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try (Statement st = con.createStatement()) {
+                    iv.setImage(VariablatPublike.spinning);
+                    transition.play();
+                    st.addBatch("drop all objects");
+                    st.addBatch("runscript from '" + path + "Backup/backup.sql'");
+                    st.executeBatch();
+                }catch (Exception e) {e.printStackTrace();}
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        VariablatPublike.stopSpinning(transition, iv);
+                        ntf.setMessage("Te dhenat u shtuan, programi do te mbyllet.");
+                        ntf.setButton(ButtonType.OK);
+                        ntf.setType(NotificationType.SUCCESS);
+                        ntf.showAndWait();
+                        Server.stopServer();
+                        Platform.exit();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    @FXML
+    private void exportDb() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                iv.setImage(VariablatPublike.spinning);
+                transition.play();
+                exportDataFunc();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        VariablatPublike.stopSpinning(transition, iv);
+                        ntf.setMessage("Te dhenat u eksportuan me sukses.");
+                        ntf.setButton(ButtonType.NO_BUTTON);
+                        ntf.setType(NotificationType.SUCCESS);
+                        ntf.show();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    private void exportDataFunc() {
+        File file = new File(System.getProperty("user.home") + "/store-ms-files/Backup/backup.sql");
+        try (Statement st = con.createStatement()) {
+
+            st.execute("script to '" + file.getAbsolutePath() + "' table produktet,punetoret,perdoruesi,konsumatoret," +
+                    "shitjet,rec,kat_prod,departamenti,priv,pushimet,tvsh,target");
+
+            String view =
+                    "CREATE FORCE VIEW PUBLIC.HYRAT_JAVA(FITIMI) AS SELECT SUM((PRODUKTET.QMIMI_SHITJES - PRODUKTET.QMIMI_STD) * SHITJET.SASIA) AS FITIMI FROM PUBLIC.PRODUKTET INNER JOIN PUBLIC.SHITJET ON 1=1 WHERE (PRODUKTET.ID = SHITJET.PROD_ID) AND (WEEK(SHITJET.KOHA_SHITJES) = WEEK(CURRENT_DATE()));\n" +
+                            "CREATE FORCE VIEW PUBLIC.HYRAT_SOT(FITIMI) AS SELECT SUM((PRODUKTET.QMIMI_SHITJES - PRODUKTET.QMIMI_STD) * SHITJET.SASIA) AS FITIMI FROM PUBLIC.PRODUKTET INNER JOIN PUBLIC.SHITJET ON 1=1 WHERE (PRODUKTET.ID = SHITJET.PROD_ID) AND (CAST(SHITJET.KOHA_SHITJES AS DATE) = CURRENT_DATE());\n" +
+                            "CREATE FORCE VIEW PUBLIC.HYRAT_MUAJ(FITIMI) AS SELECT SUM((PRODUKTET.QMIMI_SHITJES - PRODUKTET.QMIMI_STD) * SHITJET.SASIA) AS FITIMI FROM PUBLIC.PRODUKTET INNER JOIN PUBLIC.SHITJET ON 1=1 WHERE (PRODUKTET.ID = SHITJET.PROD_ID) AND (MONTH(SHITJET.KOHA_SHITJES) = MONTH(CURRENT_DATE()));\n" +
+                            "CREATE FORCE VIEW PUBLIC.MERREMRINPNT(ID, PNT_ID, EMRI, USR, PW) AS SELECT PERDORUESI.ID, PERDORUESI.PNT_ID, ((PUNETORET.EMRI || ' ') || PUNETORET.MBIEMRI) AS EMRI, PERDORUESI.USR, PERDORUESI.PW FROM PUBLIC.PERDORUESI INNER JOIN PUBLIC.PUNETORET ON 1=1 WHERE PUNETORET.ID = PERDORUESI.PNT_ID;\n" +
+                            "CREATE FORCE VIEW PUBLIC.MERRPUNETORET(ID, EMRI, DITELINDJA, DEPARTAMENTI, DATA_PUNESIMIT, PAGA, TELEFONI, ADRESA, QYTETI, SHTETI, STATUSI, FOTO, EMAIL, GJINIA, HYRAT) AS SELECT PUNETORET.ID, ((PUNETORET.EMRI || ' ') || PUNETORET.MBIEMRI) AS EMRI, PUNETORET.DITELINDJA, DEPARTAMENTI.DEPARTAMENTI, PUNETORET.DATA_PUNESIMIT, PUNETORET.PAGA, PUNETORET.TELEFONI, PUNETORET.ADRESA, PUNETORET.QYTETI, PUNETORET.SHTETI, PUNETORET.STATUSI, PUNETORET.FOTO, PUNETORET.EMAIL, PUNETORET.GJINIA, (SELECT SUM(VSHITJET.TOTALNETO) FROM PUBLIC.VSHITJET WHERE VSHITJET.PNT_ID = PUNETORET.ID) AS HYRAT FROM PUBLIC.PUNETORET INNER JOIN PUBLIC.DEPARTAMENTI ON 1=1 WHERE PUNETORET.DEP_ID = DEPARTAMENTI.ID;\n" +
+                            "CREATE FORCE VIEW PUBLIC.PNT(NR, A, P) AS SELECT COUNT(PUNETORET.ID) AS NR, (SELECT COUNT(ID) FROM PUBLIC.PUNETORET WHERE STATUSI = 1) AS A, (SELECT COUNT(ID) FROM PUBLIC.PUNETORET WHERE STATUSI = 0) AS P FROM PUBLIC.PUNETORET;\n" +
+                            "CREATE FORCE VIEW PUBLIC.PROD_DETAIL(ID, BARCODE, EMRI, SASIA, NJESIA, ZBRITJE, KATEGORIA, QMIMI_SHITJES) AS SELECT PRODUKTET.ID, PRODUKTET.BARCODE, PRODUKTET.EMRI, PRODUKTET.SASIA, PRODUKTET.NJESIA, PRODUKTET.ZBRITJE, KAT_PROD.KATEGORIA, PRODUKTET.QMIMI_SHITJES FROM PUBLIC.PRODUKTET INNER JOIN PUBLIC.KAT_PROD ON 1=1 WHERE PRODUKTET.KATEGORIA_ID = KAT_PROD.ID;\n" +
+                            "CREATE FORCE VIEW PUBLIC.TE_HYRAT(MUAJ, JAVA, SOT) AS SELECT HYRAT_MUAJ.FITIMI AS MUAJ, HYRAT_JAVA.FITIMI AS JAVA, HYRAT_SOT.FITIMI AS SOT FROM PUBLIC.HYRAT_MUAJ INNER JOIN PUBLIC.HYRAT_JAVA ON 1=1 INNER JOIN PUBLIC.HYRAT_SOT ON 1=1 WHERE TRUE;\n" +
+                            "CREATE FORCE VIEW PUBLIC.TOPKATEGORIA(SASIA, KATEGORIA) AS SELECT SUM(VSHITJET.SASIA) AS SASIA, VSHITJET.KATEGORIA FROM PUBLIC.VSHITJET GROUP BY KATEGORIA;\n" +
+                            "CREATE FORCE VIEW PUBLIC.VFATURA(REC_ID, USR, KOHA, CASH, KONSUMATORI) AS SELECT REC.REC_ID, PERDORUESI.USR, PARSEDATETIME(SHITJET.KOHA_SHITJES, 'yyyy-MM-dd H:m:ss') AS KOHA, SHITJET.CASH, KONSUMATORET.EMRI AS KONSUMATORI FROM PUBLIC.REC INNER JOIN PUBLIC.PRODUKTET ON 1=1 INNER JOIN PUBLIC.SHITJET ON 1=1 INNER JOIN PUBLIC.KONSUMATORET ON 1=1 INNER JOIN PUBLIC.PERDORUESI ON 1=1 WHERE (PERDORUESI.ID = SHITJET.USR) AND ((SHITJET.KONS_ID = KONSUMATORET.ID) AND ((SHITJET.REC_ID = REC.REC_ID) AND (SHITJET.PROD_ID = PRODUKTET.ID)));\n" +
+                            "CREATE FORCE VIEW PUBLIC.VMES(SHUMA) AS SELECT SUM(TOTALNETO) AS SHUMA FROM PUBLIC.VSHITJET GROUP BY RED_ID;\n" +
+                            "CREATE FORCE VIEW PUBLIC.VPROD(BARCODE, ID, EMRI, QMIMI_SHITJES, BG, FG, NJESIA, KATEGORIA_ID, SASIA, ZBRITJE) AS SELECT PRODUKTET.BARCODE, PRODUKTET.ID, PRODUKTET.EMRI, PRODUKTET.QMIMI_SHITJES, KAT_PROD.BG, KAT_PROD.FG, PRODUKTET.NJESIA, KAT_PROD.ID AS KATEGORIA_ID, PRODUKTET.SASIA, PRODUKTET.ZBRITJE FROM PUBLIC.PRODUKTET INNER JOIN PUBLIC.KAT_PROD ON 1=1 WHERE (PRODUKTET.SASIA > 0) AND (PRODUKTET.KATEGORIA_ID = KAT_PROD.ID);\n" +
+                            "CREATE FORCE VIEW PUBLIC.VREC(TOTAL, REC_ID, KOHA_KRIJIMIT) AS SELECT SUM(VSHITJET.TOTAL) AS TOTAL, REC.REC_ID, REC.KOHA_KRIJIMIT FROM PUBLIC.VSHITJET INNER JOIN PUBLIC.REC ON 1=1 WHERE VSHITJET.RED_ID = REC.REC_ID GROUP BY VSHITJET.RED_ID;\n" +
+                            "CREATE FORCE VIEW PUBLIC.VSHITJET(KONS_ID, PRODUKTI, KATEGORIA, QMIMI_SHITJES, FITIMI, KOHA_SHITJES, CASH, KUSURI, SASIA, TOTALNETO, TOTAL, PUNETORI, RED_ID, P_ID, TVSH, PNT_ID, PROD_ZBRITJE) AS SELECT KONSUMATORET.ID AS KONS_ID, PRODUKTET.EMRI AS PRODUKTI, KAT_PROD.KATEGORIA, PRODUKTET.QMIMI_SHITJES, (PRODUKTET.QMIMI_SHITJES - PRODUKTET.QMIMI_STD) AS FITIMI, SHITJET.KOHA_SHITJES, SHITJET.CASH, (SHITJET.CASH - (PRODUKTET.QMIMI_SHITJES * SHITJET.SASIA)) AS KUSURI, SHITJET.SASIA AS SASIA, (SHITJET.SASIA * (PRODUKTET.QMIMI_SHITJES - PRODUKTET.QMIMI_STD)) AS TOTALNETO, (SHITJET.SASIA * ((PRODUKTET.QMIMI_SHITJES - ((PRODUKTET.QMIMI_SHITJES * PRODUKTET.ZBRITJE) / 100)) + (((PRODUKTET.QMIMI_SHITJES - ((PRODUKTET.QMIMI_SHITJES * PRODUKTET.ZBRITJE) / 100)) * REC.TVSH) / 100))) AS TOTAL, PERDORUESI.USR AS PUNETORI, SHITJET.REC_ID AS RED_ID, PRODUKTET.ID AS P_ID, REC.TVSH, PERDORUESI.PNT_ID, PRODUKTET.ZBRITJE AS PROD_ZBRITJE FROM PUBLIC.SHITJET INNER JOIN PUBLIC.KONSUMATORET ON 1=1 INNER JOIN PUBLIC.PRODUKTET ON 1=1 INNER JOIN PUBLIC.KAT_PROD ON 1=1 INNER JOIN PUBLIC.PERDORUESI ON 1=1 INNER JOIN PUBLIC.REC ON 1=1 WHERE (SHITJET.REC_ID = REC.REC_ID) AND ((PERDORUESI.ID = SHITJET.USR) AND ((KONSUMATORET.ID = SHITJET.KONS_ID) AND ((SHITJET.PROD_ID = PRODUKTET.ID) AND (PRODUKTET.KATEGORIA_ID = KAT_PROD.ID))));";
+            try (FileWriter fw = new FileWriter(file, true);
+                 BufferedWriter bw = new BufferedWriter(fw);) {
+                bw.write(view);
+            }catch (Exception ex) {ex.printStackTrace();}
+        }catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void setTransition(RotateTransition transition) {
+        this.transition = transition;
+    }
+
+    public void setIv(ImageView iv) {
+        this.iv = iv;
     }
 }

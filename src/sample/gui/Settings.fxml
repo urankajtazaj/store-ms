@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <GridPane alignment="TOP_CENTER" vgap="5" hgap="5" styleClass="gp" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Settings">
@@ -83,7 +80,10 @@
                 </VBox>
             </center>
         </BorderPane>
-        <Button text="Pastro te gjitha te dhenat" onAction="#pastroDb" GridPane.halignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4"
+        <Button text="Eksporto te dhenat (SQL)" minWidth="200" maxWidth="220" onAction="#exportDb" GridPane.halignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Button text="Importo te dhenat (SQL)" minWidth="200" maxWidth="220" onAction="#importDb" GridPane.halignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="5"
+                style="-fx-background-color: -fx-green"/>
+        <Button text="Pastro te gjitha te dhenat" minWidth="200" maxWidth="220" onAction="#pastroDb" GridPane.halignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="6"
                 style="-fx-background-color: -fx-red"/>
 
     </children>

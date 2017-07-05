@@ -6,47 +6,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.chart.*;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
-import java.util.EventListener;
-import java.util.Random;
 import java.util.ResourceBundle;
-
-import javafx.scene.chart.XYChart;
-import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
-import sample.Main;
-
-import javax.tools.Tool;
 
 public class Controller implements Initializable {
 
@@ -197,10 +172,10 @@ public class Controller implements Initializable {
             pntRoot = loader.load();
 
             Punetoret punetoret = loader.getController();
-
+            punetoret.setStage(stage);
             punetoret.setTransition(startSpinning(spinner));
             punetoret.setIv(spinner);
-            punetoret.setStage(root);
+            punetoret.setBorderPane(root);
 
             punetoret.btnShtoPnt.setOnAction(a -> {
                 try {
@@ -237,6 +212,9 @@ public class Controller implements Initializable {
             pntRoot = loader.load();
         }else if (((ToggleButton) e.getSource()).getText().equals("RREGULLO")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Settings.fxml"));
+            Settings settings = loader.getController();
+            settings.setIv(spinner);
+            settings.setTransition(startSpinning(spinner));
             pntRoot = loader.load();
         }
 
