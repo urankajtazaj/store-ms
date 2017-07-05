@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <BorderPane styleClass="bg" style="-fx-background-color: -fx-sidebar;" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sample.controller.Login">
@@ -26,12 +22,12 @@
         </GridPane>
     </center>
     <bottom>
-        <HBox styleClass="bottom" alignment="BOTTOM_RIGHT">
+        <HBox alignment="BOTTOM_RIGHT">
             <padding>
                 <Insets right="5" left="5"/>
             </padding>
             <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                <Label style="-fx-text-fill: rgba(255,255,255,.5)" text="Copyrights © Uran Kajtazaj, 2017"/>
+                <Label style="-fx-text-fill: rgba(0,0,0,.75)" text="Copyrights © Uran Kajtazaj, 2017"/>
             </HBox>
             <Button fx:id="btnSetting" onAction="#openSettings" styleClass="littleIcon">
                 <tooltip>

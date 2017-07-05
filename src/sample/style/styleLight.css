@@ -1195,10 +1195,6 @@
     -fx-font-family: "Lato";
 }
 
-.bottom {
-    -fx-background-color: -fx-btn;
-}
-
 .menuTp {
     -fx-background-color: #40bcf2;
 }
