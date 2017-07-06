@@ -32,11 +32,7 @@
     -fx-green: #79bd9a;
     -fx-red: #f1404b;
     -fx-label-color: rgba(255,255,255,.85);
-    -fx-sidebar: #1D2B30;
-    -fx-sidebar: #242734;
     -fx-sidebar: #1A2129;
-    -fx-secondary: #282c3b;
-    -fx-secondary: #2e4756;
     -fx-secondary: #202731;
     -fx-btn: #0E97F5;
     -fx-second: #F16B6F;
@@ -109,7 +105,7 @@
 }
 
 .sideBar {
-    -fx-background-color: -fx-secondary;
+    -fx-background-color: -fx-sidebar;
     -fx-padding: 0;
     -fx-min-width: 135;
     -fx-max-width: 135;
@@ -217,17 +213,6 @@
 .default-color0.chart-pie {
     -fx-background-color: -fx-btn;
 }
-
-.default-color0.chart-pie {/*
-    -fx-effect: dropshadow(gaussian, -fx-btn, 15, 0, 0, 0);
-    -fx-background-color: -fx-btn;/*
-    -fx-effect: dropshadow(gaussian, #8171ED, 20, 0, 0, 0);
-*/}
-
-/*
-.chart-series-area-fill {
-    -fx-fill: transparent;
-}*/
 
 .chart-plot-background {
     -fx-background-color: transparent;

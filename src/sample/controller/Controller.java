@@ -152,7 +152,7 @@ public class Controller implements Initializable {
     private void changeScene(ActionEvent e) throws Exception {
         Parent pntRoot = null;
 
-        if (((ToggleButton) e.getSource()).getText().equals("SHTEPI")) {
+        if (((ToggleButton) e.getSource()).getText().equals("BALLINA")) {
             pntRoot = FXMLLoader.load(getClass().getResource("/sample/gui/dashboard.fxml"));
         }else if (((ToggleButton) e.getSource()).getText().equals("PUNETORET")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/punetoret.fxml"));
@@ -197,7 +197,7 @@ public class Controller implements Initializable {
         }else if (((ToggleButton) e.getSource()).getText().equals("SHITJE")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Shitjet.fxml"));
             pntRoot = loader.load();
-        }else if (((ToggleButton) e.getSource()).getText().equals("RREGULLO")) {
+        }else if (((ToggleButton) e.getSource()).getText().equals("PREFERENCAT")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Settings.fxml"));
             pntRoot = loader.load();
             Settings settings = loader.getController();
