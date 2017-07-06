@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
+<?import java.lang.*?>
 <GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml">
 
@@ -49,7 +46,7 @@
         <Label text="Qmimi i shitjes*"/>
         <Label text="Zbritje (%)"/>
         <Label text="Sasia*" />
-        <Label text="Niveli kritik" />
+        <Label text="Sasia kritike" />
     </VBox>
 
     <VBox spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="1">

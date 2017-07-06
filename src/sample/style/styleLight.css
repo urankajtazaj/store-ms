@@ -117,8 +117,8 @@
 
 .sideBar {
     -fx-background-color: -fx-btn;
-    -fx-min-width: 50;
-    -fx-max-width: 50;
+    -fx-min-width: 135;
+    -fx-max-width: 135;
 }
 
 .hbBtn {

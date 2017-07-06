@@ -67,19 +67,6 @@ public class Controller implements Initializable {
         disableButtons(VariablatPublike.raportet, btnStat);
         disableButtons(VariablatPublike.produktet, btnPaisjet);
 
-        Tooltip tp = new Tooltip();
-        tp.setMinHeight(54);
-        tp.setMaxHeight(54);
-        tp.getStyleClass().add("menuTp");
-        addTooltip(tp, btnHome, "SHTEPI");
-        addTooltip(tp, btnPunetoret, "PUNETORET");
-        addTooltip(tp, btnKons, "KONSUMATORET");
-        addTooltip(tp, btnPaisjet, "PRODUKTET");
-        addTooltip(tp, btnSettings, "RREGULLO");
-        addTooltip(tp, btnStat, "RAPORTET");
-        addTooltip(tp, btnLogout, "DALJA");
-        addTooltip(tp, btnShit, "SHITJET");
-
         try {
             if (pntId > 0) root.setCenter(openFirst().load());
             else root.setCenter(FXMLLoader.load(getClass().getResource("/sample/gui/dashboard.fxml")));

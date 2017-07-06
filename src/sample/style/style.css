@@ -101,18 +101,18 @@
 }
 
 .sideBar .toggle-button:selected, .sideBar .toggle-button:focused {
-    -fx-background-color: -fx-btn;
+    -fx-background-color: -fx-sidebar;
 }
 
 .sideBar .toggle-button:hover {
-    -fx-background-color: -fx-btn;
+    -fx-background-color: -fx-sidebar;
 }
 
 .sideBar {
     -fx-background-color: -fx-secondary;
     -fx-padding: 0;
-    -fx-min-width: 50;
-    -fx-max-width: 50;
+    -fx-min-width: 135;
+    -fx-max-width: 135;
 }
 
 .hbBtn {

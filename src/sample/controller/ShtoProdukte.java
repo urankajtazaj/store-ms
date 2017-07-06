@@ -132,7 +132,7 @@ public class ShtoProdukte implements Initializable {
     private void shtoProdukt(){
         if (!emri.getText().isEmpty() && !qmimiShitjes.getText().isEmpty() && !stok.getText().isEmpty()) {
             if (Pattern.compile(patternDot).matcher(qmimiStd.getText()).matches() && Pattern.compile(patternDot).matcher(qmimiShitjes.getText()).matches() &&
-                    Pattern.compile(patternDot).matcher(zbritje.getText()).matches() && Pattern.compile(pattern).matcher(stok.getText()).matches() &&
+                    Pattern.compile(patternEmpty).matcher(zbritje.getText()).matches() && Pattern.compile(pattern).matcher(stok.getText()).matches() &&
                     Pattern.compile(patternEmpty).matcher(stokCrit.getText()).matches()) {
                 if (id == 0)
                     addToDatabase();
