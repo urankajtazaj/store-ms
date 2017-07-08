@@ -81,6 +81,7 @@
                 </VBox>
             </center>
         </BorderPane>
+
         <VBox spacing="5" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4"
               style="-fx-border-color: -fx-red; -fx-border-radius: 5; -fx-border-width: 1; -fx-padding: 10">
             <Label text="Zona e rrezikut"/>

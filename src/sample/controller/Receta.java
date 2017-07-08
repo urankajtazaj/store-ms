@@ -42,17 +42,17 @@ public class Receta {
     public void krijoFaturen() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        sb.append(String.format("\n\r\t\t%s\n\r\n\r\t%s\n\r\n\r", VariablatPublike.emriShitores, sdf.format(date)));
-        sb.append(String.format("%-22s%-6s %-9s\n\r------------------------------------\n\r", "Produkti", "Qmimi", "Total"));
+        sb.append(String.format("\n\t\t%s\n\n\t%s\n\n", VariablatPublike.emriShitores, sdf.format(date)));
+        sb.append(String.format("%-22s%-6s %-9s\n------------------------------------\n", "Produkti", "Qmimi", "Total"));
         for (int i = 0; i <= len; i++) {
-            sb.append(String.format("%-22s%-6.2f%.2f€\n\r", rec[i][0] + " x" + rec[i][1], Double.parseDouble(rec[i][2]), (Double.parseDouble(rec[i][1]) *
+            sb.append(String.format("%-22s%-6.2f%.2f€\n", rec[i][0] + " x" + rec[i][1], Double.parseDouble(rec[i][2]), (Double.parseDouble(rec[i][1]) *
             Double.parseDouble(rec[i][2]))));
         }
-        sb.append("\n\r------------------------------------\n\r");
-        sb.append(String.format("%-22s%10.2f€\n\r%-18s%10d%%\n\r%-18s%10.2f€\n\r\n\r","Total pa tvsh:", total, "TVSH:", tvsh, "TOTAL:", total + (total * tvsh/100)));
-        sb.append(String.format("%-22s%10.2f€\n\r%-18s%10.2f€", "Pagesa:", pagesa, "Kusuri:", pagesa - (total + (total * tvsh/100))));
-        sb.append(String.format("\n\r\n\rPunetori: %s", VariablatPublike.uemri));
-        sb.append("\n\r\n\r\t\tJU FALEMINDERIT");
+        sb.append("\n------------------------------------\n");
+        sb.append(String.format("%-22s%10.2f€\n%-18s%10d%%\n%-18s%10.2f€\n\n","Total pa tvsh:", total, "TVSH:", tvsh, "TOTAL:", total + (total * tvsh/100)));
+        sb.append(String.format("%-22s%10.2f€\n%-18s%10.2f€", "Pagesa:", pagesa, "Kusuri:", pagesa - (total + (total * tvsh/100))));
+        sb.append(String.format("\n\nPunetori: %s", VariablatPublike.uemri));
+        sb.append("\n\n\t\tJU FALEMINDERIT");
         krijoFile(date);
     }
 

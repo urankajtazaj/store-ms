@@ -105,7 +105,7 @@
 }
 
 .sideBar {
-    -fx-background-color: -fx-sidebar;
+    -fx-background-color: -fx-secondary;
     -fx-padding: 0;
     -fx-min-width: 135;
     -fx-max-width: 135;

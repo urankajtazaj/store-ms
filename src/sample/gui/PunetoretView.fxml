@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
 <GridPane alignment="TOP_CENTER" vgap="5" hgap="5" styleClass="gp" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml">         <!--fx:controller="sample.controller.PunetoretView"> -->
 
@@ -83,7 +77,6 @@
             </HBox>
         </VBox>
         <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" spacing="4" alignment="BOTTOM_RIGHT">
-            <Button styleClass="btn" fx:id="btnExport" text="Eksporto"/>
             <Button styleClass="btn" fx:id="btnRregullo" text="Rregullo"/>
         </HBox>
         <VBox fx:id="hbGrid" GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER_LEFT" GridPane.halignment="CENTER" spacing="5">
