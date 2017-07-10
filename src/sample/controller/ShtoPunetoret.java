@@ -70,10 +70,11 @@ public class ShtoPunetoret implements Initializable {
                 txtUser.setText(emri.getText().toLowerCase() + "." + mbiemri.getText().toLowerCase());
             }
         });
-
         mbiemri.focusedProperty().addListener((o, ov, nv) -> {
             if (nv.booleanValue() == false && !emri.getText().isEmpty()) {
-                txtUser.setText(emri.getText().toLowerCase() + "." + mbiemri.getText().toLowerCase());
+                if (!mbiemri.getText().isEmpty())
+                    txtUser.setText(emri.getText().toLowerCase() + "." + mbiemri.getText().toLowerCase());
+                else txtUser.setText(emri.getText().toLowerCase());
             }
         });
 
@@ -91,6 +92,9 @@ public class ShtoPunetoret implements Initializable {
                 txtShteti.setDisable(false);
                 cbQyteti.setDisable(true);
             }else {
+                cbQyteti.setDisable(false);
+                txtQyteti.setDisable(true);
+                txtShteti.setDisable(true);
                 merrQytetet(VariablatPublike.shteti.get(nv));
             }
         });
@@ -201,8 +205,8 @@ public class ShtoPunetoret implements Initializable {
                     pstmt.setString(9, telefoni.getText());
                     pstmt.setString(10, formatterTime.format(LocalDateTime.now()));
                     pstmt.setString(11, adresa.getText());
-                    pstmt.setString(12, cbQyteti.getSelectionModel().getSelectedItem());
-                    pstmt.setString(13, cbShteti.getSelectionModel().getSelectedItem());
+                    pstmt.setString(12, cbQyteti.isDisable() ? getQytetiAndAddToDb() : cbQyteti.getSelectionModel().getSelectedItem());
+                    pstmt.setString(13, cbShteti.getSelectionModel().getSelectedItem().equals("Tjeter") ? getShtetiAndAddToDb() : cbShteti.getSelectionModel().getSelectedItem());
                     pstmt.setString(14, email.getText());
                     pstmt.setString(15, lblFoto.getText());
                     pstmt.execute();
@@ -226,6 +230,22 @@ public class ShtoPunetoret implements Initializable {
             }
         }catch (Exception ex) {ex.printStackTrace();}
 
+    }
+
+    private String getQytetiAndAddToDb() {
+        try (PreparedStatement ps = con.prepareStatement("insert into qytetet values(null, ?, (select max(id) from shteti)+1)")) {
+            ps.setString(1, txtQyteti.getText());
+            ps.execute();
+        }catch (Exception e ) { e.printStackTrace(); }
+        return txtQyteti.getText();
+    }
+
+    private String getShtetiAndAddToDb() {
+        try (PreparedStatement ps = con.prepareStatement("insert into shteti values(null, ?)")) {
+            ps.setString(1, txtShteti.getText());
+            ps.execute();
+        }catch (Exception e) { e.printStackTrace(); }
+        return txtShteti.getText();
     }
 
     private void pastro (){
