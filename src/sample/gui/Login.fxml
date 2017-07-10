@@ -24,10 +24,16 @@
     <bottom>
         <HBox alignment="BOTTOM_RIGHT">
             <padding>
-                <Insets right="5" left="5"/>
+                <Insets right="5" left="6" bottom="5"/>
             </padding>
             <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                <Hyperlink fx:id="hyperlink" onAction="#openGithub" style="-fx-text-fill: rgba(255,255,255,.7)" text="github.com/urankajtazaj/store-ms"/>
+                <Hyperlink fx:id="hyperlink" onAction="#openGithub" style="-fx-text-fill: rgba(255,255,255,.7)">
+                    <graphic>
+                        <ImageView preserveRatio="true" fitWidth="20">
+                            <Image url="/sample/photo/github-logo.png"/>
+                        </ImageView>
+                    </graphic>
+                </Hyperlink>
             </HBox>
             <Button fx:id="btnSetting" onAction="#openSettings" styleClass="littleIcon">
                 <tooltip>
