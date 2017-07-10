@@ -307,6 +307,10 @@ public class Settings implements Initializable {
             if (ntf.getDelete()) {
                 String query =
                         "delete from punetoret;" +
+                        "delete from shteti where id > 2;" +
+                        "alter table shteti alter column id restart with 3;" +
+                        "delete from qytetet where id > 102;" +
+                        "alter table qytetet alter id restart with 103;" +
                         "delete from konsumatoret;" +
                         "delete from produktet;" +
                         "delete from departamenti;" +
@@ -416,7 +420,7 @@ public class Settings implements Initializable {
         try (Statement st = con.createStatement()) {
 
             st.execute("script to '" + file.getAbsolutePath() + "' table produktet,punetoret,perdoruesi,konsumatoret," +
-                    "shitjet,rec,kat_prod,departamenti,priv,pushimet,tvsh,target");
+                    "shitjet,rec,kat_prod,departamenti,priv,pushimet,tvsh,target,shteti,qytetet");
 
             String view =
                     "CREATE FORCE VIEW PUBLIC.HYRAT_JAVA(FITIMI) AS SELECT SUM((PRODUKTET.QMIMI_SHITJES - PRODUKTET.QMIMI_STD) * SHITJET.SASIA) AS FITIMI FROM PUBLIC.PRODUKTET INNER JOIN PUBLIC.SHITJET ON 1=1 WHERE (PRODUKTET.ID = SHITJET.PROD_ID) AND (WEEK(SHITJET.KOHA_SHITJES) = WEEK(CURRENT_DATE()));\n" +
