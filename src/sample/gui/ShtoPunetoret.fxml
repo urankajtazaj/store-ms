@@ -52,8 +52,8 @@
                 <Label text="Telefoni"/>
                 <Label text="Email"/>
                 <Label text="Adresa"/>
-                <Label text="Qyteti"/>
-                <Label text="Shteti"/>
+                <Label text="Qyteti*"/>
+                <Label text="Shteti*"/>
             </VBox>
 
             <VBox GridPane.columnIndex="3" GridPane.rowIndex="0" spacing="10">

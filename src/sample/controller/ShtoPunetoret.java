@@ -85,6 +85,19 @@ public class ShtoPunetoret implements Initializable {
             shtoPnt(mode, id);
         });
 
+        cbQyteti.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
+            if (nv != null) {
+                if (nv.equals("Tjeter")) {
+                    txtQyteti.setDisable(false);
+                }
+            }else {
+                if (cbQyteti.isDisable()) {
+                    cbQyteti.setDisable(false);
+                    txtQyteti.setDisable(true);
+                }
+            }
+        });
+
         merrShtetet();
         cbShteti.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
             if (nv.equals("Tjeter")) {
@@ -95,7 +108,7 @@ public class ShtoPunetoret implements Initializable {
                 cbQyteti.setDisable(false);
                 txtQyteti.setDisable(true);
                 txtShteti.setDisable(true);
-                merrQytetet(VariablatPublike.shteti.get(nv));
+                if (!cbQyteti.isDisable()) merrQytetet(VariablatPublike.shteti.get(nv));
             }
         });
         cbShteti.getSelectionModel().select(0);
@@ -147,8 +160,8 @@ public class ShtoPunetoret implements Initializable {
                 telefoni.setText(rs.getString("telefoni"));
                 email.setText(rs.getString("email"));
                 adresa.setText(rs.getString("adresa"));
-                cbQyteti.getSelectionModel().select(rs.getString("qyteti"));
-                cbShteti.getSelectionModel().select(rs.getString("shteti"));
+                if (!rs.getString("shteti").isEmpty()) cbShteti.getSelectionModel().select(rs.getString("shteti"));
+                if (!rs.getString("qyteti").isEmpty()) cbQyteti.getSelectionModel().select(rs.getString("qyteti"));
                 lblFoto.setText(rs.getString("foto"));
                 cbStatusi.getSelectionModel().select(rs.getInt("statusi"));
                 departamenti.getSelectionModel().select(VariablatPublike.revDep.get(rs.getInt("dep_id")));
@@ -188,7 +201,9 @@ public class ShtoPunetoret implements Initializable {
                 "where id = " + id);
             }
 
-            if (!emri.getText().equals("") && !paga.getText().equals("") && !punesuar.getEditor().getText().equals("")) {
+            if (!emri.getText().equals("") && (!(txtQyteti.getText().isEmpty() && cbQyteti.getSelectionModel().getSelectedItem().equals("Tjeter"))
+                    && !(txtShteti.getText().isEmpty() && cbShteti.getSelectionModel().getSelectedItem().equals("Tjeter")))
+                    && !paga.getText().equals("") && !punesuar.getEditor().getText().equals("")) {
                 if (!paga.getText().trim().matches("^\\d+(\\.\\d)*$") || !telefoni.getText().trim().matches("|^[0-9 ]+")) {
                     ntf.setMessage("Gabim ne konvertim te te dhenave, kontrolloni fushat ku kerkohen numra");
                     ntf.setType(NotificationType.ERROR);
@@ -233,7 +248,15 @@ public class ShtoPunetoret implements Initializable {
     }
 
     private String getQytetiAndAddToDb() {
-        try (PreparedStatement ps = con.prepareStatement("insert into qytetet values(null, ?, (select max(id) from shteti)+1)")) {
+        String q = null;
+
+        if (!txtShteti.isDisable()) {
+            q = "insert into qytetet values(null, ?, (select max(id) from shteti)+1)";
+        }else {
+            q = "insert into qytetet values(null, ?, "+VariablatPublike.shteti.get(cbShteti.getSelectionModel().getSelectedItem())+")";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(q)) {
             ps.setString(1, txtQyteti.getText());
             ps.execute();
         }catch (Exception e ) { e.printStackTrace(); }
@@ -288,6 +311,7 @@ public class ShtoPunetoret implements Initializable {
                 VariablatPublike.qyteti.put(rs.getString("qyteti"), rs.getInt("id"));
                 VariablatPublike.revQyteti.put(rs.getInt("id"), rs.getString("qyteti"));
             }
+            cbQyteti.getItems().add("Tjeter");
             cbQyteti.getSelectionModel().select(0);
         }catch (Exception e) {e.printStackTrace();}
     }

@@ -309,6 +309,7 @@
 
 .text-field:focused, .combo-box:focused, .choice-box:focused {
     -fx-border-color: rgba(255,255,255,.15);
+    -fx-background-color: rgba(255,255,255,.08);
 }
 
 .date-picker > .text-field {
@@ -1001,11 +1002,12 @@
     -fx-min-width: 250;
     -fx-font-size: 15;
     -fx-text-fill: #fff;
-    -fx-border-color: rgba(255,255,255,.6);
+    -fx-border-color: rgba(255,255,255,.07);
 }
 
 .logTxt:focused {
-    -fx-border-color: rgba(255,255,255,.9);
+    -fx-border-color: rgba(255,255,255,.15);
+    -fx-background-color: rgba(255,255,255,.08);
 }
 /*
 .logTxt {
