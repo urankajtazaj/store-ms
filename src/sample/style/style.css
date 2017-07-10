@@ -267,9 +267,9 @@
 }
 
 .date-picker > .arrow-button {
-    -fx-background-color: transparent;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
+    -fx-background-color: rgba(255,255,255, .07);
+    -fx-border-radius: 0 4 4 0;
+    -fx-background-radius: 0 4 4 0;
 }
 
 .vbSp .label {
@@ -279,7 +279,7 @@
     -fx-opacity: .85;
     -fx-text-fill: #fff;
 }
-
+/*
 .text-field, .date-picker > .text-field {
     -fx-border-width: 0 0 1 0;
     -fx-min-height: 32;
@@ -292,12 +292,24 @@
     -fx-text-fill: rgba(255,255,255,0.9);
     -fx-background-color: transparent;
     -fx-font-weight: bold;
+}*/
+
+.text-field, .date-picker > .text-field, .combo-box, .choice-box {
+    -fx-border-width: 1;
+    -fx-min-height: 32;
+    -fx-max-height: 32;
+    -fx-padding: 0 5 0 5;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-border-color: rgba(255,255,255,.07);
+    -fx-effect: none;
+    -fx-text-fill: rgba(255,255,255,0.9);
+    -fx-background-color: rgba(255,255,255,.05);
 }
 
 .text-field:focused, .combo-box:focused, .choice-box:focused {
-    -fx-border-color: -fx-primary;/*
-    -fx-effect: dropshadow(gaussian, -fx-primary, 20, 0, 0, 0);
-*/}
+    -fx-border-color: rgba(255,255,255,.15);
+}
 
 .date-picker > .text-field {
     -fx-border-width: 0;
@@ -422,7 +434,7 @@
     -fx-text-fill: rgba(255,255,255,0.9);
 }
 
-.combo-box, .choice-box {
+/*.combo-box, .choice-box {
     -fx-border-width: 0 0 1 0;
     -fx-border-color: rgba(255,255,255,.3);
     -fx-padding: 0 7 0 7;
@@ -432,7 +444,7 @@
     -fx-min-height: 32;
     -fx-max-height: 32;
     -fx-background-color: transparent;
-}
+}*/
 
  .combo-box:disabled, .choice-box:disabled {
     -fx-opacity: .45;
