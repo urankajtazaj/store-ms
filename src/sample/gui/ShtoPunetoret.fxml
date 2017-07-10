@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.shape.Rectangle?>
+<?import java.lang.String?>
 <BorderPane styleClass="gp" style="-fx-padding: 50 10 10 10" fx:id="shtoBp" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml">
             <!---fx:controller="sample.controller.ShtoPunetoret">-->
@@ -70,8 +64,14 @@
                 <TextField fx:id="telefoni" minWidth="200" maxWidth="200"/>
                 <TextField fx:id="email" minWidth="200" maxWidth="200"/>
                 <TextField fx:id="adresa" minWidth="200" maxWidth="200"/>
-                <TextField fx:id="qyteti" minWidth="200" maxWidth="200"/>
-                <TextField fx:id="shteti" minWidth="200" maxWidth="200"/>
+                <HBox spacing="5">
+                    <ComboBox fx:id="cbShteti" minWidth="200" maxWidth="200"/>
+                    <TextField fx:id="txtShteti" disable="true" minWidth="150" maxWidth="150"/>
+                </HBox>
+                <HBox spacing="5">
+                    <ComboBox fx:id="cbQyteti" minWidth="200" maxWidth="200"/>
+                    <TextField fx:id="txtQyteti" disable="true" minWidth="150" maxWidth="150"/>
+                </HBox>
             </VBox>
 
             <VBox spacing="10" styleClass="vbSp" GridPane.rowIndex="1" GridPane.columnIndex="0">

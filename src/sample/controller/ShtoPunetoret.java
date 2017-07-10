@@ -1,29 +1,23 @@
 package sample.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import sample.Enums.*;
 import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 
-import java.awt.*;
-import java.io.File;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.*;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Created by uran on 17-04-30.
@@ -38,9 +32,9 @@ public class ShtoPunetoret implements Initializable {
     @FXML private BorderPane shtoBp, childBp;
     @FXML Button btnRuaj;
     @FXML private Hyperlink addDp;
-    @FXML private TextField emri, mbiemri, paga, titulli, telefoni, email, adresa, qyteti, shteti, txtUser;
+    @FXML private TextField emri, mbiemri, paga, titulli, telefoni, email, adresa, txtQyteti, txtShteti, txtUser;
     @FXML private PasswordField txtPw;
-    @FXML private ComboBox departamenti, gjinia, cbStatusi;
+    @FXML private ComboBox<String> departamenti, gjinia, cbStatusi, cbShteti, cbQyteti;
     @FXML private DatePicker punesuar, ditelindja;
     @FXML private Label lblFoto;
     @FXML private Button btnFotoHape;
@@ -90,6 +84,18 @@ public class ShtoPunetoret implements Initializable {
             shtoPnt(mode, id);
         });
 
+        merrShtetet();
+        cbShteti.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
+            if (nv.equals("Tjeter")) {
+                txtQyteti.setDisable(false);
+                txtShteti.setDisable(false);
+                cbQyteti.setDisable(true);
+            }else {
+                merrQytetet(VariablatPublike.shteti.get(nv));
+            }
+        });
+        cbShteti.getSelectionModel().select(0);
+
         try {
             departamenti.getItems().clear();
             merrDeps("Select * from departamenti", departamenti);
@@ -137,8 +143,8 @@ public class ShtoPunetoret implements Initializable {
                 telefoni.setText(rs.getString("telefoni"));
                 email.setText(rs.getString("email"));
                 adresa.setText(rs.getString("adresa"));
-                qyteti.setText(rs.getString("qyteti"));
-                shteti.setText(rs.getString("shteti"));
+                cbQyteti.getSelectionModel().select(rs.getString("qyteti"));
+                cbShteti.getSelectionModel().select(rs.getString("shteti"));
                 lblFoto.setText(rs.getString("foto"));
                 cbStatusi.getSelectionModel().select(rs.getInt("statusi"));
                 departamenti.getSelectionModel().select(VariablatPublike.revDep.get(rs.getInt("dep_id")));
@@ -195,8 +201,8 @@ public class ShtoPunetoret implements Initializable {
                     pstmt.setString(9, telefoni.getText());
                     pstmt.setString(10, formatterTime.format(LocalDateTime.now()));
                     pstmt.setString(11, adresa.getText());
-                    pstmt.setString(12, qyteti.getText());
-                    pstmt.setString(13, shteti.getText());
+                    pstmt.setString(12, cbQyteti.getSelectionModel().getSelectedItem());
+                    pstmt.setString(13, cbShteti.getSelectionModel().getSelectedItem());
                     pstmt.setString(14, email.getText());
                     pstmt.setString(15, lblFoto.getText());
                     pstmt.execute();
@@ -228,13 +234,42 @@ public class ShtoPunetoret implements Initializable {
         mbiemri.setText("");
         paga.setText("");
         adresa.setText("");
-        qyteti.setText("");
-        shteti.setText("");
+        txtQyteti.setText("");
+        txtShteti.setText("");
+        cbShteti.getSelectionModel().select(0);
+        cbQyteti.getSelectionModel().select(0);
         telefoni.setText("");
         punesuar.setValue(LocalDate.now());
         ditelindja.getEditor().clear();
         departamenti.getSelectionModel().select(0);
         gjinia.getSelectionModel().select(0);
+    }
+
+    private void merrShtetet(){
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("select * from shteti")) {
+            cbShteti.getItems().clear();
+            while (rs.next()) {
+                cbShteti.getItems().add(rs.getString("shteti"));
+                VariablatPublike.revShteti.put(rs.getInt("id"), rs.getString("shteti"));
+                VariablatPublike.shteti.put(rs.getString("shteti"), rs.getInt("id"));
+            }
+            cbShteti.getItems().add("Tjeter");
+        }catch (Exception e) { e.printStackTrace(); }
+    }
+
+    private void merrQytetet(int id){
+        try (PreparedStatement stmt = con.prepareStatement("select * from qytetet where shteti_id = ?")) {
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            cbQyteti.getItems().clear();
+            while (rs.next()) {
+                cbQyteti.getItems().add(rs.getString("qyteti"));
+                VariablatPublike.qyteti.put(rs.getString("qyteti"), rs.getInt("id"));
+                VariablatPublike.revQyteti.put(rs.getInt("id"), rs.getString("qyteti"));
+            }
+            cbQyteti.getSelectionModel().select(0);
+        }catch (Exception e) {e.printStackTrace();}
     }
 
 }

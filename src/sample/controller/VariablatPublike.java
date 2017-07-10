@@ -111,5 +111,10 @@ public class VariablatPublike {
         iv.setRotate(0);
     }
 
+    public static Map<String, Integer> shteti = new HashMap<>();
+    public static Map<Integer, String> revShteti = new HashMap<>();
+
+    public static Map<String, Integer> qyteti = new HashMap<>();
+    public static Map<Integer, String> revQyteti = new HashMap<>();
 
 }
