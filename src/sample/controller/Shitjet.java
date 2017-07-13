@@ -13,8 +13,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sample.Enums.*;
 import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 import sample.constructors.ShitjetProd;
 
 import java.math.BigDecimal;
@@ -130,6 +130,8 @@ public class Shitjet implements Initializable {
                                 lSubTtl.setText(VariablatPublike.decimalFormat.format(ttl));
                                 lTotal.setText(VariablatPublike.decimalFormat.format(
                                         ttl + ttl * VariablatPublike.tvsh/100));
+                            }else if (e.getCode().equals(KeyCode.ENTER)) {
+                                txtProd.requestFocus();
                             }
                         });
 
@@ -213,9 +215,12 @@ public class Shitjet implements Initializable {
             double qm = Double.parseDouble(dt[1]);
             double zbr = Double.parseDouble(dt[3]);
             double zbrttl = qm - (qm * zbr/100);
-            tbl.getItems().add(new ShitjetProd(Integer.parseInt(dt[0]),
+            ShitjetProd sp = new ShitjetProd(Integer.parseInt(dt[0]),
                     button.getText().split("\n")[0], VariablatPublike.decimalFormat.format(zbrttl), dt[2],
-                    VariablatPublike.decimal.format(zbr) + "%"));
+                    VariablatPublike.decimal.format(zbr) + "%");
+
+            tbl.getItems().add(sp);
+
             qmimi = qmimi.add(new BigDecimal(Double.parseDouble(dt[1]) - (Double.parseDouble(dt[1]) * Double.parseDouble(dt[3])/100)));
             lSubTtl.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
             lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue() + (qmimi.doubleValue() * VariablatPublike.tvsh/100)));
