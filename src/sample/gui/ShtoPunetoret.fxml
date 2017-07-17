@@ -67,11 +67,11 @@
                 <TextField fx:id="adresa" minWidth="200" maxWidth="200"/>
                 <HBox spacing="5">
                     <ComboBox fx:id="cbShteti" minWidth="200" maxWidth="200"/>
-                    <TextField fx:id="txtShteti" disable="true" minWidth="150" maxWidth="150"/>
+                    <TextField fx:id="txtShteti" disable="true" minWidth="150" maxWidth="150" promptText="Shteti"/>
                 </HBox>
                 <HBox spacing="5">
                     <ComboBox fx:id="cbQyteti" minWidth="200" maxWidth="200"/>
-                    <TextField fx:id="txtQyteti" disable="true" minWidth="150" maxWidth="150"/>
+                    <TextField fx:id="txtQyteti" disable="true" minWidth="150" maxWidth="150" promptText="Qyteti"/>
                 </HBox>
             </VBox>
 

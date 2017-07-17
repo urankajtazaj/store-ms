@@ -11,7 +11,7 @@
 
     <center>
         <GridPane styleClass="gpBg" alignment="CENTER" vgap="15">
-            <Label text="Miresevini" styleClass="h1" GridPane.halignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label text="Miresevini" styleClass="bigFont" GridPane.halignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
             <TextField promptText="Emri" fx:id="txtUser" styleClass="logTxt" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
             <PasswordField promptText="Fjalekalimi" fx:id="txtPw" styleClass="logTxt" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
             <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3"

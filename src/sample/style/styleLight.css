@@ -13,6 +13,21 @@
     src: url("../font/Lato-Bold.ttf");
 }
 
+@font-face {
+    font-family: "Poppins";
+    src: url("../font/Poppins-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../font/Poppins-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../font/Poppins-SemiBold.ttf");
+}
+
 /*
 .gp .label, .gp .check-box {
     -fx-text-fill: rgba(0,0,0,.8);
@@ -286,7 +301,7 @@
     -fx-opacity: .85;
     -fx-text-fill: #000;
 }
-
+/*
 .text-field, .date-picker > .text-field {
     -fx-border-width: 0 0 1 0;
     -fx-min-height: 32;
@@ -299,12 +314,7 @@
     -fx-text-fill: rgba(0,0,0,0.9);
     -fx-background-color: transparent;
     -fx-font-weight: bold;
-}
-
-.text-field:focused, .combo-box:focused, .choice-box:focused {
-    -fx-border-color: -fx-btn;/*
-    -fx-effect: dropshadow(gaussian, -fx-primary, 20, 0, 0, 0);
-*/}
+}*/
 
 .date-picker > .text-field {
     -fx-border-width: 0;
@@ -482,6 +492,24 @@
 
 .choice-box .label {
     -fx-font-weight: bold;
+}
+
+.text-field, .date-picker > .text-field, .combo-box, .choice-box {
+    -fx-border-width: 1;
+    -fx-min-height: 32;
+    -fx-max-height: 32;
+    -fx-padding: 0 5 0 5;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-border-color: rgba(0,0,0,.07);
+    -fx-effect: none;
+    -fx-text-fill: rgba(0,0,0,0.9);
+    -fx-background-color: rgba(0,0,0,.05);
+}
+
+.text-field:focused, .combo-box:focused, .choice-box:focused {
+    -fx-border-color: rgba(0,0,0,.15);
+    -fx-background-color: rgba(0,0,0,.08);
 }
 
  .chartVb {
@@ -976,13 +1004,8 @@
 .logTxt {
     -fx-min-width: 250;
     -fx-font-size: 15;
-    -fx-text-fill: #000;
-    -fx-border-color: rgba(0,0,0,.6);
 }
 
-.logTxt:focused {
-    -fx-border-color: rgba(0,0,0,.9);
-}
 /*
 .logTxt {
     -fx-border-radius: 4;
@@ -1006,10 +1029,18 @@
     -fx-text-fill: -fx-label-color;
 }
 
+.bigFont {
+    -fx-font-size: 20;
+    -fx-font-family: "Poppins semibold";
+    -fx-padding: 0 0 0 10;
+}
+
 .h0 {
     -fx-font-size: 30;
-    -fx-font-family: "Lato light";
+    -fx-font-family: "Poppins semibold";
     -fx-text-fill: -fx-primary;
+     -fx-border-width: 0 0 2 0;
+    -fx-border-color: rgba(0,0,0,.15);
 }
 
 .bg {
