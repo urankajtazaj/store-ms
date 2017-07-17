@@ -13,6 +13,21 @@
     src: url("../font/Lato-Bold.ttf");
 }
 
+@font-face {
+    font-family: "Poppins";
+    src: url("../font/Poppins-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../font/Poppins-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../font/Poppins-SemiBold.ttf");
+}
+
 /*
 .gp .label, .gp .check-box {
     -fx-text-fill: rgba(255,255,255,.8);
@@ -1035,6 +1050,9 @@
 .h0 {
     -fx-font-size: 30;
     -fx-text-fill: -fx-primary;
+    -fx-font-family: "Poppins semibold";
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: rgba(255,255,255,.15);
 }
 
 .bg {
@@ -1171,6 +1189,12 @@
     -fx-background-radius: 0;
     -fx-effect: none;
     -fx-border-width: 0;
+}
+
+.bigFont {
+    -fx-font-size: 20;
+    -fx-font-family: "Poppins semibold";
+    -fx-padding: 0 0 0 10;
 }
 
 .bigBtn:hover {

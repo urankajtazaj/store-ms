@@ -329,7 +329,7 @@ public class Punetoret implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 520, 175);
+        Scene scene = new Scene(bpExport, 520, 200);
         scene.setFill(Color.TRANSPARENT);
         scene.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ESCAPE)) stage.close();

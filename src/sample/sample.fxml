@@ -29,7 +29,7 @@
                 </VBox>
             </center>
             <bottom>
-                <HBox alignment="CENTER" style="-fx-background-color: -fx-sidebar">
+                <HBox alignment="CENTER" style="-fx-background-color: -fx-secondary">
                     <padding>
                         <Insets bottom="15" top="15"/>
                     </padding>

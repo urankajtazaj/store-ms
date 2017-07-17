@@ -7,10 +7,11 @@
 <?import java.lang.String?>
 <BorderPane styleClass="gp" style="-fx-padding: 50 10 10 10" fx:id="shtoBp" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml">
-            <!---fx:controller="sample.controller.ShtoPunetoret">-->
+
     <center>
-        <GridPane alignment="TOP_CENTER" vgap="5" hgap="10">
-            <VBox styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="10">
+        <GridPane alignment="TOP_CENTER" vgap="10" hgap="10">
+            <Label text="Shto punetore" styleClass="h0" GridPane.columnSpan="2" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <VBox styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="10">
                 <Label text="Emri*"/>
                 <Label text="Mbiemri"/>
                 <Label text="Gjinia*"/>
@@ -19,7 +20,7 @@
                 <Label text="Statusi*"/>
             </VBox>
 
-            <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="10">
+            <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="10">
                 <TextField fx:id="emri" minWidth="200" maxWidth="200"/>
                 <TextField fx:id="mbiemri" minWidth="200" maxWidth="200"/>
                 <ComboBox value="Mashkull" fx:id="gjinia" minWidth="200" maxWidth="200">
@@ -43,7 +44,7 @@
                 <Label fx:id="lblFoto" style="-fx-text-fill: rgba(0,0,0,.7)" wrapText="true" maxWidth="200"/>
             </VBox>
 
-            <VBox styleClass="vbSp" GridPane.columnIndex="2" GridPane.rowIndex="0" spacing="10">
+            <VBox styleClass="vbSp" GridPane.columnIndex="2" GridPane.rowIndex="1" spacing="10">
                 <padding>
                     <Insets left="70"/>
                 </padding>
@@ -56,7 +57,7 @@
                 <Label text="Qyteti*"/>
             </VBox>
 
-            <VBox GridPane.columnIndex="3" GridPane.rowIndex="0" spacing="10">
+            <VBox GridPane.columnIndex="3" GridPane.rowIndex="1" spacing="10">
                 <HBox spacing="2">
                     <ComboBox fx:id="departamenti" minWidth="200" maxWidth="200"/>
                 </HBox>
@@ -74,17 +75,17 @@
                 </HBox>
             </VBox>
 
-            <VBox spacing="10" styleClass="vbSp" GridPane.rowIndex="1" GridPane.columnIndex="0">
+            <VBox spacing="10" styleClass="vbSp" GridPane.rowIndex="2" GridPane.columnIndex="0">
                 <Label text="Emri"/>
                 <Label text="Fjalekalimi"/>
             </VBox>
 
-            <VBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <VBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <TextField fx:id="txtUser" minWidth="200" maxWidth="200"/>
                 <PasswordField fx:id="txtPw" minWidth="200" maxWidth="200"/>
             </VBox>
 
-            <HBox GridPane.rowIndex="1" GridPane.columnIndex="2" spacing="3" alignment="BOTTOM_RIGHT" GridPane.columnSpan="2">
+            <HBox GridPane.rowIndex="2" GridPane.columnIndex="2" spacing="3" alignment="BOTTOM_RIGHT" GridPane.columnSpan="2">
                 <padding>
                     <Insets top="10"/>
                 </padding>

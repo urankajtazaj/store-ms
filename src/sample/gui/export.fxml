@@ -12,6 +12,9 @@
     </padding>
     <center>
         <BorderPane fx:id="inBp" styleClass="newWindow">
+            <top>
+                <Label text="Ekporto te dhenat" styleClass="bigFont"/>
+            </top>
             <center>
                 <GridPane alignment="TOP_CENTER">
                     <Button contentDisplay="TOP" text="excel" GridPane.rowIndex="0" GridPane.columnIndex="0" fx:id="btnExcel" styleClass="btnExportImg">

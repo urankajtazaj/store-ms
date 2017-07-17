@@ -315,7 +315,7 @@ public class Shitjet implements Initializable {
             pagesa.setTotal(qmimi);
             loader.setController(pagesa);
             Parent parent = loader.load();
-            Scene scene = new Scene(parent, 300, 100);
+            Scene scene = new Scene(parent, 340, 150);
             scene.setOnKeyPressed(e -> {
                 if (e.getCode().equals(KeyCode.ENTER)) {
                     pagesa.shtoPagesen();
@@ -326,7 +326,7 @@ public class Shitjet implements Initializable {
             scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             pgs = pagesa.getPagesa();
 

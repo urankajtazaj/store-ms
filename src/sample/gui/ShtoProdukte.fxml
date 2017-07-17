@@ -5,16 +5,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml">
+<GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" style="-fx-padding: 50 10 10 10"
+          xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" styleClass="h0" text="Shto Produkte"/>
 
     <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <Label text="Barkodi"/>
-        <Label text="Emri*"/>
-        <Label text="Kategoria*"/>
-        <Label text="Njesia*"/>
+        <Label text="Emri*">
+            <tooltip>
+                <Tooltip text="Emri i produktit"/>
+            </tooltip>
+        </Label>
+        <Label text="Kategoria*">
+            <tooltip>
+                <Tooltip text="Kategoria e produktit"/>
+            </tooltip>
+        </Label>
+        <Label text="Njesia*">
+            <tooltip>
+                <Tooltip text="Njesia e shitjes se produktit"/>
+            </tooltip>
+        </Label>
     </VBox>
 
     <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="10">
@@ -42,11 +54,31 @@
         <padding>
             <Insets left="50"/>
         </padding>
-        <Label text="Qmimi standard*"/>
-        <Label text="Qmimi i shitjes*"/>
-        <Label text="Zbritje (%)"/>
-        <Label text="Sasia*" />
-        <Label text="Sasia kritike" />
+        <Label text="Qmimi standard*">
+            <tooltip>
+                <Tooltip text="Vendoset qmimi i blerjes nese deshirohet&#10;qe ne fund te llogariten te hyrat NETO"/>
+            </tooltip>
+        </Label>
+        <Label text="Qmimi i shitjes*">
+            <tooltip>
+                <Tooltip text="Qmimi me te cilin do te shitet produkti"/>
+            </tooltip>
+        </Label>
+        <Label text="Zbritje (%)">
+            <tooltip>
+                <Tooltip text="Zbritja ne qmim ne perqindje (mund te lihet e zbrazet)"/>
+            </tooltip>
+        </Label>
+        <Label text="Sasia*" >
+            <tooltip>
+                <Tooltip text="Sasia (stoku, en.Stock)"/>
+            </tooltip>
+        </Label>
+        <Label text="Sasia kritike" >
+            <tooltip>
+                <Tooltip text="Nese sasia bie nen kete nivel, ateher ne pamjen e bardhe (Light)&#10;do te dallohet me ngjyre te kuqe"/>
+            </tooltip>
+        </Label>
     </VBox>
 
     <VBox spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="1">
