@@ -266,12 +266,24 @@ public class Shitjet implements Initializable {
                 ntf.setDuration(3);
                 ntf.setMessage("Shitja u krye me sukses");
                 ntf.show();
+
+                receta.setTvsh((int)VariablatPublike.tvsh);
+                receta.setPagesa(pgs.doubleValue());
+
                 pastro();
+
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new PrintReceipt(receta.krijoFaturen());
+                    }
+                });
+                t.setDaemon(true);
+
                 if (cbShtypPagesen.isSelected() && !cbShtypPagesen.isDisable()) {
-                    receta.setTvsh((int)VariablatPublike.tvsh);
-                    receta.setPagesa(pgs.doubleValue());
-                    new PrintReceipt(receta.krijoFaturen());
+                    t.start();
                 }
+
             }else {
                 ntf.setType(NotificationType.ERROR);
                 ntf.setMessage(tbl.getItems().size() == 0 ? "Duhet te zgjedhet se paku nje produkt" : "Nuk eshte procesuar pagesa");
