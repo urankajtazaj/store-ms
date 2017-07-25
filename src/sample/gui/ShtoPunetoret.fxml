@@ -76,8 +76,8 @@
             </VBox>
 
             <VBox spacing="10" styleClass="vbSp" GridPane.rowIndex="2" GridPane.columnIndex="0">
-                <Label text="Emri"/>
-                <Label text="Fjalekalimi"/>
+                <Label text="User"/>
+                <Label text="Password"/>
             </VBox>
 
             <VBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
