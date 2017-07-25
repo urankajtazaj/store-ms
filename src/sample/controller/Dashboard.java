@@ -1,7 +1,6 @@
 package sample.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
@@ -9,11 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import org.controlsfx.control.PopOver;
+import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -186,6 +182,8 @@ public class Dashboard implements Initializable {
             Statement stmt6 = con.createStatement();
             Statement stmt7 = con.createStatement();
             Statement stmt8 = con.createStatement();
+            Statement stmt9 = con.createStatement();
+
             ResultSet rs = stmt.executeQuery("select * from te_hyrat limit 1");
             ResultSet rs2 = stmt2.executeQuery("select * from pnt limit 1");
             ResultSet rs3 = stmt3.executeQuery("select count(*) from konsumatoret limit 1");
@@ -195,11 +193,16 @@ public class Dashboard implements Initializable {
             ResultSet rs6 = stmt6.executeQuery("select count(*) as c, sum(sasia) as s from produktet limit 1");
             ResultSet rs7 = stmt7.executeQuery("select kategoria as k, id from kat_prod");
             ResultSet rs8 = stmt8.executeQuery("select emri, id from konsumatoret order by id");
+            ResultSet rs9 = stmt9.executeQuery("select valuta from valuta");
+
+            while (rs9.next()) {
+                VariablatPublike.valuta = rs9.getString("valuta");
+            }
 
             rs.next();
-            VariablatPublike.hyratM = rs.getDouble("muaj");
-            VariablatPublike.hyratJ = rs.getDouble("java");
-            VariablatPublike.hyratS = rs.getDouble("sot");
+            VariablatPublike.hyratM = rs.getDouble(VariablatPublike.valuta.equals("EURO") ? "muaj" : "muaj_lek");
+            VariablatPublike.hyratJ = rs.getDouble(VariablatPublike.valuta.equals("EURO") ? "java" : "java_lek");
+            VariablatPublike.hyratS = rs.getDouble(VariablatPublike.valuta.equals("EURO") ? "sot" : "sot_lek");
 
             rs2.next();
             VariablatPublike.pnt = rs2.getInt("nr");

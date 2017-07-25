@@ -39,7 +39,7 @@ public class Receta {
 
     StringBuilder sb = new StringBuilder();
 
-    public void krijoFaturen() {
+    public String krijoFaturen() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         sb.append(String.format("\n\t\t%s\n\n\t%s\n\n", VariablatPublike.emriShitores, sdf.format(date)));
@@ -54,6 +54,7 @@ public class Receta {
         sb.append(String.format("\n\nPunetori: %s", VariablatPublike.uemri));
         sb.append("\n\n\t\tJU FALEMINDERIT");
         krijoFile(date);
+        return sb.toString();
     }
 
     public void krijoFile(Date date) {

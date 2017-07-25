@@ -29,6 +29,12 @@ public class PrintReceipt {
         }
     }
 
+    public static boolean availablePrinter() {
+        PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+        if (services.length > 0) return true;
+        return false;
+    }
+
     public static class JobMonitor extends PrintJobAdapter {
         @Override
         public void printJobCompleted(PrintJobEvent pje) {

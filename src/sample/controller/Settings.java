@@ -45,7 +45,7 @@ public class Settings implements Initializable {
     private String path = System.getProperty("user.home") + "/store-ms-files/";
 
     @FXML private TextField tMujor, txtTvsh;
-    @FXML private ComboBox cbTipi;
+    @FXML private ComboBox<String> cbTipi, cbValuta;
     @FXML private VBox vbPunet;
     @FXML private Button shtoPune, btnImport;
     @FXML private VBox vbPnt;
@@ -59,6 +59,8 @@ public class Settings implements Initializable {
         merrTvsh();
         getJobs();
         merrProdKats();
+
+        cbValuta.getSelectionModel().select(VariablatPublike.valuta);
 
         File file = new File(path + "Backup/backup.sql");
         if (!file.exists()) btnImport.setDisable(true);
@@ -98,7 +100,7 @@ public class Settings implements Initializable {
             ResultSet rs = s.executeQuery("select * from target limit 1");
 
             while (rs.next()) {
-                tMujor.setText(rs.getString("qmimi"));
+                tMujor.setText(rs.getString(VariablatPublike.valuta.equals("EURO") ? "qmimi" : "qmimi_lek"));
                 cbTipi.getSelectionModel().select(rs.getInt("tipi"));
             }
 
@@ -451,5 +453,17 @@ public class Settings implements Initializable {
 
     public void setIv(ImageView iv) {
         this.iv = iv;
+    }
+
+    @FXML
+    private void ruajValuten() {
+        try (PreparedStatement ps = con.prepareStatement("update valuta set valuta.valuta = ?")) {
+            ps.setString(1, cbValuta.getSelectionModel().getSelectedItem());
+            ps.execute();
+            ntf.setMessage("Valuta u ndryshua me sukses");
+            ntf.setType(NotificationType.SUCCESS);
+            ntf.setButton(ButtonType.NO_BUTTON);
+            ntf.show();
+        }catch (Exception e) { e.printStackTrace(); }
     }
 }

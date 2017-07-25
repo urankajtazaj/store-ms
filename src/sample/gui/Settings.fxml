@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.String?>
+<?import java.lang.*?>
 <GridPane alignment="TOP_CENTER" vgap="5" hgap="5" styleClass="gp" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Settings">
@@ -82,35 +82,58 @@
             </center>
         </BorderPane>
 
-        <VBox spacing="5" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4"
-              style="-fx-border-color: -fx-red; -fx-border-radius: 5; -fx-border-width: 1; -fx-padding: 10">
-            <Label text="Zona e rrezikut"/>
-            <HBox spacing="5" alignment="CENTER">
-                <Button text="Eksporto te dhenat" minWidth="200" maxWidth="220" onAction="#exportDb" GridPane.halignment="RIGHT">
-                    <graphic>
-                        <ImageView preserveRatio="true" rotate="90">
-                            <Image url="/sample/photo/right-arrow.png"/>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button text="Rikthe te dhenat" fx:id="btnImport" minWidth="200" maxWidth="220" onAction="#importDb" GridPane.halignment="RIGHT">
-                    <graphic>
-                        <ImageView preserveRatio="true" rotate="-90">
-                            <Image url="/sample/photo/right-arrow.png"/>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button text="Pastro te gjitha te dhenat" minWidth="200" maxWidth="220" onAction="#pastroDb" GridPane.halignment="RIGHT"
-                        style="-fx-background-color: -fx-red;">
-                    <graphic>
-                        <ImageView preserveRatio="true">
-                            <Image url="/sample/photo/close.png"/>
-                        </ImageView>
-                    </graphic>
-                </Button>
-            </HBox>
-        </VBox>
+        <BorderPane styleClass="shadow" GridPane.rowSpan="2" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <padding>
+                <Insets top="5" left="10" right="10" bottom="10"/>
+            </padding>
+            <top>
+                <Label text="Tjera" styleClass="infoTtl"/>
+            </top>
+            <center>
+                <VBox spacing="20" alignment="TOP_LEFT">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Valuta"/>
+                        <ComboBox disable="true" fx:id="cbValuta">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="EURO"/>
+                                    <String fx:value="LEK"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <Button disable="true" text="Ruaj" onAction="#ruajValuten"/>
+                    </HBox>
 
+                    <VBox spacing="5" style="-fx-border-color: -fx-red; -fx-border-radius: 5; -fx-border-width: 1; -fx-padding: 10">
+                        <Label text="Zona e rrezikut"/>
+                        <VBox spacing="5" alignment="CENTER">
+                            <Button text="Eksporto te dhenat" minWidth="200" maxWidth="220" onAction="#exportDb" GridPane.halignment="RIGHT">
+                                <graphic>
+                                    <ImageView preserveRatio="true" rotate="90">
+                                        <Image url="/sample/photo/right-arrow.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button text="Rikthe te dhenat" fx:id="btnImport" minWidth="200" maxWidth="220" onAction="#importDb" GridPane.halignment="RIGHT">
+                                <graphic>
+                                    <ImageView preserveRatio="true" rotate="-90">
+                                        <Image url="/sample/photo/right-arrow.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button text="Pastro te gjitha te dhenat" minWidth="200" maxWidth="220" onAction="#pastroDb" GridPane.halignment="RIGHT"
+                                    style="-fx-background-color: -fx-red;">
+                                <graphic>
+                                    <ImageView preserveRatio="true">
+                                        <Image url="/sample/photo/close.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </VBox>
+                    </VBox>
+                </VBox>
+            </center>
+        </BorderPane>
     </children>
 
 </GridPane>

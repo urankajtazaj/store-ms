@@ -31,6 +31,8 @@ public class VariablatPublike {
     public static Image spinning = new Image("/sample/photo/spinner.png");
     public static Image doneSpinning = new Image("/sample/photo/doneSpinning.png");
 
+    public static String valuta;
+
     public static boolean leapYear(int viti) {
         return viti%4==0?(viti%200==0?false:viti%400==0?true:false):false;
 //        if (viti % 4 == 0) {

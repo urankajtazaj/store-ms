@@ -197,7 +197,8 @@ public class Produktet implements Initializable {
             while (rs.next()) {
                 tblProduktet.getItems().add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"),
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
-                        rs.getString("qmimi_shitjes"), rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokCrit"),
+                        rs.getString(VariablatPublike.valuta.equals("EURO") ? "qmimi_shitjes" : "qmimi_shitjes_lek"),
+                        rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokCrit"),
                         rs.getString("zbritje") + "%", rs.getString("njesia")));
             }
 

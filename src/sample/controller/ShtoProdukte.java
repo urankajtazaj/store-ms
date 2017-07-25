@@ -106,17 +106,24 @@ public class ShtoProdukte implements Initializable {
     }
 
     private void addToDatabase(){
-        String q = "insert into produktet values (null, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, ?, ?)";
+        String q = "insert into produktet values (null, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(q)) {
             ps.setInt(1, VariablatPublike.revProdKat.get(cbKategoria.getSelectionModel().getSelectedItem()));
             ps.setString(2, emri.getText());
             ps.setInt(3, Integer.parseInt(stok.getText()));
-            ps.setDouble(4, qmimiStd.getText().isEmpty() ? 0 : Double.parseDouble(qmimiStd.getText()));
-            ps.setDouble(5, Double.parseDouble(qmimiShitjes.getText()));
+            ps.setDouble(4, qmimiStd.getText().isEmpty() ? 0 : VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiStd.getText()) :
+                    Double.parseDouble(qmimiStd.getText())*0.0075);
+//            ps.setDouble(5, Double.parseDouble(qmimiShitjes.getText()));
+            ps.setDouble(5, VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiShitjes.getText()) :
+                    Double.parseDouble(qmimiShitjes.getText())*0.0075);
             ps.setString(6, unit(cbNjesia.getSelectionModel().getSelectedItem()));
             ps.setString(7, bc.getText());
             ps.setInt(8, zbritje.getText().isEmpty() ? 0 : Integer.parseInt(zbritje.getText()));
             ps.setInt(9, stokCrit.getText().isEmpty() ? 0 : Integer.parseInt(stokCrit.getText()));
+            ps.setDouble(10, VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiStd.getText())*133 :
+                    Double.parseDouble(qmimiStd.getText()));
+            ps.setDouble(11, VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiShitjes.getText())*133 :
+                    Double.parseDouble(qmimiShitjes.getText()));
             ps.execute();
             ntf.setMessage("Produkti " + emri.getText() + ", u shtua me sukses");
             ntf.setType(NotificationType.SUCCESS);
@@ -153,7 +160,7 @@ public class ShtoProdukte implements Initializable {
     private void updateProduct() {
         String q = "update produktet set barcode = ?, emri = ?, kategoria_id = ?, sasia = ?, stokcrit = ?, " +
                 "qmimi_std = ?, qmimi_shitjes = ?, njesia = ?, modifikuar = current_timestamp(), " +
-                "zbritje = ? where id = ?";
+                "zbritje = ?, qmimi_shitjes_lek = ? where id = ?";
         try (PreparedStatement ps = con.prepareStatement(q)) {
 
             ps.setString(1, bc.getText());
@@ -161,11 +168,14 @@ public class ShtoProdukte implements Initializable {
             ps.setInt(3, VariablatPublike.revProdKat.get(cbKategoria.getSelectionModel().getSelectedItem()));
             ps.setInt(4, Integer.parseInt(stok.getText()));
             ps.setInt(5, stokCrit.getText().isEmpty() ? 0 : Integer.parseInt(stokCrit.getText()));
-            ps.setDouble(6, qmimiStd.getText().isEmpty() ? 0 : Double.parseDouble(qmimiStd.getText()));
+            ps.setDouble(6, qmimiStd.getText().isEmpty() ? 0 : VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiStd.getText()) :
+                    Double.parseDouble(qmimiStd.getText())*133);
             ps.setDouble(7, Double.parseDouble(qmimiShitjes.getText()));
             ps.setString(8, unit(cbNjesia.getSelectionModel().getSelectedItem()));
             ps.setDouble(9, zbritje.getText().isEmpty() ? 0 : Double.parseDouble(zbritje.getText()));
-            ps.setInt(10, id);
+            ps.setDouble(10, qmimiStd.getText().isEmpty() ? 0 : VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiStd.getText())*0.0075 :
+                    Double.parseDouble(qmimiStd.getText()));
+            ps.setInt(11, id);
 
             ps.execute();
 
