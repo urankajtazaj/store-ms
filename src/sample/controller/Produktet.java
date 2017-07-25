@@ -85,6 +85,8 @@ public class Produktet implements Initializable {
         fillBarChart();
         fillTable();
 
+        merrProduktetKat();
+
         cbCat.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> filterTable());
         cbOp.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> filterTable());
         txtId.setOnKeyPressed(e -> { if (e.getCode().equals(KeyCode.ENTER)) filterTable(); });
@@ -501,5 +503,15 @@ public class Produktet implements Initializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    private void merrProduktetKat() {
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("select kategoria as k, id from kat_prod")) {
+            while (rs.next()) {
+                VariablatPublike.prodKat.add(rs.getString("k"));
+                VariablatPublike.mProdKat.put(rs.getInt("id"), rs.getString("k"));
+                VariablatPublike.revProdKat.put(rs.getString("k"), rs.getInt("id"));
+            }
+        }catch (Exception e) { e.printStackTrace(); }
     }
 }
