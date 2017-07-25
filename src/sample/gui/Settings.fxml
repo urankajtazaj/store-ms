@@ -101,7 +101,7 @@
                                 </FXCollections>
                             </items>
                         </ComboBox>
-                        <Button disable="true" text="Ruaj" onAction="#ruajValuten"/>
+                        <Button disable="true" text="Ruaj"/>
                     </HBox>
 
                     <VBox spacing="5" style="-fx-border-color: -fx-red; -fx-border-radius: 5; -fx-border-width: 1; -fx-padding: 10">

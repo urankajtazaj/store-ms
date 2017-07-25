@@ -4,26 +4,39 @@ import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 
 import javax.print.*;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Copies;
 import javax.print.event.PrintJobAdapter;
 import javax.print.event.PrintJobEvent;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 public class PrintReceipt {
     public PrintReceipt(String text) {
 
-        DocFlavor flavor = DocFlavor.STRING.TEXT_PLAIN;
-
         PrintService service = PrintServiceLookup.lookupDefaultPrintService();
+
+        InputStream is = new ByteArrayInputStream((text + "\f").getBytes());
+
+        System.out.println(text);
+
+        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+        pras.add(new Copies(1));
+
+        DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
 
         if (service != null) {
             DocPrintJob printJob = service.createPrintJob();
 
             printJob.addPrintJobListener(new JobMonitor());
 
-            Doc doc = new SimpleDoc(text, flavor, null);
+            Doc doc = new SimpleDoc(is, flavor, null);
 
             try {
-                printJob.print(doc, null);
-            } catch (PrintException e) {
+                printJob.print(doc, pras);
+                is.close();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

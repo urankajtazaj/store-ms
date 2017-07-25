@@ -182,7 +182,7 @@ public class Dashboard implements Initializable {
             Statement stmt6 = con.createStatement();
             Statement stmt7 = con.createStatement();
             Statement stmt8 = con.createStatement();
-            Statement stmt9 = con.createStatement();
+//            Statement stmt9 = con.createStatement();
 
             ResultSet rs = stmt.executeQuery("select * from te_hyrat limit 1");
             ResultSet rs2 = stmt2.executeQuery("select * from pnt limit 1");
@@ -193,11 +193,13 @@ public class Dashboard implements Initializable {
             ResultSet rs6 = stmt6.executeQuery("select count(*) as c, sum(sasia) as s from produktet limit 1");
             ResultSet rs7 = stmt7.executeQuery("select kategoria as k, id from kat_prod");
             ResultSet rs8 = stmt8.executeQuery("select emri, id from konsumatoret order by id");
-            ResultSet rs9 = stmt9.executeQuery("select valuta from valuta");
+//            ResultSet rs9 = stmt9.executeQuery("select valuta from valuta");
 
-            while (rs9.next()) {
-                VariablatPublike.valuta = rs9.getString("valuta");
-            }
+//            while (rs9.next()) {
+//                VariablatPublike.valuta = rs9.getString("valuta");
+//            }
+
+            VariablatPublike.valuta = "EURO";
 
             rs.next();
             VariablatPublike.hyratM = rs.getDouble(VariablatPublike.valuta.equals("EURO") ? "muaj" : "muaj_lek");

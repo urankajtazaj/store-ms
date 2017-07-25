@@ -455,15 +455,15 @@ public class Settings implements Initializable {
         this.iv = iv;
     }
 
-    @FXML
-    private void ruajValuten() {
-        try (PreparedStatement ps = con.prepareStatement("update valuta set valuta.valuta = ?")) {
-            ps.setString(1, cbValuta.getSelectionModel().getSelectedItem());
-            ps.execute();
-            ntf.setMessage("Valuta u ndryshua me sukses");
-            ntf.setType(NotificationType.SUCCESS);
-            ntf.setButton(ButtonType.NO_BUTTON);
-            ntf.show();
-        }catch (Exception e) { e.printStackTrace(); }
-    }
+//    @FXML
+//    private void ruajValuten() {
+//        try (PreparedStatement ps = con.prepareStatement("update valuta set valuta.valuta = ?")) {
+//            ps.setString(1, cbValuta.getSelectionModel().getSelectedItem());
+//            ps.execute();
+//            ntf.setMessage("Valuta u ndryshua me sukses");
+//            ntf.setType(NotificationType.SUCCESS);
+//            ntf.setButton(ButtonType.NO_BUTTON);
+//            ntf.show();
+//        }catch (Exception e) { e.printStackTrace(); }
+//    }
 }
