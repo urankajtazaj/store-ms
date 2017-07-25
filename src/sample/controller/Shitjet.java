@@ -51,6 +51,9 @@ public class Shitjet implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        if (!PrintReceipt.availablePrinter())
+            cbShtypPagesen.setDisable(true);
+
         merrKons();
         cbKons.getItems().clear();
         Iterator<String> itK = VariablatPublike.konsEmri.iterator();
@@ -264,7 +267,7 @@ public class Shitjet implements Initializable {
                 ntf.setMessage("Shitja u krye me sukses");
                 ntf.show();
                 pastro();
-                if (cbShtypPagesen.isSelected()) {
+                if (cbShtypPagesen.isSelected() && !cbShtypPagesen.isDisable()) {
                     receta.setTvsh((int)VariablatPublike.tvsh);
                     receta.setPagesa(pgs.doubleValue());
                     new PrintReceipt(receta.krijoFaturen());
