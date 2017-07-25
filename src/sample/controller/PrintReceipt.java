@@ -15,7 +15,6 @@ public class PrintReceipt {
         PrintService service = PrintServiceLookup.lookupDefaultPrintService();
 
         if (service != null) {
-
             DocPrintJob printJob = service.createPrintJob();
 
             printJob.addPrintJobListener(new JobMonitor());

@@ -258,17 +258,17 @@ public class Shitjet implements Initializable {
                 }
                 stmt.executeBatch();
                 updateProd();
-                if (cbShtypPagesen.isSelected()) {
-                    receta.setTvsh((int)VariablatPublike.tvsh);
-                    receta.setPagesa(pgs.doubleValue());
-                    receta.krijoFaturen();
-                }
                 ntf.setButton(ButtonType.NO_BUTTON);
                 ntf.setType(NotificationType.SUCCESS);
                 ntf.setDuration(3);
                 ntf.setMessage("Shitja u krye me sukses");
                 ntf.show();
                 pastro();
+                if (cbShtypPagesen.isSelected()) {
+                    receta.setTvsh((int)VariablatPublike.tvsh);
+                    receta.setPagesa(pgs.doubleValue());
+                    new PrintReceipt(receta.krijoFaturen());
+                }
             }else {
                 ntf.setType(NotificationType.ERROR);
                 ntf.setMessage(tbl.getItems().size() == 0 ? "Duhet te zgjedhet se paku nje produkt" : "Nuk eshte procesuar pagesa");
@@ -290,7 +290,7 @@ public class Shitjet implements Initializable {
     private void batch (Statement ps, int id, double qmimi, BigDecimal pagesa, double sasia) throws Exception {
         ps.addBatch("insert into shitjet values (null, "+id+", "+VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem())+
                 ", current_timestamp(), "+pagesa+", "+VariablatPublike.uid+", "+sasia+", (select max(rec_id) from rec limit 1), "+
-                VariablatPublike.uid2+")");
+                VariablatPublike.uid2+", 0)");
     }
 
     private void merrKons(){
