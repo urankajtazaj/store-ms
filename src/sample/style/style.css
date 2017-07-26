@@ -955,10 +955,27 @@
     -fx-word-wrap: true;
     -fx-text-fill: #fff;
 }
+    -fx-font-family: "Poppins semibold";
 
 .newWindow {
     -fx-background-color: -fx-secondary;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 0);
+}
+
+.newWindow .toggle-button {
+    -fx-font-size: 20;
+    -fx-font-family: "Poppins semibold";
+}
+
+.newWindow .toggle-button:selected, .newWindow .toggle-button:focused {
+    -fx-background-color: rgba(0,0,0,0.08);
+    -fx-text-fill: #fff;
+}
+
+.newWindow .text-field {
+    -fx-font-size: 30;
+    -fx-font-family: "Poppins semibold";
+    -fx-min-height: 250;
 }
 
 .smallBtn {

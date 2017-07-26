@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane style="-fx-background-color: transparent" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <padding>
+        <Insets left="15" right="15" bottom="15" top="15"/>
+    </padding>
+
+    <fx:define>
+        <ToggleGroup fx:id="tgTipi"/>
+        <ToggleGroup fx:id="tgSasia"/>
+    </fx:define>
+
+    <center>
+        <GridPane BorderPane.alignment="CENTER" styleClass="newWindow">
+            <children>
+                <ToggleButton fx:id="tbAdd" minWidth="160" contentDisplay="GRAPHIC_ONLY" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgTipi" selected="true" text="+" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                <ToggleButton fx:id="tbRem" minWidth="160" minHeight="83" contentDisplay="GRAPHIC_ONLY" GridPane.vgrow="ALWAYS" toggleGroup="$tgTipi" text="-" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
+
+                <ToggleButton selected="true" minWidth="80" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgSasia" text="5" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ToggleButton minWidth="80" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgSasia" text="15" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <ToggleButton minWidth="80" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgSasia" text="25" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                <ToggleButton minWidth="80" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgSasia" text="35" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                <ToggleButton minWidth="80" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgSasia" text="10" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ToggleButton minWidth="80" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgSasia" text="20" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <ToggleButton minWidth="80" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgSasia" text="30" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                <ToggleButton minWidth="80" minHeight="83" GridPane.vgrow="ALWAYS" toggleGroup="$tgSasia" text="40" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+                <TextField text="5" alignment="CENTER" GridPane.vgrow="ALWAYS" fx:id="txtSasia" GridPane.rowIndex="0" GridPane.columnIndex="4" GridPane.rowSpan="4"/>
+            </children>
+
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+            </rowConstraints>
+
+        </GridPane>
+    </center>
+
+</BorderPane>

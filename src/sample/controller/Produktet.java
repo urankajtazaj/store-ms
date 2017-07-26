@@ -104,32 +104,42 @@ public class Produktet implements Initializable {
         colAksion.setCellFactory(e -> {
             return new TableCell<String, HBox>() {
 
-                Button btnDel = new Button();
-                Button btnEd = new Button();
-                HBox hbox = new HBox(btnDel, btnEd);
-                ImageView deliv = new ImageView(new Image("/sample/photo/trash.png"));
-                ImageView ediv = new ImageView(new Image("/sample/photo/setting.png"));
-
                 @Override
                 protected void updateItem(HBox item, boolean empty) {
 
-                    btnDel.setTooltip(new Tooltip("Fshi produktin"));
-
-                    deliv.setPreserveRatio(true);
-                    ediv.setPreserveRatio(true);
-
-                    deliv.setFitWidth(15);
-                    ediv.setFitWidth(15);
-
-                    btnEd.setGraphic(ediv);
-                    btnDel.setGraphic(deliv);
-
-                    hbox.setAlignment(Pos.CENTER);
-                    hbox.setSpacing(7);
-
                     super.updateItem(item, empty);
                     if (!empty) {
+
+                        Button btnDel = new Button();
+                        Button btnEd = new Button();
+                        Button btnStock = new Button("Stock");
+                        HBox hbox = new HBox(btnStock, btnEd, btnDel);
+                        ImageView deliv = new ImageView(new Image("/sample/photo/trash.png"));
+                        ImageView ediv = new ImageView(new Image("/sample/photo/settings.png"));
+                        ImageView stiv = new ImageView(new Image("/sample/photo/add-blue.png"));
+
+                        btnDel.setTooltip(new Tooltip("Fshi produktin"));
+
+                        deliv.setPreserveRatio(true);
+                        ediv.setPreserveRatio(true);
+                        stiv.setPreserveRatio(true);
+
+                        deliv.setFitWidth(15);
+                        ediv.setFitWidth(15);
+                        stiv.setFitWidth(15);
+
+                        btnEd.setGraphic(ediv);
+                        btnDel.setGraphic(deliv);
+                        btnStock.setGraphic(stiv);
+
+                        hbox.setAlignment(Pos.CENTER);
+                        hbox.setSpacing(7);
+
                         ProduktetClass p = tblProduktet.getItems().get(getIndex());
+
+                        btnStock.setOnAction(e -> {
+                            hapShtoStock(p.getId());
+                        });
 
                         btnEd.setOnAction(e -> {
                             try {
@@ -154,29 +164,40 @@ public class Produktet implements Initializable {
 
         tblProduktet.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        colSasia.setCellFactory(e -> {
-            return new TableCell<ProduktetClass, Integer>() {
-                @Override
-                protected void updateItem(Integer item, boolean empty) {
-                    super.updateItem(item, empty);
+    }
 
-                    TableRow<ProduktetClass> row = getTableRow();
-
-                    if (!empty && row != null) {
-                        ProduktetClass pc = tblProduktet.getItems().get(getIndex());
-                        setText(item + "");
-                        if (item <= pc.getSasiaKrit() || item == 0) {
-                            row.getStyleClass().add("redRow");
-                        }
-                    }else {
-                        setGraphic(null);
-                        setText("");
-                    }
-
+    private void hapShtoStock(int id) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoStock.fxml"));
+            ShtoStock sk = new ShtoStock();
+            loader.setController(sk);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 470, 280);
+            scene.setOnKeyPressed(e -> {
+                if (e.getCode().equals(KeyCode.ENTER)) {
+                    updateStock(id, sk.txtSasia.getText(), ((ToggleButton) sk.tgTipi.getSelectedToggle()).getText().equals("+") ? '+' : '-');
+                    stage.close();
+                }else if (e.getCode().equals(KeyCode.ESCAPE)) {
+                    stage.close();
                 }
-            };
-        });
+            });
+            scene.setFill(Color.TRANSPARENT);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception e) { e.printStackTrace(); }
+    }
 
+    private void updateStock(int id, String sasia, char op) {
+
+        try (PreparedStatement ps = con.prepareStatement("update produktet set sasia = sasia "+op+" ?  where id = ?")) {
+            ps.setDouble(1, Double.parseDouble(sasia));
+            ps.setInt(2, id);
+            ps.execute();
+        }catch (Exception e) { e.printStackTrace(); }
     }
 
     @FXML

@@ -62,7 +62,7 @@
                 <TableColumn fx:id="colZbritje" text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colNjesia" text="Njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
-                <TableColumn fx:id="colAksion" minWidth="50" maxWidth="50"></TableColumn>
+                <TableColumn fx:id="colAksion" minWidth="100" maxWidth="100"></TableColumn>
             </columns>
         </TableView>
 
