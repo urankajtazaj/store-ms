@@ -4,7 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.*?>
+<?import java.lang.String?>
 <GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" style="-fx-padding: 50 10 10 10"
           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
@@ -38,13 +38,9 @@
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Cope"/>
                     <String fx:value="Paketim"/>
-                    <Separator />
-                    <String fx:value="Kilogram (kg)"/>
-                    <String fx:value="Gram (g)"/>
-                    <String fx:value="Miligram (mg)"/>
-                    <Separator />
-                    <String fx:value="Liter (l)"/>
-                    <String fx:value="Mililiter (ml)"/>
+                    <Separator/>
+                    <String fx:value="Kilogram"/>
+                    <String fx:value="Liter"/>
                 </FXCollections>
             </items>
         </ChoiceBox>

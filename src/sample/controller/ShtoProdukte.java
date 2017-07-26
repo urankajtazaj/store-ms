@@ -29,16 +29,20 @@ public class ShtoProdukte implements Initializable {
     @FXML private ComboBox<String> cbKategoria;
     @FXML private ChoiceBox<String> cbNjesia;
 
-    private String vbc = "", vemri = "", cbCat;
+    private String vbc = "", vemri = "", cbCat, cbNjs;
     private double vqstd = 0, vqs = 0, vz = 0;
     private int vs = 0, vsc = 0, id = 0;
 
     private String patternDot = "[0-9.]+";
-    private String patternEmpty = "^$|[0-9]+";
+    private String patternEmpty = "^$|[0-9.]+";
     private String pattern = "[0-9]+";
 
     public void setCbKategoria (String index){
         this.cbCat = index;
+    }
+
+    public void setCbNjesia (String njesia) {
+        this.cbNjs = njesia;
     }
 
     public void setBc (String bc) {
@@ -91,18 +95,10 @@ public class ShtoProdukte implements Initializable {
             zbritje.setText(vz+"");
             stok.setText(vs+"");
             stokCrit.setText(vsc+"");
+            cbNjesia.getSelectionModel().select(cbNjs);
             cbKategoria.getSelectionModel().select(cbCat);
         }
 
-    }
-
-    private String unit (String s) {
-        if (s.equals("Kilogram (kg)")) return "kg";
-        else if (s.equals("Gram (g)")) return "g";
-        else if (s.equals("Miligram (mg)")) return "mg";
-        else if (s.equals("Liter (l)")) return "l";
-        else if (s.equals("Mililiter (ml)")) return "ml";
-        return s;
     }
 
     private void addToDatabase(){
@@ -116,7 +112,7 @@ public class ShtoProdukte implements Initializable {
 //            ps.setDouble(5, Double.parseDouble(qmimiShitjes.getText()));
             ps.setDouble(5, VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiShitjes.getText()) :
                     Double.parseDouble(qmimiShitjes.getText())*0.0075);
-            ps.setString(6, unit(cbNjesia.getSelectionModel().getSelectedItem()));
+            ps.setString(6, cbNjesia.getSelectionModel().getSelectedItem());
             ps.setString(7, bc.getText());
             ps.setInt(8, zbritje.getText().isEmpty() ? 0 : Integer.parseInt(zbritje.getText()));
             ps.setInt(9, stokCrit.getText().isEmpty() ? 0 : Integer.parseInt(stokCrit.getText()));
@@ -171,7 +167,7 @@ public class ShtoProdukte implements Initializable {
             ps.setDouble(6, qmimiStd.getText().isEmpty() ? 0 : VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiStd.getText()) :
                     Double.parseDouble(qmimiStd.getText())*133);
             ps.setDouble(7, Double.parseDouble(qmimiShitjes.getText()));
-            ps.setString(8, unit(cbNjesia.getSelectionModel().getSelectedItem()));
+            ps.setString(8, cbNjesia.getSelectionModel().getSelectedItem());
             ps.setDouble(9, zbritje.getText().isEmpty() ? 0 : Double.parseDouble(zbritje.getText()));
             ps.setDouble(10, qmimiStd.getText().isEmpty() ? 0 : VariablatPublike.valuta.equals("EURO") ? Double.parseDouble(qmimiStd.getText())*0.0075 :
                     Double.parseDouble(qmimiStd.getText()));

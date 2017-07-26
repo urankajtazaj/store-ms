@@ -143,8 +143,9 @@ public class Produktet implements Initializable {
 
                         btnEd.setOnAction(e -> {
                             try {
+                                String njesia = null;
                                 rregulloProd(p.getId(), p.getEmri(), p.getBc(), p.getQmimiStd(), p.getQmimi().substring(0, p.getQmimi().length()-1), p.getSasia(), p.getSasiaKrit(), p.getZbritje(),
-                                        p.getKategoria());
+                                        p.getKategoria(), p.getNjesia());
                             }catch (Exception ex) {ex.printStackTrace(); }
                         });
 
@@ -375,7 +376,7 @@ public class Produktet implements Initializable {
         }catch (Exception e) { e.printStackTrace(); }
     }
 
-    private void rregulloProd (int id, String emri, String bc, double qstd, String qs, int stok, int stokk, String zbritje, String catIndex) throws Exception {
+    private void rregulloProd (int id, String emri, String bc, double qstd, String qs, int stok, int stokk, String zbritje, String catIndex, String njesia) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoProdukte.fxml"));
         ShtoProdukte sp = new ShtoProdukte();
         sp.setId(id);
@@ -387,6 +388,7 @@ public class Produktet implements Initializable {
         sp.setStokCrit(stokk);
         sp.setZbritje(Double.parseDouble(zbritje.substring(0, zbritje.length()-1)));
         sp.setCbKategoria(catIndex);
+        sp.setCbNjesia(njesia);
         loader.setController(sp);
         bp.setCenter(loader.load());
     }

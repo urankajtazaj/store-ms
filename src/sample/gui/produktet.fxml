@@ -12,7 +12,7 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Produktet">
 
-        <HBox alignment="BOTTOM_LEFT" styleClass="filterHb" spacing="2" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+        <HBox alignment="BOTTOM_LEFT" styleClass="filterHb" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
             <VBox alignment="BOTTOM_LEFT">
                 <Label text="ID" styleClass="filterLbl"/>
                 <TextField maxWidth="50" minWidth="50" fx:id="txtId" />
