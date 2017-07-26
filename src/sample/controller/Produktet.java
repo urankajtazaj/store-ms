@@ -178,6 +178,7 @@ public class Produktet implements Initializable {
                 if (e.getCode().equals(KeyCode.ENTER)) {
                     updateStock(id, sk.txtSasia.getText(), ((ToggleButton) sk.tgTipi.getSelectedToggle()).getText().equals("+") ? '+' : '-');
                     stage.close();
+                    filterTable();
                 }else if (e.getCode().equals(KeyCode.ESCAPE)) {
                     stage.close();
                 }
