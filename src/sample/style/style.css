@@ -955,7 +955,6 @@
     -fx-word-wrap: true;
     -fx-text-fill: #fff;
 }
-    -fx-font-family: "Poppins semibold";
 
 .newWindow {
     -fx-background-color: -fx-secondary;
