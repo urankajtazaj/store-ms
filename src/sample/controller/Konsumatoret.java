@@ -178,6 +178,10 @@ public class Konsumatoret implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.setMaxWidth(520);
+        stage.setMinWidth(520);
+        stage.setMaxHeight(200);
+        stage.setMinHeight(200);
         stage.setScene(scene);
         stage.show();
     }

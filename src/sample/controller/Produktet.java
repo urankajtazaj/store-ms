@@ -187,6 +187,11 @@ public class Produktet implements Initializable {
             scene.setFill(Color.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setResizable(false);
+            stage.setMaxWidth(470);
+            stage.setMinWidth(470);
+            stage.setMaxHeight(280);
+            stage.setMinHeight(280);
             scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
             stage.setScene(scene);
             stage.show();
@@ -339,6 +344,10 @@ public class Produktet implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.setMaxWidth(520);
+        stage.setMinWidth(520);
+        stage.setMaxHeight(200);
+        stage.setMinHeight(200);
         stage.setScene(scene);
         stage.show();
     }
