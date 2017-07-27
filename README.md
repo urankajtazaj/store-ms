@@ -4,7 +4,11 @@
 
 `1KT388H9EmoiGiENbcwWVzkBcv2jibFGnB` 
 
+---
+
 ![Image](http://i.imgur.com/rhffLep.png)
+
+---
 
 ## Perdorimi
 1. [Shkarko aplikacionin](https://github.com/urankajtazaj/store-ms/releases/download/v1.0.1/store-ms.zip)
