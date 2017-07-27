@@ -1,3 +1,5 @@
+### Donate using bitcoin: `1KT388H9EmoiGiENbcwWVzkBcv2jibFGnB`
+
 ![Image](http://i.imgur.com/rhffLep.png)
 
 ## Perdorimi
