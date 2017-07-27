@@ -1,5 +1,6 @@
- Donate using bitcoin: `1KT388H9EmoiGiENbcwWVzkBcv2jibFGnB`
- 
+bitcoin:`1KT388H9EmoiGiENbcwWVzkBcv2jibFGnB`
+
+![Bitcoin](http://i.imgur.com/iNvVh8M.png)
  
 
 ![Image](http://i.imgur.com/rhffLep.png)
