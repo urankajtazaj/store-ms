@@ -43,7 +43,7 @@ public class Receta {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         sb.append(String.format("\n\t\t%s\n\n\t%s\n\n", VariablatPublike.emriShitores, sdf.format(date)));
-        sb.append(String.format("%-22s%-6s %-9s\n------------------------------------\n", "Produkti", "Qmimi", "Total"));
+        sb.append(String.format("%-22s%-6s %-9s\n------------------------------------\n", "Produkti", "Çmimi", "Total"));
         for (int i = 0; i <= len; i++) {
             sb.append(String.format("%-22s%-6.2f%.2f€\n", rec[i][0] + " x" + rec[i][1], Double.parseDouble(rec[i][2]), (Double.parseDouble(rec[i][1]) *
             Double.parseDouble(rec[i][2]))));

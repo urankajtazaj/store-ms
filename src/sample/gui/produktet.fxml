@@ -26,7 +26,7 @@
                 <ComboBox value="Kategoria" fx:id="cbCat"/>
             </VBox>
             <VBox alignment="BOTTOM_LEFT">
-                <Label text="Qmimi" styleClass="filterLbl"/>
+                <Label text="Çmimi" styleClass="filterLbl"/>
                 <TextField maxWidth="100" fx:id="txtQmimi"/>
             </VBox>
             <ComboBox value="=" fx:id="cbOp">
@@ -58,7 +58,7 @@
                 <TableColumn maxWidth="50" minWidth="50" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
                 <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
                 <TableColumn text="Kategoria"><cellValueFactory><PropertyValueFactory property="kategoria"/></cellValueFactory></TableColumn>
-                <TableColumn text="Qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
+                <TableColumn text="Çmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colZbritje" text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colNjesia" text="Njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>

@@ -29,7 +29,7 @@ public class PrintReceipt {
         if (service != null) {
             DocPrintJob printJob = service.createPrintJob();
 
-            printJob.addPrintJobListener(new JobMonitor());
+//            printJob.addPrintJobListener(new JobMonitor());
 
             Doc doc = new SimpleDoc(is, flavor, null);
 
