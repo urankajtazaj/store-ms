@@ -3,27 +3,29 @@ package sample.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import org.controlsfx.control.Notifications;
-import sample.Enums.*;
 import sample.Enums.ButtonType;
+import sample.Enums.NotificationType;
 
 import java.net.URL;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 /**
  * Created by uran on 17-05-10.
@@ -234,8 +236,10 @@ public class PunetoretView implements Initializable {
                 getData();
                 fillCbViti();
             } else {
-                Notifications.create().text("Data e fillimit duhet te jete me e vogel se ajo e perfundimit te pushimit").
-                        position(Pos.TOP_CENTER).show();
+                ntf.setMessage("Data e fillimit duhet te jete me e vogel se ajo e perfundimit te pushimit");
+                ntf.setType(NotificationType.ERROR);
+                ntf.setButton(ButtonType.NO_BUTTON);
+                ntf.show();
             }
         }catch (Exception e) {e.printStackTrace();}
     }

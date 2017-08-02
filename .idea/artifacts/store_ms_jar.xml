@@ -7,7 +7,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/res/poi-excelant-3.16.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/jdt-compiler-3.1.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/h2-1.4.195.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/res/controlsfx-8.40.12.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/poi-3.16.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/commons-beanutils-1.8.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/jasperreports-6.3.1.jar" path-in-jar="/" />
