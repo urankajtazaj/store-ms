@@ -32,7 +32,7 @@
 
                 <TextField text="5" alignment="CENTER" GridPane.vgrow="ALWAYS" fx:id="txtSasia" GridPane.rowIndex="0" GridPane.columnIndex="4" GridPane.rowSpan="4"/>
 
-                <Button text="OK" onAction="" styleClass="btn" minHeight="300" GridPane.columnIndex="5" GridPane.rowIndex="0" GridPane.rowSpan="4" GridPane.vgrow="ALWAYS" alignment="CENTER"/>
+                <Button fx:id="btnOk" text="OK" styleClass="btn, btn-h" minHeight="300" GridPane.columnIndex="5" GridPane.rowIndex="0" GridPane.rowSpan="4" GridPane.vgrow="ALWAYS" alignment="CENTER"/>
             </children>
 
             <columnConstraints>

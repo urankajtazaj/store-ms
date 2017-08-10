@@ -175,6 +175,13 @@ public class Produktet implements Initializable {
             loader.setController(sk);
             Parent root = loader.load();
             Scene scene = new Scene(root, 520, 280);
+
+            sk.btnOk.setOnAction(e -> {
+                updateStock(id, sk.txtSasia.getText(), ((ToggleButton) sk.tgTipi.getSelectedToggle()).getText().equals("+") ? '+' : '-');
+                stage.close();
+                filterTable();
+            });
+
             scene.setOnKeyPressed(e -> {
                 if (e.getCode().equals(KeyCode.ENTER)) {
                     updateStock(id, sk.txtSasia.getText(), ((ToggleButton) sk.tgTipi.getSelectedToggle()).getText().equals("+") ? '+' : '-');
