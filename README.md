@@ -11,7 +11,7 @@
 ---
 
 ## Perdorimi
-1. [Shkarko aplikacionin](https://github.com/urankajtazaj/store-ms/releases/download/v1.0.1/store-ms.zip)
+1. [Shkarko aplikacionin](https://github.com/urankajtazaj/store-ms/releases/download/v1.0.2/store-ms.zip)
 2. Vendos folderin `store-ms-files` ne folderin kryesor *(C:/Users/%emri-folderit%)*
 3. Starto aplikacionin `store-ms.jar`
 4. Perdor `admin` si user, dhe `123` si fjalekalim (te ndryshohet pas perdorimit te pare)
