@@ -63,7 +63,7 @@ public class Shitjet implements Initializable {
         cbKons.getSelectionModel().select(0);
 
         tbl.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        lTotal.setText(VariablatPublike.decimalFormat.format(0));
+        lTotal.setText(VariablatPublike.toMoney(0));
         cbCat.getItems().clear();
         cbCat.getItems().add("Te gjitha");
         Iterator<String> it = VariablatPublike.prodKat.iterator();
@@ -106,8 +106,8 @@ public class Shitjet implements Initializable {
                             qmimi = qmimi.subtract(new BigDecimal((Double.parseDouble(sp.getQmimi().substring(0, sp.getQmimi().length()-1)) *
                                     Double.parseDouble(sp.getSasia().getText()))+""));
                             tbl.getItems().remove(getIndex());
-                            lSubTtl.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
-                            lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue() + (qmimi.doubleValue()*VariablatPublike.tvsh/100)));
+                            lSubTtl.setText(VariablatPublike.toMoney(qmimi.doubleValue()));
+                            lTotal.setText(VariablatPublike.toMoney(qmimi.doubleValue() + (qmimi.doubleValue()*VariablatPublike.tvsh/100)));
                         });
                         setGraphic(btn);
                     }else {
@@ -130,8 +130,8 @@ public class Shitjet implements Initializable {
                         setOnKeyReleased(e -> {
                             if (Pattern.compile("[0-9.]+").matcher(e.getText()).matches()) {
                                 double ttl = merrQmimet(tf.getText(), getIndex()).doubleValue();
-                                lSubTtl.setText(VariablatPublike.decimalFormat.format(ttl));
-                                lTotal.setText(VariablatPublike.decimalFormat.format(
+                                lSubTtl.setText(VariablatPublike.toMoney(ttl));
+                                lTotal.setText(VariablatPublike.toMoney(
                                         ttl + ttl * VariablatPublike.tvsh/100));
                             }else if (e.getCode().equals(KeyCode.ENTER)) {
                                 txtProd.requestFocus();
@@ -194,7 +194,7 @@ public class Shitjet implements Initializable {
             flow.getChildren().clear();
             while (rs.next()) {
                 Button button = new Button((rs.getString("emri").length() >= 30 ? rs.getString("emri").substring(0, 30) : rs.getString("emri")) +
-                        "\n(" + VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")) + ")");
+                        "\n(" + VariablatPublike.toMoney(rs.getDouble("qmimi_shitjes")) + ")");
                 button.setTextAlignment(TextAlignment.CENTER);
                 button.setWrapText(true);
                 button.getStyleClass().addAll("btn", "bigBtn");
@@ -219,14 +219,14 @@ public class Shitjet implements Initializable {
             double zbr = Double.parseDouble(dt[3]);
             double zbrttl = qm - (qm * zbr/100);
             ShitjetProd sp = new ShitjetProd(Integer.parseInt(dt[0]),
-                    button.getText().split("\n")[0], VariablatPublike.decimalFormat.format(zbrttl), dt[2],
+                    button.getText().split("\n")[0], VariablatPublike.toMoney(zbrttl), dt[2],
                     VariablatPublike.decimal.format(zbr) + "%");
 
             tbl.getItems().add(sp);
 
             qmimi = qmimi.add(new BigDecimal(Double.parseDouble(dt[1]) - (Double.parseDouble(dt[1]) * Double.parseDouble(dt[3])/100)));
-            lSubTtl.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
-            lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue() + (qmimi.doubleValue() * VariablatPublike.tvsh/100)));
+            lSubTtl.setText(VariablatPublike.toMoney(qmimi.doubleValue()));
+            lTotal.setText(VariablatPublike.toMoney(qmimi.doubleValue() + (qmimi.doubleValue() * VariablatPublike.tvsh/100)));
         }catch (Exception ex) { ex.printStackTrace(); }
     }
 
@@ -296,7 +296,7 @@ public class Shitjet implements Initializable {
     private void pastro (){
         qmimi = BigDecimal.ZERO;
         pgs = BigDecimal.ZERO;
-        lTotal.setText(VariablatPublike.decimalFormat.format(qmimi.doubleValue()));
+        lTotal.setText(VariablatPublike.toMoney(qmimi.doubleValue()));
         lKusuri.setText("0");
         lPagesa.setText("0");
         tbl.getItems().clear();

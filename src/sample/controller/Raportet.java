@@ -7,8 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import sample.Enums.ButtonType;
-import sample.Enums.NotificationType;
 import sample.constructors.FaturaDhenat;
 import sample.constructors.Faturat;
 
@@ -67,7 +65,7 @@ public class Raportet implements Initializable {
             while (rs.next()) {
                 data.add(new Faturat(rs.getInt("rec_id"), rs.getString("usr"), rs.getString("konsumatori"),
                         "---",
-                        VariablatPublike.decimalFormat.format(rs.getDouble("cash"))));
+                        VariablatPublike.toMoney(rs.getDouble("cash"))));
             }
             tblFatura.setItems(data);
             merrTotal();
@@ -116,7 +114,7 @@ public class Raportet implements Initializable {
                 perc = -100;
             }
 
-            lCurrTtl.setText(VariablatPublike.decimalFormat.format(totalLast));
+            lCurrTtl.setText(VariablatPublike.toMoney(totalLast));
             if (perc < 0) {
                 lLastTtl.setStyle("-fx-text-fill: -fx-second");
             }else {
@@ -211,7 +209,7 @@ public class Raportet implements Initializable {
 
             lPagMesL.setStyle(perc < 0 ? "-fx-text-fill: -fx-second" : "-fx-text-fill: -fx-green");
 
-            lPagMes.setText(VariablatPublike.decimalFormat.format(mes));
+            lPagMes.setText(VariablatPublike.toMoney(mes));
             lPagMesL.setText(perc > 100 ? "999+%" : perc < -100 ? "-999+%" : VariablatPublike.decimal.format(perc) + "%");
 
         }catch (Exception e) {
@@ -267,8 +265,8 @@ public class Raportet implements Initializable {
             double zbritje = 0.0;
             while (rs.next()) {
                 zbritje = rs.getDouble("sasia") * rs.getDouble("qmimi_shitjes") - ((rs.getDouble("sasia") * rs.getDouble("qmimi_shitjes")) * rs.getDouble("prod_zbritje")/100);
-                data.add(new FaturaDhenat(rs.getString("p_id"), rs.getString("produkti"), VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")),
-                        VariablatPublike.decimal.format(rs.getDouble("sasia")), VariablatPublike.decimalFormat.format(zbritje) +
+                data.add(new FaturaDhenat(rs.getString("p_id"), rs.getString("produkti"), VariablatPublike.toMoney(rs.getDouble("qmimi_shitjes")),
+                        VariablatPublike.decimal.format(rs.getDouble("sasia")), VariablatPublike.toMoney(zbritje) +
                         " (" + VariablatPublike.decimal.format(rs.getDouble("prod_zbritje")) + "%)"));
                 total += zbritje;
                 pag = rs.getDouble("cash");
@@ -277,9 +275,9 @@ public class Raportet implements Initializable {
             lTvsh.setText(VariablatPublike.decimal.format(tvsh) + "%");
             total += total*(tvsh/100);
             tblDhenat.setItems(data);
-            lTotal.setText(VariablatPublike.decimalFormat.format(total));
-            lPagesa.setText(VariablatPublike.decimalFormat.format(pag));
-            lKusuri.setText(VariablatPublike.decimalFormat.format(pag-total));
+            lTotal.setText(VariablatPublike.toMoney(total));
+            lPagesa.setText(VariablatPublike.toMoney(pag));
+            lKusuri.setText(VariablatPublike.toMoney(pag-total));
 
         }catch (Exception e) {e.printStackTrace();}
     }

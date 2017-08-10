@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -28,10 +29,34 @@ public class VariablatPublike {
     public static String emriShitores;
     public static String styleSheet;
 
+    public static char valuta = '€';
+
+    public static String toMoney(double money) {
+        if (valuta == 'L') {
+            return decimalFormatL.format(money);
+        }else if (valuta == 'D') {
+            return usd.format(money);
+        }else if (valuta == 'M') {
+            return mkd.format(money);
+        }else {
+            return decimalFormat.format(money);
+        }
+    }
+
+    public static String toMoney(BigDecimal money) {
+        if (valuta == 'L') {
+            return decimalFormatL.format(money);
+        }else if (valuta == 'D') {
+            return usd.format(money);
+        }else if (valuta == 'M') {
+            return mkd.format(money);
+        }else {
+            return decimalFormat.format(money);
+        }
+    }
+
     public static Image spinning = new Image("/sample/photo/spinner.png");
     public static Image doneSpinning = new Image("/sample/photo/doneSpinning.png");
-
-    public static String valuta;
 
     public static boolean leapYear(int viti) {
         return viti%4==0?(viti%200==0?false:viti%400==0?true:false):false;
@@ -73,7 +98,10 @@ public class VariablatPublike {
     static int pnt, pntA, pntP, kons, shitje, p, ps;
 
     static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    static DecimalFormat decimalFormat = new DecimalFormat("###,###,##0.00€");
+    private static DecimalFormat decimalFormat = new DecimalFormat("###,###,##0.00€");
+    private static DecimalFormat decimalFormatL = new DecimalFormat("###,###,##0.00L");
+    private static DecimalFormat usd = new DecimalFormat("$###,###,##0.00");
+    private static DecimalFormat mkd = new DecimalFormat("ден###,###,##0.00");
     static DecimalFormat decimal = new DecimalFormat("###,###,###.#");
     static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     static SimpleDateFormat hms = new SimpleDateFormat("dd/MM/yyyy HH:mm");

@@ -60,11 +60,25 @@ public class Settings implements Initializable {
         getJobs();
         merrProdKats();
 
-        cbValuta.getSelectionModel().select(VariablatPublike.valuta);
+
+        cbValuta.getSelectionModel().select(getIndex());
 
         File file = new File(path + "Backup/backup.sql");
         if (!file.exists()) btnImport.setDisable(true);
 
+    }
+
+    private int getIndex() {
+        char c = VariablatPublike.valuta;
+        if (c == 'L') {
+            return 1;
+        }else if (c == 'D') {
+            return 2;
+        }else if (c == 'M') {
+            return 3;
+        }else {
+            return 0;
+        }
     }
 
     @FXML
@@ -100,7 +114,7 @@ public class Settings implements Initializable {
             ResultSet rs = s.executeQuery("select * from target limit 1");
 
             while (rs.next()) {
-                tMujor.setText(rs.getString(VariablatPublike.valuta.equals("EURO") ? "qmimi" : "qmimi_lek"));
+                tMujor.setText(rs.getString("qmimi"));
                 cbTipi.getSelectionModel().select(rs.getInt("tipi"));
             }
 
@@ -457,15 +471,17 @@ public class Settings implements Initializable {
         this.iv = iv;
     }
 
-//    @FXML
-//    private void ruajValuten() {
-//        try (PreparedStatement ps = con.prepareStatement("update valuta set valuta.valuta = ?")) {
-//            ps.setString(1, cbValuta.getSelectionModel().getSelectedItem());
-//            ps.execute();
-//            ntf.setMessage("Valuta u ndryshua me sukses");
-//            ntf.setType(NotificationType.SUCCESS);
-//            ntf.setButton(ButtonType.NO_BUTTON);
-//            ntf.show();
-//        }catch (Exception e) { e.printStackTrace(); }
-//    }
+    @FXML
+    private void ruajValuten() {
+        try (Statement stmt = con.createStatement();) {
+            int index = cbValuta.getSelectionModel().getSelectedIndex();
+            VariablatPublike.valuta = (index == 0 ? '€' : index == 1 ? 'L' : index == 2 ? 'D' : 'M');
+            stmt.executeUpdate("update valuta set valuta = '" + cbValuta.getSelectionModel().getSelectedItem() + "'");
+
+            ntf.setMessage("Valuta u ndryshua me sukses");
+            ntf.setType(NotificationType.SUCCESS);
+            ntf.setButton(ButtonType.NO_BUTTON);
+            ntf.show();
+        }catch (Exception e) { e.printStackTrace(); }
+    }
 }

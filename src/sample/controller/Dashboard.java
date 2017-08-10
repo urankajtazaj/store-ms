@@ -83,19 +83,19 @@ public class Dashboard implements Initializable {
                 handleCb(nv.intValue(), "1m");
         });
 
-        lVleraHyratMuaj.setText(VariablatPublike.decimalFormat.format(VariablatPublike.hyratM));
-        lVleraHyratJave.setText(VariablatPublike.decimalFormat.format(VariablatPublike.hyratJ));
-        lVleraHyratSot.setText(VariablatPublike.decimalFormat.format(VariablatPublike.hyratS));
+        lVleraHyratMuaj.setText(VariablatPublike.toMoney(VariablatPublike.hyratM));
+        lVleraHyratJave.setText(VariablatPublike.toMoney(VariablatPublike.hyratJ));
+        lVleraHyratSot.setText(VariablatPublike.toMoney(VariablatPublike.hyratS));
         lPnt.setText(VariablatPublike.pnt + "");
         lPntA.setText(VariablatPublike.pntA + "");
         lPntP.setText(VariablatPublike.pntP + "");
         lKons.setText(VariablatPublike.kons + "");
         lShitje.setText(VariablatPublike.shitje + "");
-        lShitjeM.setText(VariablatPublike.decimalFormat.format(VariablatPublike.mes));
+        lShitjeM.setText(VariablatPublike.toMoney(VariablatPublike.mes));
 
-        lVleraHyratMuajTarget.setText(VariablatPublike.decimalFormat.format(VariablatPublike.muaj));
-        lVleraHyratJaveTarget.setText(VariablatPublike.decimalFormat.format(VariablatPublike.jave));
-        lVleraHyratSotTarget.setText(VariablatPublike.decimalFormat.format(VariablatPublike.dite));
+        lVleraHyratMuajTarget.setText(VariablatPublike.toMoney(VariablatPublike.muaj));
+        lVleraHyratJaveTarget.setText(VariablatPublike.toMoney(VariablatPublike.jave));
+        lVleraHyratSotTarget.setText(VariablatPublike.toMoney(VariablatPublike.dite));
 
         hlViti.setOnAction(e -> dataForAreaChart("vit", cbChartTp.getSelectionModel().getSelectedIndex()));
         hl6m.setOnAction(e -> dataForAreaChart("6m", cbChartTp.getSelectionModel().getSelectedIndex()));
@@ -161,7 +161,7 @@ public class Dashboard implements Initializable {
         Node n = ((XYChart.Data) series.getData().get((int) xa.toNumericValue(xa.getValueForDisplay(event.getX()) + 0.5) - 1)).getNode();
 
         tp.setText(VariablatPublike.dataMap.get((xa.getValueForDisplay(n.getLayoutX()).intValue() + 1)) + "\nTe hyrat per kete date: " +
-                VariablatPublike.decimalFormat.format(((XYChart.Data) series.getData().get((int) xa.toNumericValue(xa.getValueForDisplay(n.getLayoutX())))).getYValue()));
+                VariablatPublike.toMoney((Double) ((XYChart.Data) series.getData().get((int) xa.toNumericValue(xa.getValueForDisplay(n.getLayoutX())))).getYValue()));
 
         tp.show(lineChart.lookup(lookup),
                 n.localToScreen(n.getBoundsInLocal()).getMinX() - tp.getWidth() / 2,
@@ -182,7 +182,7 @@ public class Dashboard implements Initializable {
             Statement stmt6 = con.createStatement();
             Statement stmt7 = con.createStatement();
             Statement stmt8 = con.createStatement();
-//            Statement stmt9 = con.createStatement();
+            Statement stmt9 = con.createStatement();
 
             ResultSet rs = stmt.executeQuery("select * from te_hyrat limit 1");
             ResultSet rs2 = stmt2.executeQuery("select * from pnt limit 1");
@@ -193,18 +193,19 @@ public class Dashboard implements Initializable {
             ResultSet rs6 = stmt6.executeQuery("select count(*) as c, sum(sasia) as s from produktet limit 1");
             ResultSet rs7 = stmt7.executeQuery("select kategoria as k, id from kat_prod");
             ResultSet rs8 = stmt8.executeQuery("select emri, id from konsumatoret order by id");
-//            ResultSet rs9 = stmt9.executeQuery("select valuta from valuta");
+            ResultSet rs9 = stmt9.executeQuery("select valuta from valuta");
 
-//            while (rs9.next()) {
-//                VariablatPublike.valuta = rs9.getString("valuta");
-//            }
-
-            VariablatPublike.valuta = "EURO";
+            rs9.next();
+            String v = rs9.getString("valuta");
+            if (v.equals("EUR")) VariablatPublike.valuta = '€';
+            else if (v.equals("LEK")) VariablatPublike.valuta = 'L';
+            else if (v.equals("USD")) VariablatPublike.valuta = 'D';
+            else VariablatPublike.valuta = 'M';
 
             rs.next();
-            VariablatPublike.hyratM = rs.getDouble(VariablatPublike.valuta.equals("EURO") ? "muaj" : "muaj_lek");
-            VariablatPublike.hyratJ = rs.getDouble(VariablatPublike.valuta.equals("EURO") ? "java" : "java_lek");
-            VariablatPublike.hyratS = rs.getDouble(VariablatPublike.valuta.equals("EURO") ? "sot" : "sot_lek");
+            VariablatPublike.hyratM = rs.getDouble("muaj");
+            VariablatPublike.hyratJ = rs.getDouble("java");
+            VariablatPublike.hyratS = rs.getDouble("sot");
 
             rs2.next();
             VariablatPublike.pnt = rs2.getInt("nr");

@@ -2,6 +2,7 @@ package sample.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -19,6 +20,8 @@ public class ShtoStock implements Initializable {
 
     @FXML
     public ToggleGroup tgSasia, tgTipi;
+    @FXML
+    public Button btnOk;
 
     @FXML
     private ToggleButton tbAdd, tbRem;

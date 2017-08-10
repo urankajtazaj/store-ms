@@ -93,15 +93,17 @@
                 <VBox spacing="20" alignment="TOP_LEFT">
                     <HBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="Valuta"/>
-                        <ComboBox disable="true" fx:id="cbValuta">
+                        <ComboBox value="EUR" fx:id="cbValuta">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="EURO"/>
+                                    <String fx:value="EUR"/>
                                     <String fx:value="LEK"/>
+                                    <String fx:value="USD"/>
+                                    <String fx:value="MKD"/>
                                 </FXCollections>
                             </items>
                         </ComboBox>
-                        <Button disable="true" text="Ruaj"/>
+                        <Button text="Ruaj" onAction="#ruajValuten"/>
                     </HBox>
 
                     <VBox spacing="5" style="-fx-border-color: -fx-red; -fx-border-radius: 5; -fx-border-width: 1; -fx-padding: 10">

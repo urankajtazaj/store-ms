@@ -174,7 +174,7 @@ public class Produktet implements Initializable {
             ShtoStock sk = new ShtoStock();
             loader.setController(sk);
             Parent root = loader.load();
-            Scene scene = new Scene(root, 470, 280);
+            Scene scene = new Scene(root, 520, 280);
             scene.setOnKeyPressed(e -> {
                 if (e.getCode().equals(KeyCode.ENTER)) {
                     updateStock(id, sk.txtSasia.getText(), ((ToggleButton) sk.tgTipi.getSelectedToggle()).getText().equals("+") ? '+' : '-');
@@ -188,8 +188,8 @@ public class Produktet implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.setResizable(false);
-            stage.setMaxWidth(470);
-            stage.setMinWidth(470);
+            stage.setMaxWidth(520);
+            stage.setMinWidth(520);
             stage.setMaxHeight(280);
             stage.setMinHeight(280);
             scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
@@ -225,7 +225,7 @@ public class Produktet implements Initializable {
             while (rs.next()) {
                 tblProduktet.getItems().add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"),
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
-                        rs.getString(VariablatPublike.valuta.equals("EURO") ? "qmimi_shitjes" : "qmimi_shitjes_lek"),
+                        rs.getString("qmimi_shitjes"),
                         rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokCrit"),
                         rs.getString("zbritje") + "%", rs.getString("njesia")));
             }
@@ -409,7 +409,7 @@ public class Produktet implements Initializable {
             while (rs.next()) {
                 data.add(new ProduktetClass(rs.getString("barcode"), rs.getInt("id"), rs.getString("emri"),
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
-                        VariablatPublike.decimalFormat.format(rs.getDouble("qmimi_shitjes")),
+                        VariablatPublike.toMoney(rs.getDouble("qmimi_shitjes")),
                         rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokcrit"),
                         rs.getDouble("zbritje") + "%", rs.getString("njesia")));
             }

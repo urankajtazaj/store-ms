@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 
 import java.math.BigDecimal;
@@ -67,9 +66,9 @@ public class Pagesa implements Initializable {
             ttl = ttl.setScale(2, BigDecimal.ROUND_HALF_DOWN);
             BigDecimal pag = new BigDecimal(txtPagesa.getText()).setScale(2, BigDecimal.ROUND_HALF_DOWN);
             if (ttl.compareTo(pag) <= 0) {
-                lPagesa.setText(VariablatPublike.decimalFormat.format(pag.doubleValue()));
+                lPagesa.setText(VariablatPublike.toMoney(pag.doubleValue()));
                 pagesa = pag;
-                lKusuri.setText(VariablatPublike.decimalFormat.format(pagesa.subtract(ttl)));
+                lKusuri.setText(VariablatPublike.toMoney(pagesa.subtract(ttl)));
                 stage.close();
             }else {
                 ntf.setMessage("Pagesa nuk mund te jete me e vogel se shuma qe duhet paguar");

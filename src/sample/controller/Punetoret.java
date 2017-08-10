@@ -219,8 +219,8 @@ public class Punetoret implements Initializable {
         }
 
         if (totalPnt > 0) {
-            lblTotalM.setText(VariablatPublike.decimalFormat.format(paga));
-            lblMes.setText(VariablatPublike.decimalFormat.format(paga / totalPnt));
+            lblTotalM.setText(VariablatPublike.toMoney(paga));
+            lblMes.setText(VariablatPublike.toMoney(paga / totalPnt));
             lblPntAktiv.setText((totalPnt - psh) + "");
             lblPntPsh.setText(psh + "");
         }
@@ -487,8 +487,8 @@ public class Punetoret implements Initializable {
             ObservableList<Punetori> data = FXCollections.observableArrayList();
             while (rs.next()) {
 
-                data.add(new Punetori(rs.getInt("id"), rs.getString("emri"), rs.getString("departamenti"), VariablatPublike.decimalFormat.format(rs.getDouble("paga")),
-                        VariablatPublike.decimalFormat.format(rs.getDouble("hyrat")), rs.getString("statusi"),
+                data.add(new Punetori(rs.getInt("id"), rs.getString("emri"), rs.getString("departamenti"), VariablatPublike.toMoney(rs.getDouble("paga")),
+                        VariablatPublike.toMoney(rs.getDouble("hyrat")), rs.getString("statusi"),
                         VariablatPublike.sdf.format(rs.getDate("ditelindja")), rs.getString("telefoni"), VariablatPublike.sdf.format(rs.getDate("data_punesimit")),
                         rs.getString("adresa"), rs.getString("qyteti"), rs.getString("shteti"), rs.getString("email"), rs.getInt("gjinia") == 0 ? "Mashkull" : "Femer"));
 
@@ -538,8 +538,8 @@ public class Punetoret implements Initializable {
 
             tbl.getItems().clear();
             while (rs.next()) {
-                tbl.getItems().add(new Punetori(rs.getInt("id"), rs.getString("emri"), rs.getString("departamenti"), VariablatPublike.decimalFormat.format(rs.getDouble("paga")),
-                        VariablatPublike.sdf.format(rs.getDate("data_punesimit")), VariablatPublike.decimalFormat.format(rs.getDouble("hyrat")), rs.getString("statusi")));
+                tbl.getItems().add(new Punetori(rs.getInt("id"), rs.getString("emri"), rs.getString("departamenti"), VariablatPublike.toMoney(rs.getDouble("paga")),
+                        VariablatPublike.sdf.format(rs.getDate("data_punesimit")), VariablatPublike.toMoney(rs.getDouble("hyrat")), rs.getString("statusi")));
             }
         }catch (Exception e) { e.printStackTrace(); }
     }
