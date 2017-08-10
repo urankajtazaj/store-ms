@@ -323,7 +323,7 @@ public class Settings implements Initializable {
             if (ntf.getDelete()) {
                 String query =
                         "delete from punetoret;" +
-                        "update valuta set valuta = 'EURO';" +
+                        "update valuta set valuta = 'EUR';" +
                         "delete from shteti where id > 2;" +
                         "alter table shteti alter column id restart with 3;" +
                         "delete from qytetet where id > 102;" +
