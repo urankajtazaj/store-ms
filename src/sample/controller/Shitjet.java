@@ -13,6 +13,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
 import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 import sample.constructors.ShitjetProd;
@@ -22,6 +23,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -275,7 +277,22 @@ public class Shitjet implements Initializable {
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        new PrintReceipt(receta.krijoFaturen());
+//                        new PrintReceipt(receta.krijoFaturen());
+
+                        try {
+                            JasperReport jr = JasperCompileManager.compileReport(System.getProperty("user.home") + "/store-ms-files/Raportet/raportet/Faktura.jrxml");
+                            HashMap<String, Object> params = new HashMap<>();
+                            params.put("Emri", VariablatPublike.emriShitores);
+                            params.put("Faktura", getRecId());
+
+                            JasperPrint print = JasperFillManager.fillReport(jr, params, con);
+                            String filename = System.getProperty("user.home") + "/store-ms-files/Raportet/PDF/Faktura.pdf";
+                            JasperExportManager.exportReportToPdfFile(print, filename);
+
+                        } catch (JRException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 });
                 t.setDaemon(true);
@@ -306,6 +323,19 @@ public class Shitjet implements Initializable {
         ps.addBatch("insert into shitjet values (null, "+id+", "+VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem())+
                 ", current_timestamp(), "+pagesa+", "+VariablatPublike.uid+", "+sasia+", (select max(rec_id) from rec limit 1), "+
                 VariablatPublike.uid2+", 0)");
+    }
+
+    private int getRecId() {
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select max(rec_id) as nr from rec limit 1");
+
+            rs.next();
+            return rs.getInt("nr");
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     private void merrKons(){

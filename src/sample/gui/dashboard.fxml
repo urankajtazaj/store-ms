@@ -1,24 +1,10 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
 <?import java.lang.String?>
-<?import javafx.scene.chart.AreaChart?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Tooltip?>
 <GridPane fx:id="grid" styleClass="gp" vgap="2" hgap="2" fx:controller="sample.controller.Dashboard" xmlns:fx="http://javafx.com/fxml">
     <HBox spacing="2" minHeight="170" maxHeight="220" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT">
 

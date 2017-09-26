@@ -1,7 +1,5 @@
 package sample.constructors;
 
-import javafx.scene.control.Label;
-
 /**
  * Created by uran on 17-04-07.
  */

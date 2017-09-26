@@ -1,6 +1,5 @@
 package sample.controller;
 
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 
 /**
