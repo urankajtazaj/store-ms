@@ -5,7 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -18,11 +22,16 @@ import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 import sample.constructors.ShitjetProd;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -286,10 +295,15 @@ public class Shitjet implements Initializable {
                             params.put("Faktura", getRecId());
 
                             JasperPrint print = JasperFillManager.fillReport(jr, params, con);
-                            String filename = System.getProperty("user.home") + "/store-ms-files/Raportet/PDF/Faktura.pdf";
+                            String filename = System.getProperty("user.home") + "/store-ms-files/Raportet/PDF/Faktura-"+
+                                    new SimpleDateFormat("dd-MM-yy h-m").format(new Date())+".pdf";
                             JasperExportManager.exportReportToPdfFile(print, filename);
 
+                            Desktop.getDesktop().open(new File(filename));
+
                         } catch (JRException e) {
+                            //e.printStackTrace();
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
 
