@@ -1200,17 +1200,6 @@
     -fx-background-color: #fff;
 }
 
-.bigBtn {
-    -fx-min-width: 100;
-    -fx-max-width: 100;
-    -fx-min-height: 90;
-    -fx-max-height: 90;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
-    -fx-effect: none;
-    -fx-border-width: 0;
-}
-
 .bigFont {
     -fx-font-size: 20;
     -fx-font-family: "Poppins semibold";
@@ -1279,4 +1268,16 @@
 
 .redRow .text {
     -fx-fill: -fx-red;
+}
+
+.bigBtn {
+    -fx-min-width: 250;
+    -fx-max-width: 100;
+    -fx-min-height: 90;
+    -fx-max-height: 90;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-effect: none;
+    -fx-border-width: 0;
+    -fx-alignment: CENTER-LEFT;
 }

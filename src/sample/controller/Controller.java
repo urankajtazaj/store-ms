@@ -54,6 +54,8 @@ public class Controller implements Initializable {
             Platform.exit();
         });
 
+//        System.out.println(VariablatPublike.IBAN);
+
         stage.setTitle("Sistemi per Menaxhim te Shitjeve");
         if (pntId > 0)
             setPrivileges();

@@ -19,8 +19,23 @@
                 <Label text="Emri i kompanise" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <TextField minWidth="170" maxWidth="170" fx:id="txtEmri" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-                <Label text="Pamja" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <ComboBox minWidth="170" maxWidth="170" fx:id="cbTheme" value="Dark" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Label text="Nr. Fiskal" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField minWidth="170" maxWidth="170" fx:id="txtFiskal" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="IBAN" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <TextField minWidth="170" maxWidth="170" fx:id="txtIban" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <Label text="Banka" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <TextField minWidth="170" maxWidth="170" fx:id="txtBanka" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                <Label text="Nr. Kontos" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                <TextField minWidth="170" maxWidth="170" fx:id="txtKonto" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+                <Label text="SWIFT Adresa" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                <TextField minWidth="170" maxWidth="170" fx:id="txtSwift" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+                <Label text="Pamja" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+                <ComboBox minWidth="170" maxWidth="170" fx:id="cbTheme" value="Dark" GridPane.columnIndex="1" GridPane.rowIndex="7">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Dark"/>

@@ -131,7 +131,7 @@ public class Login implements Initializable {
             loader.setController(cs);
             Parent parent = loader.load();
 
-            Scene scene = new Scene(parent, 300, 250);
+            Scene scene = new Scene(parent, 300, 450);
             scene.getStylesheets().add(getClass().getResource(VariablatPublike.styleSheet).toExternalForm());
             stage.setScene(scene);
             stage.setResizable(false);

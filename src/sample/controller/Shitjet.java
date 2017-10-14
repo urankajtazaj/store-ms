@@ -31,10 +31,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -204,7 +201,7 @@ public class Shitjet implements Initializable {
 
             flow.getChildren().clear();
             while (rs.next()) {
-                Button button = new Button((rs.getString("emri").length() >= 30 ? rs.getString("emri").substring(0, 30) : rs.getString("emri")) +
+                Button button = new Button((rs.getString("emri").length() >= 60 ? rs.getString("emri").substring(0, 60) : rs.getString("emri")) +
                         "\n(" + VariablatPublike.toMoney(rs.getDouble("qmimi_shitjes")) + ")");
                 button.setTextAlignment(TextAlignment.CENTER);
                 button.setWrapText(true);
@@ -293,6 +290,13 @@ public class Shitjet implements Initializable {
                             HashMap<String, Object> params = new HashMap<>();
                             params.put("Emri", VariablatPublike.emriShitores);
                             params.put("Faktura", getRecId());
+                            params.put("iban", VariablatPublike.IBAN);
+                            params.put("banka", VariablatPublike.BANKA);
+                            params.put("swift", VariablatPublike.SWIFT);
+                            params.put("konto", VariablatPublike.KONTO);
+                            params.put("konsumatori", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[0]);
+                            params.put("konsAdresa", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[1]);
+                            params.put("konsQyteti", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[2]);
 
                             JasperPrint print = JasperFillManager.fillReport(jr, params, con);
                             String filename = System.getProperty("user.home") + "/store-ms-files/Raportet/PDF/Faktura-"+
@@ -353,10 +357,11 @@ public class Shitjet implements Initializable {
     }
 
     private void merrKons(){
-        try (Statement s = con.createStatement(); ResultSet rs = s.executeQuery("select emri, id from konsumatoret order by id")) {
+        try (Statement s = con.createStatement(); ResultSet rs = s.executeQuery("select emri, id, adresa, qyteti from konsumatoret order by id")) {
             while (rs.next()) {
                 VariablatPublike.konsEmri.add(rs.getString("emri"));
                 VariablatPublike.revKons.put(rs.getString("emri"), rs.getInt("id"));
+                VariablatPublike.konsShitur.put(rs.getInt("id"), new String[] {rs.getString("emri"), rs.getString("adresa"), rs.getString("qyteti")});
             }
         }catch (Exception e ){ e.printStackTrace(); }
     }

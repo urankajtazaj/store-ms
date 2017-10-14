@@ -105,6 +105,9 @@ public class Dashboard implements Initializable {
         hlSot.setOnAction(e -> dataForAreaChart("sot", 0));
 
         displayChart();
+
+        System.out.println(VariablatPublike.IBAN);
+
     }
 
     private void enableCb() {
@@ -203,7 +206,7 @@ public class Dashboard implements Initializable {
             else VariablatPublike.valuta = 'M';
 
             rs.next();
-            VariablatPublike.hyratM = rs.getDouble("muaj");
+            VariablatPublike.hyratM = rs.getDouble("muaji");
             VariablatPublike.hyratJ = rs.getDouble("java");
             VariablatPublike.hyratS = rs.getDouble("sot");
 
@@ -302,33 +305,33 @@ public class Dashboard implements Initializable {
                 if (index > 0)
                     handleCb(index, "vit");
                 else
-                    q = "select cast(koha_shitjes as date) as data, sum(totalneto) as qmimi_shitjes from vshitjet " +
+                    q = "select cast(koha_shitjes as date) as data, sum(total) as qmimi_shitjes from vshitjet " +
                             "where koha_shitjes >= dateadd('month', -12, current_date()) " +
                             "group by data";
             } else if (p.equals("6m")) {
                 if (index > 0)
                     handleCb(index, "6m");
                 else
-                    q = "select sum(totalneto) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +
+                    q = "select sum(total) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +
                             "where koha_shitjes >= dateadd('month', -6, current_date()) group by data";
             } else if (p.equals("3m")) {
                 if (index > 0)
                     handleCb(index, "3m");
                 else
-                    q = "select sum(totalneto) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +
+                    q = "select sum(total) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +
                             "where koha_shitjes >= dateadd('month', -3, current_date()) group by data";
             } else if (p.equals("1m")) {
                 if (index > 0)
                     handleCb(index, "1m");
                 else
-                    q = "select sum(totalneto) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +
+                    q = "select sum(total) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet " +
                             "where koha_shitjes >= dateadd('month', -1, current_date()) group by data";
             } else if (p.equals("7d")) {
-                q = "select sum(totalneto) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet where " +
+                q = "select sum(total) as qmimi_shitjes, cast(koha_shitjes as date) as data from vshitjet where " +
                         "koha_shitjes >= dateadd('day', -7, current_date()) " +
                         "group by data";
             } else {
-                q = "select sum(totalneto) as qmimi_shitjes, (hour(koha_shitjes) || ':00') as data from vshitjet where " +
+                q = "select sum(total) as qmimi_shitjes, (hour(koha_shitjes) || ':00') as data from vshitjet where " +
                         "cast(koha_shitjes as date) = current_date() " +
                         "group by data";
             }

@@ -53,6 +53,11 @@ public class Main extends Application {
             VariablatPublike.server = br.readLine().split(":")[1];
             VariablatPublike.emriShitores = br.readLine().split(":")[1];
             VariablatPublike.styleSheet = br.readLine().split(":")[1].equals("Dark") ? "/sample/style/style.css" : "/sample/style/styleLight.css";
+            VariablatPublike.nrFiskal = br.readLine().split(":")[1];
+            VariablatPublike.BANKA = br.readLine().split(":")[1];
+            VariablatPublike.KONTO = br.readLine().split(":")[1];
+            VariablatPublike.IBAN = br.readLine().split(":")[1];
+            VariablatPublike.SWIFT = br.readLine().split(":")[1];
         }catch (Exception e) { e.printStackTrace(); }
     }
 

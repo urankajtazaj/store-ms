@@ -11,10 +11,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by uran on 17-05-02.
@@ -28,6 +25,17 @@ public class VariablatPublike {
     public static String server = "localhost";
     public static String emriShitores;
     public static String styleSheet;
+    public static String nrFiskal;
+    public static String IBAN;
+    public static String KONTO;
+    public static String BANKA;
+    public static String SWIFT;
+
+    public static String currKons;
+    public static String currKonsAdresa;
+    public static String currKonsQyteti;
+
+    public static Map<Integer, String[]> konsShitur = new HashMap<>();
 
     public static char valuta = '€';
 
@@ -126,7 +134,6 @@ public class VariablatPublike {
     };
 
     static boolean shitjeBool, konsumatoret, punetoret, shtepi, raportet, produktet, settings;
-
 
     public static RotateTransition startSpinning(ImageView iv){
         RotateTransition transition = new RotateTransition(Duration.millis(700), iv);

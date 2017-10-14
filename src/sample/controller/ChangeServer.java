@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
  */
 public class ChangeServer implements Initializable {
 
-    @FXML private TextField txtSrv, txtEmri;
+    @FXML private TextField txtSrv, txtEmri, txtFiskal, txtBanka, txtKonto, txtIban, txtSwift;
     @FXML private ComboBox<String> cbTheme;
 
     private Stage stage;
@@ -44,16 +44,26 @@ public class ChangeServer implements Initializable {
             }
         }
 
-        String ip = null, emri = null, theme = null;
+        String ip = null, emri = null, theme = null, fiskal = null, banka = null, konto = null, iban = null, swift = null;
         try (FileReader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr)) {
             ip = br.readLine();
             emri = br.readLine();
             theme = br.readLine();
+            fiskal = br.readLine();
+            banka = br.readLine();
+            konto = br.readLine();
+            iban = br.readLine();
+            swift = br.readLine();
         }catch (Exception e) { e.printStackTrace(); }
 
         txtSrv.setText(ip != null ? ip.split(":")[1] : "");
         txtEmri.setText(emri != null ? emri.split(":")[1] : "");
         cbTheme.getSelectionModel().select(theme != null ? theme.split(":")[1] : "Dark");
+        txtFiskal.setText(fiskal != null ? fiskal.split(":")[1] : "");
+        txtBanka.setText(banka != null ? banka.split(":")[1] : "");
+        txtKonto.setText(konto != null ? konto.split(":")[1] : "");
+        txtIban.setText(iban != null ? iban.split(":")[1] : "");
+        txtSwift.setText(swift != null ? swift.split(":")[1] : "");
     }
 
     @FXML
@@ -67,7 +77,17 @@ public class ChangeServer implements Initializable {
             bw.write("server:" + (txtSrv.getText().isEmpty() ? "localhost" : txtSrv.getText()) + "\n");
             bw.write("emri:" + txtEmri.getText() + "\n");
             bw.write("theme:" + cbTheme.getSelectionModel().getSelectedItem() + "\n");
+            bw.write("nr.fiskal:" + txtFiskal.getText() + "\n");
+            bw.write("banka:" + txtBanka.getText() + "\n");
+            bw.write("konto:" + txtKonto.getText() + "\n");
+            bw.write("iban:" + txtIban.getText() + "\n");
+            bw.write("swift:" + txtSwift.getText() + "\n");
             VariablatPublike.server = txtSrv.getText().isEmpty() ? "localhost" : txtSrv.getText();
+            VariablatPublike.nrFiskal = txtFiskal.getText();
+            VariablatPublike.BANKA = txtBanka.getText();
+            VariablatPublike.KONTO = txtKonto.getText();
+            VariablatPublike.SWIFT = txtSwift.getText();
+            VariablatPublike.IBAN = txtIban.getText();
             stage.close();
             ntf.setMessage("Te dhenat u ruajten me sukses dhe do te aplikohen pas ristartimit te aplikacionit");
             ntf.setButton(ButtonType.NO_BUTTON);
