@@ -1274,6 +1274,7 @@
     -fx-min-width: 300;
     -fx-max-width: 300;
     -fx-min-height: 110;*/
+    -fx-min-height: 100;
     -fx-max-height: 110;
     -fx-border-radius: 0;
     -fx-background-radius: 0;

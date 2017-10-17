@@ -143,7 +143,7 @@ public class ShtoProdukte implements Initializable {
             ps.setInt(9, stokCrit.getText().isEmpty() ? 0 : Integer.parseInt(stokCrit.getText()));
             ps.setDouble(10, Double.parseDouble(qmimiStd.getText()));
             ps.setDouble(11, Double.parseDouble(qmimiShitjes.getText()));
-            ps.setString(12, ivProdFoto.getImage().getUrl().substring(6, ivProdFoto.getImage().getUrl().length()));
+            ps.setString(12, ivProdFoto.getImage() != null ? ivProdFoto.getImage().getUrl().substring(6, ivProdFoto.getImage().getUrl().length()) : "");
             ps.execute();
             ntf.setMessage("Produkti " + emri.getText() + ", u shtua me sukses");
             ntf.setType(NotificationType.SUCCESS);
@@ -193,7 +193,7 @@ public class ShtoProdukte implements Initializable {
             ps.setString(8, cbNjesia.getSelectionModel().getSelectedItem());
             ps.setDouble(9, zbritje.getText().isEmpty() ? 0 : Double.parseDouble(zbritje.getText()));
             ps.setDouble(10, qmimiStd.getText().isEmpty() ? 0 : Double.parseDouble(qmimiStd.getText()));
-            ps.setString(11, ivProdFoto.getImage().getUrl().substring(6, ivProdFoto.getImage().getUrl().length()));
+            ps.setString(11, ivProdFoto.getImage() != null ? ivProdFoto.getImage().getUrl().substring(6, ivProdFoto.getImage().getUrl().length()) : "");
             ps.setInt(12, id);
 
             ps.execute();
