@@ -3,7 +3,7 @@ Ky program sherben per menaxhimin e te hyrave, punetoreve, konsumatoreve etj. ne
 Diqka qe e dallon kete program nga programet tjera te ketij lloji, eshte nderfaqja e cila eshte krijuar ne menyre qe te jete sa me e pershtatshme per perdorues.
 
 ## Perdorimi
-1. [Shkarko aplikacionin](https://github.com/urankajtazaj/store-ms/releases/download/v1.0.3/Store-ms.zip)
+1. [Shkarko aplikacionin](https://github.com/urankajtazaj/store-ms/releases/download/v1.0.4/Store-ms.zip)
 2. Vendos folderin `store-ms-files` ne folderin kryesor *(C:/Users/%emri-folderit%)*
 3. Starto aplikacionin `store-ms.jar`
 4. Perdor `admin` si user, dhe `123` si fjalekalim (te ndryshohet pas perdorimit te pare)
