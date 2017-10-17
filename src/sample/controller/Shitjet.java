@@ -47,7 +47,7 @@ public class Shitjet implements Initializable {
     Notification ntf = new Notification();
 
     @FXML private TableView<ShitjetProd> tbl;
-    @FXML private VBox flow;
+    @FXML private FlowPane flow;
     @FXML private ScrollPane scroll;
     @FXML private Label lTotal, lPagesa, lKusuri, lTvsh, lSubTtl;
     @FXML private TableColumn colAct, colSasia;
@@ -224,6 +224,7 @@ public class Shitjet implements Initializable {
                     }
                 }
 
+                button.setTextAlignment(TextAlignment.LEFT);
                 button.setGraphic(ivButton);
                 button.setStyle("-fx-background-color: " + rs.getString("bg") + "; -fx-text-fill: " + rs.getString("fg"));
                 button.setId(rs.getString("id") + " " + rs.getDouble("qmimi_shitjes") + " " + rs.getString("njesia") + " " + rs.getDouble("zbritje"));
@@ -231,9 +232,9 @@ public class Shitjet implements Initializable {
                 flow.widthProperty().addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        button.setMinWidth(newValue.doubleValue());
-                        button.setPrefWidth(newValue.doubleValue());
-                        button.setMaxWidth(newValue.doubleValue());
+                        button.setMinWidth(newValue.doubleValue()/2-10);
+                        button.setPrefWidth(newValue.doubleValue()/2-10);
+                        button.setMaxWidth(newValue.doubleValue()/2-10);
                     }
                 });
 

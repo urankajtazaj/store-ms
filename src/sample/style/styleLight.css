@@ -1254,8 +1254,8 @@
     -fx-max-width: 300;
     -fx-min-height: 110;*/
     -fx-max-height: 110;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-effect: none;
     -fx-border-width: 0;
     -fx-padding: 10;

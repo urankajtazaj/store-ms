@@ -315,7 +315,7 @@ public class Settings implements Initializable {
     @FXML
     private void pastroDb() {
         try {
-            ntf.setMessage("Te gjitha te dhenat do te fshihen duke perfshire punetoret, konsumatoret shitjet etj. Deshironi te vazhdoni?");
+            ntf.setMessage("Te gjitha te dhenat do te fshihen duke perfshire punetoret, konsumatoret, shitjet etj. Deshironi te vazhdoni?");
             ntf.setType(NotificationType.ERROR);
             ntf.setButton(ButtonType.YES_NO);
             ntf.showAndWait();
@@ -349,7 +349,7 @@ public class Settings implements Initializable {
                         "insert into punetoret values (null, 1, 'Admin', '', 0, current_timestamp(), 0, current_timestamp(), current_timestamp(), 1, current_timestamp(), '','','','','','');" +
                         "insert into perdoruesi values (null, 1, 'admin', 123, 1);" +
                         "insert into konsumatoret values (null, 'Publik', '','','',1, current_timestamp(), current_timestamp(), '','Kosove');" +
-                        "insert into departamenti values (null, 'Menagjer');" +
+                        "insert into departamenti values (null, 'Administrator');" +
                         "insert into priv values (1, 1, 1,1,1,1,1,1)";
 
                 String[] cmds = query.split(";");

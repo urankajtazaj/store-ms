@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" style="-fx-padding: 50 10 10 10"
           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
@@ -46,9 +47,11 @@
                 </FXCollections>
             </items>
         </ChoiceBox>
-        <ImageView fx:id="ivProdFoto" preserveRatio="true" fitHeight="150">
-        </ImageView>
-        <Button fx:id="shtoFoto" text="Zgjedh Foton"/>
+        <ImageView fx:id="ivProdFoto" preserveRatio="true" fitHeight="150"></ImageView>
+        <HBox spacing="5">
+            <Button fx:id="shtoFoto" text="Zgjedh foton"/>
+            <Button fx:id="pastroFoto" text="Pastro foton" disable="true" style="-fx-background-color: -fx-red;"/>
+        </HBox>
     </VBox>
 
     <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="2" GridPane.rowIndex="1">

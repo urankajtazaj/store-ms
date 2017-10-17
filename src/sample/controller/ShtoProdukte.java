@@ -33,9 +33,9 @@ public class ShtoProdukte implements Initializable {
     @FXML private TextField bc, emri, qmimiStd, qmimiShitjes, zbritje, stok, stokCrit;
     @FXML private ComboBox<String> cbKategoria;
     @FXML private ChoiceBox<String> cbNjesia;
-    @FXML private Button shtoFoto;
+    @FXML private Button shtoFoto, pastroFoto;
 
-    private String vbc = "", vemri = "", cbCat, cbNjs, fotoPath;
+    private String vbc = "", vemri = "", cbCat, cbNjs, fotoPath, fotoLink;
     private double vqstd = 0, vqs = 0, vz = 0;
     private int vs = 0, vsc = 0, id = 0;
 
@@ -97,6 +97,11 @@ public class ShtoProdukte implements Initializable {
         }
         cbKategoria.getSelectionModel().select(0);
 
+        pastroFoto.setOnAction(e -> {
+            ivProdFoto.setImage(null);
+            pastroFoto.setDisable(true);
+        });
+
         if (id > 0) {
             emri.setText(vemri);
             bc.setText(vbc);
@@ -107,8 +112,15 @@ public class ShtoProdukte implements Initializable {
             stokCrit.setText(vsc+"");
             cbNjesia.getSelectionModel().select(cbNjs);
             cbKategoria.getSelectionModel().select(cbCat);
-            ivProdFoto.setImage(new Image("file:///" + fotoPath));
+
+//            if (fotoPath != null) {
+                ivProdFoto.setImage(new Image("file:///" + fotoPath));
+//            }
         }
+
+//        if (!ivProdFoto.getImage().getUrl().substring(ivProdFoto.getImage().getUrl().length()-10, ivProdFoto.getImage().getUrl().length()).equals("sample.png")) {
+//            pastroFoto.setDisable(false);
+//        }
 
     }
 
@@ -164,7 +176,7 @@ public class ShtoProdukte implements Initializable {
     private void updateProduct() {
         String q = "update produktet set barcode = ?, emri = ?, kategoria_id = ?, sasia = ?, stokcrit = ?, " +
                 "qmimi_std = ?, qmimi_shitjes = ?, njesia = ?, modifikuar = current_timestamp(), " +
-                "zbritje = ?, qmimi_shitjes_lek = ? where id = ?";
+                "zbritje = ?, qmimi_shitjes_lek = ?, foto = ? where id = ?";
         try (PreparedStatement ps = con.prepareStatement(q)) {
 
             ps.setString(1, bc.getText());
@@ -177,7 +189,8 @@ public class ShtoProdukte implements Initializable {
             ps.setString(8, cbNjesia.getSelectionModel().getSelectedItem());
             ps.setDouble(9, zbritje.getText().isEmpty() ? 0 : Double.parseDouble(zbritje.getText()));
             ps.setDouble(10, qmimiStd.getText().isEmpty() ? 0 : Double.parseDouble(qmimiStd.getText()));
-            ps.setInt(11, id);
+            ps.setString(11, ivProdFoto.getImage().getUrl().substring(6, ivProdFoto.getImage().getUrl().length()));
+            ps.setInt(12, id);
 
             ps.execute();
 
@@ -198,10 +211,18 @@ public class ShtoProdukte implements Initializable {
     private void zgjedhFoton() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Zgjedh foton");
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Foto", "*.jpg", "*.png"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Foto", "*.jpg", "*.png", "*.jpeg"));
 
         shtoFoto.setOnAction(e -> {
-            ivProdFoto.setImage(new Image("file:///" + fc.showOpenDialog(null).getAbsolutePath()));
+            fotoLink = fc.showOpenDialog(null).getAbsolutePath();
+
+            if (fotoLink != null) {
+                if (fotoLink.substring(fotoLink.length()-3, fotoLink.length()).equals("jpg") || fotoLink.substring(fotoLink.length()-3, fotoLink.length()).equals("png")
+                        || fotoLink.substring(fotoLink.length()-4, fotoLink.length()).equals("jpeg")) {
+                    pastroFoto.setDisable(false);
+                    ivProdFoto.setImage(new Image("file:///" + fotoLink));
+                }
+            }
         });
     }
 
