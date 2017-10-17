@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -68,9 +69,36 @@ public class Dashboard implements Initializable {
             enableCb();
         });
 
-        getDataFromDb();
+//        pie1.setAnimated(true);
+//        pie2.setAnimated(true);
+//        pie3.setAnimated(true);
 
-        fillPieCharts();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getDataFromDb();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        fillPieCharts();
+
+                        lVleraHyratMuaj.setText(VariablatPublike.toMoney(VariablatPublike.hyratM));
+                        lVleraHyratJave.setText(VariablatPublike.toMoney(VariablatPublike.hyratJ));
+                        lVleraHyratSot.setText(VariablatPublike.toMoney(VariablatPublike.hyratS));
+                        lPnt.setText(VariablatPublike.pnt + "");
+                        lPntA.setText(VariablatPublike.pntA + "");
+                        lPntP.setText(VariablatPublike.pntP + "");
+                        lKons.setText(VariablatPublike.kons + "");
+                        lShitje.setText(VariablatPublike.shitje + "");
+                        lShitjeM.setText(VariablatPublike.toMoney(VariablatPublike.mes));
+
+                        lVleraHyratMuajTarget.setText(VariablatPublike.toMoney(VariablatPublike.muaj));
+                        lVleraHyratJaveTarget.setText(VariablatPublike.toMoney(VariablatPublike.jave));
+                        lVleraHyratSotTarget.setText(VariablatPublike.toMoney(VariablatPublike.dite));
+                    }
+                });
+            }
+        }).start();
 
         cbChartTp.getSelectionModel().selectedIndexProperty().addListener((o, ov, nv) -> {
             if (hlViti.isSelected())
@@ -83,20 +111,6 @@ public class Dashboard implements Initializable {
                 handleCb(nv.intValue(), "1m");
         });
 
-        lVleraHyratMuaj.setText(VariablatPublike.toMoney(VariablatPublike.hyratM));
-        lVleraHyratJave.setText(VariablatPublike.toMoney(VariablatPublike.hyratJ));
-        lVleraHyratSot.setText(VariablatPublike.toMoney(VariablatPublike.hyratS));
-        lPnt.setText(VariablatPublike.pnt + "");
-        lPntA.setText(VariablatPublike.pntA + "");
-        lPntP.setText(VariablatPublike.pntP + "");
-        lKons.setText(VariablatPublike.kons + "");
-        lShitje.setText(VariablatPublike.shitje + "");
-        lShitjeM.setText(VariablatPublike.toMoney(VariablatPublike.mes));
-
-        lVleraHyratMuajTarget.setText(VariablatPublike.toMoney(VariablatPublike.muaj));
-        lVleraHyratJaveTarget.setText(VariablatPublike.toMoney(VariablatPublike.jave));
-        lVleraHyratSotTarget.setText(VariablatPublike.toMoney(VariablatPublike.dite));
-
         hlViti.setOnAction(e -> dataForAreaChart("vit", cbChartTp.getSelectionModel().getSelectedIndex()));
         hl6m.setOnAction(e -> dataForAreaChart("6m", cbChartTp.getSelectionModel().getSelectedIndex()));
         hl3m.setOnAction(e -> dataForAreaChart("3m", cbChartTp.getSelectionModel().getSelectedIndex()));
@@ -107,7 +121,6 @@ public class Dashboard implements Initializable {
         displayChart();
 
         System.out.println(VariablatPublike.IBAN);
-
     }
 
     private void enableCb() {
@@ -368,10 +381,11 @@ public class Dashboard implements Initializable {
             pie1.getData().add(new PieChart.Data("", 0));
         } else {
             lPie1.setText(m + "%");
+//            pdata.setPieValue(m);
+//            pdata1.setPieValue(100-m);
             pie1.getData().add(new PieChart.Data("", m));
             pie1.getData().add(new PieChart.Data("", 100 - m));
         }
-
 
         if (j >= 100) {
             lPie2.setText("");

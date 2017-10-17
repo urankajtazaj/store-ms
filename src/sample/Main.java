@@ -24,7 +24,13 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(e -> {
             Server.stopServer();
         });
-        lexoServerin();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                lexoServerin();
+            }
+        }).start();
 
         FXMLLoader login = new FXMLLoader(getClass().getResource("/sample/gui/Login.fxml"));
         Parent root = login.load();

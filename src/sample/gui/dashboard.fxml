@@ -17,7 +17,7 @@
                 <Insets right="15"/>
             </padding>
             <StackPane maxWidth="180" minWidth="180" styleClass="first">
-                <PieChart fx:id="pie1" rotate="-90" maxHeight="170" legendVisible="false" labelsVisible="false"/>
+                <PieChart fx:id="pie1" rotate="-90" maxHeight="170" legendVisible="false" animated="true" labelsVisible="false"/>
                 <Circle styleClass="circle" radius="62"/>
                 <Label fx:id="lPie1" styleClass="chart-nr, color"/>
             </StackPane>

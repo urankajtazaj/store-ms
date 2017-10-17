@@ -47,8 +47,8 @@
     -fx-green: #79bd9a;
     -fx-red: #f1404b;
     -fx-label-color: rgba(0,0,0,.85);
-    -fx-sidebar: #f0f2f4;
-    -fx-secondary: #f7f8f9;
+    -fx-sidebar: #ddd;
+    -fx-secondary: #eee;
     -fx-btn: #11ABEF;
     -fx-second: #E91E63;
     -fx-third: #5E72D1;
@@ -70,7 +70,7 @@
 .gp .button, .btn {
     -fx-cursor: hand;
     -fx-background-color: -fx-btn;
-    -fx-text-fill: -fx-sidebar;
+    -fx-text-fill: #fff;
     -fx-alignment: CENTER;
     -fx-background-radius: 3;
     -fx-border-radius: 3;
@@ -81,7 +81,7 @@
     -fx-min-width: 60;
     -fx-border-width: 0;
     -fx-opacity: .85;
-    -fx-border-color: -fx-primary;
+    -fx-border-color: #bbb;
     -fx-font-weight: bold;/*
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 7, 0, 0, 0);
 */}
@@ -128,11 +128,11 @@
 
 .sideBar .toggle-button:hover {
     -fx-opacity: 1;
-    -fx-background-color: rgba(255,255,255,.2);
+    -fx-background-color: rgba(255,255,255,.1);
 }
 
 .sideBar {
-    -fx-background-color: -fx-btn;
+    -fx-background-color: #222;
     -fx-min-width: 135;
     -fx-max-width: 135;
 }
@@ -510,7 +510,6 @@
 .text-field:focused, .combo-box:focused, .choice-box:focused {
     -fx-border-color: rgba(50, 157, 224, .8);
     -fx-background-color: #f7f8f9;
-    -fx-effect: dropshadow(gaussian, rgba(50, 157, 224, .55), 12, 0, 0, 0);
 }
 
  .chartVb {
@@ -1186,17 +1185,6 @@
     -fx-background-color: #000;
 }
 
-.bigBtn {
-    -fx-min-width: 100;
-    -fx-max-width: 100;
-    -fx-min-height: 100;
-    -fx-max-height: 100;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
-    -fx-effect: none;
-    -fx-border-width: 0;
-}
-
 .bigBtn:hover {
     -fx-effect: none;
     -fx-background-color: -fx-primary;
@@ -1259,4 +1247,17 @@
 
 .redRow .text {
     -fx-fill: -fx-red;
+}
+
+.bigBtn {/*
+    -fx-min-width: 300;
+    -fx-max-width: 300;
+    -fx-min-height: 110;*/
+    -fx-max-height: 110;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-effect: none;
+    -fx-border-width: 0;
+    -fx-padding: 10;
+    -fx-alignment: CENTER-LEFT;
 }

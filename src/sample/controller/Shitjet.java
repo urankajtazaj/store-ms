@@ -253,6 +253,7 @@ public class Shitjet implements Initializable {
             double qm = Double.parseDouble(dt[1]);
             double zbr = Double.parseDouble(dt[3]);
             double zbrttl = qm - (qm * zbr/100);
+
             ShitjetProd sp = new ShitjetProd(Integer.parseInt(dt[0]),
                     button.getText().split("\n")[0], VariablatPublike.toMoney(zbrttl), dt[2],
                     VariablatPublike.decimal.format(zbr) + "%");
