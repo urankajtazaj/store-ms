@@ -4,11 +4,11 @@ package sample.constructors;
  * Created by uran on 17-04-07.
  */
 public class ProduktetClass {
-    private String qmimi, zbritje, bc, emri, prodhuesi, kategoria, furnizuesi, njesia;
+    private String qmimi, zbritje, bc, emri, prodhuesi, kategoria, furnizuesi, njesia, foto;
     private int id, sasia, sasiaKrit;
     private double qmimiStd;
 
-    public ProduktetClass(String barcode, int id, String emri, String kategoria, String qmimi, double qmimiStd, int sasia, int sasiaKrit, String zbritje, String njesia) {
+    public ProduktetClass(String barcode, int id, String emri, String kategoria, String qmimi, double qmimiStd, int sasia, int sasiaKrit, String zbritje, String njesia, String foto) {
         this.emri = emri;
         this.id = id;
         this.kategoria = kategoria;
@@ -19,6 +19,7 @@ public class ProduktetClass {
         this.qmimiStd = qmimiStd;
         this.sasiaKrit = sasiaKrit;
         this.njesia = njesia;
+        this.foto = foto;
     }
 
     public ProduktetClass(int id, String emri, String prodhuesi, String kategoria, String furnizuesi, String qmimi, int sasia) {
@@ -124,5 +125,13 @@ public class ProduktetClass {
 
     public void setSasia(int sasia) {
         this.sasia = sasia;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getFoto() {
+        return this.foto;
     }
 }

@@ -23,11 +23,11 @@
                     </HBox>
 
                     <ScrollPane fitToWidth="true" fx:id="scroll" styleClass="edge-to-edge" minWidth="450">
-                        <FlowPane fx:id="flow" vgap="3" hgap="2" minWidth="450" orientation="HORIZONTAL">
+                        <VBox fx:id="flow" spacing="5" minWidth="450">
                             <padding>
                                 <Insets top="15"/>
                             </padding>
-                        </FlowPane>
+                        </VBox>
                     </ScrollPane>
                 </VBox>
 

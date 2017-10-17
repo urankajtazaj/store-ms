@@ -1,5 +1,7 @@
 package sample.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -44,7 +47,7 @@ public class Shitjet implements Initializable {
     Notification ntf = new Notification();
 
     @FXML private TableView<ShitjetProd> tbl;
-    @FXML private FlowPane flow;
+    @FXML private VBox flow;
     @FXML private ScrollPane scroll;
     @FXML private Label lTotal, lPagesa, lKusuri, lTvsh, lSubTtl;
     @FXML private TableColumn colAct, colSasia;
@@ -201,18 +204,42 @@ public class Shitjet implements Initializable {
 
             flow.getChildren().clear();
             while (rs.next()) {
-                Button button = new Button((rs.getString("emri").length() >= 60 ? rs.getString("emri").substring(0, 60) : rs.getString("emri")) +
-                        "\n(" + VariablatPublike.toMoney(rs.getDouble("qmimi_shitjes")) + ")");
+                Button button = new Button((rs.getString("emri").length() >= 60 ? rs.getString("emri").substring(0, 60) : rs.getString("emri")));
                 button.setTextAlignment(TextAlignment.CENTER);
                 button.setWrapText(true);
+
                 button.getStyleClass().addAll("btn", "bigBtn");
+
+                ImageView ivButton = null;
+                if (rs.getString("foto") != null) {
+                    if (!rs.getString("foto").isEmpty()) {
+                        ivButton = new ImageView(new Image("file:///" + rs.getString("foto")));
+                        ivButton.setPreserveRatio(true);
+                        ivButton.setFitHeight(100);
+                        ivButton.setSmooth(true);
+
+                        button.setPrefHeight(100);
+                        button.setMinHeight(100);
+                        button.setMaxHeight(100);
+                    }
+                }
+
+                button.setGraphic(ivButton);
                 button.setStyle("-fx-background-color: " + rs.getString("bg") + "; -fx-text-fill: " + rs.getString("fg"));
                 button.setId(rs.getString("id") + " " + rs.getDouble("qmimi_shitjes") + " " + rs.getString("njesia") + " " + rs.getDouble("zbritje"));
+
+                flow.widthProperty().addListener(new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                        button.setMinWidth(newValue.doubleValue());
+                        button.setPrefWidth(newValue.doubleValue());
+                        button.setMaxWidth(newValue.doubleValue());
+                    }
+                });
 
                 button.setOnAction(e -> {
                     firstButton(button);
                 });
-
                 flow.getChildren().add(button);
             }
 

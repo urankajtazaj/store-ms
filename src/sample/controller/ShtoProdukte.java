@@ -2,9 +2,13 @@ package sample.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 
@@ -25,11 +29,13 @@ public class ShtoProdukte implements Initializable {
 
     Notification ntf = new Notification();
 
+    @FXML private ImageView ivProdFoto;
     @FXML private TextField bc, emri, qmimiStd, qmimiShitjes, zbritje, stok, stokCrit;
     @FXML private ComboBox<String> cbKategoria;
     @FXML private ChoiceBox<String> cbNjesia;
+    @FXML private Button shtoFoto;
 
-    private String vbc = "", vemri = "", cbCat, cbNjs;
+    private String vbc = "", vemri = "", cbCat, cbNjs, fotoPath;
     private double vqstd = 0, vqs = 0, vz = 0;
     private int vs = 0, vsc = 0, id = 0;
 
@@ -77,8 +83,12 @@ public class ShtoProdukte implements Initializable {
         this.vsc = stokCrit;
     }
 
+    public void setIvProdFoto (String fotoPath) { this.fotoPath = fotoPath; }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        zgjedhFoton();
 
         cbKategoria.getItems().clear();
         Iterator<String> it = VariablatPublike.prodKat.iterator();
@@ -97,12 +107,13 @@ public class ShtoProdukte implements Initializable {
             stokCrit.setText(vsc+"");
             cbNjesia.getSelectionModel().select(cbNjs);
             cbKategoria.getSelectionModel().select(cbCat);
+            ivProdFoto.setImage(new Image("file:///" + fotoPath));
         }
 
     }
 
     private void addToDatabase(){
-        String q = "insert into produktet values (null, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, ?, ?, ?, ?)";
+        String q = "insert into produktet values (null, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(q)) {
             ps.setInt(1, VariablatPublike.revProdKat.get(cbKategoria.getSelectionModel().getSelectedItem()));
             ps.setString(2, emri.getText());
@@ -116,6 +127,7 @@ public class ShtoProdukte implements Initializable {
             ps.setInt(9, stokCrit.getText().isEmpty() ? 0 : Integer.parseInt(stokCrit.getText()));
             ps.setDouble(10, Double.parseDouble(qmimiStd.getText()));
             ps.setDouble(11, Double.parseDouble(qmimiShitjes.getText()));
+            ps.setString(12, ivProdFoto.getImage().getUrl().substring(6, ivProdFoto.getImage().getUrl().length()));
             ps.execute();
             ntf.setMessage("Produkti " + emri.getText() + ", u shtua me sukses");
             ntf.setType(NotificationType.SUCCESS);
@@ -181,6 +193,16 @@ public class ShtoProdukte implements Initializable {
             ntf.show();
         }
         catch (Exception e) { e.printStackTrace(); }
+    }
+
+    private void zgjedhFoton() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Zgjedh foton");
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Foto", "*.jpg", "*.png"));
+
+        shtoFoto.setOnAction(e -> {
+            ivProdFoto.setImage(new Image("file:///" + fc.showOpenDialog(null).getAbsolutePath()));
+        });
     }
 
     @FXML

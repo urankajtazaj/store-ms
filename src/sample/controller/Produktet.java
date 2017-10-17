@@ -145,7 +145,7 @@ public class Produktet implements Initializable {
                             try {
                                 String njesia = null;
                                 rregulloProd(p.getId(), p.getEmri(), p.getBc(), p.getQmimiStd(), p.getQmimi().substring(0, p.getQmimi().length()-1), p.getSasia(), p.getSasiaKrit(), p.getZbritje(),
-                                        p.getKategoria(), p.getNjesia());
+                                        p.getKategoria(), p.getNjesia(), p.getFoto());
                             }catch (Exception ex) {ex.printStackTrace(); }
                         });
 
@@ -234,7 +234,7 @@ public class Produktet implements Initializable {
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
                         rs.getString("qmimi_shitjes"),
                         rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokCrit"),
-                        rs.getString("zbritje") + "%", rs.getString("njesia")));
+                        rs.getString("zbritje") + "%", rs.getString("njesia"), rs.getString("foto")));
             }
 
         }catch (NumberFormatException nfe) {
@@ -392,7 +392,7 @@ public class Produktet implements Initializable {
         }catch (Exception e) { e.printStackTrace(); }
     }
 
-    private void rregulloProd (int id, String emri, String bc, double qstd, String qs, int stok, int stokk, String zbritje, String catIndex, String njesia) throws Exception {
+    private void rregulloProd (int id, String emri, String bc, double qstd, String qs, int stok, int stokk, String zbritje, String catIndex, String njesia, String foto) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoProdukte.fxml"));
         ShtoProdukte sp = new ShtoProdukte();
         sp.setId(id);
@@ -405,6 +405,7 @@ public class Produktet implements Initializable {
         sp.setZbritje(Double.parseDouble(zbritje.substring(0, zbritje.length()-1)));
         sp.setCbKategoria(catIndex);
         sp.setCbNjesia(njesia);
+        sp.setIvProdFoto(foto);
         loader.setController(sp);
         bp.setCenter(loader.load());
     }
@@ -418,7 +419,7 @@ public class Produktet implements Initializable {
                         VariablatPublike.mProdKat.get(rs.getInt("kategoria_id")),
                         VariablatPublike.toMoney(rs.getDouble("qmimi_shitjes")),
                         rs.getDouble("qmimi_std"), rs.getInt("sasia"), rs.getInt("stokcrit"),
-                        rs.getDouble("zbritje") + "%", rs.getString("njesia")));
+                        rs.getDouble("zbritje") + "%", rs.getString("njesia"), rs.getString("foto")));
             }
             tblProduktet.setItems(data);
         }catch (Exception e) {e.printStackTrace();}

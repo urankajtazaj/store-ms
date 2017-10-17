@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
+<?import javafx.scene.image.ImageView?>
 <GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" style="-fx-padding: 50 10 10 10"
           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
@@ -27,6 +28,7 @@
                 <Tooltip text="Njesia e shitjes se produktit"/>
             </tooltip>
         </Label>
+        <Label text="Foto"></Label>
     </VBox>
 
     <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="10">
@@ -44,6 +46,9 @@
                 </FXCollections>
             </items>
         </ChoiceBox>
+        <ImageView fx:id="ivProdFoto" preserveRatio="true" fitHeight="150">
+        </ImageView>
+        <Button fx:id="shtoFoto" text="Zgjedh Foton"/>
     </VBox>
 
     <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="2" GridPane.rowIndex="1">

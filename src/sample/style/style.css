@@ -1270,14 +1270,15 @@
     -fx-fill: -fx-red;
 }
 
-.bigBtn {
-    -fx-min-width: 250;
-    -fx-max-width: 100;
-    -fx-min-height: 90;
-    -fx-max-height: 90;
+.bigBtn {/*
+    -fx-min-width: 300;
+    -fx-max-width: 300;
+    -fx-min-height: 110;*/
+    -fx-max-height: 110;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
     -fx-effect: none;
     -fx-border-width: 0;
+    -fx-padding: 10;
     -fx-alignment: CENTER-LEFT;
 }
