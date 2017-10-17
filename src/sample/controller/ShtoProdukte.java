@@ -113,12 +113,16 @@ public class ShtoProdukte implements Initializable {
             cbNjesia.getSelectionModel().select(cbNjs);
             cbKategoria.getSelectionModel().select(cbCat);
 
-//            if (fotoPath != null) {
+            if (fotoPath != null) {
                 ivProdFoto.setImage(new Image("file:///" + fotoPath));
-//            }
+                pastroFoto.setDisable(false);
+            } else {
+                ivProdFoto.setImage(new Image(""));
+                pastroFoto.setDisable(true);
+            }
         }
 
-//        if (!ivProdFoto.getImage().getUrl().substring(ivProdFoto.getImage().getUrl().length()-10, ivProdFoto.getImage().getUrl().length()).equals("sample.png")) {
+//        if (!ivProdFoto.getImage().getUrl().isEmpty()) {
 //            pastroFoto.setDisable(false);
 //        }
 
