@@ -33,6 +33,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -69,10 +70,31 @@ public class Konsumatoret implements Initializable {
     @FXML private TableView<sample.constructors.Konsumatoret> tbl;
     @FXML private TableColumn colAction;
     @FXML private Label lblTotalKon, lblTotalP, lblPs, lblPd;
+    @FXML private TextField txtEmri, txtQyteti, txtAdr;
+
+    @FXML private Button btnAdd;
+
+    ResourceBundle rb;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        rb = resources;
+
         tbl.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        txtQyteti.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) fillTableWithData();
+        });
+
+        txtEmri.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) fillTableWithData();
+        });
+
+        txtAdr.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) fillTableWithData();
+        });
+
+        if (!VariablatPublike.kons_add) btnAdd.setVisible(false);
 
         fillTableWithData();
         addButtonToCell();
@@ -80,7 +102,7 @@ public class Konsumatoret implements Initializable {
     }
 
     @FXML private void eksporto() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/export.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/export.fxml"), rb);
         Parent bpExport = loader.load();
         Export export = loader.getController();
         Stage stage = new Stage();
@@ -96,7 +118,7 @@ public class Konsumatoret implements Initializable {
                         @Override
                         public void run() {
                             VariablatPublike.stopSpinning(transition, iv);
-                            ntf.setMessage("Dokumenti u eksportua me sukses!");
+                            ntf.setMessage(rb.getString("kons_doc_sukses"));
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.setButton(ButtonType.NO_BUTTON);
                             ntf.show();
@@ -137,7 +159,7 @@ public class Konsumatoret implements Initializable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            ntf.setMessage("Dokumenti u eksportua me sukses");
+                            ntf.setMessage(rb.getString("kons_doc_sukses"));
                             ntf.setButton(ButtonType.NO_BUTTON);
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.show();
@@ -155,7 +177,7 @@ public class Konsumatoret implements Initializable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            ntf.setMessage("Dokumenti u eksportua me sukses");
+                            ntf.setMessage(rb.getString("kons_doc_sukses"));
                             ntf.setButton(ButtonType.NO_BUTTON);
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.show();
@@ -169,7 +191,7 @@ public class Konsumatoret implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 520, 200);
+        Scene scene = new Scene(bpExport, 520, 214);
         scene.setFill(Color.TRANSPARENT);
         scene.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ESCAPE)) stage.close();
@@ -235,29 +257,31 @@ public class Konsumatoret implements Initializable {
     private void addButtonToCell(){
         colAction.setCellFactory(e -> {
             return new TableCell<String, sample.constructors.Konsumatoret>() {
-                Button btnDel = new Button();
-                Button btnEd = new Button();
-                HBox hb = new HBox(btnDel, btnEd);
-
                 @Override
                 protected void updateItem(sample.constructors.Konsumatoret item, boolean empty) {
-
-                    ImageView btIvEd = new ImageView(new Image("/sample/photo/setting.png"));
-                    btIvEd.setFitWidth(15);
-                    btIvEd.setPreserveRatio(true);
-                    btnEd.setGraphic(btIvEd);
-                    ImageView btIvDel = new ImageView(new Image("/sample/photo/trash.png"));
-                    btIvDel.setFitWidth(15);
-                    btIvDel.setPreserveRatio(true);
-                    btnDel.setGraphic(btIvDel);
-
-                    hb.setSpacing(7);
-                    hb.setAlignment(Pos.CENTER);
-
                     super.updateItem(item, empty);
                     if (!empty) {
-                        setGraphic(hb);
+                        Button btnDel = new Button();
+                        Button btnEd = new Button();
+                        HBox hb = new HBox();
+
+                        ImageView btIvEd = new ImageView(new Image("/sample/photo/setting.png"));
+                        btIvEd.setFitWidth(15);
+                        btIvEd.setPreserveRatio(true);
+                        btnEd.setGraphic(btIvEd);
+                        ImageView btIvDel = new ImageView(new Image("/sample/photo/trash.png"));
+                        btIvDel.setFitWidth(15);
+                        btIvDel.setPreserveRatio(true);
+                        btnDel.setGraphic(btIvDel);
+
+                        hb.setSpacing(7);
+                        hb.setAlignment(Pos.CENTER);
+
                         sample.constructors.Konsumatoret konsumatoret = tbl.getItems().get(getIndex());
+
+                        if (VariablatPublike.kons_edit) hb.getChildren().add(btnEd);
+                        if (VariablatPublike.kons_del) hb.getChildren().add(btnDel);
+
                         btnDel.setOnAction(e -> {
                             try {
                                 dritarjaKonfirmo(konsumatoret.getEmri(), konsumatoret.getId(), getIndex());
@@ -272,6 +296,8 @@ public class Konsumatoret implements Initializable {
                             }catch (IOException ex) {ex.printStackTrace();}
                         });
 
+                        setGraphic(hb);
+
                     }else {
                         setGraphic(null);
                     }
@@ -284,7 +310,7 @@ public class Konsumatoret implements Initializable {
 
     private void dritarjaKonfirmo(String emri, int id, int index) throws Exception{
         ntf.setType(NotificationType.ERROR);
-        ntf.setMessage("A jeni te sigurte qe deshironi ta fshini " + emri + " nga lista e konsumatoreve?");
+        ntf.setMessage(MessageFormat.format(rb.getString("kons_sigurt_delete"), emri));
         ntf.setButton(ButtonType.YES_NO);
         ntf.showAndWait();
 
@@ -300,11 +326,12 @@ public class Konsumatoret implements Initializable {
             ps.execute();
             ntf.setType(NotificationType.SUCCESS);
             ntf.setButton(ButtonType.NO_BUTTON);
-            ntf.setMessage("Konsumatori u fshi me sukses");
+            ntf.setMessage(rb.getString("kons_del_sukses"));
             ntf.show();
         }catch (Exception e) { e.printStackTrace(); }
     }
 
+    @FXML
     private void fillTableWithData() {
         tbl.setItems(fillData());
         lblTotalKon.setText(tbl.getItems().size()+"");
@@ -314,13 +341,28 @@ public class Konsumatoret implements Initializable {
         ObservableList<sample.constructors.Konsumatoret> data = FXCollections.observableArrayList();
         try {
 
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from konsumatoret");
+            String sql = "select * from konsumatoret";
+
+            if (!txtAdr.getText().isEmpty() || !txtEmri.getText().isEmpty() || !txtQyteti.getText().isEmpty()) {
+                sql += " where lower(emri) like lower(?) and lower(adresa) like lower(?) and lower(qyteti) like lower(?)";
+            }
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            System.out.println(sql);
+
+            if (!txtAdr.getText().isEmpty() || !txtEmri.getText().isEmpty() || !txtQyteti.getText().isEmpty()) {
+                ps.setString(1, "%" + txtEmri.getText() + "%");
+                ps.setString(2, "%" + txtAdr.getText() + "%");
+                ps.setString(3, "%" + txtQyteti.getText() + "%");
+            }
+
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 data.add(new sample.constructors.Konsumatoret(rs.getInt("id"), rs.getString("emri"), rs.getString("email"),
                         rs.getString("telefoni"), rs.getString("adresa"), rs.getString("qyteti"), rs.getString("shteti"), rs.getInt("aktiv"),
-                        rs.getString("data_krijimit")));
+                        rs.getString("data_krijimit"), rs.getString("nr_fiskal")));
             }
 
         }catch (Exception ex ) {ex.printStackTrace();}
@@ -331,7 +373,7 @@ public class Konsumatoret implements Initializable {
 
     @FXML
     private void shtoKons(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoKonsumatoret.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoKonsumatoret.fxml"), rb);
         ShtoKonsumatoret sk = new ShtoKonsumatoret();
         loader.setController(sk);
         Parent parent = null;
@@ -344,11 +386,10 @@ public class Konsumatoret implements Initializable {
         }
 
         root.setCenter(parent);
-
     }
 
     private void rregulloKons(int id) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoKonsumatoret.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoKonsumatoret.fxml"), rb);
         ShtoKonsumatoret sk = new ShtoKonsumatoret();
         sk.setRoot(root);
         sk.setId(id);

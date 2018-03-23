@@ -7,35 +7,95 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<GridPane vgap="25" hgap="55" alignment="TOP_CENTER" styleClass="gp" xmlns="http://javafx.com/javafx"
+<BorderPane style="-fx-background-color: transparent" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml">
 
-    <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnSpan="2" GridPane.columnIndex="0" GridPane.rowIndex="0">
-        <padding>
-            <Insets top="15"/>
-        </padding>
-        <Label text="Emri i punes"/>
-        <TextField minWidth="200" fx:id="txtEmriPunes"/>
-    </HBox>
+    <padding>
+        <Insets top="20" left="20" right="20" bottom="30"/>
+    </padding>
 
-    <VBox spacing="10" fx:id="cbVb1" GridPane.rowIndex="1" GridPane.columnIndex="0">
-        <Label text="Menyte aktive" styleClass="infoTtl, intoTtlNb"/>
-        <CheckBox text="Shtepi" fx:id="cbShtepi" selected="true"/>
-        <CheckBox text="Punetoret" fx:id="cbPunetoret" selected="true"/>
-        <CheckBox text="Konsumatoret" fx:id="cbKonsumatoret" selected="true"/>
-        <CheckBox text="Produktet" fx:id="cbProduktet" selected="true"/>
-    </VBox>
+    <center>
+        <GridPane alignment="TOP_CENTER" vgap="20" hgap="70" styleClass="newWindow">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="5"/>
+            </padding>
 
-    <VBox spacing="10" fx:id="cbVb2" GridPane.rowIndex="1" GridPane.columnIndex="1">
-        <Label styleClass="infoTtl, intoTtlNb"/>
-        <CheckBox text="Raportet" fx:id="cbRaportet" selected="true"/>
-        <CheckBox text="Rregullo" fx:id="cbRregullo" selected="true"/>
-        <CheckBox text="Shitjet" fx:id="cbShitjet" selected="true"/>
-    </VBox>
+            <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnSpan="2" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <padding>
+                    <Insets top="15"/>
+                </padding>
+                <Label text="%emri_punes"/>
+                <TextField minWidth="200" fx:id="txtEmriPunes"/>
+            </HBox>
 
-    <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="5" alignment="CENTER_RIGHT">
-        <Button text="Fshi" fx:id="btnFshi" onAction="#fshiPunen"/>
-        <Button text="Ne rregull" onAction="#ruajPunen"/>
-    </HBox>
+            <VBox spacing="5" fx:id="cbVb1" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                <Label text="%men_active" styleClass="infoTtl, intoTtlNb"/>
+                <CheckBox selected="true" text="%M_HOME" fx:id="cbShtepi" />
+                <CheckBox selected="true" text="%M_PUNETORET" fx:id="cbPunetoret" />
+                <CheckBox selected="true" text="%M_KONSUMATORET" fx:id="cbKonsumatoret" />
+                <CheckBox selected="true" text="%M_PRODUKTET" fx:id="cbProduktet" />
+                <CheckBox selected="true" text="%M_RAPORTET" fx:id="cbRaportet" />
+                <CheckBox selected="true" text="%M_SETTINGS" fx:id="cbRregullo" />
+                <CheckBox selected="true" text="%M_SHITJE" fx:id="cbShitjet" />
+            </VBox>
 
-</GridPane>
+            <VBox spacing="5" fx:id="cbVb2" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                <Label text="Mundesite" styleClass="infoTtl, intoTtlNb"/>
+                <CheckBox fx:id="prod_add" text="%prod_add"  />
+                <CheckBox fx:id="prod_edit" text="%prod_edit"  />
+                <CheckBox fx:id="prod_del" text="%prod_del"  />
+                <Label />
+                <CheckBox fx:id="pnt_add" text="%pnt_add"  />
+                <CheckBox fx:id="pnt_edit" text="%pnt_edit"  />
+                <CheckBox fx:id="pnt_del" text="%pnt_del"  />
+                <Label />
+                <CheckBox fx:id="kons_add" text="%kons_add"  />
+                <CheckBox fx:id="kons_edit" text="%kons_edit"  />
+                <CheckBox fx:id="kons_del" text="%kons_del"  />
+                <Label />
+                <CheckBox fx:id="rep_edit" text="%rep_edit"  />
+                <CheckBox fx:id="rep_del" text="%rep_del"  />
+            </VBox>
+
+            <HBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" spacing="5">
+                <Button text="%btn_close" onAction="#mbyllDritaren">
+                    <graphic>
+                        <Label text="&#xE5CD;"/>
+                    </graphic>
+                </Button>
+                <HBox spacing="5" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                    <Button text="%fshi" styleClass="btnRed" fx:id="btnFshi" onAction="#fshiPunen">
+                        <graphic>
+                            <Label text="&#xE872;"/>
+                        </graphic>
+                    </Button>
+                    <Button styleClass="btnGreen" text="%ruaj" onAction="#ruajPunen">
+                        <graphic>
+                            <Label text="&#xE876;"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </HBox>
+        </GridPane>
+    </center>
+
+</BorderPane>
+
+
+<!--
+create table mundesite (
+    id int(2) auto_increment primary key,
+    dep_id int(5),
+    prod_add int(1) default 1,
+    prod_edit int(1) default 1,
+    prod_del int(1) default 1,
+    pnt_add int(1) default 1,
+    pnt_edit int(1) default 1,
+    pnt_del int(1) default 1,
+    kons_add int(1) default 1,
+    kons_edit int(1) default 1,
+    kons_del int(1) default 1,
+    rep_edit int(1) default 1,
+    rep_del int(1) default 1
+)
+-->

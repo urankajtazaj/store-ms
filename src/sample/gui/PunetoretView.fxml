@@ -34,26 +34,26 @@
 
         <VBox GridPane.rowIndex="1" styleClass="shadow" GridPane.halignment="CENTER" style="-fx-padding: 10;"
               GridPane.columnIndex="0" spacing="5">
-            <Label text="Detajet personale" styleClass="infoTtl, intoTtlNb"/>
+            <Label text="%detajet_personale" styleClass="infoTtl, intoTtlNb"/>
             <HBox spacing="50">
                 <VBox alignment="CENTER_LEFT" spacing="2">
-                    <Label text="Ditelindja" styleClass="infoTtl, infoTtl1"/>
+                    <Label text="%dtl" styleClass="infoTtl, infoTtl1"/>
                     <Label fx:id="dtl" styleClass="infoTtl, intoTtlNb"/>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" spacing="2">
-                    <Label text="Adresa" styleClass="infoTtl, infoTtl1"/>
+                    <Label text="%adresa" styleClass="infoTtl, infoTtl1"/>
                     <Label maxWidth="130" fx:id="adresa" styleClass="infoTtl, intoTtlNb"/>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" spacing="2">
-                    <Label text="Qyteti" styleClass="infoTtl, infoTtl1"/>
+                    <Label text="%qyt" styleClass="infoTtl, infoTtl1"/>
                     <Label maxWidth="130" fx:id="qyteti" styleClass="infoTtl, intoTtlNb"/>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" spacing="2">
-                    <Label text="Shteti" styleClass="infoTtl, infoTtl1"/>
+                    <Label text="%shteti" styleClass="infoTtl, infoTtl1"/>
                     <Label maxWidth="130" fx:id="shteti" styleClass="infoTtl, intoTtlNb"/>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" spacing="2">
-                    <Label text="Gjinia" styleClass="infoTtl, infoTtl1"/>
+                    <Label text="%gjinia" styleClass="infoTtl, infoTtl1"/>
                     <Label maxWidth="130" fx:id="gjinia" styleClass="infoTtl, intoTtlNb"/>
                 </VBox>
             </HBox>
@@ -63,48 +63,48 @@
             <Label text="Tjera" styleClass="infoTtl, intoTtlNb"/>
             <HBox spacing="50">
                 <VBox alignment="CENTER_LEFT" spacing="2">
-                    <Label text="Pagesa" styleClass="infoTtl, infoTtl1"/>
+                    <Label text="%pagesa" styleClass="infoTtl, infoTtl1"/>
                     <Label maxWidth="130" fx:id="pagesa" styleClass="infoTtl, intoTtlNb"/>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" spacing="2">
-                    <Label text="Email" styleClass="infoTtl, infoTtl1"/>
+                    <Label text="%email" styleClass="infoTtl, infoTtl1"/>
                     <Label maxWidth="200" fx:id="email" styleClass="infoTtl, intoTtlNb"/>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" spacing="2">
-                    <Label text="Telefoni" styleClass="infoTtl, infoTtl1"/>
+                    <Label text="%telefoni" styleClass="infoTtl, infoTtl1"/>
                     <Label maxWidth="130" fx:id="telefoni" styleClass="infoTtl, intoTtlNb"/>
                 </VBox>
             </HBox>
         </VBox>
         <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" spacing="4" alignment="BOTTOM_RIGHT">
-            <Button styleClass="btn" fx:id="btnRregullo" text="Rregullo"/>
+            <Button styleClass="btn" fx:id="btnRregullo" text="%rregullo"/>
         </HBox>
         <VBox fx:id="hbGrid" GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER_LEFT" GridPane.halignment="CENTER" spacing="5">
             <padding>
                 <Insets top="50"/>
             </padding>
             <HBox spacing="5" alignment="BOTTOM_CENTER">
-                <Label text="Kalendari i pushimeve" styleClass="infoTtl, intoTtlNb"/>
+                <Label text="%kal" styleClass="infoTtl, intoTtlNb"/>
                 <HBox HBox.hgrow="ALWAYS" spacing="20" alignment="BOTTOM_CENTER">
                     <HBox spacing="5" alignment="CENTER_LEFT">
                         <Rectangle width="10" height="10" styleClass="vjetor"/>
-                        <Label text="Vjetor" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                        <Label text="%vjetor" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
                     </HBox>
                     <HBox spacing="5" alignment="CENTER_LEFT">
                         <Rectangle width="10" height="10" styleClass="veqant"/>
-                        <Label text="Veqante" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                        <Label text="%veqant" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
                     </HBox>
                     <HBox spacing="5" alignment="CENTER_LEFT">
                         <Rectangle width="10" height="10" styleClass="semure"/>
-                        <Label text="Semure" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                        <Label text="%semure" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
                     </HBox>
                     <HBox spacing="5" alignment="CENTER_LEFT">
                         <Rectangle width="10" height="10" styleClass="ppages"/>
-                        <Label text="Pa pagese" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                        <Label text="%pa_pagese" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
                     </HBox>
                     <HBox spacing="5" alignment="CENTER_LEFT">
                         <Rectangle width="10" height="10" styleClass="parsye"/>
-                        <Label text="Pa arsye" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
+                        <Label text="%pa_arsye" styleClass="infoTtl, intoTtlNb, infoTtlSmall"/>
                     </HBox>
                 </HBox>
                 <ComboBox fx:id="cbViti"/>
@@ -114,7 +114,7 @@
               spacing="5">
             <DatePicker maxWidth="110" fx:id="dpPrejPushim"/>
             <DatePicker maxWidth="110" fx:id="dpDeriPushim"/>
-            <ComboBox fx:id="cbArsyeja" value="Vjetor">
+            <ComboBox fx:id="cbArsyeja" value="%vjetor">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Vjetor"/>
@@ -125,7 +125,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Button text="Shto" styleClass="btn" onAction="#shtoPushim"/>
+            <Button text="%shto" styleClass="btn" onAction="#shtoPushim"/>
         </HBox>
     </children>
 

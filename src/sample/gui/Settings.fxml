@@ -10,30 +10,26 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Settings">
 
+    <fx:define>
+        <ToggleGroup fx:id="tgRaporti"/>
+    </fx:define>
+
     <children>
         <BorderPane styleClass="shadow" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <padding>
                 <Insets top="5" left="10" right="10" bottom="10"/>
             </padding>
             <top>
-                <Label text="Targeti" styleClass="infoTtl"/>
+                <Label text="%target" styleClass="infoTtl"/>
             </top>
             <center>
                 <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-padding: 10 0 15 0">
                     <TextField fx:id="tMujor" minWidth="100" maxWidth="150" />
-                    <ComboBox fx:id="cbTipi" value="Mujore">
-                        <items>
-                            <FXCollections fx:factory="observableArrayList">
-                                <String fx:value="Mujore"/>
-                                <String fx:value="Javore"/>
-                                <String fx:value="Ditore"/>
-                            </FXCollections>
-                        </items>
-                    </ComboBox>
+                    <ComboBox fx:id="cbTipi" />
                 </HBox>
             </center>
             <bottom>
-                <Button BorderPane.alignment="CENTER_RIGHT" onAction="#ruajTarget" text="Ruaj" fx:id="btnRuajTargeti"/>
+                <!--<Button BorderPane.alignment="CENTER_RIGHT" onAction="#ruajTarget" text="Ruaj" fx:id="btnRuajTargeti"/>-->
             </bottom>
         </BorderPane>
 
@@ -42,7 +38,7 @@
                 <Insets top="5" left="10" right="10" bottom="10"/>
             </padding>
             <top>
-                <Label text="Punet" styleClass="infoTtl"/>
+                <Label text="%punet" styleClass="infoTtl"/>
             </top>
             <center>
                 <VBox spacing="10">
@@ -50,7 +46,7 @@
                         <VBox spacing="10" fx:id="vbPunet" alignment="CENTER_RIGHT">
                         </VBox>
                     </ScrollPane>
-                    <Button text="Shto" onAction="#shtoPune" fx:id="shtoPune"/>
+                    <Button text="%shto" onAction="#shtoPune" fx:id="shtoPune"/>
                 </VBox>
             </center>
         </BorderPane>
@@ -60,22 +56,22 @@
                 <Insets top="5" left="10" right="10" bottom="10"/>
             </padding>
             <top>
-                <Label text="Produktet" styleClass="infoTtl"/>
+                <Label text="%produktet" styleClass="infoTtl"/>
             </top>
             <center>
                 <VBox spacing="5" alignment="TOP_LEFT">
                     <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Label text="TVSH (%)"/>
+                        <Label text="%tvsh_prc"/>
                         <TextField minWidth="100" fx:id="txtTvsh" maxWidth="130"/>
-                        <Button text="Ruaj" onAction="#ruajTvsh"/>
+                        <!--<Button text="Ruaj" onAction="#ruajTvsh"/>-->
                     </HBox>
 
-                    <Label text="Kategorite" styleClass="infoTtl" style="-fx-padding: 10 0 0 0"/>
+                    <Label text="%kategorit" styleClass="infoTtl" style="-fx-padding: 10 0 0 0"/>
                     <ScrollPane VBox.vgrow="ALWAYS" maxHeight="240" styleClass="edge-to-edge">
                         <VBox alignment="CENTER_LEFT" fx:id="vbPnt" spacing="5"/>
                     </ScrollPane>
                     <HBox spacing="5" alignment="CENTER_RIGHT">
-                        <Button text="Ruaj" onAction="#ruajProdKat"/>
+                        <!--<Button text="Ruaj" onAction="#ruajProdKat"/>-->
                         <Button text="+" onAction="#shtoProdKat"/>
                     </HBox>
                 </VBox>
@@ -87,12 +83,12 @@
                 <Insets top="5" left="10" right="10" bottom="10"/>
             </padding>
             <top>
-                <Label text="Tjera" styleClass="infoTtl"/>
+                <Label text="%tjera" styleClass="infoTtl"/>
             </top>
             <center>
                 <VBox spacing="20" alignment="TOP_LEFT">
                     <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Label text="Valuta"/>
+                        <Label text="%valuta"/>
                         <ComboBox value="EUR" fx:id="cbValuta">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
@@ -103,32 +99,25 @@
                                 </FXCollections>
                             </items>
                         </ComboBox>
-                        <Button text="Ruaj" onAction="#ruajValuten"/>
+                        <!--<Button text="Ruaj" onAction="#ruajValuten"/>-->
                     </HBox>
 
                     <VBox spacing="5" style="-fx-border-color: -fx-red; -fx-border-radius: 5; -fx-border-width: 1; -fx-padding: 10">
-                        <Label text="Zona e rrezikut"/>
-                        <VBox spacing="5" alignment="CENTER">
-                            <Button text="Eksporto te dhenat" minWidth="200" maxWidth="220" onAction="#exportDb" GridPane.halignment="RIGHT">
+                        <Label text="%danger_zone"/>
+                        <VBox spacing="10" alignment="CENTER">
+                            <Button textAlignment="LEFT" text="%export_data" minWidth="200" maxWidth="250" onAction="#exportDb" GridPane.halignment="RIGHT">
                                 <graphic>
-                                    <ImageView preserveRatio="true" rotate="90">
-                                        <Image url="/sample/photo/right-arrow.png"/>
-                                    </ImageView>
+                                    <Label text="&#xE2C3;"/>
                                 </graphic>
                             </Button>
-                            <Button text="Rikthe te dhenat" fx:id="btnImport" minWidth="200" maxWidth="220" onAction="#importDb" GridPane.halignment="RIGHT">
+                            <Button textAlignment="LEFT" text="%rikthe" fx:id="btnImport" minWidth="200" maxWidth="250" onAction="#importDb" GridPane.halignment="RIGHT">
                                 <graphic>
-                                    <ImageView preserveRatio="true" rotate="-90">
-                                        <Image url="/sample/photo/right-arrow.png"/>
-                                    </ImageView>
+                                    <Label text="&#xE2C0;"/>
                                 </graphic>
                             </Button>
-                            <Button text="Pastro te gjitha te dhenat" minWidth="200" maxWidth="220" onAction="#pastroDb" GridPane.halignment="RIGHT"
-                                    style="-fx-background-color: -fx-red;">
+                            <Button textAlignment="LEFT" text="%pastro_gjitha" minWidth="200" maxWidth="250" onAction="#pastroDb" GridPane.halignment="RIGHT">
                                 <graphic>
-                                    <ImageView preserveRatio="true">
-                                        <Image url="/sample/photo/close.png"/>
-                                    </ImageView>
+                                    <Label text="&#xE872;"/>
                                 </graphic>
                             </Button>
                         </VBox>
@@ -136,6 +125,28 @@
                 </VBox>
             </center>
         </BorderPane>
+
+        <BorderPane styleClass="shadow" GridPane.rowSpan="1" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <padding>
+                <Insets top="5" left="10" right="10" bottom="10"/>
+            </padding>
+            <top>
+                <Label text="%raportet" styleClass="infoTtl"/>
+            </top>
+            <center>
+                <VBox spacing="7">
+                    <Label text="%zgjedh_report"/>
+                    <VBox spacing="5">
+                        <RadioButton fx:id="rbQdoRaport" toggleGroup="$tgRaporti" text="%qdo_raport"/>
+                        <RadioButton fx:id="rbQdoDite" toggleGroup="$tgRaporti" text="%qdo_dite"/>
+                        <RadioButton fx:id="rbQdoMuaj" toggleGroup="$tgRaporti" text="%qdo_muaj"/>
+                    </VBox>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <Button text="%ruaj" onAction="#oneClickSaveAll" style="-fx-background-color: #1abc9c"
+                GridPane.columnIndex="0" GridPane.rowIndex="3" />
     </children>
 
 </GridPane>

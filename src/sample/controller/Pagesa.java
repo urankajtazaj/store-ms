@@ -53,31 +53,33 @@ public class Pagesa implements Initializable {
         this.lPagesa = pagesa;
     }
 
+    ResourceBundle rb;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        rb = resources;
     }
 
     @FXML
     public void shtoPagesen(){
         if (Pattern.compile("[0-9.]+").matcher(txtPagesa.getText()).matches()) {
             BigDecimal ttl = new BigDecimal(total+"");
-            ttl = ttl.add(ttl.multiply(new BigDecimal(VariablatPublike.tvsh/100)));
+//            ttl = ttl.add(ttl.multiply(new BigDecimal(VariablatPublike.tvsh/100)));
             ttl = ttl.setScale(2, BigDecimal.ROUND_HALF_DOWN);
             BigDecimal pag = new BigDecimal(txtPagesa.getText()).setScale(2, BigDecimal.ROUND_HALF_DOWN);
-            if (ttl.compareTo(pag) <= 0) {
+//            if (ttl.compareTo(pag) <= 0) {
                 lPagesa.setText(VariablatPublike.toMoney(pag.doubleValue()));
                 pagesa = pag;
                 lKusuri.setText(VariablatPublike.toMoney(pagesa.subtract(ttl)));
                 stage.close();
-            }else {
-                ntf.setMessage("Pagesa nuk mund te jete me e vogel se shuma qe duhet paguar");
-                ntf.setType(NotificationType.ERROR);
-                ntf.show();
-                txtPagesa.clear();
-            }
+//            }else {
+//                ntf.setMessage("Pagesa nuk mund te jete me e vogel se shuma qe duhet paguar");
+//                ntf.setType(NotificationType.ERROR);
+//                ntf.show();
+//                txtPagesa.clear();
+//            }
         }else {
-            ntf.setMessage("Pagesa duhet te permbaje vetem numra");
+            ntf.setMessage(rb.getString("pagesa_msg"));
             ntf.setType(NotificationType.ERROR);
             ntf.show();
             txtPagesa.clear();

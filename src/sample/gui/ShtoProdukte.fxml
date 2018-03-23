@@ -10,47 +10,37 @@
 <GridPane alignment="TOP_CENTER" styleClass="gp" vgap="15" hgap="20" style="-fx-padding: 50 10 10 10"
           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
-    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" styleClass="h0" text="Shto Produkte"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" styleClass="h0" text="%shto_prod"/>
 
     <VBox spacing="10" styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="1">
-        <Label text="Barkodi"/>
-        <Label text="Emri*">
-            <tooltip>
-                <Tooltip text="Emri i produktit"/>
-            </tooltip>
-        </Label>
-        <Label text="Kategoria*">
-            <tooltip>
-                <Tooltip text="Kategoria e produktit"/>
-            </tooltip>
-        </Label>
-        <Label text="Njesia*">
-            <tooltip>
-                <Tooltip text="Njesia e shitjes se produktit"/>
-            </tooltip>
-        </Label>
-        <Label text="Foto"></Label>
+        <Label text="%kodi"/>
+        <Label text="%emri"></Label>
+        <Label text="%kategoria"></Label>
+        <Label text="%njesia"/>
+        <Label text="%foto"/>
     </VBox>
 
     <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="10">
         <TextField fx:id="bc" minWidth="200" maxWidth="200"/>
         <TextField fx:id="emri" minWidth="200" maxWidth="200"/>
         <ComboBox fx:id="cbKategoria" minWidth="200" maxWidth="200"/>
-        <ChoiceBox fx:id="cbNjesia" value="Cope" minWidth="200" maxWidth="200">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Cope"/>
-                    <String fx:value="Paketim"/>
-                    <Separator/>
-                    <String fx:value="Kilogram"/>
-                    <String fx:value="Liter"/>
-                </FXCollections>
-            </items>
-        </ChoiceBox>
+        <HBox spacing="5" minWidth="200" maxWidth="200">
+            <TextField fx:id="txtNjesia"/>
+            <ChoiceBox fx:id="cbNjesia" value="Cope">
+                <!--<items>-->
+                    <!--<FXCollections fx:factory="observableArrayList">-->
+                        <!--<String fx:value="%cope"/>-->
+                        <!--<String fx:value="%Liter"/>-->
+                        <!--<String fx:value="%Kg"/>-->
+                    <!--</FXCollections>-->
+                <!--</items>-->
+            </ChoiceBox>
+        </HBox>
+
         <ImageView fx:id="ivProdFoto" preserveRatio="true" fitHeight="150"></ImageView>
         <HBox spacing="5">
-            <Button fx:id="shtoFoto" text="Zgjedh foton"/>
-            <Button fx:id="pastroFoto" text="Pastro foton" disable="true" style="-fx-background-color: -fx-red;"/>
+            <Button fx:id="shtoFoto" text="%foto_z"/>
+            <Button fx:id="pastroFoto" text="%foto_p" disable="true" style="-fx-background-color: -fx-red;"/>
         </HBox>
     </VBox>
 
@@ -58,48 +48,27 @@
         <padding>
             <Insets left="50"/>
         </padding>
-        <Label text="Qmimi standard*">
-            <tooltip>
-                <Tooltip text="Vendoset qmimi i blerjes nese deshirohet&#10;qe ne fund te llogariten te hyrat NETO"/>
-            </tooltip>
-        </Label>
-        <Label text="Qmimi i shitjes*">
-            <tooltip>
-                <Tooltip text="Qmimi me te cilin do te shitet produkti"/>
-            </tooltip>
-        </Label>
-        <Label text="Zbritje (%)">
-            <tooltip>
-                <Tooltip text="Zbritja ne qmim ne perqindje (mund te lihet e zbrazet)"/>
-            </tooltip>
-        </Label>
-        <Label text="Sasia*" >
-            <tooltip>
-                <Tooltip text="Sasia (stoku, en.Stock)"/>
-            </tooltip>
-        </Label>
-        <Label text="Sasia kritike" >
-            <tooltip>
-                <Tooltip text="Nese sasia bie nen kete nivel, ateher ne pamjen e bardhe (Light)&#10;do te dallohet me ngjyre te kuqe"/>
-            </tooltip>
-        </Label>
+        <Label text="%qmimi_h"/>
+        <Label text="%qmimi_p"></Label>
+        <Label text="%qmimi_sh"></Label>
+        <Label text="%zbritje"></Label>
+        <Label text="%sasia" ></Label>
+        <!--<Label text="Sasia kritike" ></Label>-->
     </VBox>
 
     <VBox spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="1">
         <TextField fx:id="qmimiStd" minWidth="200" maxWidth="200"/>
         <TextField fx:id="qmimiShitjes" minWidth="200" maxWidth="200"/>
+        <TextField fx:id="qmimiShumice" minWidth="200" maxWidth="200"/>
         <TextField fx:id="zbritje" minWidth="200" maxWidth="200"/>
         <TextField fx:id="stok" minWidth="200" maxWidth="200"/>
-        <TextField fx:id="stokCrit" minWidth="200" maxWidth="200"/>
+        <!--<TextField fx:id="stokCrit" minWidth="200" maxWidth="200"/>-->
+        <CheckBox fx:id="cbRifillo" visible="false" text="%stok_rifillo" GridPane.halignment="RIGHT"/>
     </VBox>
 
-    <Label text="Fushat me yll (*) jane te obligueshme" style="-fx-font-weight: bold; -fx-opacity: .6"
-           GridPane.halignment="RIGHT"
-           GridPane.columnSpan="2" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-
-    <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.rowIndex="3" GridPane.columnIndex="3">
-        <Button text="Pastro" onAction="#pastroProdukt"/>
-        <Button text="Shto" onAction="#shtoProdukt"/>
+    <HBox alignment="CENTER_RIGHT" spacing="5" GridPane.rowIndex="2" GridPane.columnIndex="3">
+        <Button text="%pastro" onAction="#pastroProdukt"/>
+        <Button text="%shto" onAction="#shtoProdukt"/>
     </HBox>
 
 </GridPane>

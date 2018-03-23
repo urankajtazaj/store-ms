@@ -11,34 +11,40 @@
     </padding>
     <children>
         <HBox alignment="BOTTOM_LEFT" styleClass="filterHb" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3">
+            <!--<VBox>-->
+                <!--<Label text="ID" styleClass="filterLbl"/>-->
+                <!--<TextField maxWidth="60" fx:id="txtId"/>-->
+            <!--</VBox>-->
             <VBox>
-                <Label text="ID" styleClass="filterLbl"/>
-                <TextField maxWidth="60" fx:id="txtId"/>
-            </VBox>
-            <VBox>
-                <Label text="Emri" styleClass="filterLbl"/>
+                <Label text="%emri" styleClass="filterLbl"/>
                 <TextField fx:id="txtEmri" maxWidth="150"/>
             </VBox>
             <VBox>
-                <Label text="Qyteti" styleClass="filterLbl"/>
+                <Label text="%qyt" styleClass="filterLbl"/>
                 <TextField fx:id="txtQyteti" maxWidth="150"/>
             </VBox>
             <VBox>
-                <Label text="Adresa" styleClass="filterLbl"/>
+                <Label text="%adresa" styleClass="filterLbl"/>
                 <TextField fx:id="txtAdr" maxWidth="150"/>
             </VBox>
-            <VBox>
-                <Label text="Email" styleClass="filterLbl"/>
-                <TextField fx:id="txtEmail" maxWidth="150"/>
-            </VBox>
-            <Button text="Filtro"/>
+            <!--<VBox>-->
+                <!--<Label text="%email" styleClass="filterLbl"/>-->
+                <!--<TextField fx:id="txtEmail" maxWidth="150"/>-->
+            <!--</VBox>-->
+            <Button onAction="#fillTableWithData" text="%btn_search">
+                <graphic>
+                    <Label text="&#xE8B6;"/>
+                </graphic>
+            </Button>
             <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="5">
-                <Button text="Shto" onAction="#shtoKons"/>
-                <Button text="Eksporto" onAction="#eksporto" contentDisplay="RIGHT">
+                <Button fx:id="btnAdd" text="%btn_add" onAction="#shtoKons">
                     <graphic>
-                        <ImageView preserveRatio="true">
-                            <Image url="/sample/photo/right-arrow.png"/>
-                        </ImageView>
+                        <Label text="&#xE145;"/>
+                    </graphic>
+                </Button>
+                <Button onAction="#eksporto" text="%btn_export">
+                    <graphic>
+                        <Label text="&#xE89E;"/>
                     </graphic>
                 </Button>
             </HBox>
@@ -46,7 +52,7 @@
 
         <HBox styleClass="shadow" alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 20" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <!--<VBox alignment="CENTER_LEFT" styleClass="details">-->
-                <Label styleClass="detailInfoPnt" text="Numri i konsumatoreve: "/>
+                <Label styleClass="detailInfoPnt" text="%kons_nr"/>
                 <Label fx:id="lblTotalKon" styleClass="detailInfoPnt-Qm"/>
             <!--</VBox>-->
             <!--<VBox alignment="CENTER_LEFT" styleClass="details">-->
@@ -67,12 +73,13 @@
                    GridPane.columnSpan="1" GridPane.columnIndex="0" fx:id="tbl" GridPane.vgrow="ALWAYS">
             <columns>
                 <TableColumn maxWidth="70" minWidth="70" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
-                <TableColumn maxWidth="150" minWidth="150" text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
-                <TableColumn text="Adresa"><cellValueFactory><PropertyValueFactory property="adresa"/></cellValueFactory></TableColumn>
-                <TableColumn minWidth="90" maxWidth="90" text="Qyteti"><cellValueFactory><PropertyValueFactory property="qyteti"/></cellValueFactory></TableColumn>
-                <TableColumn maxWidth="90" minWidth="90" text="Shteti"><cellValueFactory><PropertyValueFactory property="shteti"/></cellValueFactory></TableColumn>
-                <TableColumn maxWidth="90" minWidth="90" text="Telefoni"><cellValueFactory><PropertyValueFactory property="tel"/></cellValueFactory></TableColumn>
-                <TableColumn text="Email"><cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory></TableColumn>
+                <TableColumn text="%emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                <TableColumn text="%adresa"><cellValueFactory><PropertyValueFactory property="adresa"/></cellValueFactory></TableColumn>
+                <TableColumn text="%qyt"><cellValueFactory><PropertyValueFactory property="qyteti"/></cellValueFactory></TableColumn>
+                <TableColumn text="%shteti"><cellValueFactory><PropertyValueFactory property="shteti"/></cellValueFactory></TableColumn>
+                <TableColumn text="%telefoni"><cellValueFactory><PropertyValueFactory property="tel"/></cellValueFactory></TableColumn>
+                <TableColumn text="%email"><cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory></TableColumn>
+                <TableColumn text="%nr_fiskal"><cellValueFactory><PropertyValueFactory property="fiskal"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colAction" maxWidth="50" minWidth="50"></TableColumn>
             </columns>
         </TableView>

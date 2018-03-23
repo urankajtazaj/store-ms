@@ -59,8 +59,12 @@ public class ShtoPunetoret implements Initializable {
         this.stage = stage;
     }
 
+    ResourceBundle rb;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        rb = resources;
 
         punesuar.setValue(LocalDate.now());
         cbStatusi.getSelectionModel().select(1);
@@ -87,7 +91,7 @@ public class ShtoPunetoret implements Initializable {
 
         cbQyteti.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
             if (nv != null) {
-                if (nv.equals("Tjeter")) {
+                if (nv.equals(rb.getString("tjeter"))) {
                     txtQyteti.setDisable(false);
                 }
             }else {
@@ -100,7 +104,7 @@ public class ShtoPunetoret implements Initializable {
 
         merrShtetet();
         cbShteti.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
-            if (nv.equals("Tjeter")) {
+            if (nv.equals(rb.getString("tjeter"))) {
                 txtQyteti.setDisable(false);
                 txtShteti.setDisable(false);
                 cbQyteti.setDisable(true);
@@ -201,11 +205,11 @@ public class ShtoPunetoret implements Initializable {
                 "where id = " + id);
             }
 
-            if (!emri.getText().equals("") && (!(txtQyteti.getText().isEmpty() && cbQyteti.getSelectionModel().getSelectedItem().equals("Tjeter"))
-                    && !(txtShteti.getText().isEmpty() && cbShteti.getSelectionModel().getSelectedItem().equals("Tjeter")))
+            if (!emri.getText().equals("") && (!(txtQyteti.getText().isEmpty() && cbQyteti.getSelectionModel().getSelectedItem().equals(rb.getString("tjeter")))
+                    && !(txtShteti.getText().isEmpty() && cbShteti.getSelectionModel().getSelectedItem().equals(rb.getString("tjeter"))))
                     && !paga.getText().equals("") && !punesuar.getEditor().getText().equals("")) {
                 if (!paga.getText().trim().matches("^\\d+(\\.\\d)*$") || !telefoni.getText().trim().matches("|^[0-9 ]+")) {
-                    ntf.setMessage("Gabim ne konvertim te te dhenave, kontrolloni fushat ku kerkohen numra");
+                    ntf.setMessage(rb.getString("shpnt_convert_error"));
                     ntf.setType(NotificationType.ERROR);
                     ntf.show();
                 }else {
@@ -232,13 +236,13 @@ public class ShtoPunetoret implements Initializable {
                     pstmt2.execute();
 
                     pastro();
-                    ntf.setMessage("Te dhenat u ruajten me sukses");
+                    ntf.setMessage(rb.getString("shpnt_update_sukses"));
                     ntf.setType(NotificationType.SUCCESS);
                     ntf.setButton(ButtonType.NO_BUTTON);
                     ntf.show();
                 }
             }else {
-                ntf.setMessage("Fushat e kerkuara duhet te permbajne te dhena");
+                ntf.setMessage(rb.getString("shpnt_empty_error"));
                 ntf.setType(NotificationType.ERROR);
                 ntf.setButton(ButtonType.NO_BUTTON);
                 ntf.show();
@@ -296,7 +300,7 @@ public class ShtoPunetoret implements Initializable {
                 VariablatPublike.revShteti.put(rs.getInt("id"), rs.getString("shteti"));
                 VariablatPublike.shteti.put(rs.getString("shteti"), rs.getInt("id"));
             }
-            cbShteti.getItems().add("Tjeter");
+            cbShteti.getItems().add(rb.getString("tjeter"));
         }catch (Exception e) { e.printStackTrace(); }
     }
 
@@ -311,7 +315,7 @@ public class ShtoPunetoret implements Initializable {
                 VariablatPublike.qyteti.put(rs.getString("qyteti"), rs.getInt("id"));
                 VariablatPublike.revQyteti.put(rs.getInt("id"), rs.getString("qyteti"));
             }
-            cbQyteti.getItems().add("Tjeter");
+            cbQyteti.getItems().add(rb.getString("tjeter"));
             cbQyteti.getSelectionModel().select(0);
         }catch (Exception e) {e.printStackTrace();}
     }

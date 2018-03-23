@@ -5,9 +5,8 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import com.sun.javafx.scene.control.skin.IntegerField?>
 <?import javafx.geometry.Insets?>
+
 <BorderPane styleClass="newWindow" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sample.controller.ShtoDepartamente">

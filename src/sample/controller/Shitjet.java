@@ -1,10 +1,14 @@
 package sample.controller;
 
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableListValue;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,11 +16,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,6 +42,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -50,17 +62,24 @@ public class Shitjet implements Initializable {
     @FXML private FlowPane flow;
     @FXML private ScrollPane scroll;
     @FXML private Label lTotal, lPagesa, lKusuri, lTvsh, lSubTtl;
-    @FXML private TableColumn colAct, colSasia;
+    @FXML private TableColumn colAct, colSasia, colQmimi, colNjesia;
     @FXML private TextField txtProd;
     @FXML private ComboBox<String> cbCat, cbKons;
     @FXML private CheckBox cbShtypPagesen;
+    @FXML private RadioButton rbPakice, rbShumic;
+    NumberFormat format = NumberFormat.getInstance(Locale.US);
+    DecimalFormat pct = new DecimalFormat("00");
 
-    BigDecimal qmimi = BigDecimal.ZERO, pgs = BigDecimal.ZERO;
+    BigDecimal qmimi = BigDecimal.ZERO, pgs = BigDecimal.ZERO, qmShum = BigDecimal.ZERO;
 
     Receta receta = new Receta();
 
+    ResourceBundle rb;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        rb = resources;
 
         if (!PrintReceipt.availablePrinter())
             cbShtypPagesen.setDisable(true);
@@ -76,7 +95,7 @@ public class Shitjet implements Initializable {
         tbl.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         lTotal.setText(VariablatPublike.toMoney(0));
         cbCat.getItems().clear();
-        cbCat.getItems().add("Te gjitha");
+        cbCat.getItems().add(rb.getString("te_gjitha"));
         Iterator<String> it = VariablatPublike.prodKat.iterator();
         while (it.hasNext()) {
             cbCat.getItems().add(it.next());
@@ -93,12 +112,31 @@ public class Shitjet implements Initializable {
 
         txtProd.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ENTER) && flow.getChildren().size() > 0) {
-                firstButton((Button) flow.getChildren().get(0));
+                firstButton((HBox) flow.getChildren().get(0));
                 txtProd.setText("");
             }
         });
 
-        lTvsh.setText(VariablatPublike.decimal.format(VariablatPublike.tvsh) + "%");
+        lTvsh.setText(VariablatPublike.tvsh > 0 ? ("" + VariablatPublike.tvsh).split("\\.")[1] + "%" : 0 + "%");
+
+        colNjesia.setCellFactory(e -> {
+            return new TableCell<String, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (!empty) {
+                        if (item.equals("0")) setText(rb.getString("cope"));
+                        else if (item.equals("1")) setText(rb.getString("paketim"));
+                        else if (item.equals("2")) setText(rb.getString("Liter"));
+                        else if (item.equals("3")) setText(rb.getString("Kg"));
+                    } else {
+                        setText("");
+                        setGraphic(null);
+                    }
+
+                }
+            };
+        });
 
         colAct.setCellFactory(e -> {
             return new TableCell<String, String>() {
@@ -114,11 +152,16 @@ public class Shitjet implements Initializable {
                         btn.setGraphic(iv);
                         btn.setOnAction(e -> {
                             ShitjetProd sp = tbl.getItems().get(getIndex());
-                            qmimi = qmimi.subtract(new BigDecimal((Double.parseDouble(sp.getQmimi().substring(0, sp.getQmimi().length()-1)) *
-                                    Double.parseDouble(sp.getSasia().getText()))+""));
+                            try {
+                                qmimi = qmimi.subtract(new BigDecimal((format.parse(sp.getQm().getText()).doubleValue() *
+                                        Double.parseDouble(sp.getSasia().getText()))+""));
+                            } catch (ParseException e1) {
+                                e1.printStackTrace();
+                            }
                             tbl.getItems().remove(getIndex());
-                            lSubTtl.setText(VariablatPublike.toMoney(qmimi.doubleValue()));
-                            lTotal.setText(VariablatPublike.toMoney(qmimi.doubleValue() + (qmimi.doubleValue()*VariablatPublike.tvsh/100)));
+                            lSubTtl.setText(VariablatPublike.toMoney(qmimi.doubleValue()/VariablatPublike.tvsh));
+                            lTotal.setText(VariablatPublike.toMoney(qmimi.doubleValue()));
+//                            lShumic.setText(VariablatPublike.toMoney(qmShum.doubleValue() + (qmShum.doubleValue()*VariablatPublike.tvsh/100)));
                         });
                         setGraphic(btn);
                     }else {
@@ -140,10 +183,9 @@ public class Shitjet implements Initializable {
                         TextField tf = new TextField(sp.getSasia().getText());
                         setOnKeyReleased(e -> {
                             if (Pattern.compile("[0-9.]+").matcher(e.getText()).matches()) {
-                                double ttl = merrQmimet(tf.getText(), getIndex()).doubleValue();
-                                lSubTtl.setText(VariablatPublike.toMoney(ttl));
-                                lTotal.setText(VariablatPublike.toMoney(
-                                        ttl + ttl * VariablatPublike.tvsh/100));
+                                double ttl = merrQmimet(((TextField) colQmimi.getCellData(getIndex())).getText(), tf.getText(), getIndex(), rbShumic.isSelected()).doubleValue();
+                                lSubTtl.setText(VariablatPublike.toMoney(ttl/VariablatPublike.tvsh));
+                                lTotal.setText(VariablatPublike.toMoney(ttl));
                             }else if (e.getCode().equals(KeyCode.ENTER)) {
                                 txtProd.requestFocus();
                             }
@@ -158,27 +200,90 @@ public class Shitjet implements Initializable {
             };
         });
 
+        colQmimi.setCellFactory(e -> {
+            return new TableCell<String, TextField>() {
+                @Override
+                protected void updateItem(TextField item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (!empty) {
+                        ShitjetProd sp = tbl.getItems().get(getIndex());
+                        if (rbShumic.isSelected()) {
+                            if (!item.getText().isEmpty()) {
+                                item.setText(item.getText());
+                            } else {
+                                item.setText(sp.getQmimiShum());
+                            }
+                        } else {
+                            if (!item.getText().isEmpty()) {
+                                item.setText(item.getText());
+                            } else {
+                                item.setText(sp.getQmimi());
+                            }
+                        }
+
+                        setOnKeyPressed(e -> {
+                            if (e.getCode().equals(KeyCode.ENTER)) {
+                                double ttl = merrQmimet(item.getText(), ((TextField) colSasia.getCellData(getIndex())).getText(), getIndex(), rbShumic.isSelected()).doubleValue();
+                                lSubTtl.setText(VariablatPublike.toMoney(ttl/VariablatPublike.tvsh));
+                                lTotal.setText(VariablatPublike.toMoney(ttl));
+                            }
+                        });
+
+                        setGraphic(item);
+                    } else {
+                        setText("");
+                        setGraphic(null);
+                    }
+                }
+            };
+        });
+
         getProducts("", "");
+
+        rbPakice.setOnAction(e -> updateQmimet(1));
+        rbShumic.setOnAction(e -> updateQmimet(2));
+    }
+
+    private void updateQmimet(int id) {
+//        1 = pakica
+//        2 = shumic
+
+        for (ShitjetProd p : tbl.getItems()) {
+            if (id == 1) {
+                p.getQm().setText(p.getQmimi());
+            } else {
+                p.getQm().setText(p.getQmimiShum());
+            }
+
+            double ttl = merrQmimet(p.getQm().getText(), p.getSasia().getText(), -2, rbShumic.isSelected()).doubleValue();
+            lSubTtl.setText(VariablatPublike.toMoney(ttl/VariablatPublike.tvsh));
+            lTotal.setText(VariablatPublike.toMoney(ttl));
+
+        }
+
     }
 
 //    LEXO TE GJITH TABELEN PER SHITJE DHE KTHE QMIMIN PAS NDRYSHIMIT TE SASISE
-    private BigDecimal merrQmimet (String s, int index){
+    private BigDecimal merrQmimet (String s, String ss, int index, boolean nqmimi){
         BigDecimal t = BigDecimal.ZERO;
 
         for (int i = 0; i < tbl.getItems().size(); i++) {
             ShitjetProd sp = tbl.getItems().get(i);
 
-            if (s.equals("0") || s.isEmpty()) {
-                t = t.add(new BigDecimal(sp.getQmimi()));
-                continue;
+            if (index != -2) {
+                if (s.equals("0") || s.isEmpty()) {
+                    t = t.add(new BigDecimal(Double.parseDouble(((TextField) colQmimi.getCellData(i)).getText())));
+                    continue;
+                }
             }
 
-            if (i == index)
-                sp.getSasia().setText(s);
+            if (index == -1 || i == index) {
+                sp.getSasia().setText(ss);
+                sp.getQm().setText(s);
+            }
 
-            double qm = Double.parseDouble(sp.getQmimi().substring(0, sp.getQmimi().length()-1));
-//            t = t.add(new BigDecimal((((qm - (qm * Double.parseDouble(sp.getZbritje().substring(0, sp.getZbritje().length()-1))/100)) *
-//                    Double.parseDouble(sp.getSasia().getText()))+"")));
+            double qm = Double.parseDouble(((TextField)colQmimi.getCellData(i)).getText());
             t = t.add(new BigDecimal(qm).multiply(new BigDecimal(sp.getSasia().getText())));
         }
 
@@ -192,78 +297,103 @@ public class Shitjet implements Initializable {
         try {
             Statement stmt = con.createStatement();
 
-            StringBuilder sb = new StringBuilder("select * from vprod where (barcode like lower('" + q + "%') or lower(emri) like " +
+            StringBuilder sb = new StringBuilder("select * from vprod where (barcode = '" + q + "' or lower(emri) like " +
                     "lower('%" + q + "%'))");
 
-            if (!kat.isEmpty() && !kat.equals("Te gjitha")) {
+            if (!kat.isEmpty() && !kat.equals(rb.getString("te_gjitha"))) {
                 sb.append(" and kategoria_id = " + VariablatPublike.revProdKat.get(kat));
             }
 
-            sb.append(" order by kategoria_id");
+            sb.append(" and sasia > 0 order by kategoria_id limit 40");
             ResultSet rs = stmt.executeQuery(sb.toString());
 
             flow.getChildren().clear();
             while (rs.next()) {
+                Circle circle = new Circle(5, Paint.valueOf(rs.getString("bg")));
+                HBox hbox1 = new HBox();
+                HBox hbox2 = new HBox();
                 Button button = new Button((rs.getString("emri").length() >= 60 ? rs.getString("emri").substring(0, 60) : rs.getString("emri")));
                 button.setTextAlignment(TextAlignment.CENTER);
                 button.setWrapText(true);
 
-                button.getStyleClass().addAll("btn", "bigBtn");
+                hbox2.getChildren().add(circle);
+                hbox1.getChildren().addAll(button, hbox2);
+                hbox1.setHgrow(hbox2, Priority.ALWAYS);
+                hbox1.setAlignment(Pos.CENTER_LEFT);
+                hbox2.setAlignment(Pos.CENTER_RIGHT);
+
+                hbox1.getStyleClass().addAll("btn", "bigBtn");
+                button.getStyleClass().addAll("sellBtn", "bigBtn");
 
                 ImageView ivButton = null;
                 if (rs.getString("foto") != null) {
                     if (!rs.getString("foto").isEmpty()) {
                         ivButton = new ImageView(new Image("file:///" + rs.getString("foto")));
                         ivButton.setPreserveRatio(true);
-                        ivButton.setFitHeight(100);
+                        ivButton.setFitHeight(80);
                         ivButton.setSmooth(true);
 
-                        button.setPrefHeight(100);
-                        button.setMinHeight(100);
-                        button.setMaxHeight(100);
+                        hbox1.setPrefHeight(85);
+                        hbox1.setMinHeight(85);
+                        hbox1.setMaxHeight(85);
                     }
                 }
 
                 button.setTextAlignment(TextAlignment.LEFT);
                 button.setGraphic(ivButton);
-                button.setStyle("-fx-background-color: " + rs.getString("bg") + "; -fx-text-fill: " + rs.getString("fg"));
-                button.setId(rs.getString("id") + " " + rs.getDouble("qmimi_shitjes") + " " + rs.getString("njesia") + " " + rs.getDouble("zbritje"));
+//                circle.setStyle("-fx-fill: " + rs.getString("bg") + "; -fx-text-fill: " + rs.getString("fg"));
+                button.setId(rs.getString("id") + " " + rs.getDouble("qmimi_shitjes") + " " + rs.getInt("njesia") + " " + rs.getDouble("zbritje")
+                        + " " + rs.getDouble("qmimi_shumic"));
+
+                hbox1.setMinWidth(flow.getWidth()/3-10);
+                hbox1.setMaxWidth(flow.getWidth()/3-10);
+                hbox1.setPrefWidth(flow.getWidth()/3-10);
+
+//                button.setMinSize(hbox1.getMinWidth(), hbox2.getMinHeight());
 
                 flow.widthProperty().addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        button.setMinWidth(newValue.doubleValue()/2-10);
-                        button.setPrefWidth(newValue.doubleValue()/2-10);
-                        button.setMaxWidth(newValue.doubleValue()/2-10);
+                        hbox1.setMinWidth(newValue.doubleValue()/3-10);
+                        hbox1.setPrefWidth(newValue.doubleValue()/3-10);
+                        hbox1.setMaxWidth(newValue.doubleValue()/3-10);
                     }
                 });
 
                 button.setOnAction(e -> {
-                    firstButton(button);
+                    firstButton(hbox1);
                 });
-                flow.getChildren().add(button);
+                hbox1.setOnMousePressed(e -> {
+                    firstButton(hbox1);
+                });
+                flow.getChildren().add(hbox1);
             }
 
         }catch (Exception e) { e.printStackTrace();}
 
     }
 
-    private void firstButton (Button button){
+    private void firstButton (HBox button){
         try {
-            String[] dt = button.getId().split(" ");
+            String[] dt = ((Button) button.getChildren().get(0)).getId().split(" ");
             double qm = Double.parseDouble(dt[1]);
             double zbr = Double.parseDouble(dt[3]);
             double zbrttl = qm - (qm * zbr/100);
+            double shumic = Double.parseDouble(dt[4]);
 
             ShitjetProd sp = new ShitjetProd(Integer.parseInt(dt[0]),
-                    button.getText().split("\n")[0], VariablatPublike.toMoney(zbrttl), dt[2],
-                    VariablatPublike.decimal.format(zbr) + "%");
+                    ((Button) button.getChildren().get(0)).getText().split("\n")[0], qm + "", dt[2],
+                    VariablatPublike.decimal.format(zbr) + "%", shumic+"");
 
             tbl.getItems().add(sp);
 
-            qmimi = qmimi.add(new BigDecimal(Double.parseDouble(dt[1]) - (Double.parseDouble(dt[1]) * Double.parseDouble(dt[3])/100)));
-            lSubTtl.setText(VariablatPublike.toMoney(qmimi.doubleValue()));
-            lTotal.setText(VariablatPublike.toMoney(qmimi.doubleValue() + (qmimi.doubleValue() * VariablatPublike.tvsh/100)));
+            qmimi = qmimi.add(new BigDecimal((rbPakice.isSelected() ? qm : shumic) - ((rbPakice.isSelected() ? qm : shumic) * zbr/100)));
+//            qmShum = qmShum.add(new BigDecimal(shumic - (shumic * zbr/100)));
+
+            lSubTtl.setText(VariablatPublike.toMoney(qmimi.doubleValue()/VariablatPublike.tvsh));
+            lTotal.setText(VariablatPublike.toMoney(qmimi.doubleValue()));
+
+//            lShumic.setText(VariablatPublike.toMoney(qmShum.doubleValue() + (qmShum.doubleValue() * VariablatPublike.tvsh/100)));
         }catch (Exception ex) { ex.printStackTrace(); }
     }
 
@@ -277,80 +407,107 @@ public class Shitjet implements Initializable {
     }
 
     private void upbatch (Statement ps, int id, double sasia) throws Exception{
-        ps.addBatch("update produktet set sasia = sasia - "+sasia+" where id = " + id);
+        ps.addBatch("update produktet set sasia = sasia - " + sasia + " where id = " + id);
     }
 
     @FXML
     private void perfundoPagesen (){
         try {
-            if (tbl.getItems().size() > 0 && pgs.compareTo(BigDecimal.ZERO) > 0 && qmimi.compareTo(BigDecimal.ZERO) > 0 && qmimi.compareTo(pgs) <= 0) {
-                Statement stmt = con.createStatement();
-                stmt.addBatch("insert into rec values (null, current_timestamp(), "+VariablatPublike.tvsh+")");
-                int i = 0;
-                double qm = 0;
-                for (ShitjetProd sp : tbl.getItems()) {
-                    qm = Double.parseDouble(sp.getQmimi().substring(0, sp.getQmimi().length()-1));
-                    if (cbShtypPagesen.isSelected()) {
-                        receta.setData(sp.getEmri(), Double.parseDouble(sp.getSasia().getText()), qm,
-                                Double.parseDouble(sp.getZbritje().substring(0, sp.getZbritje().length()-1)) / 100, i++);
+            if (tbl.getItems().size() > 0) {
+//                if ((rbPakice.isSelected() && qmimi.compareTo(pgs) <= 0) || (rbShumic.isSelected() && qmShum.compareTo(pgs) <= 0)) {
+                    Statement stmt = con.createStatement();
+                    int lloji = rbPakice.isSelected() ? 0 : 1;
+
+                    if (qmimi.compareTo(pgs) <= 0) {
+                        stmt.addBatch("insert into rec values (null, current_date(), " +
+                                (VariablatPublike.tvsh > 0 ? ("" + VariablatPublike.tvsh).split("\\.")[1] : 0) +
+                                ", " + lloji + ", 0, 0)");
+                    } else {
+                        stmt.addBatch("insert into rec values (null, current_date(), " +
+                                (VariablatPublike.tvsh > 0 ? ("" + VariablatPublike.tvsh).split("\\.")[1] : 0)
+                                + ", " + lloji + ", 1, 0)");
                     }
-                    batch(stmt, sp.getId(), qm, pgs.compareTo(BigDecimal.ZERO) <= 0 ? new BigDecimal(0+"") : pgs, Double.parseDouble(sp.getSasia().getText()));
-                }
-                stmt.executeBatch();
-                updateProd();
-                ntf.setButton(ButtonType.NO_BUTTON);
-                ntf.setType(NotificationType.SUCCESS);
-                ntf.setDuration(3);
-                ntf.setMessage("Shitja u krye me sukses");
-                ntf.show();
 
-                receta.setTvsh((int)VariablatPublike.tvsh);
-                receta.setPagesa(pgs.doubleValue());
+                    int i = 0;
+                    double qm = 0;
+                    for (ShitjetProd sp : tbl.getItems()) {
+                        qm = format.parse(sp.getQm().getText()).doubleValue();
+                        batch(stmt, sp.getId(), qm, pgs.compareTo(BigDecimal.ZERO) <= 0 ? new BigDecimal(0 + "") : pgs, Double.parseDouble(sp.getSasia().getText()));
+                    }
+                    stmt.executeBatch();
+                    updateProd();
+                    ntf.setButton(ButtonType.NO_BUTTON);
+                    ntf.setType(NotificationType.SUCCESS);
+                    ntf.setDuration(2);
+                    ntf.setMessage(rb.getString("shit_sukses"));
+                    ntf.show();
 
-                pastro();
+                    rbPakice.setSelected(true);
 
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
+                    receta.setTvsh((int) VariablatPublike.tvsh);
+                    receta.setPagesa(pgs.doubleValue());
+
+                    pastro();
+
+                    Thread t = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
 //                        new PrintReceipt(receta.krijoFaturen());
 
-                        try {
-                            JasperReport jr = JasperCompileManager.compileReport(System.getProperty("user.home") + "/store-ms-files/Raportet/raportet/Faktura.jrxml");
-                            HashMap<String, Object> params = new HashMap<>();
-                            params.put("Emri", VariablatPublike.emriShitores);
-                            params.put("Faktura", getRecId());
-                            params.put("iban", VariablatPublike.IBAN);
-                            params.put("banka", VariablatPublike.BANKA);
-                            params.put("swift", VariablatPublike.SWIFT);
-                            params.put("konto", VariablatPublike.KONTO);
-                            params.put("konsumatori", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[0]);
-                            params.put("konsAdresa", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[1]);
-                            params.put("konsQyteti", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[2]);
+                            try {
+                                JasperReport jr = JasperCompileManager.compileReport(System.getProperty("user.home") + "/store-ms-files/Raportet/raportet/Faktura.jrxml");
+                                HashMap<String, Object> params = new HashMap<>();
+                                params.put("anuluar", false);
+                                params.put("gjuha", VariablatPublike.LANG);
+                                params.put("date", new java.util.Date());
+                                params.put("pnt", VariablatPublike.pntEmri);
+                                params.put("email", VariablatPublike.pntEmail);
+                                params.put("adresa", VariablatPublike.ADRESA);
+                                params.put("nrFiskal", VariablatPublike.nrFiskal);
+                                params.put("foto", System.getProperty("user.home") + "/store-ms-files/Raportet/raportet/2.jpg");
+                                params.put("Tel", VariablatPublike.pntTel);
+                                params.put("Emri", VariablatPublike.emriShitores);
+                                params.put("Faktura", getRecId());
+                                params.put("iban", VariablatPublike.IBAN);
+                                params.put("banka", VariablatPublike.BANKA);
+                                params.put("swift", VariablatPublike.SWIFT);
+                                params.put("konto", VariablatPublike.KONTO);
+                                params.put("konsumatori", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[0]);
+                                params.put("konsAdresa", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[1]);
+                                params.put("konsQyteti", VariablatPublike.konsShitur.get(VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem()))[2]);
 
-                            JasperPrint print = JasperFillManager.fillReport(jr, params, con);
-                            String filename = System.getProperty("user.home") + "/store-ms-files/Raportet/PDF/Faktura-"+
-                                    new SimpleDateFormat("dd-MM-yy h-m").format(new Date())+".pdf";
-                            JasperExportManager.exportReportToPdfFile(print, filename);
+                                JasperPrint print = JasperFillManager.fillReport(jr, params, con);
+                                String filename = System.getProperty("user.home") + "/store-ms-files/Raportet/PDF/Faktura-" +
+                                        new SimpleDateFormat("dd-MM-yy h-m").format(new Date()) + ".pdf";
+                                JasperExportManager.exportReportToPdfFile(print, filename);
 
-                            Desktop.getDesktop().open(new File(filename));
+                                Desktop.getDesktop().open(new File(filename));
 
-                        } catch (JRException e) {
-                            //e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            } catch (JRException ex) {
+                                ex.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+//                            $V{tvsh}.compareTo(BigDecimal.ZERO) > 0 ?
+//$V{total}.divide(new BigDecimal(Double.parseDouble(("1." + ("" + $V{tvsh}).split("\\.")[1])))) :
+//$V{total}
+
                         }
+                    });
+                    t.setDaemon(true);
 
+                    if (cbShtypPagesen.isSelected() && !cbShtypPagesen.isDisable()) {
+                        t.start();
                     }
-                });
-                t.setDaemon(true);
-
-                if (cbShtypPagesen.isSelected() && !cbShtypPagesen.isDisable()) {
-                    t.start();
-                }
-
+//                } else {
+//                    ntf.setType(NotificationType.ERROR);
+//                    ntf.setMessage("Nuk eshte procesuar pagesa.");
+//                    ntf.show();
+//                }
             }else {
                 ntf.setType(NotificationType.ERROR);
-                ntf.setMessage(tbl.getItems().size() == 0 ? "Duhet te zgjedhet se paku nje produkt" : "Nuk eshte procesuar pagesa");
+                ntf.setMessage(rb.getString("shit_error_nr_prod"));
                 ntf.show();
             }
         }catch (Exception e) {
@@ -368,8 +525,8 @@ public class Shitjet implements Initializable {
 
     private void batch (Statement ps, int id, double qmimi, BigDecimal pagesa, double sasia) throws Exception {
         ps.addBatch("insert into shitjet values (null, "+id+", "+VariablatPublike.revKons.get(cbKons.getSelectionModel().getSelectedItem())+
-                ", current_timestamp(), "+pagesa+", "+VariablatPublike.uid+", "+sasia+", (select max(rec_id) from rec limit 1), "+
-                VariablatPublike.uid2+", 0)");
+                ", current_date(), "+pagesa+", "+VariablatPublike.uid+", "+sasia+", (select max(rec_id) from rec limit 1), "+
+                VariablatPublike.uid2+", 0, " + qmimi + ")");
     }
 
     private int getRecId() {
@@ -399,7 +556,8 @@ public class Shitjet implements Initializable {
     private void pagesa (){
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Pagesa.fxml"));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/icon.png")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/Pagesa.fxml"), rb);
             Pagesa pagesa = new Pagesa();
             pagesa.setlPagesa(lPagesa);
             pagesa.setlKusuri(lKusuri);

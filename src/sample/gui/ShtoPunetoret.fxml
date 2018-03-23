@@ -12,12 +12,12 @@
         <GridPane alignment="TOP_CENTER" vgap="10" hgap="10">
             <Label text="Shto punetore" styleClass="h0" GridPane.columnSpan="2" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
             <VBox styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="10">
-                <Label text="Emri*"/>
-                <Label text="Mbiemri"/>
-                <Label text="Gjinia*"/>
-                <Label text="Ditelindja*"/>
-                <Label text="Punesuar*"/>
-                <Label text="Statusi*"/>
+                <Label text="%emri"/>
+                <Label text="%mbiemri"/>
+                <Label text="%gjinia"/>
+                <Label text="%dtl"/>
+                <Label text="%punesuar"/>
+                <Label text="%status"/>
             </VBox>
 
             <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="10">
@@ -48,13 +48,13 @@
                 <padding>
                     <Insets left="70"/>
                 </padding>
-                <Label text="Puna*"/>
-                <Label text="Paga*"/>
-                <Label text="Telefoni"/>
-                <Label text="Email"/>
-                <Label text="Adresa"/>
-                <Label text="Shteti*"/>
-                <Label text="Qyteti*"/>
+                <Label text="%puna"/>
+                <Label text="%paga"/>
+                <Label text="%telefoni"/>
+                <Label text="%email"/>
+                <Label text="%adresa"/>
+                <Label text="%shteti"/>
+                <Label text="%qyt"/>
             </VBox>
 
             <VBox GridPane.columnIndex="3" GridPane.rowIndex="1" spacing="10">
@@ -67,11 +67,11 @@
                 <TextField fx:id="adresa" minWidth="200" maxWidth="200"/>
                 <HBox spacing="5">
                     <ComboBox fx:id="cbShteti" minWidth="200" maxWidth="200"/>
-                    <TextField fx:id="txtShteti" disable="true" minWidth="150" maxWidth="150" promptText="Shteti"/>
+                    <TextField fx:id="txtShteti" disable="true" minWidth="150" maxWidth="150" promptText="%shteti"/>
                 </HBox>
                 <HBox spacing="5">
                     <ComboBox fx:id="cbQyteti" minWidth="200" maxWidth="200"/>
-                    <TextField fx:id="txtQyteti" disable="true" minWidth="150" maxWidth="150" promptText="Qyteti"/>
+                    <TextField fx:id="txtQyteti" disable="true" minWidth="150" maxWidth="150" promptText="%qyt"/>
                 </HBox>
             </VBox>
 
@@ -89,7 +89,7 @@
                 <padding>
                     <Insets top="10"/>
                 </padding>
-                    <Button text="Ruaj" fx:id="btnRuaj" styleClass="btn" minWidth="200"></Button>
+                    <Button text="%ruaj" fx:id="btnRuaj" styleClass="btn" minWidth="200"></Button>
             </HBox>
         </GridPane>
     </center>

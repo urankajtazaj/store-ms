@@ -18,19 +18,15 @@ import java.util.ResourceBundle;
  */
 public class ZgjedhNgjyren implements Initializable {
 
-    @FXML private ColorPicker cpBg, cpFg;
+    @FXML private ColorPicker cpBg;
 
     private Button button;
     private Stage stage;
     private int id = 0;
-    private String background, foreground;
+    private String background;
 
     public void setBg (String background) {
         this.background = background;
-    }
-
-    public void setFg (String foreground) {
-        this.foreground = foreground;
     }
 
     public void setButton (Button button) {
@@ -45,18 +41,10 @@ public class ZgjedhNgjyren implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         cpBg.setValue(Color.valueOf(button.getId().split("/")[1]));
-        cpFg.setValue(Color.valueOf(button.getId().split("/")[2]));
-
         cpBg.setOnAction(e -> {
             background = toRGB(cpBg.getValue());
             System.out.println(background);
-        });
-
-        cpFg.setOnAction(e -> {
-            foreground = toRGB(cpFg.getValue());
-            System.out.println(foreground);
         });
     }
 
@@ -66,8 +54,8 @@ public class ZgjedhNgjyren implements Initializable {
 
     @FXML
     private void ruajNgjyren(ActionEvent actionEvent) {
-        button.setStyle("-fx-background-color: " + background + "; -fx-text-fill: " + foreground);
-        button.setId(id + "/" + background + "/" + foreground);
+        button.setStyle("-fx-min-width: 20; -fx-max-width: 20; -fx-min-height: 20; -fx-max-height: 20; -fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: " + background);
+        button.setId(id + "/" + background);
         stage.close();
     }
 

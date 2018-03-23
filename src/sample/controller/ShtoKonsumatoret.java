@@ -24,7 +24,7 @@ public class ShtoKonsumatoret implements Initializable {
 
     Notification ntf = new Notification();
 
-    @FXML private TextField emri, adresa, qyteti, shteti, telefoni, email;
+    @FXML private TextField emri, adresa, qyteti, shteti, telefoni, email, fiskal;
 
     int id = 0;
     private BorderPane root;
@@ -36,8 +36,11 @@ public class ShtoKonsumatoret implements Initializable {
         this.id = id;
     }
 
+    ResourceBundle rb;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        rb = resources;
         if (id > 0) mbushTeDhenat();
     }
 
@@ -48,30 +51,32 @@ public class ShtoKonsumatoret implements Initializable {
 
             if (id > 0) {
                 pstmt = con.prepareStatement("update konsumatoret set " +
-                        "emri = ?, email = ?, qyteti = ?, shteti = ?, adresa = ?, telefoni = ? " +
+                        "emri = ?, email = ?, qyteti = ?, shteti = ?, adresa = ?, telefoni = ?, nr_fiskal = ? " +
                         "where id = ?");
                 pstmt.setString(1, emri.getText());
-                pstmt.setString(5, adresa.getText());
-                pstmt.setString(6, telefoni.getText());
                 pstmt.setString(2, email.getText());
                 pstmt.setString(3, qyteti.getText());
                 pstmt.setString(4, shteti.getText());
-                pstmt.setInt(7, id);
+                pstmt.setString(5, adresa.getText());
+                pstmt.setString(6, telefoni.getText());
+                pstmt.setString(7, fiskal.getText());
+                pstmt.setInt(8, id);
             }else {
                 pstmt = con.prepareStatement("insert into konsumatoret values (" +
-                        "null, ?,?,?,?,1, current_date(), current_date(),?,?)");
+                        "null, ?,?,?,?,1, current_date(), current_date(),?,?,?)");
                 pstmt.setString(1, emri.getText());
                 pstmt.setString(2, adresa.getText());
                 pstmt.setString(3, telefoni.getText());
                 pstmt.setString(4, email.getText());
                 pstmt.setString(5, qyteti.getText());
                 pstmt.setString(6, shteti.getText());
+                pstmt.setString(7, fiskal.getText());
             }
             pstmt.execute();
 
             pstmt.close();
             pastro();
-            ntf.setMessage("Te dhenat u ruajten me sukses");
+            ntf.setMessage(rb.getString("shk_sukses"));
             ntf.show();
 
         }catch (Exception e) {e.printStackTrace();}
@@ -84,6 +89,7 @@ public class ShtoKonsumatoret implements Initializable {
         adresa.setText("");
         qyteti.setText("");
         shteti.setText("");
+        fiskal.setText("");
     }
 
     private void mbushTeDhenat (){
@@ -98,6 +104,7 @@ public class ShtoKonsumatoret implements Initializable {
             qyteti.setText(rs.getString("qyteti"));
             shteti.setText(rs.getString("shteti"));
             adresa.setText(rs.getString("adresa"));
+            fiskal.setText(rs.getString("nr_fiskal"));
 
         }catch (Exception e) { e.printStackTrace(); }
     }

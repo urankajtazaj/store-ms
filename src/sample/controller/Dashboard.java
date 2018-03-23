@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Properties;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -65,6 +66,9 @@ public class Dashboard implements Initializable {
 
         cbChartTp.setDisable(true);
 
+        cbChartTp.getItems().addAll(resources.getString("cb_chart_1"), resources.getString("cb_chart_2"), resources.getString("cb_chart_3"));
+        cbChartTp.getSelectionModel().select(0);
+
         tg.selectedToggleProperty().addListener((o, ov, nv) -> {
             enableCb();
         });
@@ -89,7 +93,7 @@ public class Dashboard implements Initializable {
                         lPntA.setText(VariablatPublike.pntA + "");
                         lPntP.setText(VariablatPublike.pntP + "");
                         lKons.setText(VariablatPublike.kons + "");
-                        lShitje.setText(VariablatPublike.shitje + "");
+                        lShitje.setText(VariablatPublike.decimal.format(VariablatPublike.shitje));
                         lShitjeM.setText(VariablatPublike.toMoney(VariablatPublike.mes));
 
                         lVleraHyratMuajTarget.setText(VariablatPublike.toMoney(VariablatPublike.muaj));
@@ -119,8 +123,6 @@ public class Dashboard implements Initializable {
         hlSot.setOnAction(e -> dataForAreaChart("sot", 0));
 
         displayChart();
-
-        System.out.println(VariablatPublike.IBAN);
     }
 
     private void enableCb() {
@@ -176,7 +178,7 @@ public class Dashboard implements Initializable {
 
         Node n = ((XYChart.Data) series.getData().get((int) xa.toNumericValue(xa.getValueForDisplay(event.getX()) + 0.5) - 1)).getNode();
 
-        tp.setText(VariablatPublike.dataMap.get((xa.getValueForDisplay(n.getLayoutX()).intValue() + 1)) + "\nTe hyrat per kete date: " +
+        tp.setText(VariablatPublike.dataMap.get((xa.getValueForDisplay(n.getLayoutX()).intValue() + 1)) + "\n" +
                 VariablatPublike.toMoney((Double) ((XYChart.Data) series.getData().get((int) xa.toNumericValue(xa.getValueForDisplay(n.getLayoutX())))).getYValue()));
 
         tp.show(lineChart.lookup(lookup),
@@ -203,7 +205,7 @@ public class Dashboard implements Initializable {
             ResultSet rs = stmt.executeQuery("select * from te_hyrat limit 1");
             ResultSet rs2 = stmt2.executeQuery("select * from pnt limit 1");
             ResultSet rs3 = stmt3.executeQuery("select count(*) from konsumatoret limit 1");
-            ResultSet rs4 = stmt4.executeQuery("select count(distinct rec_id) from shitjet where month(koha_shitjes) = month(current_date()) limit 1");
+            ResultSet rs4 = stmt4.executeQuery("select count(distinct rec_id) from rec where month(koha_krijimit) = month(current_date()) limit 1");
 //            ResultSet rs5 = stmt5.executeQuery("select avg(qmimi_shitjes) from vshitjet where month(koha_shitjes) = month(current_datetime()) limit 1");
             ResultSet rs5 = stmt5.executeQuery("select avg(total) as ttl from vrec where month(koha_krijimit) = month(current_date()) limit 1");
             ResultSet rs6 = stmt6.executeQuery("select count(*) as c, sum(sasia) as s from produktet limit 1");
@@ -264,17 +266,17 @@ public class Dashboard implements Initializable {
             } else {
                 if (index == 1) {
                     if (p.equals("vit")) {
-                        q = "select week(koha_shitjes) as data, year(koha_shitjes) as viti, sum(totalneto) as qmimi_shitjes from vshitjet " +
+                        q = "select week(koha_shitjes) as data, year(koha_shitjes) as viti, sum(total) as qmimi_shitjes from vshitjet " +
                                 "where koha_shitjes >= dateadd('month', -12, current_date()) " +
                                 "group by data, viti";
                     } else if (p.equals("6m")) {
-                        q = "select sum(totalneto) as qmimi_shitjes, week(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
+                        q = "select sum(total) as qmimi_shitjes, week(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
                                 "where koha_shitjes >= dateadd('month', -6, current_date()) group by data, viti";
                     } else if (p.equals("3m")) {
-                        q = "select sum(totalneto) as qmimi_shitjes, week(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
+                        q = "select sum(total) as qmimi_shitjes, week(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
                                 "where koha_shitjes >= dateadd('month', -3, current_date()) group by data, viti";
                     } else if (p.equals("1m")) {
-                        q = "select sum(totalneto) as qmimi_shitjes, week(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
+                        q = "select sum(total) as qmimi_shitjes, week(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
                                 "where koha_shitjes >= dateadd('month', -1, current_date()) group by data, viti";
                     }
                 } else if (index == 2) {
@@ -283,18 +285,18 @@ public class Dashboard implements Initializable {
                                 "where koha_shitjes >= dateadd('month', -12, current_date()) " +
                                 "group by data, viti";
                     } else if (p.equals("6m")) {
-                        q = "select sum(totalneto) as qmimi_shitjes, month(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
+                        q = "select sum(total) as qmimi_shitjes, month(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
                                 "where koha_shitjes >= dateadd('month', -6, current_date()) group by data, viti";
                     } else if (p.equals("3m")) {
-                        q = "select sum(totalneto) as qmimi_shitjes, month(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
+                        q = "select sum(total) as qmimi_shitjes, month(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
                                 "where koha_shitjes >= dateadd('month', -3, current_date()) group by data, viti";
                     } else if (p.equals("1m")) {
-                        q = "select sum(totalneto) as qmimi_shitjes, month(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
+                        q = "select sum(total) as qmimi_shitjes, month(koha_shitjes) as data, year(koha_shitjes) as viti from vshitjet " +
                                 "where koha_shitjes >= dateadd('month', -1, current_date()) group by data, viti";
                     }
                 }
 
-                ResultSet rs = stm.executeQuery(q + " order by data");
+                ResultSet rs = stm.executeQuery(q + " order by viti, data");
                 series.getData().clear();
                 int i = 0;
                 while (rs.next()) {
@@ -381,8 +383,6 @@ public class Dashboard implements Initializable {
             pie1.getData().add(new PieChart.Data("", 0));
         } else {
             lPie1.setText(m + "%");
-//            pdata.setPieValue(m);
-//            pdata1.setPieValue(100-m);
             pie1.getData().add(new PieChart.Data("", m));
             pie1.getData().add(new PieChart.Data("", 100 - m));
         }

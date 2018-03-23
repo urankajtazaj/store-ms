@@ -35,9 +35,9 @@
             </center>
             <bottom>
                 <HBox alignment="CENTER" spacing="3">
-                    <Button text="PO" onAction="#retTrue" fx:id="btnYes" styleClass="btn"
+                    <Button text="%_po" onAction="#retTrue" fx:id="btnYes" styleClass="btn"
                             style="-fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: rgba(0,0,0,0.15); -fx-text-fill: rgba(255,255,255,.7)"/>
-                    <Button text="ANULO" onAction="#retFalse" fx:id="btnNo" styleClass="btn"
+                    <Button text="%_anulo" onAction="#retFalse" fx:id="btnNo" styleClass="btn"
                             style="-fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: rgba(0,0,0,0.15); -fx-text-fill: rgba(255,255,255,.7)"/>
                 </HBox>
             </bottom>

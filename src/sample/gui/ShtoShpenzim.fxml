@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          hgap="20" vgap="30">
+
+    <padding>
+        <Insets left="10" top="10" right="10" bottom="10" />
+    </padding>
+
+    <children>
+
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+            <Label text="%arsyeja"/>
+            <TextField fx:id="txtArsyeja" minWidth="280" maxWidth="280"/>
+        </VBox>
+
+        <VBox spacing="5" prefWidth="280" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+            <Label text="%pnt"/>
+            <ComboBox editable="true" GridPane.hgrow="ALWAYS" minWidth="280" maxWidth="280" fx:id="cbPnt"/>
+        </VBox>
+
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label text="%data"/>
+            <DatePicker fx:id="dpData" minWidth="130" maxWidth="130"/>
+        </VBox>
+
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="%shuma"/>
+            <TextField fx:id="txtShuma" minWidth="130" maxWidth="130"/>
+        </VBox>
+
+        <HBox spacing="5" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
+            <Button text="%ruaj" fx:id="btnRuaj"/>
+            <Button text="%anulo" onAction="#closeShpenzim" style="-fx-background-color: -fx-red"/>
+        </HBox>
+
+    </children>
+
+</GridPane>

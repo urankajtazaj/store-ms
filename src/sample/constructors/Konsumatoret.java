@@ -6,9 +6,9 @@ package sample.constructors;
 public class Konsumatoret {
 
     private int id, statusi;
-    private String emri, qyteti, shteti, adresa, tel, email, krijuar;
+    private String emri, qyteti, shteti, adresa, tel, email, krijuar, fiskal;
 
-    public Konsumatoret(int id, String emri, String email, String telefoni, String adresa, String qyteti, String shteti, int statusi, String krijuar){
+    public Konsumatoret(int id, String emri, String email, String telefoni, String adresa, String qyteti, String shteti, int statusi, String krijuar, String fiskal){
         this.id = id;
         this.email = email;
         this.emri = emri;
@@ -18,6 +18,15 @@ public class Konsumatoret {
         this.shteti = shteti;
         this.statusi = statusi;
         this.krijuar = krijuar;
+        this.fiskal = fiskal;
+    }
+
+    public String getFiskal() {
+        return fiskal;
+    }
+
+    public void setFiskal(String fiskal) {
+        this.fiskal = fiskal;
     }
 
     public String getKrijuar() {

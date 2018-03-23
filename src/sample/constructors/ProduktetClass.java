@@ -4,11 +4,12 @@ package sample.constructors;
  * Created by uran on 17-04-07.
  */
 public class ProduktetClass {
-    private String qmimi, zbritje, bc, emri, prodhuesi, kategoria, furnizuesi, njesia, foto;
+    private String qmimi, zbritje, bc, emri, prodhuesi, kategoria, furnizuesi, njesia, foto, nrNjesia;
     private int id, sasia, sasiaKrit;
-    private double qmimiStd;
+    private double qmimiStd, qmimiShumice;
 
-    public ProduktetClass(String barcode, int id, String emri, String kategoria, String qmimi, double qmimiStd, int sasia, int sasiaKrit, String zbritje, String njesia, String foto) {
+    public ProduktetClass(String barcode, int id, String emri, String kategoria, String qmimi, double qmimiStd, int sasia, int sasiaKrit, String zbritje, String njesia,
+                          String foto, double qmimiShumice, String nrNjesia) {
         this.emri = emri;
         this.id = id;
         this.kategoria = kategoria;
@@ -20,6 +21,28 @@ public class ProduktetClass {
         this.sasiaKrit = sasiaKrit;
         this.njesia = njesia;
         this.foto = foto;
+        this.qmimiShumice = qmimiShumice;
+        this.nrNjesia = nrNjesia;
+    }
+
+    public String getTotalNjesia() {
+        return this.nrNjesia + " " + this.njesia;
+    }
+
+    public String getNrNjesia() {
+        return nrNjesia;
+    }
+
+    public void setNrNjesia(String nrNjesia) {
+        this.nrNjesia = nrNjesia;
+    }
+
+    public double getQmimiShumice() {
+        return qmimiShumice;
+    }
+
+    public void setQmimiShumice(double qmimiShumice) {
+        this.qmimiShumice = qmimiShumice;
     }
 
     public ProduktetClass(int id, String emri, String prodhuesi, String kategoria, String furnizuesi, String qmimi, int sasia) {

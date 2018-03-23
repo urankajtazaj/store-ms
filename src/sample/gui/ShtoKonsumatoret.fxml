@@ -16,9 +16,9 @@
     <center>
         <GridPane alignment="TOP_CENTER" vgap="5" hgap="10">
             <VBox styleClass="vbSp" GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="10">
-                <Label text="Emri"/>
-                <Label text="Telefoni"/>
-                <Label text="Email"/>
+                <Label text="%emri"/>
+                <Label text="%telefoni"/>
+                <Label text="%email"/>
             </VBox>
 
             <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="10">
@@ -31,22 +31,24 @@
                 <padding>
                     <Insets left="70"/>
                 </padding>
-                <Label text="Adresa"/>
-                <Label text="Qyteti"/>
-                <Label text="Shteti"/>
+                <Label text="%adresa"/>
+                <Label text="%qyt"/>
+                <Label text="%shteti"/>
+                <Label text="%nr_fiskal"/>
             </VBox>
 
             <VBox GridPane.columnIndex="3" GridPane.rowIndex="0" spacing="10">
                 <TextField fx:id="adresa" minWidth="200" maxWidth="200"/>
                 <TextField fx:id="qyteti" minWidth="200" maxWidth="200"/>
                 <TextField fx:id="shteti" minWidth="200" maxWidth="200"/>
+                <TextField fx:id="fiskal" minWidth="200" maxWidth="200"/>
             </VBox>
 
             <HBox GridPane.rowIndex="1" GridPane.columnIndex="0" spacing="3" alignment="BOTTOM_RIGHT" GridPane.columnSpan="4">
                 <padding>
                     <Insets top="10"/>
                 </padding>
-                    <Button text="Ruaj" fx:id="btnRuaj" onAction="#ruajExit" styleClass="btn" minWidth="200"></Button>
+                    <Button text="%ruaj" fx:id="btnRuaj" onAction="#ruajExit" styleClass="btn" minWidth="200"></Button>
             </HBox>
         </GridPane>
     </center>

@@ -1,16 +1,21 @@
 @font-face {
-    font-family: "Lato";
-    src: url("../font/Lato-Regular.ttf");
+    font-family: "Open Sans";
+    src: url("../font/OpenSans-Regular.ttf");
 }
 
 @font-face {
-    font-family: "Lato";
-    src: url("../font/Lato-Light.ttf");
+    font-family: "Open Sans";
+    src: url("../font/OpenSans-Light.ttf");
 }
 
 @font-face {
-    font-family: "Lato";
-    src: url("../font/Lato-Bold.ttf");
+    font-family: "Material Icons";
+    src: url("../font/MaterialIcons-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../font/OpenSans-Bold.ttf");
 }
 
 @font-face {
@@ -34,7 +39,7 @@
 }
 */
 
-.label, .check-box {
+.label, .check-box, .radio-button {
     -fx-text-fill: rgba(0,0,0,.8);
 }
 
@@ -47,15 +52,15 @@
     -fx-green: #79bd9a;
     -fx-red: #f1404b;
     -fx-label-color: rgba(0,0,0,.85);
-    -fx-sidebar: #ddd;
-    -fx-secondary: #eee;
-    -fx-btn: #11ABEF;
+    -fx-sidebar: #f2f2f2;
+    -fx-secondary: #F9F9FC;
+    -fx-btn: #019BFF;
     -fx-second: #E91E63;
     -fx-third: #5E72D1;
 }
 
 .root {
-    -fx-font-family: "Lato";
+    -fx-font-family: "Open Sans";
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-accent: -fx-btn;
@@ -67,10 +72,11 @@
     -fx-background-color: -fx-sidebar;
 }
 
-.gp .button, .btn {
+.button, .btn {
     -fx-cursor: hand;
     -fx-background-color: -fx-btn;
-    -fx-text-fill: #fff;
+    -fx-background-color: #fff;
+    -fx-text-fill: rgba(0,0,0,0.85);
     -fx-alignment: CENTER;
     -fx-background-radius: 3;
     -fx-border-radius: 3;
@@ -82,26 +88,38 @@
     -fx-border-width: 0;
     -fx-opacity: .85;
     -fx-border-color: #bbb;
-    -fx-font-weight: bold;/*
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 7, 0, 0, 0);
-*/}
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 6, 0, 0, 3);
+}
+
+.toggle-button .label, .button .label, .btn .label {
+    -fx-font-family: "Material Icons";
+    -fx-font-size: 24;
+    -fx-text-fill: rgba(255,255,255,.7);
+}
+
+.button .label, .btn .label {
+    -fx-text-fill: rgba(0,0,0,0.85);
+}
+
 
 .gp .button:disabled, .btn:disabled {
     -fx-opacity: .5;
 }
 
-.gp .button:hover {
-    -fx-opacity: 1;
+.button:hover {
+    -fx-opacity: .9;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 3, 0, 0, 1);
 }
 
 .btn:hover {
-    -fx-opacity: 1;
+    -fx-opacity: .9;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 3, 0, 0, 1);
 }
 
 .sideBar .toggle-button, .side-btn {
     -fx-background-color: transparent;
-    -fx-text-fill: #242E3E;
-    -fx-text-fill: #fff;
+    -fx-text-fill: rgba(255,255,255,.7);
     -fx-background-radius: 0;
     -fx-border-radius: 0;
     -fx-alignment: CENTER-LEFT;
@@ -111,8 +129,6 @@
     -fx-font-size: 12;
     -fx-font-weight: bold;
     -fx-cursor: hand;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: rgba(255,255,255,.05);
     -fx-effect: none;
 }
 
@@ -123,18 +139,18 @@
 .sideBar .toggle-button:selected, .sideBar .toggle-button:focused {
     -fx-border-width: 0;
     -fx-opacity: 1;
-    -fx-background-color: rgba(255,255,255,.2);
+    -fx-background-color: rgba(255,255,255,.15);
 }
 
 .sideBar .toggle-button:hover {
     -fx-opacity: 1;
-    -fx-background-color: rgba(255,255,255,.1);
+    -fx-background-color: rgba(255,255,255,.05);
 }
 
 .sideBar {
-    -fx-background-color: #222;
-    -fx-min-width: 135;
-    -fx-max-width: 135;
+    -fx-background-color: #353D4A;
+    -fx-min-width: 160;
+    -fx-max-width: 160;
 }
 
 .hbBtn {
@@ -495,21 +511,19 @@
 }
 
 .text-field, .date-picker > .text-field, .combo-box, .choice-box {
-    -fx-border-width: 1;
+    -fx-border-width: 0 0 1 0;
     -fx-min-height: 32;
     -fx-max-height: 32;
     -fx-padding: 0 5 0 5;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
     -fx-border-color: rgba(0,0,0,.1);
     -fx-effect: none;
     -fx-text-fill: rgba(0,0,0,0.9);
-    -fx-background-color: #f7f8f9;
+    -fx-background-color: transparent;
 }
 
 .text-field:focused, .combo-box:focused, .choice-box:focused {
-    -fx-border-color: rgba(50, 157, 224, .8);
-    -fx-background-color: #f7f8f9;
+    -fx-border-color: -fx-btn;
+    -fx-background-color: transparent;
 }
 
  .chartVb {
@@ -616,12 +630,12 @@
 }
 
 .table-view .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-btn;
+    -fx-background-color: rgba(0,0,0,0.15);
 }
-
+/*
 .table-view .table-row-cell:filled:focused:selected .text {
     -fx-fill: -fx-sidebar;
-}
+}*/
 
 .table-view .table-row-cell:filled:selected {
     -fx-background-color: -fx-btn;
@@ -668,7 +682,7 @@
     -fx-font-size: 13;
     -fx-border-width: 0;
     -fx-border-color: rgba(0,0,0,.05);
-    -fx-font-family: "Lato bold";
+    -fx-font-family: "Open Sans bold";
 }
 
 .intoTtlNb {
@@ -688,7 +702,7 @@
 .lVlera {
     -fx-font-size: 30;
     -fx-text-fill: rgba(0,0,0,.85);
-    -fx-font-family: "Lato light";
+    -fx-font-family: "Open Sans light";
 }
 
 .lVleraColor {
@@ -713,7 +727,7 @@
 }
 
 .color {
-    -fx-font-family: "Lato";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: rgba(0,0,0,0.8);
 }
 
@@ -770,11 +784,19 @@
     -fx-scale-y: .75;
 }
 
-.check-box:selected .box {
+.radio-button > .radio {
+    -fx-background-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-color: -fx-btn;
+    -fx-background-radio: 50;
+    -fx-border-radius: 50;
+}
+
+.check-box:selected .box, .radio-button:selected .radio {
     -fx-background-color: -fx-btn;
 }
 
-.check-box:selected .mark {
+.check-box:selected .mark, .radio-button:selected .dot {
     -fx-background-color: -fx-sidebar;
 }
 
@@ -872,6 +894,8 @@
     -fx-text-fill: -fx-primary;
     -fx-border-width: 1 0 0 0;
     -fx-border-color: rgba(0,0,0,0.05);
+    -fx-border-radius: 0 0 20 20;
+    -fx-background-radius: 0 0 20 20;
 }
 
 .btnC:hover {
@@ -899,16 +923,8 @@
     -fx-background-color: -fx-sidebar-w;
 }
 
-.btnGreen {
-    -fx-border-width: 1 1 0 0;
-}
-
-.btnGreen:hover {
-    -fx-background-color: -fx-secondary;
-}
-
-.btnRed:hover {
-    -fx-background-color: -fx-red;
+.btnRed {
+    -fx-text-fill: -fx-red;
 }
 
 .details {
@@ -919,13 +935,13 @@
 .detailInfoPnt {
     -fx-font-size: 13;
     -fx-opacity: .4;
-    -fx-font-family: "Lato";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: #000;
 }
 
 .detailInfoPnt-Qm {
     -fx-text-fill: -fx-btn;
-    -fx-font-family: "Lato light";
+    -fx-font-family: "Open Sans light";
     -fx-font-size: 30;
 }
 
@@ -946,6 +962,8 @@
 .newWindow {
     -fx-background-color: -fx-secondary;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 0);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
 }
 
 .newWindow .toggle-button {
@@ -958,12 +976,13 @@
     -fx-text-fill: #444;
 }
 
+/*
 .newWindow .text-field {
     -fx-font-size: 30;
     -fx-font-family: "Poppins semibold";
     -fx-min-height: 250;
     -fx-text-fill: #444;
-}
+}*/
 
 .smallBtn {
     -fx-max-height: 10;
@@ -1005,7 +1024,7 @@
 .perc {
     -fx-font-weight: bold;
     -fx-font-size: 15;
-    -fx-font-family: "Lato";
+    -fx-font-family: "Open Sans";
 }
 
 .bbHb {
@@ -1021,6 +1040,15 @@
 .logTxt {
     -fx-min-width: 250;
     -fx-font-size: 15;
+    -fx-border-color: rgba(0,0,0,.1);
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+}
+
+.logTxt:focused {
+    -fx-border-color: rgba(0,0,0,.2);
+    -fx-border-color: -fx-btn;
+    -fx-background-color: transparent;
 }
 
 /*
@@ -1047,9 +1075,9 @@
 }
 
 .bigFont {
-    -fx-font-size: 20;
+    -fx-font-size: 25;
     -fx-font-family: "Poppins semibold";
-    -fx-padding: 0 0 0 10;
+    -fx-padding: 0 0 0 20;
 }
 
 .h0 {
@@ -1203,12 +1231,12 @@
 .bigDec {
     -fx-font-size: 30;
     -fx-text-fill: -fx-label-color;
-    -fx-font-family: "Lato bold";
+    -fx-font-family: "Open Sans bold";
 }
 
 .bigDec2 {
     -fx-font-size: 18;
-    -fx-font-family: "Lato";
+    -fx-font-family: "Open Sans";
 }
 
 .smallVb .toggle-button {
@@ -1228,7 +1256,7 @@
 .bar-text {
     -fx-font-size: 16;
     -fx-fill: #fff;
-    -fx-font-family: "Lato";
+    -fx-font-family: "Open Sans";
 }
 
 .menuTp {
@@ -1253,11 +1281,39 @@
     -fx-min-width: 300;
     -fx-max-width: 300;
     -fx-min-height: 110;*/
-    -fx-max-height: 110;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
+    -fx-min-height: 85;
+    -fx-max-height: 85;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
     -fx-effect: none;
     -fx-border-width: 0;
     -fx-padding: 10;
-    -fx-alignment: CENTER-LEFT;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: #fafafa;
+}
+
+.sellBtn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: rgba(0,0,0,.8);
+}
+
+.bigBtn:hover {
+    -fx-effect: none;
+    -fx-background-color: #fafafa;
+}
+
+.btnBottom {
+    -fx-background-color: #353D4A;
+}
+
+.bigSellBtn {
+    -fx-min-height: 60;
+    -fx-max-height: 60;
+}
+
+.text-field-lg {
+    -fx-font-size: 40;
+    -fx-min-height: 80;
+    -fx-padding: 10;
 }

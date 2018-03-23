@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<BorderPane styleClass="gp" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.controller.Shpenzimet">
+
+    <padding>
+        <Insets left="10" right="10" top="10" bottom="10"/>
+    </padding>
+
+    <top>
+        <HBox spacing="10">
+            <ComboBox fx:id="cbPnt"/>
+            <ComboBox fx:id="cbMuaji"/>
+            <ComboBox fx:id="cbViti"/>
+            <Button styleClass="btn, btnRound" fx:id="btnFiltro" onAction="#merrShpenzimet">
+                <graphic>
+                    <ImageView fitWidth="16" preserveRatio="true">
+                        <Image url="/sample/photo/filter.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <!--<Button text="%fitim" onAction="#raportoFitim"/>-->
+            <!--<Button fx:id="btnRaport" text="%shpnz" onAction="#raportoShpenzim"/>-->
+            <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT">
+                <Button text="%btn_add" fx:id="btnShtoShpenz" onAction="#shtoShpenzim">
+                    <graphic>
+                        <Label text="&#xE145;"/>
+                    </graphic>
+                </Button>
+            </HBox>
+            <padding>
+                <Insets left="10" right="10" top="10" bottom="10"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <center>
+        <TableView fx:id="tblShpenz">
+            <columns>
+                <TableColumn minWidth="60" maxWidth="65" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+                <TableColumn text="%shpenz"><cellValueFactory><PropertyValueFactory property="arsyeja"/></cellValueFactory></TableColumn>
+                <TableColumn minWidth="150" maxWidth="300" text="%pnt"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                <TableColumn minWidth="100" maxWidth="200" text="%data"><cellValueFactory><PropertyValueFactory property="data"/></cellValueFactory></TableColumn>
+                <TableColumn minWidth="100" maxWidth="200" text="%shuma"><cellValueFactory><PropertyValueFactory property="shuma"/></cellValueFactory></TableColumn>
+                <TableColumn fx:id="colDel" minWidth="60" maxWidth="60" style="-fx-text-fill: -fx-secondary"></TableColumn>
+                <TableColumn fx:id="colEdit" minWidth="60" maxWidth="60"></TableColumn>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT">
+            <padding>
+                <Insets left="10" top="10" right="10" bottom="10"/>
+            </padding>
+            <Label fx:id="lblTotal" styleClass="lVlera"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

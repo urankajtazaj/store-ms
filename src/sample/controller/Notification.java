@@ -14,6 +14,11 @@ import javafx.util.Duration;
 import sample.Enums.ButtonType;
 import sample.Enums.NotificationType;
 
+import java.io.FileInputStream;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
+
 /**
  * Created by uran on 17-05-02.
  */
@@ -24,6 +29,7 @@ public class Notification {
     private ButtonType btnType = ButtonType.NO_BUTTON;
     private NotificationType ntfType = NotificationType.SUCCESS;
     private boolean delete;
+    ResourceBundle bundle;
 
     boolean getDelete (){
         return delete;
@@ -59,6 +65,7 @@ public class Notification {
     }
 
     public void showAndWait() {
+        Properties props = new Properties();
         try {
             Rectangle2D rect = Screen.getPrimary().getBounds();
             String fxml = "";
@@ -81,7 +88,16 @@ public class Notification {
                 }
             }
 
-            FXMLLoader loader = new FXMLLoader(Notification.class.getResource(fxml));
+            props.load(new FileInputStream(System.getProperty("user.home") + "/store-ms-files/config/config.properties"));
+            if (props.getProperty("lang").equals("English")) {
+                bundle = ResourceBundle.getBundle("resources.Language_en", new Locale("en", "EN"));
+            } else if (props.getProperty("lang").equals("German")) {
+                bundle = ResourceBundle.getBundle("resources.Language_de", new Locale("de", "DE"));
+            } else {
+                bundle = ResourceBundle.getBundle("resources.Language_sq", new Locale("sq", "SQ"));
+            }
+
+            FXMLLoader loader = new FXMLLoader(Notification.class.getResource(fxml), bundle);
             Parent parent = loader.load();
             LajmeroGreen lajmero = loader.getController();
             lajmero.setMesazhi(message);

@@ -6,8 +6,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<BorderPane style="-fx-background-color: -fx-sidebar; -fx-padding: 15" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<BorderPane styleClass="gp" style="-fx-padding: 15" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="sample.controller.Shitjet">
+
+    <fx:define>
+        <ToggleGroup fx:id="tgLloji"/>
+    </fx:define>
 
     <center>
         <SplitPane orientation="HORIZONTAL" styleClass="shadow" >
@@ -18,12 +22,12 @@
                         <Insets right="10"/>
                     </padding>
                     <HBox spacing="5">
-                        <TextField fx:id="txtProd" style="-fx-font-size: 22; -fx-padding: 5" minWidth="330" promptText="Emri ose Barkodi i produktit"/>
+                        <TextField fx:id="txtProd" style="-fx-padding: 5" minWidth="350" promptText="%bc_prod"/>
                         <ComboBox fx:id="cbCat"/>
                     </HBox>
 
-                    <ScrollPane fitToWidth="true" fx:id="scroll" styleClass="edge-to-edge" minWidth="450">
-                        <FlowPane fx:id="flow" hgap="5" vgap="5" orientation="HORIZONTAL" minWidth="450">
+                    <ScrollPane fitToWidth="true" fx:id="scroll" styleClass="edge-to-edge" minWidth="550">
+                        <FlowPane fx:id="flow" hgap="5" vgap="5" orientation="HORIZONTAL" minWidth="550">
                             <padding>
                                 <Insets top="15"/>
                             </padding>
@@ -38,30 +42,31 @@
                     </padding>
                     <TableView fx:id="tbl" minWidth="450">
                         <placeholder>
-                            <Label text="Zgjedhni produktet"/>
+                            <Label text="%zgjedh_prod"/>
                         </placeholder>
                         <columns>
-                            <TableColumn text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
-                            <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
-                            <TableColumn text="Çmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
-                            <TableColumn text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
-                            <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
-                            <TableColumn text="Njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
+                            <TableColumn text="ID" minWidth="40" maxWidth="40"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+                            <TableColumn text="%emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                            <TableColumn text="%qmimi" fx:id="colQmimi"><cellValueFactory><PropertyValueFactory property="qm"/></cellValueFactory></TableColumn>
+                            <TableColumn text="%zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
+                            <TableColumn fx:id="colSasia" text="%sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+                            <TableColumn fx:id="colNjesia" text="%njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
                             <TableColumn minWidth="40" maxWidth="45" fx:id="colAct"/>
                         </columns>
                     </TableView>
 
                     <GridPane hgap="25" vgap="5" styleClass="gpL">
-                        <Label text="Subtotal" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label text="%subtotal" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                         <Label fx:id="lSubTtl" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                        <Label text="TVSH" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <Label text="%tvsh" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                         <Label fx:id="lTvsh" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <Label style="-fx-font-size: 30" text="Total" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <Label style="-fx-font-size: 30" text="%total" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                         <Label fx:id="lTotal" style="-fx-font-size: 30; -fx-text-fill: -fx-primary;" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                        <Label text="Pagesa" style="-fx-font-size: 16;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <Label text="%pagesa" style="-fx-font-size: 16;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
                         <Label fx:id="lPagesa" text="0" style="-fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                        <Label text="Kusuri" style="-fx-font-size: 16;" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <Label text="%kusuri" style="-fx-font-size: 16;" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
                         <Label fx:id="lKusuri" text="0" style=" -fx-font-size: 16" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <Label GridPane.rowIndex="6" GridPane.columnIndex="0"/>
 
                         <columnConstraints>
                             <ColumnConstraints hgrow="NEVER"/>
@@ -70,42 +75,35 @@
 
                     </GridPane>
 
-                    <HBox spacing="5" alignment="CENTER">
-                        <Button HBox.hgrow="ALWAYS" onAction="#pagesa" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60;
-                        -fx-border-radius: 1; -fx-background-radius: 1;"
-                                minWidth="200" maxWidth="500" textAlignment="CENTER">
-                            <tooltip>
-                                <Tooltip text="Kryej pagesen"/>
-                            </tooltip>
-                            <graphic>
-                                <ImageView preserveRatio="true" fitWidth="25">
-                                    <Image url="/sample/photo/euro.png"/>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button HBox.hgrow="ALWAYS" onAction="#perfundoPagesen" styleClass="btn" style="-fx-min-height: 60; -fx-max-height: 60;
-                        -fx-border-radius: 1; -fx-background-radius: 1;"
-                                minWidth="200" maxWidth="500" textAlignment="CENTER">
-                            <tooltip>
-                                <Tooltip text="Perfundo shitjen"/>
-                            </tooltip>
-                            <graphic>
-                                <ImageView preserveRatio="true" fitWidth="25">
-                                    <Image url="/sample/photo/payment.png"/>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </HBox>
+                    <VBox spacing="10">
+                        <HBox spacing="10">
+                            <RadioButton fx:id="rbPakice" toggleGroup="$tgLloji" text="%pakic" selected="true"/>
+                            <RadioButton fx:id="rbShumic" toggleGroup="$tgLloji" text="%shumic"/>
+                        </HBox>
+                        <HBox spacing="5" alignment="CENTER">
+                            <Button text="%_pagesa" HBox.hgrow="ALWAYS" onAction="#pagesa" styleClass="btn, bigSellBtn"
+                                    minWidth="200" maxWidth="500" textAlignment="CENTER">
+                            </Button>
+                            <Button text="%_perfundo" HBox.hgrow="ALWAYS" onAction="#perfundoPagesen" styleClass="btn, bigSellBtn"
+                                    minWidth="200" maxWidth="500" textAlignment="CENTER">
+                            </Button>
+                        </HBox>
+                    </VBox>
 
-                    <CheckBox text="Shtyp faturen" selected="true" fx:id="cbShtypPagesen"/>
+                    <!--<HBox alignment="CENTER_LEFT">-->
+                        <CheckBox text="%view_fatura" selected="true" fx:id="cbShtypPagesen"/>
+                        <!--<HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT">-->
+                            <!--<CheckBox text="E perfunduar" selected="true" fx:id="cbPerfunduar"/>-->
+                        <!--</HBox>-->
+                    <!--</HBox>-->
 
-                    <HBox spacing="5" alignment="CENTER_RIGHT">
+                    <VBox spacing="5" alignment="CENTER_RIGHT">
                         <padding>
                             <Insets top="15"/>
                         </padding>
-                        <Label text="Konsumatori:"/>
+                        <Label text="%konsumatori"/>
                         <ComboBox fx:id="cbKons"/>
-                    </HBox>
+                    </VBox>
 
                 </VBox>
 

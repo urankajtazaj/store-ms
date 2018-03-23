@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <GridPane alignment="CENTER" styleClass="gp" vgap="15" hgap="10" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml">
 
@@ -10,14 +11,17 @@
         <ToggleGroup fx:id="tgFg"/>
     </fx:define>
 
-    <Label styleClass="infoTtl" text="Zgjedh ngjyren" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+    <padding>
+        <Insets left="10" right="10" bottom="10" top="10"/>
+    </padding>
 
-    <Label text="Prapavija" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <ColorPicker fx:id="cpBg" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label styleClass="infoTtl" text="%zgjedh_ngjyren" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+    <Label wrapText="true" text="%msg_ngjyra"
+           GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
 
-    <Label text="Teksti" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <ColorPicker fx:id="cpFg" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Label text="%bg" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <ColorPicker fx:id="cpBg" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-    <Button onAction="#ruajNgjyren" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.halignment="RIGHT" text="OK"/>
+    <Button onAction="#ruajNgjyren" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.halignment="RIGHT" text="%ok"/>
 
 </GridPane>

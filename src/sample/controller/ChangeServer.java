@@ -10,6 +10,8 @@ import sample.Enums.NotificationType;
 
 import java.io.*;
 import java.net.URL;
+import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -17,8 +19,8 @@ import java.util.ResourceBundle;
  */
 public class ChangeServer implements Initializable {
 
-    @FXML private TextField txtSrv, txtEmri, txtFiskal, txtBanka, txtKonto, txtIban, txtSwift;
-    @FXML private ComboBox<String> cbTheme;
+    @FXML private TextField txtSrv, txtEmri, txtFiskal, txtBanka, txtKonto, txtIban, txtSwift, txtAdresa;
+    @FXML private ComboBox<String> cbTheme, cbLang;
 
     private Stage stage;
 
@@ -31,6 +33,31 @@ public class ChangeServer implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        Properties props = new Properties();
+
+        try {
+
+            FileInputStream in = new FileInputStream(System.getProperty("user.home") + "/store-ms-files/config/config.properties");
+            props.load(in);
+
+            System.out.println(props.getProperty("emri"));
+
+            txtSrv.setText(props.getProperty("server"));
+            txtEmri.setText(props.getProperty("emri"));
+            cbTheme.getSelectionModel().select(props.getProperty("theme"));
+            txtFiskal.setText(props.getProperty("nr_fiskal"));
+            txtBanka.setText(props.getProperty("banka"));
+            txtKonto.setText(props.getProperty("konto"));
+            txtIban.setText(props.getProperty("iban"));
+            txtSwift.setText(props.getProperty("swift"));
+            txtAdresa.setText(props.getProperty("adresa"));
+            cbLang.getSelectionModel().select(props.getProperty("lang"));
+
+            in.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         File dir = new File(System.getProperty("user.home") + "/store-ms-files/config");
         dir.mkdir();
 
@@ -44,52 +71,51 @@ public class ChangeServer implements Initializable {
             }
         }
 
-        String ip = null, emri = null, theme = null, fiskal = null, banka = null, konto = null, iban = null, swift = null;
-        try (FileReader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr)) {
-            ip = br.readLine();
-            emri = br.readLine();
-            theme = br.readLine();
-            fiskal = br.readLine();
-            banka = br.readLine();
-            konto = br.readLine();
-            iban = br.readLine();
-            swift = br.readLine();
-        }catch (Exception e) { e.printStackTrace(); }
-
-        txtSrv.setText(ip != null ? ip.split(":")[1] : "");
-        txtEmri.setText(emri != null ? emri.split(":")[1] : "");
-        cbTheme.getSelectionModel().select(theme != null ? theme.split(":")[1] : "Dark");
-        txtFiskal.setText(fiskal != null ? fiskal.split(":")[1] : "");
-        txtBanka.setText(banka != null ? banka.split(":")[1] : "");
-        txtKonto.setText(konto != null ? konto.split(":")[1] : "");
-        txtIban.setText(iban != null ? iban.split(":")[1] : "");
-        txtSwift.setText(swift != null ? swift.split(":")[1] : "");
     }
 
     @FXML
     private void ruajSrv(){
-        File dir = new File(System.getProperty("user.home") + "/store-ms-files/config");
-        dir.mkdir();
+        Properties confProp = new Properties();
 
-        File file = new File(dir.getAbsolutePath() + "/config.txt");
+        try {
+            Properties props = new Properties();
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.home") + "/store-ms-files/config/config.properties");
 
-        try(FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
-            bw.write("server:" + (txtSrv.getText().isEmpty() ? "localhost" : txtSrv.getText()) + "\n");
-            bw.write("emri:" + txtEmri.getText() + "\n");
-            bw.write("theme:" + cbTheme.getSelectionModel().getSelectedItem() + "\n");
-            bw.write("nr.fiskal:" + txtFiskal.getText() + "\n");
-            bw.write("banka:" + txtBanka.getText() + "\n");
-            bw.write("konto:" + txtKonto.getText() + "\n");
-            bw.write("iban:" + txtIban.getText() + "\n");
-            bw.write("swift:" + txtSwift.getText() + "\n");
+            props.setProperty("server", (txtSrv.getText().isEmpty() ? "localhost" : txtSrv.getText()));
+            props.setProperty("emri", txtEmri.getText());
+            props.setProperty("theme", cbTheme.getSelectionModel().getSelectedItem());
+            props.setProperty("nr_fiskal", txtFiskal.getText());
+            props.setProperty("banka", txtBanka.getText());
+            props.setProperty("konto", txtKonto.getText());
+            props.setProperty("iban", txtIban.getText());
+            props.setProperty("swift", txtSwift.getText());
+            props.setProperty("adresa", txtAdresa.getText());
+            props.setProperty("lang", cbLang.getSelectionModel().getSelectedItem());
+
+            props.store(out, null);
+            out.close();
+
             VariablatPublike.server = txtSrv.getText().isEmpty() ? "localhost" : txtSrv.getText();
             VariablatPublike.nrFiskal = txtFiskal.getText();
             VariablatPublike.BANKA = txtBanka.getText();
             VariablatPublike.KONTO = txtKonto.getText();
             VariablatPublike.SWIFT = txtSwift.getText();
             VariablatPublike.IBAN = txtIban.getText();
+            VariablatPublike.ADRESA = txtAdresa.getText();
+            VariablatPublike.styleSheet = cbTheme.getSelectionModel().getSelectedItem().equals("Dark") ? "/sample/style/style.css" : "/sample/style/styleLight.css";
+            VariablatPublike.LANG = cbLang.getSelectionModel().getSelectedItem();
+
+            ResourceBundle resourceBundle = null;
+            if (cbLang.getSelectionModel().getSelectedItem().equals("English")) {
+                resourceBundle = ResourceBundle.getBundle("resources.Language_en", new Locale("en", "EN"));
+            } else if (cbLang.getSelectionModel().getSelectedItem().equals("German")) {
+                resourceBundle = ResourceBundle.getBundle("resources.Language_de", new Locale("de", "DE"));
+            } else {
+                resourceBundle = ResourceBundle.getBundle("resources.Language_sq", new Locale("sq", "SQ"));
+            }
             stage.close();
-            ntf.setMessage("Te dhenat u ruajten me sukses dhe do te aplikohen pas ristartimit te aplikacionit");
+
+            ntf.setMessage(resourceBundle.getString("sukses_change_server"));
             ntf.setButton(ButtonType.NO_BUTTON);
             ntf.setType(NotificationType.SUCCESS);
             ntf.show();

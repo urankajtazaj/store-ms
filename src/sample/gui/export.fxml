@@ -13,7 +13,7 @@
     <center>
         <BorderPane fx:id="inBp" styleClass="newWindow">
             <top>
-                <Label text="Ekporto te dhenat" styleClass="bigFont"/>
+                <Label text="%export_data" styleClass="bigFont"/>
             </top>
             <center>
                 <GridPane alignment="TOP_CENTER">
@@ -46,7 +46,7 @@
                         </graphic>
                     </Button>
                     <Button GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4"
-                            fx:id="btnAnulo" text="ANULO" styleClass="btnExportImg, btnC"/>
+                            fx:id="btnAnulo" text="%_anulo" styleClass="btnExportImg, btnC"/>
                 </GridPane>
             </center>
         </BorderPane>

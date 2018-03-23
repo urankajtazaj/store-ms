@@ -64,8 +64,13 @@ public class PunetoretView implements Initializable {
         return this.id;
     }
 
+    ResourceBundle rb;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        rb = resources;
+
         grid.setHgap(1);
         grid.setVgap(1);
         grid.getStyleClass().add("shadow");
@@ -118,7 +123,7 @@ public class PunetoretView implements Initializable {
 
     private void hapeRregullo(int index){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoPunetoret.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/ShtoPunetoret.fxml"), rb);
 
             ShtoPunetoret sp = new ShtoPunetoret();
             sp.setId(index);
@@ -231,12 +236,12 @@ public class PunetoretView implements Initializable {
                 ps.setDate(3, java.sql.Date.valueOf(dpDeriPushim.getValue()));
                 ps.setString(4, arsyeja);
                 ps.execute();
-                ntf.setMessage("Pushimi u shtua me sukses");
+                ntf.setMessage(rb.getString("pnt_v_pushimi"));
                 ntf.show();
                 getData();
                 fillCbViti();
             } else {
-                ntf.setMessage("Data e fillimit duhet te jete me e vogel se ajo e perfundimit te pushimit");
+                ntf.setMessage(rb.getString("pnt_v_data"));
                 ntf.setType(NotificationType.ERROR);
                 ntf.setButton(ButtonType.NO_BUTTON);
                 ntf.show();

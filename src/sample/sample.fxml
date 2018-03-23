@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane style="-fx-background-color: transparent" fx:id="root" xmlns="http://javafx.com/javafx/8.0.111"
-            xmlns:fx="http://javafx.com/fxml/1" >
+           styleClass="withBg"  xmlns:fx="http://javafx.com/fxml/1" >
 
     <fx:define>
         <ToggleGroup fx:id="sideTg"/>
@@ -18,18 +18,60 @@
         <BorderPane styleClass="sideBar">
             <center>
                 <VBox fx:id="btnVb">
-                    <ToggleButton selected="true" toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnHome" text="BALLINA" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnShit" text="SHITJE" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnKons" text="KONSUMATORET" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnPaisjet" text="PRODUKTET" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnStat" text="RAPORTET" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="PUNETORET" onAction="#changeScene"/>
-                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene"  text="PREFERENCAT"/>
-                    <ToggleButton onAction="#exit" toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnLogout" text="DIL"/>
+                    <ToggleButton selected="true" contentDisplay="LEFT" toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnHome" text="%M_HOME" onAction="#changeScene">
+                        <graphic>
+                            <Label text="&#xE88A;"/>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnShit" text="%M_SHITJE" onAction="#changeScene">
+                        <graphic>
+                            <Label text="&#xE854;"/>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnKons" text="%M_KONSUMATORET" onAction="#changeScene">
+                        <graphic>
+                            <Label text="&#xE87C;"/>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnPaisjet" text="%M_PRODUKTET" onAction="#changeScene">
+                        <graphic>
+                            <Label text="&#xE53B;"/>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnStat" text="%M_RAPORTET" onAction="#changeScene">
+                        <graphic>
+                            <Label text="&#xE8CC;"/>
+                        </graphic>
+                    </ToggleButton>
+                    <!--<ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnFin" text="%M_FINANC" onAction="#changeScene">-->
+                        <!--<graphic>-->
+                            <!--<Label text="&#xE922;"/>-->
+                        <!--</graphic>-->
+                    <!--</ToggleButton>-->
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnPunetoret" text="%M_PUNETORET" onAction="#changeScene">
+                        <graphic>
+                            <Label text="&#xE853;"/>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnShpenzimet" onAction="#changeScene"  text="%M_SHPENZIM">
+                        <graphic>
+                            <Label text="&#xE15C;"/>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnSettings" onAction="#changeScene"  text="%M_SETTINGS">
+                        <graphic>
+                            <Label text="&#xE8B8;"/>
+                        </graphic>
+                    </ToggleButton>
+                    <ToggleButton onAction="#exit" toggleGroup="$sideTg" prefWidth="${btnVb.width}" fx:id="btnLogout" text="%M_DIL">
+                        <graphic>
+                            <Label text="&#xE8AC;"/>
+                        </graphic>
+                    </ToggleButton>
                 </VBox>
             </center>
             <bottom>
-                <HBox alignment="CENTER" style="-fx-background-color: -fx-secondary">
+                <HBox alignment="CENTER" styleClass="btnBottom">
                     <padding>
                         <Insets bottom="15" top="15"/>
                     </padding>

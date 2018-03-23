@@ -13,11 +13,11 @@
             <TextField fx:id="txtId" maxWidth="60"/>
         </VBox>
         <VBox alignment="BOTTOM_LEFT">
-            <Label text="Emri" styleClass="filterLbl"/>
+            <Label text="%emri" styleClass="filterLbl"/>
             <TextField fx:id="txtEmri"/>
         </VBox>
         <VBox alignment="BOTTOM_LEFT">
-            <Label text="Roli" styleClass="filterLbl"/>
+            <Label text="%roli" styleClass="filterLbl"/>
             <ComboBox fx:id="cbDep" value="Shitje">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -29,25 +29,23 @@
             </ComboBox>
         </VBox>
         <VBox alignment="BOTTOM_LEFT">
-            <Label text="Statusi" styleClass="filterLbl"/>
-            <ComboBox fx:id="cbStat" value="Te gjithe">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Te gjithe"/>
-                        <String fx:value="Aktiv"/>
-                        <String fx:value="Pushim"/>
-                    </FXCollections>
-                </items>
-            </ComboBox>
+            <Label text="%status" styleClass="filterLbl"/>
+            <ComboBox fx:id="cbStat"/>
         </VBox>
-        <Button text="Filtro" onAction="#filtroTabelen"/>
+        <Button text="%btn_search" onAction="#filtroTabelen">
+            <graphic>
+                <Label text="&#xE8B6;"/>
+            </graphic>
+        </Button>
         <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="4">
-            <Button fx:id="btnShtoPnt" text="Shto"/>
-            <Button text="Eksporto" contentDisplay="RIGHT" onAction="#eksporto">
+            <Button fx:id="btnShtoPnt" text="%btn_add">
                 <graphic>
-                    <ImageView preserveRatio="true">
-                        <Image url="/sample/photo/right-arrow.png"/>
-                    </ImageView>
+                    <Label text="&#xE145;"/>
+                </graphic>
+            </Button>
+            <Button text="%btn_export" onAction="#eksporto">
+                <graphic>
+                    <Label text="&#xE89E;"/>
                 </graphic>
             </Button>
         </HBox>
@@ -55,23 +53,23 @@
 
     <HBox styleClass="shadow" alignment="CENTER" spacing="20" GridPane.columnSpan="1" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <VBox alignment="CENTER_LEFT" styleClass="details">
-            <Label styleClass="detailInfoPnt" text="NUMRI I PUNETOREVE"/>
+            <Label styleClass="detailInfoPnt" text="%nr_pnt"/>
             <Label fx:id="lblTotalPnt" text="0" styleClass="detailInfoPnt-Qm" />
         </VBox>
         <VBox alignment="CENTER_LEFT" styleClass="details">
-            <Label styleClass="detailInfoPnt" text="PAGESA MUJORE"/>
+            <Label styleClass="detailInfoPnt" text="%pag_mujore"/>
             <Label fx:id="lblTotalM" text="0" styleClass="detailInfoPnt-Qm"/>
         </VBox>
         <VBox alignment="CENTER_LEFT" styleClass="details">
-            <Label styleClass="detailInfoPnt" text="PAGESA MESATARE"/>
+            <Label styleClass="detailInfoPnt" text="%pag_mes"/>
             <Label fx:id="lblMes" text="0" styleClass="detailInfoPnt-Qm"/>
         </VBox>
         <VBox alignment="CENTER_LEFT" styleClass="details">
-            <Label styleClass="detailInfoPnt" text="PUNETORE AKTIV"/>
+            <Label styleClass="detailInfoPnt" text="%pnt_aktiv"/>
             <Label fx:id="lblPntAktiv" text="0" styleClass="detailInfoPnt-Qm"/>
         </VBox>
         <VBox alignment="CENTER_LEFT" styleClass="details">
-            <Label styleClass="detailInfoPnt" text="PUNETORE NE PUSHIM"/>
+            <Label styleClass="detailInfoPnt" text="%pnt_pushim"/>
             <Label fx:id="lblPntPsh" text="0" styleClass="detailInfoPnt-Qm"/>
         </VBox>
     </HBox>
@@ -81,12 +79,12 @@
                GridPane.columnIndex="0">
         <columns>
             <TableColumn maxWidth="60" minWidth="60" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
-            <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
-            <TableColumn text="Roli"><cellValueFactory><PropertyValueFactory property="departamenti"/></cellValueFactory></TableColumn>
-            <TableColumn text="Data e punesimit"><cellValueFactory><PropertyValueFactory property="punesimi"/></cellValueFactory></TableColumn>
-            <TableColumn text="Paga"><cellValueFactory><PropertyValueFactory property="paga"/></cellValueFactory></TableColumn>
-            <TableColumn fx:id="colMng" text="Shitje"><cellValueFactory><PropertyValueFactory property="hyrat"/></cellValueFactory></TableColumn>
-            <TableColumn fx:id="sts" maxWidth="80" minWidth="80" text="Statusi"><cellValueFactory><PropertyValueFactory property="statusi"/></cellValueFactory></TableColumn>
+            <TableColumn text="%emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+            <TableColumn text="%roli"><cellValueFactory><PropertyValueFactory property="departamenti"/></cellValueFactory></TableColumn>
+            <TableColumn text="%pnt_data"><cellValueFactory><PropertyValueFactory property="punesimi"/></cellValueFactory></TableColumn>
+            <TableColumn text="%paga"><cellValueFactory><PropertyValueFactory property="paga"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="colMng" text="%shitje"><cellValueFactory><PropertyValueFactory property="hyrat"/></cellValueFactory></TableColumn>
+            <TableColumn fx:id="sts" maxWidth="80" minWidth="80" text="%status"><cellValueFactory><PropertyValueFactory property="statusi"/></cellValueFactory></TableColumn>
             <TableColumn fx:id="colAct" maxWidth="45" minWidth="45"></TableColumn>
         </columns>
     </TableView>

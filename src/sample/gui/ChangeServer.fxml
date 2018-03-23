@@ -13,28 +13,28 @@
     <center>
         <GridPane BorderPane.alignment="CENTER" alignment="CENTER" vgap="15" hgap="5">
             <children>
-                <Label text="Serveri" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="%serveri" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                 <TextField minWidth="170" maxWidth="170" fx:id="txtSrv" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-                <Label text="Emri i kompanise" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="%e_comp" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <TextField minWidth="170" maxWidth="170" fx:id="txtEmri" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-                <Label text="Nr. Fiskal" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label text="%nr_fiskal" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                 <TextField minWidth="170" maxWidth="170" fx:id="txtFiskal" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
                 <Label text="IBAN" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                 <TextField minWidth="170" maxWidth="170" fx:id="txtIban" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-                <Label text="Banka" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <Label text="%banka" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
                 <TextField minWidth="170" maxWidth="170" fx:id="txtBanka" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-                <Label text="Nr. Kontos" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                <Label text="%nr_konto" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
                 <TextField minWidth="170" maxWidth="170" fx:id="txtKonto" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-                <Label text="SWIFT Adresa" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                <Label text="%swift" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
                 <TextField minWidth="170" maxWidth="170" fx:id="txtSwift" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
-                <Label text="Pamja" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+                <Label text="%theme" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
                 <ComboBox minWidth="170" maxWidth="170" fx:id="cbTheme" value="Dark" GridPane.columnIndex="1" GridPane.rowIndex="7">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -43,13 +43,27 @@
                         </FXCollections>
                     </items>
                 </ComboBox>
+
+                <Label text="%lang" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+                <ComboBox minWidth="170" maxWidth="170" fx:id="cbLang" value="Shqip" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Shqip"/>
+                            <String fx:value="English"/>
+                            <!--<String fx:value="German"/>-->
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <Label text="%adresa" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+                <TextField minWidth="170" maxWidth="170" fx:id="txtAdresa" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
             </children>
         </GridPane>
     </center>
 
     <bottom>
         <HBox alignment="CENTER_RIGHT">
-            <Button text="Ruaj" onAction="#ruajSrv"/>
+            <Button text="%ruaj" onAction="#ruajSrv"/>
         </HBox>
     </bottom>
 

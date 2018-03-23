@@ -18,15 +18,15 @@
                 <TextField maxWidth="50" minWidth="50" fx:id="txtId" />
             </VBox>
             <VBox alignment="BOTTOM_LEFT">
-                <Label text="Produkti" styleClass="filterLbl"/>
+                <Label text="%produkti" styleClass="filterLbl"/>
                 <TextField maxWidth="120" minWidth="120" fx:id="txtProd"/>
             </VBox>
             <VBox alignment="BOTTOM_LEFT">
-                <Label text="Kategoria" styleClass="filterLbl"/>
+                <Label text="%kategoria" styleClass="filterLbl"/>
                 <ComboBox value="Kategoria" fx:id="cbCat"/>
             </VBox>
             <VBox alignment="BOTTOM_LEFT">
-                <Label text="Çmimi" styleClass="filterLbl"/>
+                <Label text="%qmimi" styleClass="filterLbl"/>
                 <TextField maxWidth="100" fx:id="txtQmimi"/>
             </VBox>
             <ComboBox value="=" fx:id="cbOp">
@@ -38,30 +38,40 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Button text="Filtro" onAction="#filterTable"/>
+            <Button text="%btn_search" onAction="#filterTable">
+                <graphic>
+                    <Label text="&#xE8B6;"/>
+                </graphic>
+            </Button>
             <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_RIGHT" spacing="5">
-                <Button text="Shto" onAction="#shtoProdukt"/>
-                <Button contentDisplay="RIGHT" text="Eksporto" onAction="#export">
+                <Button text="%btn_add" fx:id="btnAdd" onAction="#shtoProdukt">
                     <graphic>
-                        <ImageView preserveRatio="true">
-                            <Image url="/sample/photo/right-arrow.png"/>
-                        </ImageView>
+                        <Label text="&#xE145;"/>
                     </graphic>
                 </Button>
+                <Button text="%btn_export" onAction="#export">
+                    <graphic>
+                        <Label text="&#xE89E;"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnPakice" visible="false" text="%raporti"
+                        styleClass="-fx-background-color: rgba(255,255,255,.15); -fx-border-radius: 50; -fx-background-radius: 50;" />
+                <!--<Button style="-fx-background-color: #fff; -fx-text-fill: #222;" fx:id="btnShumic" text="Raporti shumice"/>-->
             </HBox>
         </HBox>
 
 
-    <SplitPane orientation="VERTICAL" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
-        <TableView editable="true" styleClass="shadow" minWidth="1000" fx:id="tblProduktet"> <!-- GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"-->
+    <SplitPane styleClass="shadow" orientation="VERTICAL" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+        <TableView editable="true" minWidth="1000" fx:id="tblProduktet"> <!-- GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"-->
             <columns>
                 <TableColumn maxWidth="50" minWidth="50" text="ID"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
-                <TableColumn text="Emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
-                <TableColumn text="Kategoria"><cellValueFactory><PropertyValueFactory property="kategoria"/></cellValueFactory></TableColumn>
-                <TableColumn text="Çmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
-                <TableColumn fx:id="colZbritje" text="Zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
-                <TableColumn fx:id="colSasia" text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
-                <TableColumn fx:id="colNjesia" text="Njesia"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
+                <TableColumn text="%emri"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                <TableColumn text="%kategoria" minWidth="150" maxWidth="170"><cellValueFactory><PropertyValueFactory property="kategoria"/></cellValueFactory></TableColumn>
+                <TableColumn text="%qmimi_h" minWidth="100" maxWidth="100"><cellValueFactory><PropertyValueFactory property="qmimiStd"/></cellValueFactory></TableColumn>
+                <TableColumn text="%qmimi_sh" minWidth="100" maxWidth="100"><cellValueFactory><PropertyValueFactory property="qmimiShumice"/></cellValueFactory></TableColumn>
+                <TableColumn text="%qmimi_p" minWidth="100" maxWidth="100"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
+                <TableColumn fx:id="colNjesia" text="%njesia" minWidth="150" maxWidth="120"><cellValueFactory><PropertyValueFactory property="njesia"/></cellValueFactory></TableColumn>
+                <TableColumn fx:id="colSasia" text="%sasia" minWidth="120" maxWidth="120"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
                 <TableColumn fx:id="colAksion" minWidth="100" maxWidth="100"></TableColumn>
             </columns>
         </TableView>
@@ -69,7 +79,7 @@
         <HBox spacing="2" GridPane.hgrow="ALWAYS">
             <BorderPane styleClass="shadow" HBox.hgrow="ALWAYS" > <!-- GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="1" -->
                 <top>
-                    <Label text="Kategorite me te shitura" styleClass="infoTtl"/>
+                    <Label text="%kat_shitura" styleClass="infoTtl"/>
                 </top>
                 <center>
                     <StackPane styleClass="stack" fx:id="stack">
@@ -87,7 +97,7 @@
 
             <BorderPane styleClass="shadow" HBox.hgrow="ALWAYS" > <!-- GridPane.rowIndex="2" GridPane.columnIndex="1" -->
                 <top>
-                    <Label text="Produktet me te shitura" styleClass="infoTtl"/>
+                    <Label text="%prod_shitura" styleClass="infoTtl"/>
                 </top>
                 <center>
                     <StackPane styleClass="stack" fx:id="stack2">

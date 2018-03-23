@@ -30,6 +30,8 @@ public class VariablatPublike {
     public static String KONTO;
     public static String BANKA;
     public static String SWIFT;
+    public static String ADRESA;
+    public static String LANG;
 
     public static String currKons;
     public static String currKonsAdresa;
@@ -60,6 +62,18 @@ public class VariablatPublike {
             return mkd.format(money);
         }else {
             return decimalFormat.format(money);
+        }
+    }
+
+    public static double fromMoney(String money) {
+        if (valuta == 'L') {
+            return Double.parseDouble(money.substring(0, money.length()-1));
+        }else if (valuta == 'D') {
+            return Double.parseDouble(money.substring(1, money.length()));
+        }else if (valuta == 'M') {
+            return Double.parseDouble(money.substring(3, money.length()));
+        }else {
+            return Double.parseDouble(money.substring(0, money.length()-1));
         }
     }
 
@@ -98,6 +112,7 @@ public class VariablatPublike {
     static Map<String, Integer> revProdKat = new HashMap<>();
     static Map<String, Integer> revKons = new HashMap<>();
     static Map<Integer, String> mProdKat = new HashMap<>();
+    static String pntTel = null, pntEmail = null, pntEmri = null;
 
     static Set<String> prodKat = new HashSet<>();
     static Set<String> konsEmri = new HashSet<>();
@@ -134,6 +149,7 @@ public class VariablatPublike {
     };
 
     static boolean shitjeBool, konsumatoret, punetoret, shtepi, raportet, produktet, settings;
+    static boolean prod_add, prod_edit, prod_del, pnt_add, pnt_edit, pnt_del, kons_add, kons_edit, kons_del, rep_edit, rep_del;
 
     public static RotateTransition startSpinning(ImageView iv){
         RotateTransition transition = new RotateTransition(Duration.millis(700), iv);

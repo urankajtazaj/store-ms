@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <GridPane vgap="2" hgap="2" fx:id="gp" styleClass="gp" xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="sample.controller.Raportet">
@@ -17,37 +19,40 @@
         <HBox styleClass="filterHb" spacing="2" alignment="CENTER_RIGHT" GridPane.columnSpan="4"
               GridPane.columnIndex="0"
               GridPane.rowIndex="0">
+            <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                <ComboBox fx:id="cbKons"></ComboBox>
+            </HBox>
             <DatePicker fx:id="dpPrej" maxWidth="120" maxHeight="28"/>
             <Label text="-"/>
             <DatePicker fx:id="dpDeri" maxWidth="120" maxHeight="28"/>
-            <Button text="Filtro" onAction="#merrFaturat"/>
+            <Button text="%filtro" onAction="#merrFaturat"/>
         </HBox>
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <top>
-                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="FITIMI NETO"/>
+                <Label minWidth="270" alignment="CENTER" BorderPane.alignment="TOP_CENTER" textAlignment="CENTER" styleClass="infoTtl" text="%qark"/>
             </top>
             <center>
                 <VBox alignment="CENTER">
                     <Label styleClass="lVlera" fx:id="lCurrTtl"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
                         <Label styleClass="perc" fx:id="lLastTtl"/>
-                        <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
+                        <Label text="%npk" styleClass="l2"/>
                     </HBox>
                 </VBox>
             </center>
         </BorderPane>
-
+<!--%shitja_mes-->
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="1">
             <top>
-                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="SHITJA MESATARE"/>
+                <Label minWidth="270" alignment="CENTER" BorderPane.alignment="TOP_CENTER" textAlignment="CENTER" styleClass="infoTtl" text="%shpenzime"/>
             </top>
             <center>
                 <VBox alignment="CENTER">
                     <Label styleClass="lVlera" fx:id="lPagMes"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
                         <Label fx:id="lPagMesL" styleClass="perc"/>
-                        <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
+                        <Label text="%npk" styleClass="l2"/>
                     </HBox>
                 </VBox>
             </center>
@@ -55,14 +60,15 @@
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="2">
             <top>
-                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="NUMRI I SHITJEVE"/>
+                <Label minWidth="270" alignment="CENTER" BorderPane.alignment="TOP_CENTER" textAlignment="CENTER" styleClass="infoTtl" text="%aktual"/>
             </top>
+            <!--%new_kons-->
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera" fx:id="lShitje"/>
+                    <Label styleClass="lVlera" fx:id="lKons"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
-                        <Label fx:id="lShitjeL" styleClass="perc"/>
-                        <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
+                        <Label fx:id="lKonsL" styleClass="perc"/>
+                        <Label text="%npk" styleClass="l2"/>
                     </HBox>
                 </VBox>
             </center>
@@ -70,14 +76,14 @@
 
         <BorderPane styleClass="shadow" minWidth="250" minHeight="180" GridPane.rowIndex="1" GridPane.columnIndex="3">
             <top>
-                <Label minWidth="270" alignment="CENTER" styleClass="infoTtl" text="KONSUMATORE TE RINJ"/>
+                <Label minWidth="270" alignment="CENTER" BorderPane.alignment="TOP_CENTER" textAlignment="CENTER" styleClass="infoTtl" text="%nr_shitje"/>
             </top>
             <center>
                 <VBox alignment="CENTER">
-                    <Label styleClass="lVlera" fx:id="lKons"/>
+                    <Label styleClass="lVlera" fx:id="lShitje"/>
                     <HBox spacing="2" alignment="BOTTOM_CENTER">
-                        <Label fx:id="lKonsL" styleClass="perc"/>
-                        <Label text="ndryshim nga periudha e kaluar" styleClass="l2"/>
+                        <Label fx:id="lShitjeL" styleClass="perc"/>
+                        <Label text="%npk" styleClass="l2"/>
                     </HBox>
                 </VBox>
             </center>
@@ -87,14 +93,17 @@
             <Label text="Fatura" styleClass="infoTtl"/>
             <TableView VBox.vgrow="ALWAYS" fx:id="tblFatura">
                 <placeholder>
-                    <Label text="Nuk ka te dhena"/>
+                    <Label text="Nuk ka të dhëna"/>
                 </placeholder>
                 <columns>
-                    <TableColumn text="ID" minWidth="80" maxWidth="80"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Konsumatori" minWidth="120" maxWidth="130"><cellValueFactory><PropertyValueFactory property="konsumatori"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Punetori" minWidth="130" maxWidth="130"><cellValueFactory><PropertyValueFactory property="punetori"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Pagesa" maxWidth="80" minWidth="80"><cellValueFactory><PropertyValueFactory property="cash"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Koha"><cellValueFactory><PropertyValueFactory property="koha"/></cellValueFactory></TableColumn>
+                    <TableColumn text="ID" minWidth="55" maxWidth="55"><cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%data" minWidth="80" maxWidth="80"><cellValueFactory><PropertyValueFactory property="data"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%konsumatori"><cellValueFactory><PropertyValueFactory property="konsumatori"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%perdoruesi" minWidth="100" maxWidth="100"><cellValueFactory><PropertyValueFactory property="punetori"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%total" maxWidth="80" minWidth="80"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%lloji_shitjes" fx:id="colLloji"><cellValueFactory><PropertyValueFactory property="lloji"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%pagesa" minWidth="60" maxWidth="60" fx:id="colStatusi"><cellValueFactory><PropertyValueFactory property="statusi"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%status" minWidth="60" maxWidth="60" fx:id="colAnuluar"><cellValueFactory><PropertyValueFactory property="anuluar"/></cellValueFactory></TableColumn>
                 </columns>
             </TableView>
         </VBox>
@@ -103,37 +112,56 @@
             <Label text="Produktet" styleClass="infoTtl"/>
             <TableView VBox.vgrow="ALWAYS" fx:id="tblDhenat">
                 <placeholder>
-                    <Label text="Nuk ka te dhena"/>
+                    <Label text="%no_data"/>
                 </placeholder>
                 <columns>
-                    <TableColumn text="BC"><cellValueFactory><PropertyValueFactory property="bc"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Produkti"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Çmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Sasia"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
-                    <TableColumn text="Total (Zbritje)"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
+                    <TableColumn text="BC" minWidth="60" maxWidth="60"><cellValueFactory><PropertyValueFactory property="bc"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%produkti"><cellValueFactory><PropertyValueFactory property="emri"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%qmimi"><cellValueFactory><PropertyValueFactory property="qmimi"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%sasia" minWidth="100" maxWidth="100"><cellValueFactory><PropertyValueFactory property="sasia"/></cellValueFactory></TableColumn>
+                    <TableColumn text="%total_zbritje"><cellValueFactory><PropertyValueFactory property="zbritje"/></cellValueFactory></TableColumn>
                 </columns>
             </TableView>
-            <VBox spacing="5" alignment="CENTER_RIGHT">
-                <padding>
-                    <Insets right="10"/>
-                </padding>
-                <HBox spacing="5" alignment="CENTER_RIGHT">
-                    <Label text="Pagesa:"/>
-                    <Label fx:id="lPagesa" text="0" />
+            <HBox alignment="CENTER_RIGHT">
+                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" spacing="5">
+                    <padding>
+                        <Insets left="10" />
+                    </padding>
+                    <Button fx:id="btnAnulo" text="%btn_anulo" styleClass="btnRed"/>
+                    <Button fx:id="btnFaturo" disable="true" text="PRINT">
+                        <graphic>
+                            <Label text="&#xE8AD;" />
+                        </graphic>
+                    </Button>
+                    <!--<TextField fx:id="txtPagesa" promptText="Pagesa" maxWidth="50" visible="false" />-->
+                    <Button visible="false" fx:id="btnPagesa" text="%btn_pagesa" >
+                        <graphic>
+                            <Label text="&#xE8A1;" />
+                        </graphic>
+                    </Button>
                 </HBox>
-                <HBox spacing="5" alignment="CENTER_RIGHT">
-                    <Label text="Kusuri:" />
-                    <Label fx:id="lKusuri" text="0"/>
-                </HBox>
-                <HBox spacing="5" alignment="CENTER_RIGHT">
-                    <Label text="TVSH:"/>
-                    <Label fx:id="lTvsh" text="0" />
-                </HBox>
-                <HBox spacing="5" alignment="CENTER_RIGHT">
-                    <Label text="Total:" style="-fx-font-size: 20;"/>
-                    <Label fx:id="lTotal" text="0" style="-fx-font-size: 21;"/>
-                </HBox>
-            </VBox>
+                <VBox spacing="5">
+                    <padding>
+                        <Insets right="10"/>
+                    </padding>
+                    <HBox spacing="5" alignment="CENTER_RIGHT">
+                        <Label text="%pagesa_"/>
+                        <Label fx:id="lPagesa" text="0" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_RIGHT">
+                        <Label text="%kusuri_" />
+                        <Label fx:id="lKusuri" text="0"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_RIGHT">
+                        <Label text="%tvsh_"/>
+                        <Label fx:id="lTvsh" text="0" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_RIGHT">
+                        <Label text="%total_" style="-fx-font-size: 20;"/>
+                        <Label fx:id="lTotal" text="0" style="-fx-font-size: 21;"/>
+                    </HBox>
+                </VBox>
+            </HBox>
         </VBox>
 
     </children>

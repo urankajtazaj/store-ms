@@ -35,6 +35,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -72,6 +73,8 @@ public class Punetoret implements Initializable {
 
     BorderPane stage;
 
+    ResourceBundle rb;
+
     public void setBorderPane(BorderPane stage) {
         this.stage = stage;
     }
@@ -79,9 +82,16 @@ public class Punetoret implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        rb = resources;
+
+        cbStat.getItems().addAll(rb.getString("te_gjitha"), rb.getString("aktiv"), rb.getString("pushim"));
+        cbStat.getSelectionModel().select(0);
+
+        if (!VariablatPublike.pnt_add) btnShtoPnt.setVisible(false);
+
         ShtoPunetoret sp = new ShtoPunetoret();
         cbDep.getItems().clear();
-        cbDep.getItems().add("Te gjithe");
+        cbDep.getItems().add(rb.getString("te_gjitha"));
         try {
             sp.merrDeps("select * from departamenti", cbDep);
         } catch (Exception e) {
@@ -101,7 +111,7 @@ public class Punetoret implements Initializable {
 
                 Button btnDel = new Button();
                 Button btnEd = new Button();
-                HBox hBox = new HBox(btnDel, btnEd);
+                HBox hBox = new HBox();
 
                 @Override
                 protected void updateItem(Punetori item, boolean empty) {
@@ -119,7 +129,10 @@ public class Punetoret implements Initializable {
                     btnEd.setGraphic(btIvEd);
 
                     if (!empty) {
-                    Punetori punetori = tbl.getItems().get(getIndex());
+                        Punetori punetori = tbl.getItems().get(getIndex());
+
+                        if (VariablatPublike.pnt_edit || VariablatPublike.uid == punetori.getId()) hBox.getChildren().add(btnEd);
+                        if (VariablatPublike.pnt_del || VariablatPublike.uid == punetori.getId()) hBox.getChildren().add(btnDel);
 
                         btnDel.setOnAction(e -> {
                             try {
@@ -181,7 +194,7 @@ public class Punetoret implements Initializable {
 
     private void dritarjaKonfirmo(String emri, int id, int index) throws Exception{
         ntf.setType(NotificationType.ERROR);
-        ntf.setMessage("A jeni te sigurte qe deshironi ta fshini " + emri + " nga lista e punetoreve?\nKy veprim nuk mund te kthehet!");
+        ntf.setMessage(MessageFormat.format(rb.getString("pnt_del_q"), emri));
         ntf.setButton(ButtonType.YES_NO);
         ntf.showAndWait();
 
@@ -199,7 +212,7 @@ public class Punetoret implements Initializable {
             st.executeBatch();
             ntf.setType(NotificationType.SUCCESS);
             ntf.setButton(ButtonType.NO_BUTTON);
-            ntf.setMessage("Punetori u fshi me sukses");
+            ntf.setMessage(rb.getString("pnt_del_sukses"));
             ntf.show();
         }catch (Exception e) { e.printStackTrace(); }
     }
@@ -228,7 +241,7 @@ public class Punetoret implements Initializable {
 
     private void hapeRregullo(int index){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/PunetoretView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/PunetoretView.fxml"), rb);
 
             PunetoretView pv = new PunetoretView();
             pv.setId(index);
@@ -245,7 +258,7 @@ public class Punetoret implements Initializable {
 
     @FXML
     private void eksporto(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/export.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/gui/export.fxml"), rb);
         Parent bpExport = null;
         try {
             bpExport = loader.load();
@@ -270,7 +283,7 @@ public class Punetoret implements Initializable {
                         @Override
                         public void run() {
                             VariablatPublike.stopSpinning(transition, iv);
-                            ntf.setMessage("Fajlli u krijua me sukses!");
+                            ntf.setMessage(rb.getString("pnt_file_sukses"));
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.show();
                         }
@@ -290,7 +303,7 @@ public class Punetoret implements Initializable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            ntf.setMessage("Dokumenti u eksportua me sukses");
+                            ntf.setMessage(rb.getString("pnt_file_sukses"));
                             ntf.setButton(ButtonType.NO_BUTTON);
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.show();
@@ -319,7 +332,7 @@ public class Punetoret implements Initializable {
                         @Override
                         public void run() {
                             VariablatPublike.stopSpinning(transition, iv);
-                            ntf.setMessage("Fajli u exportua me sukses");
+                            ntf.setMessage(rb.getString("pnt_file_sukses"));
                             ntf.setType(NotificationType.SUCCESS);
                             ntf.show();
                         }
@@ -329,7 +342,7 @@ public class Punetoret implements Initializable {
             stage.close();
         });
 
-        Scene scene = new Scene(bpExport, 520, 200);
+        Scene scene = new Scene(bpExport, 520, 214);
         scene.setFill(Color.TRANSPARENT);
         scene.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ESCAPE)) stage.close();
@@ -388,7 +401,7 @@ public class Punetoret implements Initializable {
             bw.write(stringBuilder.toString());
             bw.close();
             ntf.setType(NotificationType.SUCCESS);
-            ntf.setMessage("Fajlli u krijua me sukses dhe mund te gjinded ne\n" + file.getAbsolutePath());
+            ntf.setMessage(MessageFormat.format(rb.getString("pnt_file_sukses_param"), file.getAbsolutePath()));
             ntf.show();
             stage.close();
         } catch (IOException e) {

@@ -1,16 +1,21 @@
 @font-face {
-    font-family: "Lato";
-    src: url("../font/Lato-Regular.ttf");
+    font-family: "Open Sans";
+    src: url("../font/OpenSans-Regular.ttf");
 }
 
 @font-face {
-    font-family: "Lato";
-    src: url("../font/Lato-Light.ttf");
+    font-family: "Material Icons";
+    src: url("../font/MaterialIcons-Regular.ttf");
 }
 
 @font-face {
-    font-family: "Lato";
-    src: url("../font/Lato-Bold.ttf");
+    font-family: "Open Sans";
+    src: url("../font/OpenSans-Light.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../font/OpenSans-Bold.ttf");
 }
 
 @font-face {
@@ -28,13 +33,7 @@
     src: url("../font/Poppins-SemiBold.ttf");
 }
 
-/*
-.gp .label, .gp .check-box {
-    -fx-text-fill: rgba(255,255,255,.8);
-}
-*/
-
-.label, .check-box {
+.label, .check-box, .radio-button {
     -fx-text-fill: rgba(255,255,255,.8);
 }
 
@@ -47,15 +46,16 @@
     -fx-green: #79bd9a;
     -fx-red: #f1404b;
     -fx-label-color: rgba(255,255,255,.85);
-    -fx-sidebar: #1A2129;
-    -fx-secondary: #202731;
-    -fx-btn: #0E97F5;
+    -fx-sidebar: #18191D;
+    -fx-sidebar: #141416;
+    -fx-secondary: #18181b;
+    -fx-btn: #455EDC;
     -fx-second: #F16B6F;
     -fx-third: -fx-btn;
 }
 
 .root {
-    -fx-font-family: "Lato";
+    -fx-font-family: "Open Sans";
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-accent: -fx-btn;
@@ -65,15 +65,23 @@
 .gp {
     -fx-padding: 2;
     -fx-background-color: -fx-sidebar;
+    -fx-background-color: rgba(24, 24, 27, .9);
 }
 
-.gp .button, .btn {
+.withBg {
+    -fx-background-image: url("../photo/background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.button, .btn {
     -fx-cursor: hand;
-    -fx-background-color: -fx-btn;
+    -fx-background-color: rgba(255,255,255,.1);
     -fx-text-fill: #fff;
     -fx-alignment: CENTER;
-    -fx-background-radius: 3;
-    -fx-border-radius: 4;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
     -fx-padding: 0 15 0 15;
     -fx-min-height: 34;
     -fx-max-height: 34;
@@ -89,11 +97,11 @@
     -fx-max-height: 500;
 }
 
-.gp .button:disabled, .btn:disabled {
-    -fx-opacity: .25;
+.button:disabled, .btn:disabled {
+    -fx-opacity: .3;
 }
 
-.gp .button:hover {
+.button:hover {
     -fx-opacity: 1;
 }
 
@@ -115,19 +123,38 @@
     -fx-effect: none;
 }
 
+.toggle-button .label, .button .label, .btn .label {
+    -fx-font-family: "Material Icons";
+    -fx-font-size: 24;
+}
+
+.button .label, .btn .label {
+    -fx-font-size: 22;
+}
+
 .sideBar .toggle-button:selected, .sideBar .toggle-button:focused {
     -fx-background-color: -fx-sidebar;
+}
+
+.sideBar .toggle-button:selected .label, .sideBar .toggle-button:focudes .label {
+    -fx-text-fill: -fx-btn;
 }
 
 .sideBar .toggle-button:hover {
     -fx-background-color: -fx-sidebar;
 }
 
+.btnBottom {
+    -fx-background-color: #24252d;
+    -fx-background-color: #18181b;
+}
+
 .sideBar {
-    -fx-background-color: -fx-secondary;
+    -fx-background-color: #18181b;
+    -fx-background-color: rgba(24, 24, 27, .95);
     -fx-padding: 0;
-    -fx-min-width: 135;
-    -fx-max-width: 135;
+    -fx-min-width: 160;
+    -fx-max-width: 160;
 }
 
 .hbBtn {
@@ -176,7 +203,7 @@
 
 .chart-series-area-fill {
     -fx-opacity: .07;
-    -fx-fill: linear-gradient(transparent, -fx-btn);/*
+    -fx-fill: linear-gradient(-fx-btn, transparent);/*
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 25, 0, 0, 0);
 */}
 
@@ -313,22 +340,27 @@
     -fx-font-weight: bold;
 }*/
 
+.combo-box .text-field {
+    -fx-border-width: 0;
+}
+
 .text-field, .date-picker > .text-field, .combo-box, .choice-box {
     -fx-border-width: 1;
     -fx-min-height: 32;
     -fx-max-height: 32;
     -fx-padding: 0 5 0 5;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
-    -fx-border-color: rgba(255,255,255,.07);
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(255,255,255,.1);
     -fx-effect: none;
     -fx-text-fill: rgba(255,255,255,0.9);
-    -fx-background-color: rgba(255,255,255,.05);
+    -fx-background-color: rgba(0,0,0,0);
 }
 
 .text-field:focused, .combo-box:focused, .choice-box:focused {
-    -fx-border-color: rgba(255,255,255,.15);
-    -fx-background-color: rgba(255,255,255,.08);
+    -fx-border-color: rgba(255,255,255,.5);
+    -fx-border-color: -fx-btn;
 }
 
 .date-picker > .text-field {
@@ -366,6 +398,10 @@
     -fx-text-fill: #fff;
 }
 
+.date-picker-popup > * {
+    -fx-background-color: -fx-sidebar;
+}
+
 .date-picker-popup > * > .day-name-cell {
     -fx-background-color: -fx-secondary;
     -fx-text-fill: rgba(255,255,255,0.85);
@@ -375,7 +411,7 @@
 }
 
 .date-picker-popup > * > .day-cell:hover {
-    -fx-background-color: -fx-btn;
+    -fx-background-color: rgba(255,255,255,.07);
 }
 
 .date-picker-popup > * > .spinner > .button, .date-picker-popup > * > .spinner > .button > .left-arrow {
@@ -393,7 +429,7 @@
     -fx-text-fill: rgba(255,255,255,0.3);
 }
 
-.combo-box-base > .arrow-button > .arrow {
+.combo-box-base > .arrow-button > .arrow, .combo-box-base:editable > .arrow-button > .arrow {
     -fx-background-color: rgba(255,255,255,.6);
 }
 
@@ -403,6 +439,13 @@
 
 .date-picker > .arrow-button:hover > .arrow {
     -fx-background-color: #fff;
+}
+
+.combo-box-base:editable > .arrow-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
 }
 
 .date-picker > .arrow-button:hover {
@@ -425,10 +468,10 @@
 }
 
 .custom-color-dialog .button, .toggle-button:selected, .toggle-button:focused {
-    -fx-background-color: -fx-btn;
-    -fx-border-radius: 0;
+    -fx-background-color: rgba(255,255,255,.1);
+    /*-fx-border-radius: 0;
     -fx-background-radius: 0;
-    -fx-text-fill: -fx-sidebar;/*
+    -fx-text-fill: #fff;
     -fx-effect: dropshadow(gaussian, -fx-btn, 15, 0, 0, 0);
 */}
 
@@ -438,9 +481,9 @@
 }
 
 .toggle-button {
-    -fx-background-color: rgba(255,255,255,.05);
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
     -fx-text-fill: rgba(255,255,255,.7);
     -fx-font-weight: bold;
 }
@@ -481,6 +524,7 @@
     -fx-border-width: 0;
     -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.25), 20, 0, 0, 0);
     -fx-padding: 0;
+    -fx-background-color: -fx-secondary;
  }
 
  .combo-box-popup .list-view .list-cell, .choice-box .context-menu {
@@ -491,13 +535,13 @@
  }
 
  .combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: -fx-btn;
-    -fx-text-fill: rgba(255,255,255,.85);
+    -fx-background-color: rgba(255,255,255,.07);
+    -fx-text-fill: rgba(255,255,255,.9);
  }
 
  .combo-box-popup .list-view .list-cell:selected {
-    -fx-background-color: -fx-btn;
-    -fx-text-fill: -fx-sidebar;
+    -fx-background-color: rgba(255,255,255,.12);
+    -fx-text-fill: #fff;
  }
 
  .choice-box .label {
@@ -507,16 +551,6 @@
  .chartVb {
     -fx-padding: 0 0 0 0;
  }
-
- .shadow {
-    -fx-background-color: #f7f7f7;
-    -fx-background-color: -fx-sidebar;
-    -fx-background-color: -fx-secondary;
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
-    -fx-border-width: 1;/*
-    -fx-border-color: rgba(255,255,255,0.05);
- */}
 
  .tooltip {
     -fx-background-color: -fx-btn;
@@ -580,15 +614,25 @@
     -fx-effect: none;
  }
 
- .table-view .column-header,
- .table-view .column-header .filler,
- .table-view .column-header-background .filler {
-     -fx-background-color: -fx-sidebar;
+.table-view .filler,
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
 }
 
 .table-view .column-header {
     -fx-border-width: 0 0 1 0;
     -fx-border-color: rgba(0,0,0,.1);
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view > .column-header-background {
+    -fx-background-color: rgba(24, 24, 27, .5);
 }
 
 .table-view .column-header .label {
@@ -612,10 +656,11 @@
 
 .table-view .table-row-cell:filled:focused:selected {
     -fx-table-cell-border-color: rgba(0,0,0,0.02);
+    -fx-background-color: rgba(255,255,255,.15);
 }
 
 .table-view .table-row-cell:filled:focused:selected .text {
-    -fx-fill: -fx-btn;
+    -fx-fill: #fff;
 }
 
 /*.table-view .table-row-cell:filled:selected {
@@ -629,7 +674,7 @@
 }
 
 .table-view .table-row-cell:hover {
-    -fx-background-color: rgba(0,0,0,0.13);
+    -fx-background-color: rgba(255,255,255,0.07);
 }
 
 .table-view .table-row-cell:empty {
@@ -640,8 +685,10 @@
     /*-fx-table-cell-border-color: transparent;
     */-fx-border-color: rgba(255,255,255,0.1);
     -fx-border-width: 1;
-    -fx-background-color: -fx-sidebar;
-    /*-fx-control-inner-background-alt: -fx-control-inner-background ;
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    /*-fx-background-color: -fx-sidebar;
+    -fx-control-inner-background-alt: -fx-control-inner-background ;
 */}
 
 .table-column {
@@ -665,11 +712,12 @@
     -fx-font-size: 15;
     -fx-border-width: 0;
     -fx-border-color: rgba(0,0,0,.05);
-    -fx-font-family: "Lato bold";
+    -fx-font-family: "Open Sans";
 }
 
 .intoTtlNb {
     -fx-border-width: 0;
+    -fx-padding: 5 0 5 0;
 }
 
 .infoTtl1 {
@@ -685,7 +733,7 @@
 .lVlera {
     -fx-font-size: 30;
     -fx-text-fill: rgba(255,255,255,.87);
-    -fx-font-family: "Lato light";
+    -fx-font-family: "Open Sans light";
 }
 
 .lVleraColor {
@@ -720,8 +768,8 @@
     */
 }
 
-.scroll-pane > .viewport {
-    -fx-background-color: -fx-sidebar;
+.scroll-pane > .viewport, .scroll-pane {
+    -fx-background-color: transparent;
 }
 
 .scroll-bar {
@@ -766,12 +814,17 @@
     -fx-scale-y: .75;
 }
 
-.check-box:selected .box {
-    -fx-background-color: -fx-btn;
+.radio-button > .radio {
+    -fx-background-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-color: -fx-btn;
+    -fx-background-radio: 50;
+    -fx-border-radius: 50;
+    -fx-padding: 4 4 5 4;
 }
 
-.check-box:selected .mark {
-    -fx-background-color: -fx-sidebar;
+.check-box:selected .mark, .radio-button:selected .dot {
+    -fx-background-color: -fx-btn;
 }
 
 .check-box .mark {
@@ -855,7 +908,7 @@
 }
 
 .btnExportImg:hover {
-    -fx-background-color: -fx-sidebar;
+    -fx-background-color: #212126;
     -fx-opacity: .9;
 }
 
@@ -868,6 +921,8 @@
     -fx-text-fill: -fx-primary;
     -fx-border-width: 1 0 0 0;
     -fx-border-color: rgba(0,0,0,0.05);
+    -fx-border-radius: 0 0 7 7;
+    -fx-background-radius: 0 0 7 7;
 }
 
 .btnC:hover {
@@ -899,12 +954,16 @@
     -fx-border-width: 1 1 0 0;
 }
 
-.btnGreen:hover {
-    -fx-background-color: -fx-secondary;
+.btnGreen:hover, .btnGreen .label {
+    -fx-text-fill: rgb(111, 233, 97);
+}
+
+.btnRed .label {
+    -fx-text-fill: -fx-red;
 }
 
 .btnRed:hover {
-    -fx-background-color: -fx-red;
+    -fx-text-fill: -fx-red;
 }
 
 .details {
@@ -921,7 +980,7 @@
 .detailInfoPnt-Qm {
     -fx-text-fill: -fx-btn;
     -fx-font-size: 30;
-    -fx-font-family: "Lato light";
+    -fx-font-family: "Open Sans light";
 }
 
 .stack .default-color0.chart-pie {
@@ -961,8 +1020,10 @@
 }
 
 .newWindow {
-    -fx-background-color: -fx-secondary;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 0);
+    -fx-background-color: #28282d;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 25, 0, 0, 10);
+    -fx-background-radius: 7;
+    -fx-border-radius: 7;
 }
 
 .newWindow .toggle-button {
@@ -973,12 +1034,6 @@
 .newWindow .toggle-button:selected, .newWindow .toggle-button:focused {
     -fx-background-color: rgba(0,0,0,0.08);
     -fx-text-fill: #fff;
-}
-
-.newWindow .text-field {
-    -fx-font-size: 30;
-    -fx-font-family: "Poppins semibold";
-    -fx-min-height: 250;
 }
 
 .smallBtn {
@@ -1020,7 +1075,7 @@
 .perc {
     -fx-font-weight: bold;
     -fx-font-size: 15;
-    -fx-font-family: "Lato light";
+    -fx-font-family: "Open Sans light";
 }
 
 .bbHb {
@@ -1036,14 +1091,15 @@
 .logTxt {
     -fx-min-width: 250;
     -fx-font-size: 15;
-    -fx-text-fill: #fff;
-    -fx-border-color: rgba(255,255,255,.07);
+    -fx-border-color: rgba(255,255,255,.1);
+    -fx-border-width: 0 0 1 0;
 }
 
 .logTxt:focused {
-    -fx-border-color: rgba(255,255,255,.15);
-    -fx-background-color: rgba(255,255,255,.08);
+    -fx-border-color: rgba(255,255,255,.2);
+    -fx-border-color: -fx-btn;
 }
+
 /*
 .logTxt {
     -fx-border-radius: 4;
@@ -1201,15 +1257,9 @@
 }
 
 .bigFont {
-    -fx-font-size: 20;
-    -fx-font-family: "Poppins semibold";
-    -fx-padding: 0 0 0 10;
-}
-
-.bigBtn:hover {
-    -fx-effect: none;
-    -fx-background-color: -fx-primary;
-    -fx-text-fill: #fff;
+    -fx-font-size: 25;
+    -fx-font-family: "Open Sans bold";
+    -fx-padding: 0 0 0 20;
 }
 
 .gpL .label {
@@ -1224,13 +1274,12 @@
 .bigDec {
     -fx-font-size: 30;
     -fx-text-fill: rgba(255,255,255,.8);
-    -fx-font-family: "Lato bold";
+    -fx-font-family: "Open Sans bold";
 }
 
 .bigDec2 {
     -fx-text-fill: -fx-label-color;
     -fx-font-size: 18;
-    -fx-font-family: "Lato";
 }
 
 .smallVb .toggle-button {
@@ -1263,8 +1312,18 @@
 }
 
 .split-pane {
-    -fx-background-color: transparent, -fx-sidebar;
+    -fx-background-color: transparent, transparent;
 }
+
+
+.shadow {
+    -fx-background-color: #18181b;
+    -fx-background-color: rgba(24, 24, 27, .5);
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;/*
+    -fx-border-color: rgba(255,255,255,0.05);
+*/}
 
 .redRow .text {
     -fx-fill: -fx-red;
@@ -1274,12 +1333,61 @@
     -fx-min-width: 300;
     -fx-max-width: 300;
     -fx-min-height: 110;*/
-    -fx-min-height: 100;
-    -fx-max-height: 110;
+    -fx-min-height: 85;
+    -fx-max-height: 85;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
     -fx-effect: none;
     -fx-border-width: 0;
     -fx-padding: 10;
+    -fx-opacity: .85;
     -fx-alignment: CENTER_LEFT;
+    -fx-background-color: rgba(255,255,255,0.025);
+}
+
+.sellBtn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-opacity: .85;
+    -fx-text-fill: rgba(255,255,255,.8);
+}
+
+.sellBtn:hover, .bigBtn:hover {
+    -fx-background-color: transparent;
+    -fx-opacity: 1;
+}
+
+.bigBtn:hover {
+    -fx-effect: none;
+    -fx-background-color: rgba(255,255,255,.025);
+    -fx-opacity: 1;
+}
+
+.bigSellBtn {
+    -fx-text-fill: #fafafa;
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-min-height: 60;
+    -fx-max-height: 60;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
+}
+
+/*
+.newWindow .text-field {
+     -fx-font-size: 30;
+     -fx-font-family: "Poppins semibold";
+     -fx-min-height: 250;
+ }
+*/
+
+.text-field-lg {
+    -fx-font-size: 40;
+    -fx-min-height: 80;
+    -fx-padding: 10;
+}
+
+.bigRect {
+    -fx-padding: 20;
+    -fx-min-width: 150;
+    -fx-min-height: 150;
 }

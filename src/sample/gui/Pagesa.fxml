@@ -12,9 +12,8 @@
         <Insets left="10" right="10" bottom="15" top="10"/>
     </padding>
 
-    <Label text="Pagesa" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="bigFont"/>
+    <Label text="%pagesa" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="bigFont"/>
     <TextField fx:id="txtPagesa" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-size: 22"/>
-    <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-font-size: 22; -fx-text-fill: #fff"/>
-    <Button onAction="#shtoPagesen" text="Ne rregull" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" minWidth="150"/>
+    <Button onAction="#shtoPagesen" text="%ok" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" minWidth="150"/>
 
 </GridPane>
