@@ -22,9 +22,3 @@ Ne terminal shkruaj `echo $HOME`
 
 ---
 ![Image](http://i.imgur.com/rhffLep.png)
----
-<a href="https://blockchain.info/payment_request?address=1KT388H9EmoiGiENbcwWVzkBcv2jibFGnB&amount_local=10&currency=EUR&nosavecurrency=true&message=store-ms">DONATE USING BITCOIN</a>
-
-<img src="http://i.imgur.com/iNvVh8M.png" width="200">
-
-`1KT388H9EmoiGiENbcwWVzkBcv2jibFGnB` 
